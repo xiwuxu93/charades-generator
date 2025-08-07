@@ -1,4 +1,4 @@
-name = "charades-app"
+name = "charades-generator"
 compatibility_date = "2025-08-07"
 compatibility_flags = ["nodejs_compat"]
 
