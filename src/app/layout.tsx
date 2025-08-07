@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import "./globals.css";
-
+import { GoogleAnalytics } from '@next/third-parties/google'
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -66,6 +66,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <GoogleAnalytics gaId="G-YC6P6CMMW2" />
       </body>
     </html>
   );
