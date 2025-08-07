@@ -1,0 +1,23 @@
+name = "charades-app"
+compatibility_date = "2025-08-07"
+compatibility_flags = ["nodejs_compat"]
+
+# 构建输出目录
+pages_build_output_dir = ".vercel/output/static"
+
+[build]
+command = "npm run pages:build"
+
+# 环境变量
+[vars]
+# NODE_ENV = "production"
+# API_URL = "https://api.example.com"
+
+# 开发环境变量（用于 wrangler pages dev）
+[env.development.vars]
+# NODE_ENV = "development"
+# API_URL = "http://localhost:3000"
+
+# 生产环境变量
+[env.production.vars]
+# NODE_ENV = "production"
