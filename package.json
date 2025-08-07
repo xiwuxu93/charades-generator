@@ -3,13 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "pages:build": "npx @cloudflare/next-on-pages",
-    "build": "next build && npm run pages:build",
-    "preview": "npm run build && wrangler pages dev",
-    "deploy": "npm run build && wrangler deploy --env production",
-    "deploy:preview": "npm run build && wrangler deploy --env preview",
-    "deploy:dev": "npm run build && wrangler deploy --env=\"\""
+    "cf:build": "npm run build && npm run pages:build",
+    "preview": "npm run cf:build && wrangler pages dev",
+    "deploy": "npm run cf:build && wrangler deploy --env production",
+    "deploy:preview": "npm run cf:build && wrangler deploy --env preview",
+    "deploy:dev": "npm run cf:build && wrangler deploy --env=\"\""
   },
   "dependencies": {
     "next": "15.4.6",
