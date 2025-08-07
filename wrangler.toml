@@ -1,4 +1,5 @@
 name = "charades-generator"
+main = ".vercel/output/static/_worker.js/index.js"
 compatibility_date = "2025-08-07"
 compatibility_flags = ["nodejs_compat"]
 
