@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev": "next dev --turbopack",
     "pages:build": "npx @cloudflare/next-on-pages",
     "build": "next build && npm run pages:build",
     "preview": "npm run build && wrangler pages dev",
