@@ -1,7 +1,7 @@
 import CharadesGenerator from '@/components/CharadesGenerator';
 import StructuredData from '@/components/StructuredData';
 import { Metadata } from 'next';
-export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: 'Charades Generator for Kids - Free Children\'s Word Game Ideas',
   description: 'Free online charades generator for kids with 500+ child-friendly words. Disney characters, animals, simple actions perfect for children\'s parties. Educational and safe fun!',

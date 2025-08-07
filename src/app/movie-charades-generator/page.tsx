@@ -1,7 +1,7 @@
 import CharadesGenerator from '@/components/CharadesGenerator';
 import StructuredData from '@/components/StructuredData';
 import { Metadata } from 'next';
-export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: 'Movie Charades Generator - Free Film & Cinema Word Ideas',
   description: 'Free movie charades generator with 200+ films from Hollywood classics to modern blockbusters. Perfect for movie night parties, film buffs, and cinema lovers!',

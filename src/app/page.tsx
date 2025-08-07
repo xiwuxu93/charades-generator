@@ -2,7 +2,7 @@ import CharadesGenerator from '@/components/CharadesGenerator';
 import StructuredData from '@/components/StructuredData';
 import FAQStructuredData from '@/components/FAQStructuredData';
 import { Metadata } from 'next';
-export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: 'Best Charades Generator Online - 1000+ Free Words & Ideas for Game Night',
   description: 'Generate instant charades words from 1000+ database. Best free online charades generator for kids, adults, parties. Includes movies, Disney, animals, actions, funny words. Perfect for family game nights, team building & classroom activities.',

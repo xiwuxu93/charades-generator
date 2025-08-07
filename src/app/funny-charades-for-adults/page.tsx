@@ -1,7 +1,7 @@
 import CharadesGenerator from '@/components/CharadesGenerator';
 import StructuredData from '@/components/StructuredData';
 import { Metadata } from 'next';
-export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: 'Funny Charades for Adults - Hilarious Adult Party Game Ideas',
   description: 'Free funny charades generator for adults with 150+ hilarious situations and comedy gold. Perfect for adult parties, game nights, and getting everyone laughing!',

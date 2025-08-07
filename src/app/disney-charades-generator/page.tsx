@@ -1,7 +1,7 @@
 import CharadesGenerator from '@/components/CharadesGenerator';
 import StructuredData from '@/components/StructuredData';
 import { Metadata } from 'next';
-export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: 'Disney Charades Generator - Free Disney Characters & Movies',
   description: 'Free Disney charades generator with 100+ beloved characters and movies. Frozen, Mickey Mouse, Moana, Lion King and more! Perfect for Disney fans and kids parties.',
