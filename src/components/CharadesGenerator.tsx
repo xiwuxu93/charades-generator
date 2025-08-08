@@ -10,6 +10,9 @@ interface CharadesGeneratorProps {
   title?: string;
   description?: string;
   hideFilters?: boolean;
+  hideCategoryFilter?: boolean;
+  hideDifficultyFilter?: boolean;
+  hideAgeGroupFilter?: boolean;
 }
 
 export default function CharadesGenerator({ 
@@ -18,16 +21,20 @@ export default function CharadesGenerator({
   defaultDifficulty = 'all',
   title = 'Best Free Charades Generator Online',
   description = 'Generate instant charades words from our database of 1000+ carefully curated words and ideas!',
-  hideFilters = false
+  hideFilters = false,
+  hideCategoryFilter = false,
+  hideDifficultyFilter = false,
+  hideAgeGroupFilter = false
 }: CharadesGeneratorProps = {}) {
-  const [currentWord, setCurrentWord] = useState<CharadesWord | null>(null);
+  const [generatedWords, setGeneratedWords] = useState<CharadesWord[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>(defaultCategory);
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>(defaultDifficulty);
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<string>(defaultAgeGroup);
   const [, setHistory] = useState<CharadesWord[]>([]);
   const [filtersExpanded, setFiltersExpanded] = useState<boolean>(false);
+  const [batchSize, setBatchSize] = useState<number>(1);
 
-  const generateWord = useCallback(() => {
+  const generateBatchWords = useCallback((count: number) => {
     setHistory(prevHistory => {
       // Filter words based on selected criteria
       let filteredWords = charadesDatabase.filter(word => {
@@ -38,7 +45,7 @@ export default function CharadesGenerator({
 
       // Remove recently used words to avoid repetition
       if (prevHistory.length > 0) {
-        const recentWords = prevHistory.slice(-5).map(w => w.word);
+        const recentWords = prevHistory.slice(-Math.max(10, count * 2)).map(w => w.word);
         filteredWords = filteredWords.filter(word => !recentWords.includes(word.word));
       }
 
@@ -49,26 +56,31 @@ export default function CharadesGenerator({
                  (selectedDifficulty === 'all' || word.difficulty === selectedDifficulty) &&
                  (selectedAgeGroup === 'all' || word.ageGroup === selectedAgeGroup || word.ageGroup === 'all');
         });
-        // Reset history
-        if (filteredWords.length > 0) {
-          const randomIndex = Math.floor(Math.random() * filteredWords.length);
-          const selectedWord = filteredWords[randomIndex];
-          setCurrentWord(selectedWord);
-          return [selectedWord];
-        }
-        return [];
-      } else {
-        const randomIndex = Math.floor(Math.random() * filteredWords.length);
-        const selectedWord = filteredWords[randomIndex];
-        setCurrentWord(selectedWord);
-        return [...prevHistory, selectedWord];
       }
+
+      // Generate multiple random words
+      const selectedWords: CharadesWord[] = [];
+      const availableWords = [...filteredWords];
+      
+      for (let i = 0; i < Math.min(count, availableWords.length); i++) {
+        const randomIndex = Math.floor(Math.random() * availableWords.length);
+        const selectedWord = availableWords[randomIndex];
+        selectedWords.push(selectedWord);
+        // Remove selected word to avoid duplicates in batch
+        availableWords.splice(randomIndex, 1);
+      }
+
+      setGeneratedWords(selectedWords);
+
+      return [...prevHistory, ...selectedWords];
     });
   }, [selectedCategory, selectedDifficulty, selectedAgeGroup]);
 
+  const generateWords = useCallback(() => generateBatchWords(batchSize), [generateBatchWords, batchSize]);
+
   useEffect(() => {
-    generateWord();
-  }, [generateWord]);
+    generateWords();
+  }, [generateWords]);
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -129,41 +141,7 @@ export default function CharadesGenerator({
           <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full">⚡ Actions</span>
         </div>
       </div>
-
-      {/* Current Word Display - Priority Position */}
-      {currentWord && (
-        <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl shadow-lg p-8 mb-8 text-white text-center">
-          <div className="text-6xl mb-4">
-            {getCategoryIcon(currentWord.category)}
-          </div>
-          <div className="text-5xl font-bold mb-4">
-            {currentWord.word}
-          </div>
-          <div className="flex justify-center items-center space-x-4 text-sm">
-            <span className={`px-3 py-1 rounded-full ${getDifficultyColor(currentWord.difficulty)} text-gray-800`}>
-              {currentWord.difficulty.toUpperCase()}
-            </span>
-            <span className="bg-white/20 px-3 py-1 rounded-full">
-              {currentWord.category.toUpperCase()}
-            </span>
-            <span className="bg-white/20 px-3 py-1 rounded-full">
-              {currentWord.wordCount} {currentWord.wordCount === 1 ? 'WORD' : 'WORDS'}
-            </span>
-          </div>
-        </div>
-      )}
-
-      {/* Generate Button - Prominent Position */}
-      <div className="text-center mb-8">
-        <button
-          onClick={generateWord}
-          className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-bold py-4 px-8 rounded-full text-xl transition-all duration-200 transform hover:scale-105 shadow-lg"
-        >
-          🎲 Generate New Word
-        </button>
-      </div>
-
-      {/* Collapsible Filters */}
+           {/* Collapsible Filters */}
       {!hideFilters && (
       <div className="mb-8">
         <button
@@ -189,6 +167,7 @@ export default function CharadesGenerator({
         {filtersExpanded && (
           <div className="bg-white rounded-b-lg shadow-md p-6 -mt-2 border-t border-gray-100">
             {/* Category Filter */}
+            {!hideCategoryFilter && (
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-3">
                 📂 Category
@@ -210,8 +189,10 @@ export default function CharadesGenerator({
                 ))}
               </div>
             </div>
+            )}
 
             {/* Difficulty Filter */}
+            {!hideDifficultyFilter && (
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-3">
                 ⚡ Difficulty Level
@@ -242,8 +223,10 @@ export default function CharadesGenerator({
                 ))}
               </div>
             </div>
+            )}
 
             {/* Age Group Filter */}
+            {!hideAgeGroupFilter && (
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-3">
                 👥 Age Group
@@ -281,6 +264,7 @@ export default function CharadesGenerator({
                 </button>
               </div>
             </div>
+            )}
 
             {/* Active Filters Summary */}
             <div className="pt-4 border-t border-gray-200">
@@ -312,6 +296,82 @@ export default function CharadesGenerator({
         )}
       </div>
       )}
+      {/* Generation Control */}
+      <div className="bg-white rounded-lg shadow-md p-4 mb-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center space-x-4">
+            <h3 className="text-lg font-semibold text-gray-800">📋 Generate Multiple Words:</h3>
+          </div>
+          
+          <div className="flex items-center space-x-3">
+            <label className="text-sm font-medium text-gray-700">Number of words:</label>
+            <input
+              type="number"
+              min="1"
+              max="50"
+              value={batchSize}
+              onChange={(e) => setBatchSize(Math.max(1, Math.min(50, Number(e.target.value) || 1)))}
+              className="w-20 border border-gray-300 rounded-md px-3 py-2 text-center bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+        </div>
+      </div>
+
+
+      {/* Generated Words Display */}
+      {generatedWords.length > 0 && (
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">🎯 Your Charades Words</h2>
+            <p className="text-gray-600">Generated {generatedWords.length} words for your game!</p>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {generatedWords.map((word, index) => (
+              <div
+                key={`${word.word}-${index}`}
+                className="bg-gradient-to-br from-blue-50 to-purple-50 border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
+              >
+                <div className="text-center">
+                  <div className="text-2xl mb-2">
+                    {getCategoryIcon(word.category)}
+                  </div>
+                  <div className="text-xl font-bold text-gray-800 mb-2">
+                    {word.word}
+                  </div>
+                  <div className="flex justify-center items-center space-x-2 text-xs">
+                    <span className={`px-2 py-1 rounded-full ${getDifficultyColor(word.difficulty)}`}>
+                      {word.difficulty.toUpperCase()}
+                    </span>
+                    <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                      {word.category.toUpperCase()}
+                    </span>
+                    <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                      {word.wordCount} {word.wordCount === 1 ? 'WORD' : 'WORDS'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-6 text-sm text-gray-500">
+            💡 Pro tip: Use these words for multiple rounds or save them for later!
+          </div>
+        </div>
+      )}
+
+      {/* Generate Button - Prominent Position */}
+      <div className="text-center mb-8">
+        <button
+          onClick={generateWords}
+          className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-8 rounded-full text-xl transition-all duration-200 transform hover:scale-105 shadow-lg"
+        >
+          🎲 Generate {batchSize} Words
+        </button>
+      </div>
+
+ 
 
 
       {/* Why Choose Our Charades Generator */}
@@ -387,6 +447,26 @@ export default function CharadesGenerator({
               <li>Be creative and have fun with your acting!</li>
             </ul>
           </div>
+        </div>
+      </div>
+
+      {/* User Feedback CTA */}
+      <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-200 rounded-lg p-6 mb-8">
+        <div className="text-center">
+          <div className="text-4xl mb-3">📝</div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-3">
+            Help Us Improve Your Experience!
+          </h2>
+          <p className="text-gray-600 mb-4 max-w-2xl mx-auto">
+            We&apos;re constantly improving our charades generator based on user feedback. 
+            Tell us how you use it and what features you&apos;d love to see next!
+          </p>
+          <a 
+            href="/feedback"
+            className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg"
+          >
+            🚀 Share Your Feedback (2 mins)
+          </a>
         </div>
       </div>
 

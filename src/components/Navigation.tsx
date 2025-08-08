@@ -28,6 +28,11 @@ const navigationItems = [
     title: 'Funny Adults',
     href: '/funny-charades-for-adults',
     description: 'Hilarious situations'
+  },
+  {
+    title: 'Feedback',
+    href: '/feedback',
+    description: 'Share your thoughts'
   }
 ];
 

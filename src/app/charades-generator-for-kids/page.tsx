@@ -61,6 +61,7 @@ export default function KidsCharadesPage() {
           defaultAgeGroup="kids"
           title="Kids Charades Generator"
           description="Safe and fun charades words perfect for children! All content is age-appropriate and educational."
+          hideAgeGroupFilter={true}
         />
 
         <div className="mt-12 bg-yellow-50 border border-yellow-200 rounded-lg p-6">

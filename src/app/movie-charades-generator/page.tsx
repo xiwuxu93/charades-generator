@@ -78,6 +78,7 @@ export default function MovieCharadesPage() {
           defaultCategory="movies"
           title="Movie Charades Generator"
           description="Hollywood classics to modern blockbusters! Act out your favorite films from action to romance, comedy to drama."
+          hideCategoryFilter={true}
         />
 
         <div className="mt-12 bg-red-50 border border-red-200 rounded-lg p-6">

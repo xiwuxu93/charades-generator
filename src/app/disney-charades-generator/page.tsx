@@ -61,6 +61,7 @@ export default function DisneyCharadesPage() {
           defaultCategory="disney"
           title="Disney Charades Generator"
           description="Magical Disney characters and movies! Act out your favorite Disney heroes, princesses, and classic stories."
+          hideCategoryFilter={true}
         />
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">

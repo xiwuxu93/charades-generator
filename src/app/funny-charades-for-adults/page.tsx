@@ -62,6 +62,8 @@ export default function FunnyCharadesPage() {
           defaultAgeGroup="adults"
           title="Funny Charades for Adults"
           description="Hilarious adult situations and comedy gold! Perfect for getting everyone laughing at your next party."
+          hideCategoryFilter={true}
+          hideAgeGroupFilter={true}
         />
 
         <div className="mt-12 bg-gradient-to-r from-purple-100 to-pink-100 border border-purple-200 rounded-lg p-6">
