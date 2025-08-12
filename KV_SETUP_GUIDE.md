@@ -1,139 +1,132 @@
-# 📦 KV Namespace 设置指南
+# 📦 KV Namespace 设置指南 - 修复版
 
 ## 🎯 概述
 
-本项目需要两个 KV namespace：
+本项目需要 KV namespace 来存储用户反馈数据。我们将通过 Cloudflare Pages Dashboard 来配置，这是最简单可靠的方法。
 
-- **Preview 环境**: `feedback-preview`
-- **Production 环境**: `feedback-production`
+## 🚀 创建 KV Namespace
 
-## 🚀 创建 KV Namespaces
+### 步骤 1：创建 KV Namespace
 
-### 1. 通过 Cloudflare Dashboard
+#### 方法 A：通过 Cloudflare Dashboard（推荐）
 
 1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com)
 2. 进入 **Workers & Pages** > **KV**
 3. 点击 **Create a namespace**
-4. 创建两个 namespace：
-   - 名称: `feedback-preview`
-   - 名称: `feedback-production`
-5. 记录每个 namespace 的 ID
+4. 输入名称：`charades-feedback`
+5. 点击 **Add**
+6. 记录创建的 namespace ID（类似：`a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6`）
 
-### 2. 通过 Wrangler CLI
+#### 方法 B：通过 Wrangler CLI
 
 ```bash
-# 创建 preview namespace
-wrangler kv:namespace create "feedback-preview"
+# 安装并登录 wrangler（如果还没有）
+npm install -g wrangler
+wrangler auth login
 
-# 创建 production namespace
-wrangler kv:namespace create "feedback-production"
+# 创建 namespace
+wrangler kv:namespace create "charades-feedback"
 ```
 
-## 🔧 配置 Pages 项目
-
-### 1. 进入 Pages 项目设置
+### 步骤 2：配置 Pages 项目绑定
 
 1. 在 Cloudflare Dashboard 中找到你的 Pages 项目
 2. 进入 **Settings** > **Functions**
+3. 滚动到 **KV namespace bindings** 部分
+4. 点击 **Add binding**
+5. 配置：
+   - **Variable name**: `FEEDBACK_KV`
+   - **KV namespace**: 选择刚创建的 `charades-feedback`
+6. 点击 **Save**
 
-### 2. 配置 KV Namespace 绑定
+## 🚀 部署项目
 
-#### Preview 环境
-
-- **Variable name**: `FEEDBACK_KV`
-- **KV namespace**: 选择 `feedback-preview`
-
-#### Production 环境
-
-- **Variable name**: `FEEDBACK_KV`
-- **KV namespace**: 选择 `feedback-production`
-
-## 📝 更新 wrangler.toml
-
-如果你有实际的 namespace ID，可以更新 `wrangler.toml`：
-
-```toml
-# Preview environment
-[env.preview]
-kv_namespaces = [
-  { binding = "FEEDBACK_KV", id = "your-preview-namespace-id" }
-]
-
-# Production environment
-[env.production]
-kv_namespaces = [
-  { binding = "FEEDBACK_KV", id = "your-production-namespace-id" }
-]
-```
-
-## 🧪 测试 KV 连接
-
-### 1. 部署到 Preview
+现在可以安全部署了：
 
 ```bash
-npm run deploy:preview
+# 构建项目
+npm run cf:build
+
+# 部署到生产环境
+npm run deploy
 ```
 
-### 2. 测试 API 端点
+## 🔍 验证设置
 
-访问你的 preview URL：
+### 1. 检查 API 端点
+
+部署完成后，访问：
 
 ```
 https://your-project.pages.dev/api/feedback
 ```
 
-应该返回统计信息而不是 404 错误。
+应该返回类似这样的 JSON：
 
-### 3. 测试反馈提交
+```json
+{
+  "success": true,
+  "totalRecentFeedbacks": 0,
+  "dailyStats": [...]
+}
+```
 
-在 preview 环境中提交一个测试反馈，然后检查 KV namespace 中是否有数据。
+### 2. 测试反馈提交
 
-## 🔍 验证数据存储
+1. 访问 `https://your-project.pages.dev/feedback`
+2. 填写并提交反馈表单
+3. 检查是否显示成功消息
 
-### 通过 Dashboard
+### 3. 验证数据存储
+
+在 Cloudflare Dashboard 中：
 
 1. 进入 **Workers & Pages** > **KV**
 2. 点击你的 namespace
-3. 查看存储的键值对
-
-### 通过 Wrangler CLI
-
-```bash
-# 列出所有键
-wrangler kv:key list --namespace-id="your-namespace-id"
-
-# 获取特定键的值
-wrangler kv:key get "feedback_123456789_abc" --namespace-id="your-namespace-id"
-```
+3. 应该能看到存储的反馈数据
 
 ## 🐛 故障排除
 
-### KV 绑定错误
+### 错误：Invalid KV namespace ID
 
-如果看到 "KV namespace not found" 错误：
+如果看到这个错误，说明：
 
-1. 确认 namespace 已创建
-2. 检查绑定的变量名是 `FEEDBACK_KV`
-3. 确认选择了正确的 namespace
+1. KV namespace 还没有创建
+2. 或者 Pages 项目中的绑定配置不正确
 
-### 权限问题
+**解决方案**：
 
-确保你的 Cloudflare 账户有权限：
+1. 确保已创建 KV namespace
+2. 在 Pages 项目设置中正确配置绑定
+3. 重新部署项目
 
-- 创建和管理 KV namespaces
-- 配置 Pages 项目设置
+### 错误：KV namespace not found
 
-### 数据不显示
+这通常意味着：
 
-如果数据没有正确存储：
+1. 绑定的变量名不是 `FEEDBACK_KV`
+2. 或者选择了错误的 namespace
 
-1. 检查 Functions 日志
-2. 确认 API 调用成功
-3. 验证 KV 绑定配置
+**解决方案**：
 
-## 📊 数据结构
+1. 检查变量名必须是 `FEEDBACK_KV`
+2. 确认选择了正确的 namespace
+3. 保存设置后重新部署
+
+### API 仍然返回 404
+
+如果 API 仍然不工作：
+
+1. 检查构建是否成功
+2. 确认 `functions/api/feedback.ts` 文件存在
+3. 查看 Pages 部署日志
+4. 检查 Functions 执行日志
+
+## 📊 数据结构说明
 
 ### 反馈记录格式
+
+每个反馈会存储为：
 
 ```json
 {
@@ -152,13 +145,15 @@ wrangler kv:key get "feedback_123456789_abc" --namespace-id="your-namespace-id"
 }
 ```
 
-### 日期索引格式
+### 日期索引
+
+为了便于管理，系统还会创建日期索引：
 
 ```json
 // Key: "daily_2024-01-01"
-["feedback_id_1", "feedback_id_2", "feedback_id_3"]
+// Value: ["feedback_id_1", "feedback_id_2", "feedback_id_3"]
 ```
 
 ---
 
-**下一步**: 创建 KV namespaces 后，运行 `npm run deploy:preview` 测试配置
+**下一步**: 创建 KV namespace 后，运行 `npm run deploy` 部署项目

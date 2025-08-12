@@ -5,14 +5,6 @@ compatibility_date = "2024-01-01"
 # Pages configuration
 pages_build_output_dir = ".vercel/output/static"
 
-# Preview environment
-[env.preview]
-kv_namespaces = [
-  { binding = "FEEDBACK_KV", id = "feedback-preview" }
-]
-
-# Production environment
-[env.production]
-kv_namespaces = [
-  { binding = "FEEDBACK_KV", id = "feedback-production" }
-]
+# Note: KV namespaces should be configured through Cloudflare Pages Dashboard
+# Go to your Pages project > Settings > Functions > KV namespace bindings
+# Add binding: FEEDBACK_KV -> your-kv-namespace
