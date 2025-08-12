@@ -1,10 +1,18 @@
 # Cloudflare Pages with Functions configuration
 name = "charades-generator"
-compatibility_date = "2024-01-01"
+compatibility_date = "2025-08-12"
 
 # Pages configuration
 pages_build_output_dir = ".vercel/output/static"
 
-# Note: KV namespaces should be configured through Cloudflare Pages Dashboard
-# Go to your Pages project > Settings > Functions > KV namespace bindings
-# Add binding: FEEDBACK_KV -> your-kv-namespace
+# Preview environment
+[env.preview]
+kv_namespaces = [
+  { binding = "FEEDBACK_KV", id = "64c1f557dc834e5dbb152b4a434d2bb1" }
+]
+
+# Production environment
+[env.production]
+kv_namespaces = [
+  { binding = "FEEDBACK_KV", id = "051dfaa61eea42d78d464e62dae7cb09" }
+]
