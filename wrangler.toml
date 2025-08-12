@@ -5,17 +5,14 @@ compatibility_date = "2024-01-01"
 # Pages configuration
 pages_build_output_dir = ".vercel/output/static"
 
-# KV Namespace bindings for feedback storage
-[[kv_namespaces]]
-binding = "FEEDBACK_KV"
-id = "feedback-storage"  # Will be replaced with actual namespace ID when deployed
-
-# Local development KV namespace
-[env.development]
+# Preview environment
+[env.preview]
 kv_namespaces = [
-  { binding = "FEEDBACK_KV", id = "feedback-dev", preview_id = "feedback-dev-preview" }
+  { binding = "FEEDBACK_KV", id = "feedback-preview" }
 ]
 
-# Production environment (Cloudflare Pages will handle this)
+# Production environment
 [env.production]
-# KV namespaces will be bound through CF Pages dashboard
+kv_namespaces = [
+  { binding = "FEEDBACK_KV", id = "feedback-production" }
+]

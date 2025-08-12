@@ -9,10 +9,10 @@
     "lint": "next lint",
     "pages:build": "npx @cloudflare/next-on-pages",
     "cf:build": "npm run build && npm run pages:build",
-    "preview": "npm run cf:build && wrangler pages dev .vercel/output/static --kv FEEDBACK_KV",
+    "preview": "npm run cf:build && wrangler pages dev .vercel/output/static --config wrangler.dev.toml",
     "deploy": "npm run cf:build && wrangler pages deploy .vercel/output/static",
     "deploy:preview": "npm run cf:build && wrangler pages deploy .vercel/output/static --env preview",
-    "deploy:dev": "npm run cf:build && wrangler pages deploy .vercel/output/static --env development"
+    "deploy:production": "npm run cf:build && wrangler pages deploy .vercel/output/static --env production"
   },
   "dependencies": {
     "@next/third-parties": "^15.4.6",

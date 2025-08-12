@@ -1,0 +1,9 @@
+# Local development configuration
+name = "charades-generator-dev"
+compatibility_date = "2024-01-01"
+
+# KV Namespace bindings for local development
+[[kv_namespaces]]
+binding = "FEEDBACK_KV"
+id = "feedback-dev"
+preview_id = "feedback-dev-preview"
