@@ -1,39 +1,40 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useState } from 'react';
+import Link from "next/link";
+import { useState } from "react";
+import Image from "next/image";
 
 const navigationItems = [
   {
-    title: 'Free Generator',
-    href: '/',
-    description: 'Main charades generator'
+    title: "Free Generator",
+    href: "/",
+    description: "Main charades generator",
   },
   {
-    title: 'Kids Charades',
-    href: '/charades-generator-for-kids',
-    description: 'Child-friendly words'
+    title: "Kids Charades",
+    href: "/charades-generator-for-kids",
+    description: "Child-friendly words",
   },
   {
-    title: 'Movie Charades',
-    href: '/movie-charades-generator', 
-    description: 'Films & cinema'
+    title: "Movie Charades",
+    href: "/movie-charades-generator",
+    description: "Films & cinema",
   },
   {
-    title: 'Disney Charades',
-    href: '/disney-charades-generator',
-    description: 'Disney characters'
+    title: "Disney Charades",
+    href: "/disney-charades-generator",
+    description: "Disney characters",
   },
   {
-    title: 'Funny Adults',
-    href: '/funny-charades-for-adults',
-    description: 'Hilarious situations'
+    title: "Funny Adults",
+    href: "/funny-charades-for-adults",
+    description: "Hilarious situations",
   },
   {
-    title: 'Feedback',
-    href: '/feedback',
-    description: 'Share your thoughts'
-  }
+    title: "Feedback",
+    href: "/feedback",
+    description: "Share your thoughts",
+  },
 ];
 
 export default function Navigation() {
@@ -45,10 +46,13 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="text-2xl">🎭</div>
-            <span className="font-bold text-lg text-gray-800">
-              Charades Generator
-            </span>
+            <Image
+              src="/logo.svg"
+              alt="Charades Generator"
+              width={160}
+              height={62}
+              className="h-8 w-auto logo"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -107,7 +111,9 @@ export default function Navigation() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <div>{item.title}</div>
-                  <div className="text-xs text-gray-400">{item.description}</div>
+                  <div className="text-xs text-gray-400">
+                    {item.description}
+                  </div>
                 </Link>
               ))}
             </div>
