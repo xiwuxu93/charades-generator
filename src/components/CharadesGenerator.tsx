@@ -101,9 +101,23 @@ export default function CharadesGenerator({
       objects: '📦',
       emotions: '😊',
       disney: '🏰',
-      funny: '😂'
+      funny: '🎪'
     };
     return icons[category] || '🎭';
+  };
+
+  const getCategoryColor = (category: string) => {
+    const colors: { [key: string]: string } = {
+      movies: 'from-blue-500 to-blue-600',
+      animals: 'from-green-500 to-green-600',
+      actions: 'from-yellow-500 to-yellow-600',
+      professions: 'from-purple-500 to-purple-600',
+      objects: 'from-gray-500 to-gray-600',
+      emotions: 'from-pink-500 to-pink-600',
+      disney: 'from-indigo-500 to-indigo-600',
+      funny: 'from-orange-500 to-orange-600'
+    };
+    return colors[category] || 'from-gray-500 to-gray-600';
   };
 
   const getDifficultyIcon = (difficulty: string) => {
@@ -134,11 +148,11 @@ export default function CharadesGenerator({
           {description}
         </p>
         <div className="flex flex-wrap justify-center gap-2 text-sm text-gray-500">
-          <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">🎬 Movies</span>
-          <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full">🐾 Animals</span>
-          <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full">🏰 Disney</span>
-          <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full">😂 Funny</span>
-          <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full">⚡ Actions</span>
+          <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Movies</span>
+          <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full">Animals</span>
+          <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full">Disney</span>
+          <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full">Funny</span>
+          <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full">Actions</span>
         </div>
       </div>
            {/* Collapsible Filters */}
@@ -149,7 +163,7 @@ export default function CharadesGenerator({
           className="w-full bg-white rounded-lg shadow-md p-4 flex items-center justify-between hover:shadow-lg transition-shadow duration-200"
         >
           <div className="flex items-center space-x-2">
-            <span className="text-lg font-semibold text-gray-800">🎯 Customize Your Game</span>
+            <span className="text-lg font-semibold text-gray-800">Customize Your Game</span>
             {(selectedCategory !== 'all' || selectedDifficulty !== 'all' || selectedAgeGroup !== 'all') && (
               <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">
                 Filters Active
@@ -170,7 +184,7 @@ export default function CharadesGenerator({
             {!hideCategoryFilter && (
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-3">
-                📂 Category
+                Category
               </label>
               <div className="flex flex-wrap gap-2">
                 {categories.map(category => (
@@ -195,7 +209,7 @@ export default function CharadesGenerator({
             {!hideDifficultyFilter && (
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-3">
-                ⚡ Difficulty Level
+                Difficulty Level
               </label>
               <div className="flex flex-wrap gap-2">
                 <button
@@ -206,7 +220,7 @@ export default function CharadesGenerator({
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  🎯 All Levels
+                  All Levels
                 </button>
                 {difficulties.map(difficulty => (
                   <button
@@ -229,7 +243,7 @@ export default function CharadesGenerator({
             {!hideAgeGroupFilter && (
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-3">
-                👥 Age Group
+                Age Group
               </label>
               <div className="flex flex-wrap gap-2">
                 <button
@@ -240,7 +254,7 @@ export default function CharadesGenerator({
                       : 'bg-gray-100 text-gray-700 hover:bg-purple-100 hover:text-purple-700'
                   }`}
                 >
-                  🌟 All Ages
+                  All Ages
                 </button>
                 <button
                   onClick={() => setSelectedAgeGroup('kids')}
@@ -250,7 +264,7 @@ export default function CharadesGenerator({
                       : 'bg-gray-100 text-gray-700 hover:bg-green-100 hover:text-green-700'
                   }`}
                 >
-                  👶 Kids Friendly
+                  Kids Friendly
                 </button>
                 <button
                   onClick={() => setSelectedAgeGroup('adults')}
@@ -260,7 +274,7 @@ export default function CharadesGenerator({
                       : 'bg-gray-100 text-gray-700 hover:bg-orange-100 hover:text-orange-700'
                   }`}
                 >
-                  🧑 Adults Only
+                  Adults Only
                 </button>
               </div>
             </div>
@@ -300,7 +314,7 @@ export default function CharadesGenerator({
       <div className="bg-white rounded-lg shadow-md p-4 mb-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-4">
-            <h3 className="text-lg font-semibold text-gray-800">📋 Generate Multiple Words:</h3>
+            <h3 className="text-lg font-semibold text-gray-800">Generate Multiple Words:</h3>
           </div>
           
           <div className="flex items-center space-x-3">
@@ -322,7 +336,7 @@ export default function CharadesGenerator({
       {generatedWords.length > 0 && (
         <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">🎯 Your Charades Words</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">Your Charades Words</h2>
             <p className="text-gray-600">Generated {generatedWords.length} words for your game!</p>
           </div>
           
@@ -330,23 +344,23 @@ export default function CharadesGenerator({
             {generatedWords.map((word, index) => (
               <div
                 key={`${word.word}-${index}`}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
+                className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-blue-300 transition-all duration-200 transform hover:-translate-y-1"
               >
                 <div className="text-center">
-                  <div className="text-2xl mb-2">
+                  <div className={`w-12 h-12 mx-auto mb-3 rounded-full bg-gradient-to-r ${getCategoryColor(word.category)} flex items-center justify-center text-white text-xl font-bold`}>
                     {getCategoryIcon(word.category)}
                   </div>
-                  <div className="text-xl font-bold text-gray-800 mb-2">
+                  <div className="text-xl font-bold text-gray-800 mb-3">
                     {word.word}
                   </div>
-                  <div className="flex justify-center items-center space-x-2 text-xs">
-                    <span className={`px-2 py-1 rounded-full ${getDifficultyColor(word.difficulty)}`}>
+                  <div className="flex flex-wrap justify-center gap-2 text-xs">
+                    <span className={`px-3 py-1 rounded-full font-medium ${getDifficultyColor(word.difficulty)}`}>
                       {word.difficulty.toUpperCase()}
                     </span>
-                    <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                    <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-medium">
                       {word.category.toUpperCase()}
                     </span>
-                    <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                    <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full font-medium">
                       {word.wordCount} {word.wordCount === 1 ? 'WORD' : 'WORDS'}
                     </span>
                   </div>
@@ -355,8 +369,10 @@ export default function CharadesGenerator({
             ))}
           </div>
           
-          <div className="text-center mt-6 text-sm text-gray-500">
-            💡 Pro tip: Use these words for multiple rounds or save them for later!
+          <div className="text-center mt-6 p-4 bg-blue-50 rounded-lg">
+            <p className="text-sm text-blue-700 font-medium">
+              Pro tip: Use these words for multiple rounds or save them for later!
+            </p>
           </div>
         </div>
       )}
@@ -367,7 +383,7 @@ export default function CharadesGenerator({
           onClick={generateWords}
           className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-8 rounded-full text-xl transition-all duration-200 transform hover:scale-105 shadow-lg"
         >
-          🎲 Generate {batchSize} Words
+          Generate {batchSize} {batchSize === 1 ? 'Word' : 'Words'}
         </button>
       </div>
 
@@ -378,18 +394,30 @@ export default function CharadesGenerator({
       <div className="bg-white rounded-lg shadow-md p-6 mb-8">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Why Choose Our Free Charades Generator?</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="text-center">
-            <div className="text-3xl mb-2">🎯</div>
+          <div className="text-center p-4 bg-blue-50 rounded-lg">
+            <div className="w-12 h-12 mx-auto mb-3 bg-blue-500 rounded-full flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+            </div>
             <h3 className="font-semibold text-gray-800 mb-2">1000+ Curated Words</h3>
             <p className="text-gray-600 text-sm">Carefully selected charades words across multiple categories for endless fun</p>
           </div>
-          <div className="text-center">
-            <div className="text-3xl mb-2">👨‍👩‍👧‍👦</div>
+          <div className="text-center p-4 bg-green-50 rounded-lg">
+            <div className="w-12 h-12 mx-auto mb-3 bg-green-500 rounded-full flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
             <h3 className="font-semibold text-gray-800 mb-2">All Ages Welcome</h3>
             <p className="text-gray-600 text-sm">Family-friendly content suitable for kids, teens, and adults</p>
           </div>
-          <div className="text-center">
-            <div className="text-3xl mb-2">⚡</div>
+          <div className="text-center p-4 bg-purple-50 rounded-lg">
+            <div className="w-12 h-12 mx-auto mb-3 bg-purple-500 rounded-full flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
             <h3 className="font-semibold text-gray-800 mb-2">Instant & Free</h3>
             <p className="text-gray-600 text-sm">No registration required. Generate charades words instantly</p>
           </div>
@@ -400,24 +428,20 @@ export default function CharadesGenerator({
       <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 mb-8">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Perfect for Every Occasion</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-            <div className="text-2xl mb-2">🎉</div>
-            <h3 className="font-semibold text-gray-800">Party Games</h3>
+          <div className="text-center p-4 bg-white rounded-lg shadow-sm border-l-4 border-pink-400">
+            <h3 className="font-semibold text-gray-800 mb-2">Party Games</h3>
             <p className="text-gray-600 text-sm">Perfect icebreaker for parties and social gatherings</p>
           </div>
-          <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-            <div className="text-2xl mb-2">🏠</div>
-            <h3 className="font-semibold text-gray-800">Family Night</h3>
+          <div className="text-center p-4 bg-white rounded-lg shadow-sm border-l-4 border-blue-400">
+            <h3 className="font-semibold text-gray-800 mb-2">Family Night</h3>
             <p className="text-gray-600 text-sm">Quality time with family members of all ages</p>
           </div>
-          <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-            <div className="text-2xl mb-2">🏢</div>
-            <h3 className="font-semibold text-gray-800">Team Building</h3>
+          <div className="text-center p-4 bg-white rounded-lg shadow-sm border-l-4 border-green-400">
+            <h3 className="font-semibold text-gray-800 mb-2">Team Building</h3>
             <p className="text-gray-600 text-sm">Great for office team building activities</p>
           </div>
-          <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-            <div className="text-2xl mb-2">🎓</div>
-            <h3 className="font-semibold text-gray-800">Classroom</h3>
+          <div className="text-center p-4 bg-white rounded-lg shadow-sm border-l-4 border-yellow-400">
+            <h3 className="font-semibold text-gray-800 mb-2">Classroom</h3>
             <p className="text-gray-600 text-sm">Educational and fun for students and teachers</p>
           </div>
         </div>
@@ -453,7 +477,6 @@ export default function CharadesGenerator({
       {/* User Feedback CTA */}
       <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-200 rounded-lg p-6 mb-8">
         <div className="text-center">
-          <div className="text-4xl mb-3">📝</div>
           <h2 className="text-2xl font-bold text-gray-800 mb-3">
             Help Us Improve Your Experience!
           </h2>
@@ -465,7 +488,7 @@ export default function CharadesGenerator({
             href="/feedback"
             className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg"
           >
-            🚀 Share Your Feedback (2 mins)
+            Share Your Feedback (2 mins)
           </a>
         </div>
       </div>

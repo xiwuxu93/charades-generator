@@ -20,7 +20,6 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="text-2xl">🎭</div>
               <span className="font-bold text-lg text-gray-800">
                 Charades Generator
               </span>

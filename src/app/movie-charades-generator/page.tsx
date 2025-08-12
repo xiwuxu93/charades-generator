@@ -6,10 +6,14 @@ export const metadata: Metadata = {
   title: 'Movie Charades Generator - Free Film & Cinema Word Ideas',
   description: 'Free movie charades generator with 200+ films from Hollywood classics to modern blockbusters. Perfect for movie night parties, film buffs, and cinema lovers!',
   keywords: 'movie charades generator, film charades ideas, charades movies list, movie title charades, cinema charades generator, hollywood charades game',
+  alternates: {
+    canonical: 'https://charades-generator.com/movie-charades-generator',
+  },
   openGraph: {
     title: 'Movie Charades Generator - Free Film & Cinema Word Ideas',
     description: 'Free movie charades generator with films from Hollywood classics to modern blockbusters.',
     type: 'website',
+    url: 'https://charades-generator.com/movie-charades-generator',
   },
 };
 
@@ -26,7 +30,11 @@ export default function MovieCharadesPage() {
       
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <div className="text-6xl mb-4">🎬🍿</div>
+          <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-red-500 to-yellow-500 rounded-full flex items-center justify-center">
+            <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 6a2 2 0 012-2h6l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM5 8a1 1 0 000 2h8a1 1 0 100-2H5z"/>
+            </svg>
+          </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
             Movie Charades Generator
           </h1>
@@ -38,38 +46,38 @@ export default function MovieCharadesPage() {
 
         <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Movie Genres We Cover</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4" style={{ color: '#11191f' }}>
-            <div className="text-center p-3 bg-red-100 rounded-lg">
-              <div className="text-2xl mb-2">🦸</div>
-              <p className="font-semibold">Action & Superhero</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="text-center p-4 bg-red-100 rounded-lg border-l-4 border-red-400">
+              <p className="font-semibold text-gray-800">Action & Superhero</p>
+              <p className="text-sm text-gray-600 mt-1">Marvel, DC, Explosions</p>
             </div>
-            <div className="text-center p-3 bg-pink-100 rounded-lg">
-              <div className="text-2xl mb-2">💕</div>
-              <p className="font-semibold">Romance</p>
+            <div className="text-center p-4 bg-pink-100 rounded-lg border-l-4 border-pink-400">
+              <p className="font-semibold text-gray-800">Romance</p>
+              <p className="text-sm text-gray-600 mt-1">Love stories, Rom-coms</p>
             </div>
-            <div className="text-center p-3 bg-purple-100 rounded-lg">
-              <div className="text-2xl mb-2">👻</div>
-              <p className="font-semibold">Horror & Thriller</p>
+            <div className="text-center p-4 bg-purple-100 rounded-lg border-l-4 border-purple-400">
+              <p className="font-semibold text-gray-800">Horror & Thriller</p>
+              <p className="text-sm text-gray-600 mt-1">Suspense, Scary movies</p>
             </div>
-            <div className="text-center p-3 bg-yellow-100 rounded-lg">
-              <div className="text-2xl mb-2">😂</div>
-              <p className="font-semibold">Comedy</p>
+            <div className="text-center p-4 bg-yellow-100 rounded-lg border-l-4 border-yellow-400">
+              <p className="font-semibold text-gray-800">Comedy</p>
+              <p className="text-sm text-gray-600 mt-1">Laughs, Funny films</p>
             </div>
-            <div className="text-center p-3 bg-blue-100 rounded-lg">
-              <div className="text-2xl mb-2">🎭</div>
-              <p className="font-semibold">Drama</p>
+            <div className="text-center p-4 bg-blue-100 rounded-lg border-l-4 border-blue-400">
+              <p className="font-semibold text-gray-800">Drama</p>
+              <p className="text-sm text-gray-600 mt-1">Serious, Award winners</p>
             </div>
-            <div className="text-center p-3 bg-green-100 rounded-lg">
-              <div className="text-2xl mb-2">🎨</div>
-              <p className="font-semibold">Animation</p>
+            <div className="text-center p-4 bg-green-100 rounded-lg border-l-4 border-green-400">
+              <p className="font-semibold text-gray-800">Animation</p>
+              <p className="text-sm text-gray-600 mt-1">Pixar, Disney, Cartoons</p>
             </div>
-            <div className="text-center p-3 bg-orange-100 rounded-lg">
-              <div className="text-2xl mb-2">🚀</div>
-              <p className="font-semibold">Sci-Fi</p>
+            <div className="text-center p-4 bg-orange-100 rounded-lg border-l-4 border-orange-400">
+              <p className="font-semibold text-gray-800">Sci-Fi</p>
+              <p className="text-sm text-gray-600 mt-1">Space, Future, Tech</p>
             </div>
-            <div className="text-center p-3 bg-gray-100 rounded-lg">
-              <div className="text-2xl mb-2">🏆</div>
-              <p className="font-semibold">Classics</p>
+            <div className="text-center p-4 bg-gray-100 rounded-lg border-l-4 border-gray-400">
+              <p className="font-semibold text-gray-800">Classics</p>
+              <p className="text-sm text-gray-600 mt-1">Timeless, Old Hollywood</p>
             </div>
           </div>
         </div>

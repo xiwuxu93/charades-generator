@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description: 'Generate instant charades words and ideas for kids and adults. Free online charades generator with movies, animals, actions, Disney themes and more.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/charades-generator.png',
         width: 1200,
         height: 630,
         alt: 'Charades Generator - Free Online Game'
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Free Charades Generator - Instant Words for Your Game Night',
     description: 'Generate instant charades words and ideas for kids and adults. Perfect for parties and family fun!',
-    images: ['/og-image.jpg']
+    images: ['/charades-generator.png']
   },
   viewport: 'width=device-width, initial-scale=1',
   themeColor: '#3B82F6'
