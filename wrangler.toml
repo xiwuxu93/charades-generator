@@ -3,7 +3,7 @@ name = "charades-generator"
 compatibility_date = "2025-08-12"
 
 # Pages configuration
-pages_build_output_dir = ".vercel/output/static"
+pages_build_output_dir = "out"
 
 # Preview environment
 [env.preview]
