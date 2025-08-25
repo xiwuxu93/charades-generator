@@ -64,6 +64,9 @@ export default function Footer() {
                 />
               </a>
                   </li>
+                  <li>
+                    <a href="https://kontext-ai.com/" target="_blank">Kontext AI</a>
+                  </li>
               </ul>
             </div>
         </div>
