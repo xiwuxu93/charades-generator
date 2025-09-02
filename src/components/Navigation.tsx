@@ -26,14 +26,14 @@ const navigationItems = [
     description: "Disney characters",
   },
   {
-    title: "Funny Adults",
-    href: "/funny-charades-for-adults",
-    description: "Hilarious situations",
+    title: "Christmas Charades",
+    href: "/christmas-charades-generator",
+    description: "Holiday themed words",
   },
   {
-    title: "Feedback",
-    href: "/feedback",
-    description: "Share your thoughts",
+    title: "How to Use",
+    href: "/how-to-use",
+    description: "Complete guide & rules",
   },
 ];
 

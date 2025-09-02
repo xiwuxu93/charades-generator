@@ -7,6 +7,7 @@ import { objectsData } from "./categories/objects";
 import { emotionsData } from "./categories/emotions";
 import { disneyData } from "./categories/disney";
 import { funnyData } from "./categories/funny";
+import { christmasData } from "./categories/christmas";
 // import { enhanceWordWithEmoji } from "@/utils/emojiMapper";
 
 export interface CharadesWord {
@@ -32,6 +33,7 @@ const rawDatabase = [
   ...emotionsData,
   ...disneyData,
   ...funnyData,
+  ...christmasData,
 ];
 
 // Enhance all words with emojis
@@ -47,6 +49,7 @@ export const categories = [
   "emotions",
   "disney",
   "funny",
+  "christmas",
 ];
 
 export const difficulties = ["easy", "medium", "hard"];

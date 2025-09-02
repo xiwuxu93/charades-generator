@@ -6,17 +6,29 @@ export default function Footer() {
   const footerLinks = {
     'Charades Generators': [
       { title: 'Free Charades Generator', href: '/' },
+      { title: 'Random Charades Generator', href: '/random-charades-generator' },
       { title: 'Kids Charades Generator', href: '/charades-generator-for-kids' },
       { title: 'Movie Charades Generator', href: '/movie-charades-generator' },
       { title: 'Disney Charades Generator', href: '/disney-charades-generator' },
+      { title: 'Christmas Charades Generator', href: '/christmas-charades-generator' },
       { title: 'Funny Adult Charades', href: '/funny-charades-for-adults' },
+    ],
+    'Help & Information': [
+      { title: 'How to Use', href: '/how-to-use' },
+      { title: 'FAQ', href: '/faq' },
+      { title: 'About Us', href: '/about' },
+      { title: 'Feedback', href: '/feedback' },
+    ],
+    'Legal': [
+      { title: 'Privacy Policy', href: '/privacy-policy' },
+      { title: 'Terms of Service', href: '/terms-of-service' },
     ]
   };
 
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
       <div className="max-w-6xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
@@ -89,9 +101,10 @@ export default function Footer() {
         <div className="mt-6 pt-6 border-t border-gray-100">
           <div className="text-xs text-gray-400 text-center">
             <p>
-              Popular searches: charades generator, charades words, charades ideas, 
-              charades for kids, movie charades, disney charades, funny charades for adults, 
-              charades generator online, free charades generator, party games, family games
+              Popular searches: random charades generator, charades words generator, charades ideas, 
+              kids charades generator, childrens charades generator, movie charades, disney charades, 
+              christmas charades generator, funny charades for adults, charades generator online, 
+              free charades generator, party games, family games, how to play charades
             </p>
           </div>
         </div>

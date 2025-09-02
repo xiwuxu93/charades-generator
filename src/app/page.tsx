@@ -4,18 +4,18 @@ import FAQStructuredData from "@/components/FAQStructuredData";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Best Charades Generator Online - 1000+ Free Words & Ideas [No Ads]",
+  title: "Random Charades Generator - 1000+ Free Words & Ideas [No Ads]",
   description:
-    "Generate instant charades words from 1000+ database. Best free online charades generator for kids, adults, parties. Includes movies, Disney, animals, actions, funny words. Perfect for family game nights, team building & classroom activities.",
+    "Random charades generator with 1000+ words database! Free instant charades words for kids, adults, parties. Movies, Disney, animals, actions, funny words. Perfect random charades word generator for family game nights, team building & classroom activities.",
   keywords:
-    "best charades generator online, free charades words generator, charades game ideas, instant charades generator, charades for kids, charades for adults, party games, family night games, group activities, team building games, charades movies, disney charades, animal charades, funny charades, classroom games, charades database",
+    "random charades generator, charades word generator, free charades words generator, random charades words, best charades generator online, charades game ideas, instant charades generator, words for charades generator, charades for kids, charades for adults, party games, family night games, group activities, team building games, charades movies, disney charades, animal charades, funny charades, classroom games, charades database",
   alternates: {
     canonical: "https://charades-generator.com",
   },
   openGraph: {
-    title: "Best Charades Generator Online - 1000+ Free Words & Ideas [No Ads]",
+    title: "Random Charades Generator - 1000+ Free Words & Ideas [No Ads]",
     description:
-      "Generate instant charades words from 1000+ database. Best free online charades generator for kids, adults, parties. Includes movies, Disney, animals, actions, funny words.",
+      "Random charades generator with 1000+ words database! Free instant charades words for kids, adults, parties. Movies, Disney, animals, actions, funny words.",
     type: "website",
     url: "https://charades-generator.com",
   },
@@ -27,8 +27,8 @@ export default function Home() {
     <div className="bg-gray-50">
       <StructuredData
         type="WebApplication"
-        name="Best Charades Generator Online - Free Words & Ideas"
-        description="Generate instant charades words from 1000+ database. Best free online charades generator for kids, adults, parties. Includes movies, Disney, animals, actions, funny words."
+        name="Random Charades Generator - Free Words & Ideas"
+        description="Random charades generator with 1000+ words database! Free instant charades words for kids, adults, parties. Includes movies, Disney, animals, actions, funny words."
         url="https://charades-generator.com"
         category="Party Games"
       />
