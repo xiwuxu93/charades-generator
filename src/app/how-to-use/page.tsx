@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 
 export const metadata: Metadata = {
   title: "How to Use Charades Generator - Complete Guide & Instructions",
@@ -12,6 +13,10 @@ export const metadata: Metadata = {
 export default function HowToUse() {
   return (
     <div className="bg-gray-50 min-h-screen">
+      <BreadcrumbStructuredData items={[
+        { name: "Home", url: "https://charades-generator.com" },
+        { name: "How to Use", url: "https://charades-generator.com/how-to-use" }
+      ]} />
       <div className="max-w-4xl mx-auto px-6 py-8">
         <div className="bg-white rounded-lg shadow-md p-8">
           <div className="text-center mb-12">

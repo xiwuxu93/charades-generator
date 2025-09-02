@@ -1,5 +1,6 @@
 import CharadesGenerator from "@/components/CharadesGenerator";
 import StructuredData from "@/components/StructuredData";
+import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -26,6 +27,11 @@ export const metadata: Metadata = {
 export default function KidsCharadesPage() {
   return (
     <div className="bg-gradient-to-br from-blue-50 to-purple-50">
+      <BreadcrumbStructuredData items={[
+        { name: "Home", url: "https://charades-generator.com" },
+        { name: "Generators", url: "https://charades-generator.com" },
+        { name: "Kids Charades", url: "https://charades-generator.com/charades-generator-for-kids" }
+      ]} />
       <StructuredData
         type="Game"
         name="Kids Charades Generator"

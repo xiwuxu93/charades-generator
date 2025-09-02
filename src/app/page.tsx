@@ -1,6 +1,8 @@
 import CharadesGenerator from "@/components/CharadesGenerator";
 import StructuredData from "@/components/StructuredData";
 import FAQStructuredData from "@/components/FAQStructuredData";
+import WebsiteStructuredData from "@/components/WebsiteStructuredData";
+import SiteLinksStructuredData from "@/components/SiteLinksStructuredData";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,6 +27,8 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="bg-gray-50">
+      <WebsiteStructuredData />
+      <SiteLinksStructuredData />
       <StructuredData
         type="WebApplication"
         name="Random Charades Generator - Free Words & Ideas"

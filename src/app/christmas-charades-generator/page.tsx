@@ -1,6 +1,7 @@
 import CharadesGenerator from "@/components/CharadesGenerator";
 import StructuredData from "@/components/StructuredData";
 import FAQStructuredData from "@/components/FAQStructuredData";
+import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,6 +26,11 @@ export const metadata: Metadata = {
 export default function ChristmasCharadesGenerator() {
   return (
     <div className="bg-gradient-to-b from-red-50 to-green-50 min-h-screen">
+      <BreadcrumbStructuredData items={[
+        { name: "Home", url: "https://charades-generator.com" },
+        { name: "Generators", url: "https://charades-generator.com" },
+        { name: "Christmas Charades", url: "https://charades-generator.com/christmas-charades-generator" }
+      ]} />
       <StructuredData
         type="WebApplication"
         name="Christmas Charades Generator - Holiday Party Games"
