@@ -8,16 +8,16 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Charades Generator - Free 1000+ Words & Ideas [No Ads]",
   description:
-    "Charades Generator with 1000+ words database! Free instant charades words for kids, adults, parties. Movies, Disney, animals, actions, funny words. Perfect charades generator for family game nights, team building & classroom activities.",
+    "Free charades generator with 1000+ words! Instant charades words for kids, adults, parties. Movies, Disney, animals, actions & more categories.",
   keywords:
-    "random charades generator, charades word generator, free charades words generator, random charades words, best charades generator online, charades game ideas, instant charades generator, words for charades generator, charades for kids, charades for adults, party games, family night games, group activities, team building games, charades movies, disney charades, animal charades, funny charades, classroom games, charades database",
+    "charades generator, free charades words, charades game, party games, family games, disney charades",
   alternates: {
     canonical: "https://charades-generator.com",
   },
   openGraph: {
     title: "Charades Generator - Free 1000+ Words & Ideas [No Ads]",
     description:
-      "Charades Generator with 1000+ words database! Free instant charades words for kids, adults, parties. Movies, Disney, animals, actions, funny words.",
+      "Free charades generator with 1000+ words! Instant charades words for kids, adults, parties. Movies, Disney, animals, actions & more.",
     type: "website",
     url: "https://charades-generator.com",
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 min-h-screen">
       <WebsiteStructuredData />
       <SiteLinksStructuredData />
       <StructuredData

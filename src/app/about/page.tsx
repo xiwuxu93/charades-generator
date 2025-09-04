@@ -5,9 +5,9 @@ import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 export const metadata: Metadata = {
   title: "About Charades Generator - Free Online Party Game Tool",
   description:
-    "Learn about Charades Generator - the free online tool that makes party games fun and easy. Discover our mission to bring families and friends together through interactive entertainment.",
+    "Learn about Charades Generator - the free online tool that makes party games fun and easy. Our mission: bringing families together through games.",
   keywords:
-    "about charades generator, charades game tool, party game website, family entertainment, about us charades, online game generator company",
+    "about charades generator, party game website, family entertainment, online game generator",
   robots: "index, follow",
 };
 
@@ -22,8 +22,11 @@ export default function About() {
         <div className="bg-white rounded-lg shadow-md p-8">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">About Charades Generator</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
               We&apos;re passionate about bringing people together through fun, interactive games. Our free charades generator makes it easy to create memorable moments with family and friends.
+            </p>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Ready to get started? <a href="/" className="text-blue-600 hover:text-blue-800 underline">Try our charades generator</a> and discover thousands of carefully curated words perfect for any occasion.
             </p>
           </div>
 
@@ -253,9 +256,9 @@ export default function About() {
                   Have questions, suggestions, or just want to say hello? We&apos;d love to hear from you!
                 </p>
                 <div className="space-y-2 text-gray-600">
-                  <p><strong>General Inquiries:</strong> hello@charades-generator.com</p>
+                  <p><strong>General Inquiries:</strong> support@charades-generator.com</p>
                   <p><strong>Technical Support:</strong> support@charades-generator.com</p>
-                  <p><strong>Feedback & Suggestions:</strong> feedback@charades-generator.com</p>
+                  <p><strong>Feedback & Suggestions:</strong> support@charades-generator.com</p>
                   <p className="text-sm text-gray-500 mt-4">
                     We typically respond within 24-48 hours
                   </p>

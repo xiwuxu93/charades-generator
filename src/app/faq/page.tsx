@@ -3,11 +3,11 @@ import Link from "next/link";
 import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 
 export const metadata: Metadata = {
-  title: "Frequently Asked Questions - Charades Generator FAQ",
+  title: "FAQ - Charades Generator Questions & Answers",
   description:
-    "Find answers to common questions about our free charades generator. Learn about our word database, how to use filters, game rules, troubleshooting, and more.",
+    "Find answers about our free charades generator. Learn about word database, filters, game rules & troubleshooting. Quick help for better games!",
   keywords:
-    "charades generator FAQ, charades questions, how to use charades generator, charades game help, charades word generator questions, charades troubleshooting",
+    "charades generator FAQ, charades questions, charades game help, charades troubleshooting",
   robots: "index, follow",
 };
 
@@ -23,8 +23,11 @@ export default function FAQ() {
           
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
               Get quick answers to the most common questions about our free charades generator and how to make the most of your game experience.
+            </p>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Questions answered? <a href="/" className="text-blue-600 hover:text-blue-800 underline">Start generating charades words</a> and put your knowledge to use in your next game!
             </p>
           </div>
 
@@ -33,7 +36,7 @@ export default function FAQ() {
             {/* General Questions */}
             <section>
               <h2 className="text-2xl font-semibold text-gray-800 mb-6 pb-2 border-b-2 border-blue-500">
-                🎭 General Questions
+                General Questions
               </h2>
               <div className="space-y-6">
                 

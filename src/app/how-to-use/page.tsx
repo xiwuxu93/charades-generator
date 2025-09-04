@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 
 export const metadata: Metadata = {
-  title: "How to Use Charades Generator - Complete Guide & Instructions",
+  title: "How to Use Charades Generator - Complete Guide",
   description:
-    "Learn how to use our free charades generator effectively. Step-by-step instructions, game rules, tips for different age groups, and how to create the perfect charades game experience.",
+    "Learn to use our free charades generator! Step-by-step instructions, game rules, tips for different age groups & perfect charades game setup.",
   keywords:
-    "how to use charades generator, charades game instructions, how to play charades, charades rules, charades generator guide, charades game setup, how to use charades words",
+    "how to use charades generator, charades game instructions, charades rules, charades guide",
   robots: "index, follow",
 };
 
@@ -21,8 +21,11 @@ export default function HowToUse() {
         <div className="bg-white rounded-lg shadow-md p-8">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">How to Use Charades Generator</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
               Your complete guide to getting the most out of our free charades word generator and creating unforgettable game experiences.
+            </p>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Ready to start playing? <a href="/" className="text-blue-600 hover:text-blue-800 underline">Go to our charades generator</a> to generate your first batch of words and get the party started!
             </p>
           </div>
 

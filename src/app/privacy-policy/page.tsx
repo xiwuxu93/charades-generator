@@ -3,7 +3,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy - Charades Generator",
   description:
-    "Privacy Policy for Charades Generator. Learn how we protect your privacy and handle your data when using our free online charades word generator.",
+    "Privacy Policy for Charades Generator. Learn how we protect your privacy and handle your data when using our free charades word generator.",
   robots: "index, follow",
 };
 
@@ -14,8 +14,12 @@ export default function PrivacyPolicy() {
         <div className="bg-white rounded-lg shadow-md p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-6">Privacy Policy</h1>
           
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 mb-4">
             <strong>Last updated:</strong> {new Date().toLocaleDateString()}
+          </p>
+          
+          <p className="text-gray-600 mb-6 p-4 bg-blue-50 rounded-lg">
+            Want to start using our service? <a href="/" className="text-blue-600 hover:text-blue-800 underline">Visit our charades generator</a> to begin creating fun moments with friends and family - all while maintaining your privacy.
           </p>
 
           <div className="space-y-8">
@@ -164,7 +168,7 @@ export default function PrivacyPolicy() {
               <div className="bg-gray-50 p-4 rounded-lg">
                 <p className="text-gray-600">
                   <strong>Website:</strong> charades-generator.com<br />
-                  <strong>Email:</strong> privacy@charades-generator.com<br />
+                  <strong>Email:</strong> support@charades-generator.com<br />
                   <strong>Response Time:</strong> We aim to respond to all privacy inquiries within 48 hours
                 </p>
               </div>

@@ -32,8 +32,7 @@ export default function CharadesGenerator({
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<string>(defaultAgeGroup);
   const [, setHistory] = useState<CharadesWord[]>([]);
   const [filtersExpanded, setFiltersExpanded] = useState<boolean>(false);
-  const [batchSize, setBatchSize] = useState<number>(1);
-  const [inputValue, setInputValue] = useState<string>('1');
+  const [batchSize, setBatchSize] = useState<number>(3);
 
   const generateBatchWords = useCallback((count: number) => {
     setHistory(prevHistory => {
@@ -150,35 +149,28 @@ export default function CharadesGenerator({
         <p className="text-gray-600 text-lg mb-4">
           {description}
         </p>
-        <div className="flex flex-wrap justify-center gap-2 text-sm text-gray-500">
-          <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Movies</span>
-          <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full">Animals</span>
-          <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full">Disney</span>
-          <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full">Funny</span>
-          <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full">Actions</span>
-          <span className="bg-red-100 text-green-800 px-3 py-1 rounded-full">Christmas</span>
-        </div>
         <p className="text-center text-gray-500 text-sm mt-2">
-          1000+ charades words across 9 categories | Updated database | Instant random generation
+          1000+ words across 9 categories: Movies, Animals, Disney, Actions, Professions, Objects, Emotions, Funny, Christmas
         </p>
       </div>
+
            {/* Collapsible Filters */}
       {!hideFilters && (
       <div className="mb-8">
         <button
           onClick={() => setFiltersExpanded(!filtersExpanded)}
-          className="w-full bg-white rounded-lg shadow-md p-4 flex items-center justify-between hover:shadow-lg transition-shadow duration-200"
+          className="w-full bg-gray-50 hover:bg-gray-100 rounded-lg p-3 flex items-center justify-between transition-colors duration-200 border border-gray-200"
         >
           <div className="flex items-center space-x-2">
-            <span className="text-lg font-semibold text-gray-800">Customize Your Game</span>
+            <span className="text-sm font-medium text-gray-700">Advanced Options</span>
             {(selectedCategory !== 'all' || selectedDifficulty !== 'all' || selectedAgeGroup !== 'all') && (
               <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">
-                Filters Active
+                Custom Filters
               </span>
             )}
           </div>
           <div className={`transform transition-transform duration-200 ${filtersExpanded ? 'rotate-180' : ''}`}>
-            <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
           </div>
@@ -204,7 +196,7 @@ export default function CharadesGenerator({
                         : 'bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-700'
                     }`}
                   >
-                    {getCategoryIcon(category)} {category === 'all' ? 'All Categories' : 
+{category === 'all' ? 'All Categories' : 
                      category.charAt(0).toUpperCase() + category.slice(1)}
                   </button>
                 ))}
@@ -239,7 +231,7 @@ export default function CharadesGenerator({
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
-                    {getDifficultyIcon(difficulty)} {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+{difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
                   </button>
                 ))}
               </div>
@@ -317,308 +309,87 @@ export default function CharadesGenerator({
         )}
       </div>
       )}
-      {/* Generation Control */}
-      <div className="bg-white rounded-lg shadow-md p-4 mb-4">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center space-x-4">
-            <h3 className="text-lg font-semibold text-gray-800">Generate Multiple Words:</h3>
-          </div>
-          
-          <div className="flex items-center space-x-3">
-            <label className="text-sm font-medium text-gray-700">Number of words:</label>
-            <div className="flex items-center space-x-1 bg-gray-50 rounded-lg p-1">
-              <button
-                onClick={() => {
-                  const newValue = Math.max(1, batchSize - 1);
-                  setBatchSize(newValue);
-                  setInputValue(newValue.toString());
-                }}
-                disabled={batchSize <= 1}
-                className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-gray-800 hover:bg-gray-200 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                aria-label="Decrease number of words"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
-                </svg>
-              </button>
-              <input
-                type="number"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                max="50"
-                value={inputValue}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  setInputValue(value);
-                  
-                  // Only update batchSize with valid numbers
-                  const numValue = Number(value);
-                  if (value === '' || (numValue >= 1 && numValue <= 50)) {
-                    if (value !== '' && !isNaN(numValue)) {
-                      setBatchSize(numValue);
-                    }
-                  }
-                }}
-                onBlur={(e) => {
-                  const value = e.target.value;
-                  const numValue = Number(value);
-                  
-                  // Reset to valid value on blur if invalid
-                  if (value === '' || isNaN(numValue) || numValue < 1) {
-                    setInputValue('1');
-                    setBatchSize(1);
-                  } else if (numValue > 50) {
-                    setInputValue('50');
-                    setBatchSize(50);
-                  } else {
-                    setInputValue(numValue.toString());
-                    setBatchSize(numValue);
-                  }
-                }}
-                onFocus={(e) => e.target.select()}
-                className="w-16 border-0 bg-transparent text-center text-gray-700 focus:outline-none focus:ring-0"
-                placeholder="1-50"
-              />
-              <button
-                onClick={() => {
-                  const newValue = Math.min(50, batchSize + 1);
-                  setBatchSize(newValue);
-                  setInputValue(newValue.toString());
-                }}
-                disabled={batchSize >= 50}
-                className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-gray-800 hover:bg-gray-200 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                aria-label="Increase number of words"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
 
       {/* Generated Words Display */}
       {generatedWords.length > 0 && (
         <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">Your Charades Words</h2>
-            <p className="text-gray-600">Generated {generatedWords.length} words for your game!</p>
+            <p className="text-gray-600">Ready to play! {generatedWords.length} {generatedWords.length === 1 ? 'word' : 'words'} generated</p>
+            
+            {/* Quick Batch Options - moved here for better UX */}
+            <div className="flex justify-center items-center space-x-4 mt-4">
+              <span className="text-sm text-gray-600">Generate:</span>
+              {[1, 3, 5, 10].map(num => (
+                <button
+                  key={num}
+                  onClick={() => {
+                    setBatchSize(num);
+                    generateBatchWords(num);
+                  }}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 touch-manipulation ${
+                    batchSize === num 
+                      ? 'bg-blue-500 text-white shadow-md' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-700'
+                  }`}
+                >
+                  {num} {num === 1 ? 'word' : 'words'}
+                </button>
+              ))}
+            </div>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {generatedWords.map((word, index) => (
               <div
                 key={`${word.word}-${index}`}
-                className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-blue-300 transition-all duration-200 transform hover:-translate-y-1"
+                className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
               >
                 <div className="text-center">
-                  <div className={`w-12 h-12 mx-auto mb-3 rounded-full bg-gradient-to-r ${getCategoryColor(word.category)} flex items-center justify-center text-white text-xl font-bold`}>
-                    {getCategoryIcon(word.category)}
-                  </div>
-                  <div className="text-xl font-bold text-gray-800 mb-3">
+                  <div className="text-2xl font-bold text-gray-800 mb-3">
                     {word.word}
                   </div>
-                  <div className="flex flex-wrap justify-center gap-2 text-xs">
-                    <span className={`px-3 py-1 rounded-full font-medium ${getDifficultyColor(word.difficulty)}`}>
-                      {word.difficulty.toUpperCase()}
-                    </span>
-                    <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-medium">
-                      {word.category.toUpperCase()}
-                    </span>
-                    <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full font-medium">
-                      {word.wordCount} {word.wordCount === 1 ? 'WORD' : 'WORDS'}
-                    </span>
+                  <div className="flex flex-wrap justify-center gap-2 text-xs text-gray-500">
+                    <span>{word.difficulty}</span>
+                    <span>•</span>
+                    <span>{word.category}</span>
+                    <span>•</span>
+                    <span>{word.wordCount} {word.wordCount === 1 ? 'word' : 'words'}</span>
                   </div>
                 </div>
               </div>
             ))}
           </div>
           
-          <div className="text-center mt-6 p-4 bg-blue-50 rounded-lg">
-            <p className="text-sm text-blue-700 font-medium">
-              Pro tip: Use these words for multiple rounds or save them for later!
-            </p>
-          </div>
         </div>
       )}
 
-      {/* Generate Button - Prominent Position */}
+      {/* Generate New Words Button */}
       <div className="text-center mb-8">
         <button
           onClick={generateWords}
-          className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-8 rounded-full text-xl transition-all duration-200 transform hover:scale-105 shadow-lg"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg transition-colors"
         >
-          🎲 Generate Random {batchSize} {batchSize === 1 ? 'Word' : 'Words'}
+          Generate New {batchSize} {batchSize === 1 ? 'Word' : 'Words'}
         </button>
+        <p className="text-sm text-gray-500 mt-2">Get fresh words for your next round!</p>
       </div>
 
  
 
 
-      {/* Why Choose Our Charades Generator */}
-      <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Why Choose Our Free Charades Generator?</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="text-center p-4 bg-blue-50 rounded-lg">
-            <div className="w-12 h-12 mx-auto mb-3 bg-blue-500 rounded-full flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-              </svg>
-            </div>
-            <h3 className="font-semibold text-gray-800 mb-2">1000+ Curated Words</h3>
-            <p className="text-gray-600 text-sm">Carefully selected charades words across multiple categories for endless fun</p>
-          </div>
-          <div className="text-center p-4 bg-green-50 rounded-lg">
-            <div className="w-12 h-12 mx-auto mb-3 bg-green-500 rounded-full flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-            </div>
-            <h3 className="font-semibold text-gray-800 mb-2">All Ages Welcome</h3>
-            <p className="text-gray-600 text-sm">Family-friendly content suitable for kids, teens, and adults</p>
-          </div>
-          <div className="text-center p-4 bg-purple-50 rounded-lg">
-            <div className="w-12 h-12 mx-auto mb-3 bg-purple-500 rounded-full flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <h3 className="font-semibold text-gray-800 mb-2">Instant & Free</h3>
-            <p className="text-gray-600 text-sm">No registration required. Generate charades words instantly</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Perfect For Section */}
-      <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Perfect for Every Occasion</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="text-center p-4 bg-white rounded-lg shadow-sm border-l-4 border-pink-400">
-            <h3 className="font-semibold text-gray-800 mb-2">Party Games</h3>
-            <p className="text-gray-600 text-sm">Perfect icebreaker for parties and social gatherings</p>
-          </div>
-          <div className="text-center p-4 bg-white rounded-lg shadow-sm border-l-4 border-blue-400">
-            <h3 className="font-semibold text-gray-800 mb-2">Family Night</h3>
-            <p className="text-gray-600 text-sm">Quality time with family members of all ages</p>
-          </div>
-          <div className="text-center p-4 bg-white rounded-lg shadow-sm border-l-4 border-green-400">
-            <h3 className="font-semibold text-gray-800 mb-2">Team Building</h3>
-            <p className="text-gray-600 text-sm">Great for office team building activities</p>
-          </div>
-          <div className="text-center p-4 bg-white rounded-lg shadow-sm border-l-4 border-yellow-400">
-            <h3 className="font-semibold text-gray-800 mb-2">Classroom</h3>
-            <p className="text-gray-600 text-sm">Educational and fun for students and teachers</p>
-          </div>
-        </div>
-      </div>
 
       {/* Instructions */}
-      <div className="bg-gray-50 rounded-lg p-6 mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">How to Play Charades - Complete Guide</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-600">
-          <div>
-            <h3 className="text-lg font-semibold mb-3 text-gray-800">Basic Charades Rules:</h3>
-            <ul className="list-disc list-inside space-y-2">
-              <li>One player acts out the charades word without speaking</li>
-              <li>Other players try to guess the word within the time limit</li>
-              <li>Use gestures, facial expressions, and body language only</li>
-              <li>No talking, pointing at objects, or mouthing words allowed</li>
-              <li>Team with most correct guesses wins!</li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-3 text-gray-800">Pro Charades Tips:</h3>
-            <ul className="list-disc list-inside space-y-2">
-              <li>Start with easier categories for beginners</li>
-              <li>Set a time limit (2-3 minutes works well)</li>
-              <li>Use standard charades gestures when possible</li>
-              <li>Break complex words into smaller parts</li>
-              <li>Be creative and have fun with your acting!</li>
-            </ul>
-          </div>
-        </div>
+      <div className="bg-white border border-gray-200 rounded-lg p-6">
+        <h2 className="text-xl font-medium text-gray-800 mb-4">How to Play</h2>
+        <ul className="text-gray-600 space-y-2">
+          <li>• One player acts out the word without speaking</li>
+          <li>• Other players guess within the time limit</li>
+          <li>• Use only gestures, facial expressions, and body language</li>
+          <li>• No talking, pointing, or mouthing words</li>
+        </ul>
       </div>
 
-      {/* User Feedback CTA */}
-      <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-200 rounded-lg p-6 mb-8">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-3">
-            Help Us Improve Your Experience!
-          </h2>
-          <p className="text-gray-600 mb-4 max-w-2xl mx-auto">
-            We&apos;re constantly improving our charades generator based on user feedback. 
-            Tell us how you use it and what features you&apos;d love to see next!
-          </p>
-          <a 
-            href="/feedback"
-            className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg"
-          >
-            Share Your Feedback (2 mins)
-          </a>
-        </div>
-      </div>
-
-      {/* Charades Words Database Preview */}
-      <div className="bg-gradient-to-r from-indigo-100 to-purple-100 rounded-lg p-6 mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">📚 Sample Charades Words from Our Database</h2>
-        <p className="text-gray-600 mb-4">Here&apos;s a preview of the types of words in our 1000+ charades database:</p>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 text-sm">
-          <div className="bg-white p-2 rounded text-center font-medium">Lion</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Titanic</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Elsa</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Laughing</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Doctor</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Running</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Elephant</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Spider-Man</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Santa Claus</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Crying</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Teacher</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Swimming</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Penguin</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Harry Potter</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Mickey Mouse</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Surprised</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Chef</div>
-          <div className="bg-white p-2 rounded text-center font-medium">Dancing</div>
-        </div>
-        <p className="text-center text-gray-600 text-sm mt-4">
-          <strong>...and 980+ more words!</strong> Generate random combinations from movies, animals, Disney, Christmas, actions, professions, objects, and emotions.
-        </p>
-      </div>
-
-      {/* FAQ Section */}
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">Frequently Asked Questions</h2>
-        <div className="space-y-4">
-          <div>
-            <h3 className="font-semibold text-gray-800 mb-2">How many charades words are in your database?</h3>
-            <p className="text-gray-600">Our charades generator includes over 1000 carefully curated words across 9 categories: movies, animals, Disney characters, Christmas themes, actions, professions, objects, emotions, and funny words. We regularly update and expand our database.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-800 mb-2">Are these charades words good for parties?</h3>
-            <p className="text-gray-600">Absolutely! Our words are specifically chosen for party entertainment. They range from easy (great for breaking the ice) to challenging (perfect for competitive players), ensuring everyone can participate and have fun.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-800 mb-2">Can I see all the charades words in your database?</h3>
-            <p className="text-gray-600">While we don&apos;t display our full database publicly (to maintain the surprise element!), our generator randomly selects from 1000+ words including popular movies, beloved characters, common animals, everyday actions, and more.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-800 mb-2">How do you choose charades words for the database?</h3>
-            <p className="text-gray-600">We carefully select words that are: recognizable to most people, actable without speaking, appropriate for the target age group, and fun to guess. Each word is tested to ensure it works well in actual charades games.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-800 mb-2">Is this charades generator really free?</h3>
-            <p className="text-gray-600">Yes! Our online charades generator is completely free to use. No registration, no downloads, no hidden fees. Just instant charades fun for everyone.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-800 mb-2">What categories of charades words do you offer?</h3>
-            <p className="text-gray-600">We offer 9 categories: movies, animals, Disney characters, Christmas themes, actions, professions, objects, emotions, and funny words. You can filter by category, difficulty level (easy/medium/hard), and age group (kids/adults/all).</p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

@@ -5,18 +5,18 @@ import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Christmas Charades Generator - Free Holiday Party Game Ideas [2024]",
+  title: "Christmas Charades Generator - Holiday Party Games [2024]",
   description:
-    "Generate instant Christmas charades words! 60+ festive holiday words including Santa, reindeer, Christmas movies, holiday songs. Perfect for family Christmas parties, office parties, and holiday gatherings. Free online Christmas charades generator with easy, medium, hard difficulties.",
+    "Free Christmas charades with 60+ festive words! Santa, reindeer, movies, songs for family parties & office holiday gatherings. Easy to hard difficulty.",
   keywords:
-    "christmas charades generator, holiday charades, christmas party games, holiday party games, christmas charades words, festive charades, christmas family games, santa charades, reindeer charades, holiday charades ideas, christmas activities, xmas party games, christmas word generator, holiday game generator",
+    "christmas charades, holiday charades, christmas party games, santa charades, festive charades",
   alternates: {
     canonical: "https://charades-generator.com/christmas-charades-generator",
   },
   openGraph: {
-    title: "Christmas Charades Generator - Free Holiday Party Game Ideas [2024]",
+    title: "Christmas Charades Generator - Holiday Party Games [2024]",
     description:
-      "Generate instant Christmas charades words! 60+ festive holiday words for family Christmas parties and office holiday gatherings. Free and fun!",
+      "Free Christmas charades with 60+ festive words! Santa, reindeer, movies, songs for family parties & office holiday gatherings.",
     type: "website",
     url: "https://charades-generator.com/christmas-charades-generator",
   },
@@ -42,7 +42,7 @@ export default function ChristmasCharadesGenerator() {
       
       <CharadesGenerator
         defaultCategory="christmas"
-        title="🎄 Christmas Charades Generator 🎅"
+        title="Christmas Charades Generator"
         description="Generate festive Christmas charades words for your holiday parties! Perfect for family gatherings, office parties, and Christmas celebrations."
         hideCategoryFilter={true}
       />
@@ -52,12 +52,15 @@ export default function ChristmasCharadesGenerator() {
         
         {/* Holiday Party Ideas */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-red-500">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-            🎉 Perfect for Christmas Parties
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            Perfect for Christmas Parties
           </h2>
+          <p className="text-gray-600 mb-4">
+            Looking for more party games? Check out our <a href="/" className="text-red-600 hover:text-red-800 underline">complete charades generator</a> with hundreds of words across all categories and themes.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-red-50 p-4 rounded-lg">
-              <h3 className="font-semibold text-red-800 mb-2">🏠 Family Christmas Gatherings</h3>
+              <h3 className="font-semibold text-red-800 mb-2">Family Christmas Gatherings</h3>
               <ul className="text-red-700 text-sm space-y-1">
                 <li>• Christmas Eve entertainment</li>
                 <li>• Boxing Day family fun</li>
@@ -66,7 +69,7 @@ export default function ChristmasCharadesGenerator() {
               </ul>
             </div>
             <div className="bg-green-50 p-4 rounded-lg">
-              <h3 className="font-semibold text-green-800 mb-2">🏢 Office Holiday Parties</h3>
+              <h3 className="font-semibold text-green-800 mb-2">Office Holiday Parties</h3>
               <ul className="text-green-700 text-sm space-y-1">
                 <li>• Team building activities</li>
                 <li>• Holiday break ice-breakers</li>
@@ -79,20 +82,17 @@ export default function ChristmasCharadesGenerator() {
 
         {/* Christmas Charades Categories */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">🎁 What&apos;s Included in Christmas Charades</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">What's Included in Christmas Charades</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center p-4 bg-red-100 rounded-lg">
-              <div className="text-3xl mb-2">🎅</div>
               <h3 className="font-semibold text-red-800 mb-2">Christmas Characters</h3>
               <p className="text-red-700 text-sm">Santa, Mrs. Claus, Elves, Reindeer, Grinch, and more festive characters</p>
             </div>
             <div className="text-center p-4 bg-green-100 rounded-lg">
-              <div className="text-3xl mb-2">🎬</div>
               <h3 className="font-semibold text-green-800 mb-2">Holiday Movies & Songs</h3>
               <p className="text-green-700 text-sm">Classic Christmas movies, carols, and holiday music favorites</p>
             </div>
             <div className="text-center p-4 bg-blue-100 rounded-lg">
-              <div className="text-3xl mb-2">🍪</div>
               <h3 className="font-semibold text-blue-800 mb-2">Holiday Traditions</h3>
               <p className="text-blue-700 text-sm">Christmas foods, activities, decorations, and holiday customs</p>
             </div>
@@ -101,7 +101,7 @@ export default function ChristmasCharadesGenerator() {
 
         {/* Christmas Charades Rules */}
         <div className="bg-gradient-to-r from-red-100 to-green-100 rounded-lg p-6 mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">🎲 How to Play Christmas Charades</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">How to Play Christmas Charades</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <h3 className="text-lg font-semibold mb-3 text-red-800">Holiday Game Setup:</h3>
@@ -128,7 +128,7 @@ export default function ChristmasCharadesGenerator() {
 
         {/* Christmas FAQ */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">🤔 Christmas Charades FAQ</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Christmas Charades FAQ</h2>
           <div className="space-y-4">
             <div>
               <h3 className="font-semibold text-gray-800 mb-2">How many Christmas charades words do you have?</h3>

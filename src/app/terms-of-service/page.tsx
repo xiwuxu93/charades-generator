@@ -3,7 +3,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Terms of Service - Charades Generator",
   description:
-    "Terms of Service for Charades Generator. Read our terms and conditions for using our free online charades word generator and related services.",
+    "Terms of Service for Charades Generator. Read our terms and conditions for using our free charades word generator and related services.",
   robots: "index, follow",
 };
 
@@ -14,8 +14,12 @@ export default function TermsOfService() {
         <div className="bg-white rounded-lg shadow-md p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-6">Terms of Service</h1>
           
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 mb-4">
             <strong>Last updated:</strong> {new Date().toLocaleDateString()}
+          </p>
+          
+          <p className="text-gray-600 mb-6 p-4 bg-green-50 rounded-lg">
+            Ready to use our service? <a href="/" className="text-green-600 hover:text-green-800 underline">Start using our charades generator</a> to create fun experiences while following these simple terms.
           </p>
 
           <div className="space-y-8">
@@ -182,7 +186,7 @@ export default function TermsOfService() {
               <div className="bg-gray-50 p-4 rounded-lg">
                 <p className="text-gray-600">
                   <strong>Website:</strong> charades-generator.com<br />
-                  <strong>Email:</strong> legal@charades-generator.com<br />
+                  <strong>Email:</strong> support@charades-generator.com<br />
                   <strong>Response Time:</strong> We aim to respond to all legal inquiries within 72 hours
                 </p>
               </div>

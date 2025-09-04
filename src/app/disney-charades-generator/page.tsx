@@ -3,19 +3,18 @@ import StructuredData from "@/components/StructuredData";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Disney Charades Generator - Free Disney Characters & Movies [No Ads]",
+  title: "Disney Charades Generator - Free Characters & Movies",
   description:
-    "Free Disney charades generator with 100+ beloved characters and movies. Frozen, Mickey Mouse, Moana, Lion King and more! Perfect for Disney fans and kids parties.",
+    "Free Disney charades with 100+ characters! Frozen, Mickey Mouse, Moana, Lion King & more. Perfect for Disney parties & kids birthday celebrations.",
   keywords:
-    "disney charades generator, disney characters charades, frozen charades ideas, mickey mouse charades, disney movie charades, disney party games generator",
+    "disney charades, disney characters, frozen charades, mickey mouse charades, disney party games",
   alternates: {
     canonical: "https://charades-generator.com/disney-charades-generator",
   },
   openGraph: {
-    title:
-      "Disney Charades Generator - Free Disney Characters & Movies [No Ads]",
+    title: "Disney Charades Generator - Free Characters & Movies",
     description:
-      "Free Disney charades generator with beloved characters and classic movies.",
+      "Free Disney charades with 100+ characters! Frozen, Mickey Mouse, Moana, Lion King & more. Perfect for Disney parties & kids celebrations.",
     type: "website",
     url: "https://charades-generator.com/disney-charades-generator",
   },
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function DisneyCharadesPage() {
   return (
-    <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+    <div className="bg-gray-50 min-h-screen">
       <StructuredData
         type="Game"
         name="Disney Charades Generator"
@@ -32,158 +31,119 @@ export default function DisneyCharadesPage() {
         category="Disney Family Game"
       />
 
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center">
-            <svg
-              className="w-10 h-10 text-white"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8zm0 4a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1v-2z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            Disney Charades Generator
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Enter the magical world of Disney! Act out beloved characters,
-            classic movies, and enchanting stories from Mickey Mouse to Frozen
-            and everything in between.
-          </p>
-        </div>
-
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <CharadesGenerator
+        defaultCategory="disney"
+        title="Disney Charades Generator"
+        description="Magical Disney characters and movies! Act out your favorite Disney heroes, princesses, and classic stories."
+        hideCategoryFilter={true}
+      />
+      
+      {/* Disney charades specific content */}
+      <div className="max-w-4xl mx-auto px-6 pb-8">
+        
+        {/* Disney Party Ideas */}
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-purple-500">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">
-            Disney Magic Categories
+            Perfect for Disney Themed Parties
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center p-6 bg-gradient-to-b from-blue-100 to-blue-200 rounded-lg border-l-4 border-blue-400">
-              <div className="w-12 h-12 mx-auto mb-3 bg-blue-500 rounded-full flex items-center justify-center">
-                <svg
-                  className="w-6 h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                  />
-                </svg>
-              </div>
-              <h3 className="font-bold text-lg mb-2">Disney Princesses</h3>
-              <p className="text-gray-700 text-sm">
-                Elsa, Anna, Moana, Belle, Ariel, and more magical princesses
-              </p>
-            </div>
-            <div className="text-center p-6 bg-gradient-to-b from-red-100 to-red-200 rounded-lg border-l-4 border-red-400">
-              <div className="w-12 h-12 mx-auto mb-3 bg-red-500 rounded-full flex items-center justify-center">
-                <svg
-                  className="w-6 h-6 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <h3 className="font-bold text-lg mb-2">Classic Characters</h3>
-              <p className="text-gray-700 text-sm">
-                Mickey Mouse, Donald Duck, Goofy, and timeless favorites
-              </p>
-            </div>
-            <div className="text-center p-6 bg-gradient-to-b from-purple-100 to-purple-200 rounded-lg border-l-4 border-purple-400">
-              <div className="w-12 h-12 mx-auto mb-3 bg-purple-500 rounded-full flex items-center justify-center">
-                <svg
-                  className="w-6 h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2h4a1 1 0 011 1v2a1 1 0 01-1 1h-1v12a2 2 0 01-2 2H6a2 2 0 01-2-2V8H3a1 1 0 01-1-1V5a1 1 0 011-1h4z"
-                  />
-                </svg>
-              </div>
-              <h3 className="font-bold text-lg mb-2">Animated Movies</h3>
-              <p className="text-gray-700 text-sm">
-                Lion King, Toy Story, Finding Nemo, and animated classics
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <CharadesGenerator
-          defaultCategory="disney"
-          title="Disney Charades Generator"
-          description="Magical Disney characters and movies! Act out your favorite Disney heroes, princesses, and classic stories."
-          hideCategoryFilter={true}
-        />
-
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200 rounded-lg p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Acting Disney Characters
-            </h2>
-            <ul className="list-disc list-inside text-gray-700 space-y-2">
-              <li>
-                <strong>Elsa:</strong> Pretend to create ice magic with your
-                hands
-              </li>
-              <li>
-                <strong>Mickey Mouse:</strong> Make big round ears with your
-                hands
-              </li>
-              <li>
-                <strong>Simba:</strong> Roar like a lion and show a mane
-              </li>
-              <li>
-                <strong>Buzz Lightyear:</strong> Strike a heroic pose and
-                &quot;fly&quot;
-              </li>
-              <li>
-                <strong>Ariel:</strong> Swim like a mermaid and brush your hair
-              </li>
-            </ul>
-          </div>
-
-          <div className="bg-gradient-to-r from-yellow-100 to-orange-100 border border-yellow-200 rounded-lg p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Disney Party Tips
-            </h2>
-            <ul className="list-disc list-inside text-gray-700 space-y-2">
-              <li>Play Disney music in the background</li>
-              <li>Encourage costumes or Disney accessories</li>
-              <li>Mix classic and modern Disney content</li>
-              <li>Create teams based on Disney movies</li>
-              <li>Award &quot;magical&quot; prizes for participation</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
-          <h3 className="text-xl font-bold text-gray-800 mb-2">
-            Perfect for Disney Fans!
-          </h3>
-          <p className="text-gray-600">
-            Whether you&apos;re planning a Disney-themed party, family game
-            night, or just want to relive the magic, our Disney charades
-            generator brings the enchantment right to your living room!
+          <p className="text-gray-600 mb-4">
+            Love Disney but want even more options? Try our <a href="/" className="text-purple-600 hover:text-purple-800 underline">full charades generator</a> with Disney plus hundreds of other categories including animals, movies, and books.
           </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-purple-50 p-4 rounded-lg">
+              <h3 className="font-semibold text-purple-800 mb-2">Disney Birthday Parties</h3>
+              <ul className="text-purple-700 text-sm space-y-1">
+                <li>• Princess themed birthday celebrations</li>
+                <li>• Disney character costume parties</li>
+                <li>• Frozen and Elsa themed events</li>
+                <li>• Mickey Mouse clubhouse parties</li>
+              </ul>
+            </div>
+            <div className="bg-pink-50 p-4 rounded-lg">
+              <h3 className="font-semibold text-pink-800 mb-2">Family Disney Fun</h3>
+              <ul className="text-pink-700 text-sm space-y-1">
+                <li>• Disney movie night entertainment</li>
+                <li>• Disney World trip preparation games</li>
+                <li>• Family Disney trivia nights</li>
+                <li>• Disney vacation planning activities</li>
+              </ul>
+            </div>
+          </div>
         </div>
+
+        {/* Disney Characters */}
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Disney Characters & Movies Included</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="text-center p-4 bg-blue-100 rounded-lg">
+              <h3 className="font-semibold text-blue-800 mb-2">Disney Princesses</h3>
+              <p className="text-blue-700 text-sm">Elsa, Anna, Moana, Belle, Ariel, Cinderella, and more magical princesses</p>
+            </div>
+            <div className="text-center p-4 bg-red-100 rounded-lg">
+              <h3 className="font-semibold text-red-800 mb-2">Classic Characters</h3>
+              <p className="text-red-700 text-sm">Mickey Mouse, Donald Duck, Goofy, Pluto, and timeless Disney favorites</p>
+            </div>
+            <div className="text-center p-4 bg-green-100 rounded-lg">
+              <h3 className="font-semibold text-green-800 mb-2">Disney Movies</h3>
+              <p className="text-green-700 text-sm">Lion King, Toy Story, Finding Nemo, Frozen, and beloved animated classics</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Disney Charades Tips */}
+        <div className="bg-gradient-to-r from-pink-100 to-purple-100 rounded-lg p-6 mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">How to Act Out Disney Characters</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-lg font-semibold mb-3 text-pink-800">Character Acting:</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <li>Use signature gestures (Elsa's ice magic)</li>
+                <li>Show character emotions and personality</li>
+                <li>Act out famous Disney movie scenes</li>
+                <li>Use distinctive character mannerisms</li>
+                <li>Show the character's special powers</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-3 text-purple-800">Disney Guessing Tips:</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <li>Think about Disney movie themes</li>
+                <li>Consider character relationships</li>
+                <li>Look for princess or villain clues</li>
+                <li>Remember Disney animal characters</li>
+                <li>Think classic vs modern Disney</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Disney Charades FAQ */}
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Disney Charades FAQ</h2>
+          <div className="space-y-4">
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">How many Disney characters are included?</h3>
+              <p className="text-gray-600">Our Disney charades generator includes 100+ beloved Disney characters and movies from classic animations to modern hits like Frozen, Moana, and Toy Story, covering princesses, villains, sidekicks, and iconic characters.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">Are these suitable for Disney-themed birthday parties?</h3>
+              <p className="text-gray-600">Absolutely! Disney charades is perfect for princess parties, Mickey Mouse celebrations, Frozen-themed birthdays, and any Disney character party where kids and families want magical entertainment.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">Do you include both classic and modern Disney?</h3>
+              <p className="text-gray-600">Yes! Our collection spans from classic Disney like Snow White and Mickey Mouse to modern favorites like Elsa, Moana, and characters from recent Disney and Pixar movies.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">Can adults enjoy Disney charades too?</h3>
+              <p className="text-gray-600">Definitely! Disney charades appeals to all ages. Adults love acting out their childhood favorites, and the nostalgic characters create fun intergenerational entertainment for the whole family.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">What Disney movies are represented?</h3>
+              <p className="text-gray-600">Our database includes characters and references from The Lion King, Frozen, Beauty and the Beast, The Little Mermaid, Toy Story, Finding Nemo, Moana, and many more Disney classics and recent releases.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   );

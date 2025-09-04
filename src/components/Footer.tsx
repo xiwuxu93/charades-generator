@@ -97,17 +97,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* SEO Keywords Footer */}
-        <div className="mt-6 pt-6 border-t border-gray-100">
-          <div className="text-xs text-gray-400 text-center">
-            <p>
-              Popular searches: random charades generator, charades words generator, charades ideas, 
-              kids charades generator, childrens charades generator, movie charades, disney charades, 
-              christmas charades generator, funny charades for adults, charades generator online, 
-              free charades generator, party games, family games, how to play charades
-            </p>
-          </div>
-        </div>
       </div>
     </footer>
   );
