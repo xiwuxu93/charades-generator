@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ export default function HowToUse() {
               Your complete guide to getting the most out of our free charades word generator and creating unforgettable game experiences.
             </p>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Ready to start playing? <a href="/" className="text-blue-600 hover:text-blue-800 underline">Go to our charades generator</a> to generate your first batch of words and get the party started!
+              Ready to start playing? <Link href="/" className="text-blue-600 hover:text-blue-800 underline">Go to our charades generator</Link> to generate your first batch of words and get the party started!
             </p>
           </div>
 

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Privacy Policy - Charades Generator",
@@ -19,7 +20,7 @@ export default function PrivacyPolicy() {
           </p>
           
           <p className="text-gray-600 mb-6 p-4 bg-blue-50 rounded-lg">
-            Want to start using our service? <a href="/" className="text-blue-600 hover:text-blue-800 underline">Visit our charades generator</a> to begin creating fun moments with friends and family - all while maintaining your privacy.
+            Want to start using our service? <Link href="/" className="text-blue-600 hover:text-blue-800 underline">Visit our charades generator</Link> to begin creating fun moments with friends and family - all while maintaining your privacy.
           </p>
 
           <div className="space-y-8">

@@ -1,6 +1,7 @@
 import CharadesGenerator from "@/components/CharadesGenerator";
 import StructuredData from "@/components/StructuredData";
 import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
+import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -51,16 +52,16 @@ export default function KidsCharadesPage() {
         {/* Kids Party Ideas */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-green-500">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">
-            Perfect for Children's Activities
+            Perfect for Children&apos;s Activities
           </h2>
           <p className="text-gray-600 mb-4">
-            Need more options for family fun? Visit our <a href="/" className="text-green-600 hover:text-green-800 underline">complete charades generator</a> with age-appropriate filters and thousands of family-friendly words.
+            Need more options for family fun? Visit our <Link href="/" className="text-green-600 hover:text-green-800 underline">complete charades generator</Link> with age-appropriate filters and thousands of family-friendly words.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-green-50 p-4 rounded-lg">
               <h3 className="font-semibold text-green-800 mb-2">Kids Birthday Parties</h3>
               <ul className="text-green-700 text-sm space-y-1">
-                <li>• Children's birthday entertainment</li>
+                <li>• Children&apos;s birthday entertainment</li>
                 <li>• Preschool party games and activities</li>
                 <li>• Elementary school celebrations</li>
                 <li>• Kids sleepover party fun</li>

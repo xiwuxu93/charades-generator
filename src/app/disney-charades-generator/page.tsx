@@ -1,5 +1,6 @@
 import CharadesGenerator from "@/components/CharadesGenerator";
 import StructuredData from "@/components/StructuredData";
+import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -47,7 +48,7 @@ export default function DisneyCharadesPage() {
             Perfect for Disney Themed Parties
           </h2>
           <p className="text-gray-600 mb-4">
-            Love Disney but want even more options? Try our <a href="/" className="text-purple-600 hover:text-purple-800 underline">full charades generator</a> with Disney plus hundreds of other categories including animals, movies, and books.
+            Love Disney but want even more options? Try our <Link href="/" className="text-purple-600 hover:text-purple-800 underline">full charades generator</Link> with Disney plus hundreds of other categories including animals, movies, and books.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-purple-50 p-4 rounded-lg">
@@ -97,11 +98,11 @@ export default function DisneyCharadesPage() {
             <div>
               <h3 className="text-lg font-semibold mb-3 text-pink-800">Character Acting:</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-700">
-                <li>Use signature gestures (Elsa's ice magic)</li>
+                <li>Use signature gestures (Elsa&apos;s ice magic)</li>
                 <li>Show character emotions and personality</li>
                 <li>Act out famous Disney movie scenes</li>
                 <li>Use distinctive character mannerisms</li>
-                <li>Show the character's special powers</li>
+                <li>Show the character&apos;s special powers</li>
               </ul>
             </div>
             <div>

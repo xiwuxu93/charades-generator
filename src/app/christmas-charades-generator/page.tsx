@@ -2,6 +2,7 @@ import CharadesGenerator from "@/components/CharadesGenerator";
 import StructuredData from "@/components/StructuredData";
 import FAQStructuredData from "@/components/FAQStructuredData";
 import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
+import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -56,7 +57,7 @@ export default function ChristmasCharadesGenerator() {
             Perfect for Christmas Parties
           </h2>
           <p className="text-gray-600 mb-4">
-            Looking for more party games? Check out our <a href="/" className="text-red-600 hover:text-red-800 underline">complete charades generator</a> with hundreds of words across all categories and themes.
+            Looking for more party games? Check out our <Link href="/" className="text-red-600 hover:text-red-800 underline">complete charades generator</Link> with hundreds of words across all categories and themes.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-red-50 p-4 rounded-lg">
@@ -82,7 +83,7 @@ export default function ChristmasCharadesGenerator() {
 
         {/* Christmas Charades Categories */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">What's Included in Christmas Charades</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">What&apos;s Included in Christmas Charades</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center p-4 bg-red-100 rounded-lg">
               <h3 className="font-semibold text-red-800 mb-2">Christmas Characters</h3>

@@ -1,5 +1,6 @@
 import CharadesGenerator from "@/components/CharadesGenerator";
 import StructuredData from "@/components/StructuredData";
+import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -47,7 +48,7 @@ export default function MovieCharadesPage() {
             Perfect for Movie Night Parties
           </h2>
           <p className="text-gray-600 mb-4">
-            Beyond movies? Discover our <a href="/" className="text-blue-600 hover:text-blue-800 underline">complete charades generator</a> featuring books, TV shows, animals, actions, and dozens of other entertaining categories.
+            Beyond movies? Discover our <Link href="/" className="text-blue-600 hover:text-blue-800 underline">complete charades generator</Link> featuring books, TV shows, animals, actions, and dozens of other entertaining categories.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-blue-50 p-4 rounded-lg">
@@ -73,11 +74,11 @@ export default function MovieCharadesPage() {
 
         {/* Movie Categories */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">What's Included in Movie Charades</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">What&apos;s Included in Movie Charades</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center p-4 bg-purple-100 rounded-lg">
               <h3 className="font-semibold text-purple-800 mb-2">Classic Movies</h3>
-              <p className="text-purple-700 text-sm">Timeless films from Hollywood's golden age to modern classics</p>
+              <p className="text-purple-700 text-sm">Timeless films from Hollywood&apos;s golden age to modern classics</p>
             </div>
             <div className="text-center p-4 bg-green-100 rounded-lg">
               <h3 className="font-semibold text-green-800 mb-2">Popular Blockbusters</h3>
@@ -101,14 +102,14 @@ export default function MovieCharadesPage() {
                 <li>Show the movie genre first (action, romance, etc.)</li>
                 <li>Use character gestures and mannerisms</li>
                 <li>Recreate memorable movie moments</li>
-                <li>Show the movie's emotional tone</li>
+                <li>Show the movie&apos;s emotional tone</li>
               </ul>
             </div>
             <div>
               <h3 className="text-lg font-semibold mb-3 text-gray-800">Guessing Strategy:</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-700">
                 <li>Think about popular movies from different decades</li>
-                <li>Consider the actor's famous roles</li>
+                <li>Consider the actor&apos;s famous roles</li>
                 <li>Look for genre clues in the performance</li>
                 <li>Pay attention to the number of words shown</li>
                 <li>Ask about specific movie elements</li>

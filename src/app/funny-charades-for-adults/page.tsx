@@ -1,5 +1,6 @@
 import CharadesGenerator from "@/components/CharadesGenerator";
 import StructuredData from "@/components/StructuredData";
+import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -49,7 +50,7 @@ export default function FunnyCharadesPage() {
             Perfect for Adult Entertainment
           </h2>
           <p className="text-gray-600 mb-4">
-            Want more variety for your party? Explore our <a href="/" className="text-orange-600 hover:text-orange-800 underline">main charades generator</a> with thousands of words including movies, books, animals, and more themes.
+            Want more variety for your party? Explore our <Link href="/" className="text-orange-600 hover:text-orange-800 underline">main charades generator</Link> with thousands of words including movies, books, animals, and more themes.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-orange-50 p-4 rounded-lg">
@@ -58,7 +59,7 @@ export default function FunnyCharadesPage() {
                 <li>• Adult birthday party entertainment</li>
                 <li>• Bachelorette and bachelor party fun</li>
                 <li>• Adult game night activities</li>
-                <li>• New Year's Eve party games</li>
+                <li>• New Year&apos;s Eve party games</li>
               </ul>
             </div>
             <div className="bg-yellow-50 p-4 rounded-lg">
@@ -101,7 +102,7 @@ export default function FunnyCharadesPage() {
               <ul className="list-disc list-inside space-y-2 text-gray-700">
                 <li>Exaggerate the embarrassing moments</li>
                 <li>Use facial expressions to show frustration</li>
-                <li>Don't be afraid to look completely silly</li>
+                <li>Don&apos;t be afraid to look completely silly</li>
                 <li>Show the before and after of situations</li>
                 <li>Use props if available for extra comedy</li>
               </ul>

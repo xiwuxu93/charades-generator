@@ -26,7 +26,7 @@ export default function About() {
               We&apos;re passionate about bringing people together through fun, interactive games. Our free charades generator makes it easy to create memorable moments with family and friends.
             </p>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Ready to get started? <a href="/" className="text-blue-600 hover:text-blue-800 underline">Try our charades generator</a> and discover thousands of carefully curated words perfect for any occasion.
+              Ready to get started? <Link href="/" className="text-blue-600 hover:text-blue-800 underline">Try our charades generator</Link> and discover thousands of carefully curated words perfect for any occasion.
             </p>
           </div>
 

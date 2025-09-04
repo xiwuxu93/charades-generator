@@ -27,7 +27,7 @@ export default function FAQ() {
               Get quick answers to the most common questions about our free charades generator and how to make the most of your game experience.
             </p>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Questions answered? <a href="/" className="text-blue-600 hover:text-blue-800 underline">Start generating charades words</a> and put your knowledge to use in your next game!
+              Questions answered? <Link href="/" className="text-blue-600 hover:text-blue-800 underline">Start generating charades words</Link> and put your knowledge to use in your next game!
             </p>
           </div>
 

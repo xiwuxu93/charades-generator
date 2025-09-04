@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Terms of Service - Charades Generator",
@@ -19,7 +20,7 @@ export default function TermsOfService() {
           </p>
           
           <p className="text-gray-600 mb-6 p-4 bg-green-50 rounded-lg">
-            Ready to use our service? <a href="/" className="text-green-600 hover:text-green-800 underline">Start using our charades generator</a> to create fun experiences while following these simple terms.
+            Ready to use our service? <Link href="/" className="text-green-600 hover:text-green-800 underline">Start using our charades generator</Link> to create fun experiences while following these simple terms.
           </p>
 
           <div className="space-y-8">

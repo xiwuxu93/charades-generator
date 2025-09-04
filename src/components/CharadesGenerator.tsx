@@ -82,54 +82,6 @@ export default function CharadesGenerator({
     generateWords();
   }, [generateWords]);
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'easy': return 'text-green-600 bg-green-100';
-      case 'medium': return 'text-yellow-600 bg-yellow-100';
-      case 'hard': return 'text-red-600 bg-red-100';
-      default: return 'text-gray-600 bg-gray-100';
-    }
-  };
-
-  const getCategoryIcon = (category: string) => {
-    const icons: { [key: string]: string } = {
-      all: '🎭',
-      movies: '🎬',
-      animals: '🐾',
-      actions: '⚡',
-      professions: '👔',
-      objects: '📦',
-      emotions: '😊',
-      disney: '🏰',
-      funny: '🎪',
-      christmas: '🎄'
-    };
-    return icons[category] || '🎭';
-  };
-
-  const getCategoryColor = (category: string) => {
-    const colors: { [key: string]: string } = {
-      movies: 'from-blue-500 to-blue-600',
-      animals: 'from-green-500 to-green-600',
-      actions: 'from-yellow-500 to-yellow-600',
-      professions: 'from-purple-500 to-purple-600',
-      objects: 'from-gray-500 to-gray-600',
-      emotions: 'from-pink-500 to-pink-600',
-      disney: 'from-indigo-500 to-indigo-600',
-      funny: 'from-orange-500 to-orange-600',
-      christmas: 'from-red-500 to-green-600'
-    };
-    return colors[category] || 'from-gray-500 to-gray-600';
-  };
-
-  const getDifficultyIcon = (difficulty: string) => {
-    const icons: { [key: string]: string } = {
-      easy: '🟢',
-      medium: '🟡',
-      hard: '🔴'
-    };
-    return icons[difficulty] || '⚡';
-  };
 
   const getDifficultyButtonColor = (difficulty: string) => {
     const colors: { [key: string]: string } = {
