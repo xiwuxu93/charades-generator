@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import FeedbackForm from "@/components/FeedbackForm";
 
 export const metadata: Metadata = {
-  title: "User Feedback - Help Us Improve | Charades Generator [No Ads]",
+  title: "User Feedback - Help Us Improve | Charades Generator",
   description:
     "Share your feedback to help us improve the best free charades generator. Tell us what features you need and how you use charades words.",
   keywords:

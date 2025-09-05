@@ -6,7 +6,7 @@ import SiteLinksStructuredData from "@/components/SiteLinksStructuredData";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Charades Generator - Free 1000+ Words & Ideas [No Ads]",
+  title: "Charades Generator - Free 1000+ Words & Ideas",
   description:
     "Free charades generator with 1000+ words! Instant charades words for kids, adults, parties. Movies, Disney, animals, actions & more categories.",
   keywords:
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     canonical: "https://charades-generator.com",
   },
   openGraph: {
-    title: "Charades Generator - Free 1000+ Words & Ideas [No Ads]",
+    title: "Charades Generator - Free 1000+ Words & Ideas",
     description:
       "Free charades generator with 1000+ words! Instant charades words for kids, adults, parties. Movies, Disney, animals, actions & more.",
     type: "website",

@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Charades Generator - Free Online Charades Words & Ideas [No Ads]",
-    template: "%s | Charades Generator [No Ads]",
+    default: "Charades Generator - Free Online Charades Words & Ideas",
+    template: "%s | Charades Generator",
   },
   description:
     "Free online charades generator with 1000+ words and ideas. Generate instant charades for kids, adults, movies, Disney, animals, actions and more. Perfect for parties and family game nights!",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     url: "https://charades-generator.com",
     siteName: "Charades Generator",
     title:
-      "Free Charades Generator - Instant Words for Your Game Night [No Ads]",
+      "Free Charades Generator - Instant Words for Your Game Night",
     description:
       "Generate instant charades words and ideas for kids and adults. Free online charades generator with movies, animals, actions, Disney themes and more.",
     images: [
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Free Charades Generator - Instant Words for Your Game Night [No Ads]",
+      "Free Charades Generator - Instant Words for Your Game Night",
     description:
       "Generate instant charades words and ideas for kids and adults. Perfect for parties and family fun!",
     images: ["/charades-generator.png"],
