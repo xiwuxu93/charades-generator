@@ -93,25 +93,25 @@ export default function CharadesGenerator({
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-gray-800 mb-2">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
+      <div className="text-center mb-6 sm:mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2 leading-tight">
           {title}
         </h1>
-        <p className="text-gray-600 text-lg mb-4">
+        <p className="text-gray-600 text-base sm:text-lg mb-4 px-2">
           {description}
         </p>
-        <p className="text-center text-gray-500 text-sm mt-2">
+        <p className="text-center text-gray-500 text-sm mt-2 px-2">
           1000+ words across 9 categories: Movies, Animals, Disney, Actions, Professions, Objects, Emotions, Funny, Christmas
         </p>
       </div>
 
            {/* Collapsible Filters */}
       {!hideFilters && (
-      <div className="mb-8">
+      <div className="mb-6 sm:mb-8">
         <button
           onClick={() => setFiltersExpanded(!filtersExpanded)}
-          className="w-full bg-gray-50 hover:bg-gray-100 rounded-lg p-3 flex items-center justify-between transition-colors duration-200 border border-gray-200"
+          className="w-full bg-gray-50 hover:bg-gray-100 active:bg-gray-200 rounded-lg p-4 sm:p-3 flex items-center justify-between transition-colors duration-200 border border-gray-200 touch-manipulation"
         >
           <div className="flex items-center space-x-2">
             <span className="text-sm font-medium text-gray-700">Advanced Options</span>
@@ -130,22 +130,22 @@ export default function CharadesGenerator({
 
         {/* Expandable Filter Content */}
         {filtersExpanded && (
-          <div className="bg-white rounded-b-lg shadow-md p-6 -mt-2 border-t border-gray-100">
+          <div className="bg-white rounded-b-lg shadow-md p-4 sm:p-6 -mt-2 border-t border-gray-100">
             {/* Category Filter */}
             {!hideCategoryFilter && (
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-3">
                 Category
               </label>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 sm:gap-2">
                 {categories.map(category => (
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                    className={`px-3 py-2 sm:px-4 sm:py-2 rounded-full text-sm font-medium transition-all duration-200 min-h-[44px] sm:min-h-auto touch-manipulation ${
                       selectedCategory === category
                         ? 'bg-blue-500 text-white shadow-lg transform scale-105'
-                        : 'bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-700'
+                        : 'bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-700 active:bg-blue-200'
                     }`}
                   >
 {category === 'all' ? 'All Categories' : 
@@ -165,10 +165,10 @@ export default function CharadesGenerator({
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setSelectedDifficulty('all')}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                  className={`px-3 py-2 sm:px-4 sm:py-2 rounded-full text-sm font-medium transition-all duration-200 min-h-[44px] sm:min-h-auto touch-manipulation ${
                     selectedDifficulty === 'all'
                       ? 'bg-gray-500 text-white shadow-lg transform scale-105'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 active:bg-gray-300'
                   }`}
                 >
                   All Levels
@@ -177,10 +177,10 @@ export default function CharadesGenerator({
                   <button
                     key={difficulty}
                     onClick={() => setSelectedDifficulty(difficulty)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                    className={`px-3 py-2 sm:px-4 sm:py-2 rounded-full text-sm font-medium transition-all duration-200 min-h-[44px] sm:min-h-auto touch-manipulation ${
                       selectedDifficulty === difficulty
                         ? `${getDifficultyButtonColor(difficulty)} text-white shadow-lg transform scale-105`
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 active:bg-gray-300'
                     }`}
                   >
 {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
@@ -199,30 +199,30 @@ export default function CharadesGenerator({
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setSelectedAgeGroup('all')}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                  className={`px-3 py-2 sm:px-4 sm:py-2 rounded-full text-sm font-medium transition-all duration-200 min-h-[44px] sm:min-h-auto touch-manipulation ${
                     selectedAgeGroup === 'all'
                       ? 'bg-purple-500 text-white shadow-lg transform scale-105'
-                      : 'bg-gray-100 text-gray-700 hover:bg-purple-100 hover:text-purple-700'
+                      : 'bg-gray-100 text-gray-700 hover:bg-purple-100 hover:text-purple-700 active:bg-purple-200'
                   }`}
                 >
                   All Ages
                 </button>
                 <button
                   onClick={() => setSelectedAgeGroup('kids')}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                  className={`px-3 py-2 sm:px-4 sm:py-2 rounded-full text-sm font-medium transition-all duration-200 min-h-[44px] sm:min-h-auto touch-manipulation ${
                     selectedAgeGroup === 'kids'
                       ? 'bg-green-500 text-white shadow-lg transform scale-105'
-                      : 'bg-gray-100 text-gray-700 hover:bg-green-100 hover:text-green-700'
+                      : 'bg-gray-100 text-gray-700 hover:bg-green-100 hover:text-green-700 active:bg-green-200'
                   }`}
                 >
                   Kids Friendly
                 </button>
                 <button
                   onClick={() => setSelectedAgeGroup('adults')}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                  className={`px-3 py-2 sm:px-4 sm:py-2 rounded-full text-sm font-medium transition-all duration-200 min-h-[44px] sm:min-h-auto touch-manipulation ${
                     selectedAgeGroup === 'adults'
                       ? 'bg-orange-500 text-white shadow-lg transform scale-105'
-                      : 'bg-gray-100 text-gray-700 hover:bg-orange-100 hover:text-orange-700'
+                      : 'bg-gray-100 text-gray-700 hover:bg-orange-100 hover:text-orange-700 active:bg-orange-200'
                   }`}
                 >
                   Adults Only
@@ -269,44 +269,44 @@ export default function CharadesGenerator({
             <h2 className="text-2xl font-bold text-gray-800 mb-2">Your Charades Words</h2>
             <p className="text-gray-600">Ready to play! {generatedWords.length} {generatedWords.length === 1 ? 'word' : 'words'} generated</p>
             
-            {/* Quick Batch Options - moved here for better UX */}
-            <div className="flex justify-center items-center space-x-4 mt-4">
-              <span className="text-sm text-gray-600">Generate:</span>
-              {[1, 3, 5, 10].map(num => (
-                <button
-                  key={num}
-                  onClick={() => {
-                    setBatchSize(num);
-                    generateBatchWords(num);
-                  }}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 touch-manipulation ${
-                    batchSize === num 
-                      ? 'bg-blue-500 text-white shadow-md' 
-                      : 'bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-700'
-                  }`}
-                >
-                  {num} {num === 1 ? 'word' : 'words'}
-                </button>
-              ))}
+            {/* Quick Batch Options - Compact one-row layout */}
+            <div className="mt-4">
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-sm font-medium text-gray-700 shrink-0">Generate:</span>
+                {[1, 3, 5, 10].map(num => (
+                  <button
+                    key={num}
+                    onClick={() => {
+                      setBatchSize(num);
+                      generateBatchWords(num);
+                    }}
+                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 touch-manipulation min-h-[40px] flex items-center justify-center ${
+                      batchSize === num 
+                        ? 'bg-blue-500 text-white shadow-md' 
+                        : 'bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-700 active:bg-blue-200'
+                    }`}
+                  >
+                    {num}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {generatedWords.map((word, index) => (
               <div
                 key={`${word.word}-${index}`}
-                className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                className="bg-white border border-gray-200 rounded-xl p-5 sm:p-4 hover:shadow-md transition-shadow min-h-[120px] flex items-center justify-center"
               >
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-800 mb-3">
+                <div className="text-center w-full">
+                  <div className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 leading-tight">
                     {word.word}
                   </div>
-                  <div className="flex flex-wrap justify-center gap-2 text-xs text-gray-500">
-                    <span>{word.difficulty}</span>
-                    <span>•</span>
-                    <span>{word.category}</span>
-                    <span>•</span>
-                    <span>{word.wordCount} {word.wordCount === 1 ? 'word' : 'words'}</span>
+                  <div className="flex flex-wrap justify-center gap-1 sm:gap-2 text-xs text-gray-500">
+                    <span className="bg-gray-100 px-2 py-1 rounded">{word.difficulty}</span>
+                    <span className="bg-gray-100 px-2 py-1 rounded">{word.category}</span>
+                    <span className="bg-gray-100 px-2 py-1 rounded">{word.wordCount} {word.wordCount === 1 ? 'word' : 'words'}</span>
                   </div>
                 </div>
               </div>
@@ -316,15 +316,15 @@ export default function CharadesGenerator({
         </div>
       )}
 
-      {/* Generate New Words Button */}
-      <div className="text-center mb-8">
+      {/* Generate New Words Button - Compact */}
+      <div className="text-center mb-6">
         <button
           onClick={generateWords}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg transition-colors"
+          className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 text-sm touch-manipulation"
         >
           Generate New {batchSize} {batchSize === 1 ? 'Word' : 'Words'}
         </button>
-        <p className="text-sm text-gray-500 mt-2">Get fresh words for your next round!</p>
+        <p className="text-xs text-gray-500 mt-2">Get fresh words for your next round!</p>
       </div>
 
  
