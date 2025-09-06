@@ -7,19 +7,31 @@ interface StructuredDataProps {
 }
 
 export default function StructuredData({ type, name, description, url, category }: StructuredDataProps) {
-  const baseStructure = {
+  const baseStructure: any = {
     "@context": "https://schema.org",
     "@type": type,
     "name": name,
     "description": description,
     "url": url || "https://charades-generator.com",
-    "applicationCategory": "GameApplication",
-    "operatingSystem": "Any",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
+    "isAccessibleForFree": true,
+    "inLanguage": "en-US"
+  };
+
+  // Add fields specific to WebApplication type
+  if (type === 'WebApplication') {
+    Object.assign(baseStructure, {
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    });
+  }
+
+  // Add author and publisher for all types
+  Object.assign(baseStructure, {
     "author": {
       "@type": "Organization",
       "name": "Charades Generator"
@@ -27,10 +39,8 @@ export default function StructuredData({ type, name, description, url, category 
     "publisher": {
       "@type": "Organization",
       "name": "Charades Generator"
-    },
-    "isAccessibleForFree": true,
-    "inLanguage": "en-US"
-  };
+    }
+  });
 
   if (type === 'Game' && category) {
     Object.assign(baseStructure, {
