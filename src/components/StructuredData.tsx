@@ -6,32 +6,43 @@ interface StructuredDataProps {
   category?: string;
 }
 
+interface BaseStructure {
+  "@context": string;
+  "@type": string;
+  name: string;
+  description: string;
+  url: string;
+  isAccessibleForFree: boolean;
+  inLanguage: string;
+  applicationCategory?: string;
+  operatingSystem?: string;
+  offers?: {
+    "@type": string;
+    price: string;
+    priceCurrency: string;
+  };
+  author: {
+    "@type": string;
+    name: string;
+  };
+  publisher: {
+    "@type": string;
+    name: string;
+  };
+  genre?: string;
+  numberOfPlayers?: string;
+  playMode?: string;
+}
+
 export default function StructuredData({ type, name, description, url, category }: StructuredDataProps) {
-  const baseStructure: any = {
+  const baseStructure: BaseStructure = {
     "@context": "https://schema.org",
     "@type": type,
     "name": name,
     "description": description,
     "url": url || "https://charades-generator.com",
     "isAccessibleForFree": true,
-    "inLanguage": "en-US"
-  };
-
-  // Add fields specific to WebApplication type
-  if (type === 'WebApplication') {
-    Object.assign(baseStructure, {
-      "applicationCategory": "GameApplication",
-      "operatingSystem": "Any",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    });
-  }
-
-  // Add author and publisher for all types
-  Object.assign(baseStructure, {
+    "inLanguage": "en-US",
     "author": {
       "@type": "Organization",
       "name": "Charades Generator"
@@ -40,14 +51,23 @@ export default function StructuredData({ type, name, description, url, category 
       "@type": "Organization",
       "name": "Charades Generator"
     }
-  });
+  };
+
+  // Add fields specific to WebApplication type
+  if (type === 'WebApplication') {
+    baseStructure.applicationCategory = "GameApplication";
+    baseStructure.operatingSystem = "Any";
+    baseStructure.offers = {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    };
+  }
 
   if (type === 'Game' && category) {
-    Object.assign(baseStructure, {
-      "genre": category,
-      "numberOfPlayers": "2+",
-      "playMode": "MultiPlayer"
-    });
+    baseStructure.genre = category;
+    baseStructure.numberOfPlayers = "2+";
+    baseStructure.playMode = "MultiPlayer";
   }
 
   return (
