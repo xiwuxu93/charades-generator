@@ -1,4 +1,4 @@
-import CharadesGenerator from "@/components/CharadesGenerator";
+import CharadesGeneratorOptimized from "@/components/CharadesGeneratorOptimized";
 import StructuredData from "@/components/StructuredData";
 import FAQStructuredData from "@/components/FAQStructuredData";
 import WebsiteStructuredData from "@/components/WebsiteStructuredData";
@@ -27,6 +27,10 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="bg-gray-50 min-h-screen">
+      {/* Critical content first for better LCP */}
+      <CharadesGeneratorOptimized />
+      
+      {/* Structured data - small, non-blocking */}
       <WebsiteStructuredData />
       <SiteLinksStructuredData />
       <StructuredData
@@ -37,7 +41,6 @@ export default function Home() {
         category="Party Games"
       />
       <FAQStructuredData />
-      <CharadesGenerator />
     </div>
   );
 }

@@ -49,8 +49,8 @@ export default function Navigation() {
             <Image
               src="/logo.svg"
               alt="Charades Generator"
-              width={160}
-              height={62}
+              width={320}
+              height={64}
               className="critical-logo"
               priority
             />

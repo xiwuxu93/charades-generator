@@ -1,22 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import "./globals.css";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
-  preload: true,
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://charades-generator.com'),
@@ -70,9 +56,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Essential resource hints only */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Preload critical assets */}
         <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" />
@@ -84,16 +67,14 @@ export default function RootLayout({
         {/* Minimal critical CSS for initial render */}
         <style>{`
           *{box-sizing:border-box}
-          body{margin:0;font-family:var(--font-geist-sans),ui-sans-serif,system-ui,sans-serif;background:var(--background);color:var(--foreground)}
+          body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--background);color:var(--foreground)}
           .critical-nav{position:sticky;top:0;z-index:50;background:white;border-bottom:1px solid #e5e7eb}
           .critical-container{max-width:72rem;margin:0 auto;padding:0 1rem}
           .critical-flex{display:flex;justify-content:space-between;align-items:center;height:4rem}
-          .critical-logo{height:2rem;width:auto}
+          .critical-logo{height:4rem;width:auto}
         `}</style>
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
         <Navigation />
         <main className="min-h-screen">{children}</main>
         <Footer />
