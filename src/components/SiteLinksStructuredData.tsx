@@ -67,7 +67,7 @@ export default function SiteLinksStructuredData() {
             "description": "Complete guide to using our charades generator"
           },
           {
-            "@type": "FAQPage",
+            "@type": "WebPage",
             "name": "Frequently Asked Questions",
             "url": "https://charades-generator.com/faq", 
             "description": "Common questions about charades and our generator"
