@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://charades-generator.com'),
+  metadataBase: new URL("https://charades-generator.com"),
   title: {
     default: "Charades Generator - Free Online Charades Words & Ideas",
     template: "%s | Charades Generator",
@@ -23,8 +23,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://charades-generator.com",
     siteName: "Charades Generator",
-    title:
-      "Free Charades Generator - Instant Words for Your Game Night",
+    title: "Free Charades Generator - Instant Words for Your Game Night",
     description:
       "Generate instant charades words and ideas for kids and adults. Free online charades generator with movies, animals, actions, Disney themes and more.",
     images: [
@@ -38,8 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Free Charades Generator - Instant Words for Your Game Night",
+    title: "Free Charades Generator - Instant Words for Your Game Night",
     description:
       "Generate instant charades words and ideas for kids and adults. Perfect for parties and family fun!",
     images: ["/charades-generator.svg"],
@@ -56,14 +54,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        
         {/* Preload critical assets */}
         <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" />
-        
-        
+
         {/* Viewport optimization for mobile */}
-        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5,user-scalable=yes" />
-        
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5,user-scalable=yes"
+        />
+
         {/* Minimal critical CSS for initial render */}
         <style>{`
           *{box-sizing:border-box}
@@ -73,13 +72,22 @@ export default function RootLayout({
           .critical-flex{display:flex;justify-content:space-between;align-items:center;height:4rem}
           .critical-logo{height:4rem;width:auto}
         `}</style>
+        <script
+          async
+          custom-element="amp-auto-ads"
+          src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"
+        ></script>
       </head>
       <body className="antialiased">
         <Navigation />
         <main className="min-h-screen">{children}</main>
         <Footer />
-        
+
         {/* Analytics - lazy load after page is ready */}
+        <amp-auto-ads
+          type="adsense"
+          data-ad-client="ca-pub-4855228928819714"
+        ></amp-auto-ads>
         <Script
           id="gtag-init"
           strategy="lazyOnload"
@@ -104,7 +112,7 @@ export default function RootLayout({
             `,
           }}
         />
-        
+
         {/* AdSense - lowest priority loading */}
         <Script
           async

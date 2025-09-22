@@ -1,28 +1,40 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from "next/link";
+import Image from "next/image";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
-    'Charades Generators': [
-      { title: 'Free Charades Generator', href: '/' },
-      { title: 'Random Charades Generator', href: '/random-charades-generator' },
-      { title: 'Kids Charades Generator', href: '/charades-generator-for-kids' },
-      { title: 'Movie Charades Generator', href: '/movie-charades-generator' },
-      { title: 'Disney Charades Generator', href: '/disney-charades-generator' },
-      { title: 'Christmas Charades Generator', href: '/christmas-charades-generator' },
-      { title: 'Funny Adult Charades', href: '/funny-charades-for-adults' },
+    "Charades Generators": [
+      { title: "Free Charades Generator", href: "/" },
+      {
+        title: "Random Charades Generator",
+        href: "/random-charades-generator",
+      },
+      {
+        title: "Kids Charades Generator",
+        href: "/charades-generator-for-kids",
+      },
+      { title: "Movie Charades Generator", href: "/movie-charades-generator" },
+      {
+        title: "Disney Charades Generator",
+        href: "/disney-charades-generator",
+      },
+      {
+        title: "Christmas Charades Generator",
+        href: "/christmas-charades-generator",
+      },
+      { title: "Funny Adult Charades", href: "/funny-charades-for-adults" },
     ],
-    'Help & Information': [
-      { title: 'How to Use', href: '/how-to-use' },
-      { title: 'FAQ', href: '/faq' },
-      { title: 'About Us', href: '/about' },
-      { title: 'Feedback', href: '/feedback' },
+    "Help & Information": [
+      { title: "How to Use", href: "/how-to-use" },
+      { title: "FAQ", href: "/faq" },
+      { title: "About Us", href: "/about" },
+      { title: "Feedback", href: "/feedback" },
     ],
-    'Legal': [
-      { title: 'Privacy Policy', href: '/privacy-policy' },
-      { title: 'Terms of Service', href: '/terms-of-service' },
-    ]
+    Legal: [
+      { title: "Privacy Policy", href: "/privacy-policy" },
+      { title: "Terms of Service", href: "/terms-of-service" },
+    ],
   };
 
   return (
@@ -37,11 +49,12 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-gray-600 text-sm">
-              Free online charades generator with 1000+ words and ideas. 
-              Perfect for parties, family game nights, and fun gatherings.
+              Free online charades generator with 1000+ words and ideas. Perfect
+              for parties, family game nights, and fun gatherings.
             </p>
             <div className="text-sm text-gray-500">
-              Generate instant charades for kids, adults, movies, Disney, and more!
+              Generate instant charades for kids, adults, movies, Disney, and
+              more!
             </div>
           </div>
 
@@ -63,24 +76,39 @@ export default function Footer() {
               </ul>
             </div>
           ))}
-           <div className="space-y-4">
-              <h3 className="font-semibold text-gray-800">Friendly Links</h3>
-              <ul className="space-y-2">
-                  <li>
-                    <a href="https://magicbox.tools" target="_blank">
-                <Image
-                  src="https://magicbox.tools/badge-dark.svg"
-                  alt="Featured on MagicBox.tools"
-                  width="200"
-                  height="54"
-                />
-              </a>
-                  </li>
-                  <li>
-                    <a href="https://kontext-ai.com/" target="_blank">Kontext AI</a>
-                  </li>
-              </ul>
-            </div>
+          <div className="space-y-4">
+            <h3 className="font-semibold text-gray-800">Friendly Links</h3>
+            <ul className="space-y-2">
+              <li>
+                <a href="https://magicbox.tools" target="_blank">
+                  <Image
+                    src="https://magicbox.tools/badge-dark.svg"
+                    alt="Featured on MagicBox.tools"
+                    width="200"
+                    height="54"
+                  />
+                </a>
+              </li>
+              <li>
+                <a href="https://kontext-ai.com/" target="_blank">
+                  Kontext AI
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://imglab.dev/item/charades-generator-knot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="https://imglab.dev/svg/badge.svg"
+                    alt="Listed on imglab"
+                    style="height: 54px; width: auto;"
+                  />
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
         {/* Bottom Section */}
@@ -96,7 +124,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
       </div>
     </footer>
   );

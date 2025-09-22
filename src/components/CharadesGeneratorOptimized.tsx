@@ -29,6 +29,7 @@ export default function CharadesGeneratorOptimized({
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<string>(defaultAgeGroup);
   const [filtersExpanded, setFiltersExpanded] = useState<boolean>(false);
   const [batchSize, setBatchSize] = useState<number>(3);
+  const [customCount, setCustomCount] = useState<string>('');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -116,24 +117,63 @@ export default function CharadesGeneratorOptimized({
             <p className="text-gray-600">Ready to play! {generatedWords.length} words generated</p>
             
             {/* Batch Size Selector */}
-            <div className="mt-4 flex items-center justify-center gap-2">
-              <span className="text-sm font-medium text-gray-700">Generate:</span>
-              {[1, 3, 5, 10].map(num => (
-                <button
-                  key={num}
-                  onClick={() => {
-                    setBatchSize(num);
-                    generateBatchWords(num);
+            <div className="mt-4 space-y-3">
+              <div className="flex items-center justify-center gap-2 flex-wrap">
+                <span className="text-sm font-medium text-gray-700">快速选择:</span>
+                {[1, 3, 5, 10].map(num => (
+                  <button
+                    key={num}
+                    onClick={() => {
+                      setBatchSize(num);
+                      setCustomCount('');
+                      generateBatchWords(num);
+                    }}
+                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      batchSize === num && customCount === ''
+                        ? 'bg-blue-500 text-white' 
+                        : 'bg-gray-100 text-gray-700 hover:bg-blue-100'
+                    }`}
+                  >
+                    {num}
+                  </button>
+                ))}
+              </div>
+              
+              {/* Custom Count Input */}
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-sm font-medium text-gray-700">自定义数量:</span>
+                <input
+                  type="number"
+                  min="1"
+                  max="50"
+                  value={customCount}
+                  onChange={(e) => setCustomCount(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      const count = parseInt(customCount);
+                      if (count > 0 && count <= 50) {
+                        setBatchSize(count);
+                        generateBatchWords(count);
+                      }
+                    }
                   }}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    batchSize === num 
-                      ? 'bg-blue-500 text-white' 
-                      : 'bg-gray-100 text-gray-700 hover:bg-blue-100'
-                  }`}
+                  placeholder="1-50"
+                  className="w-16 px-2 py-1 border border-gray-300 rounded text-center text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                <button
+                  onClick={() => {
+                    const count = parseInt(customCount);
+                    if (count > 0 && count <= 50) {
+                      setBatchSize(count);
+                      generateBatchWords(count);
+                    }
+                  }}
+                  disabled={!customCount || parseInt(customCount) < 1 || parseInt(customCount) > 50}
+                  className="px-3 py-1 bg-green-500 text-white text-sm rounded hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
                 >
-                  {num}
+                  生成
                 </button>
-              ))}
+              </div>
             </div>
           </div>
           
@@ -164,7 +204,7 @@ export default function CharadesGeneratorOptimized({
           onClick={generateWords}
           className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
         >
-          Generate New {batchSize} {batchSize === 1 ? 'Word' : 'Words'}
+          重新生成 {customCount || batchSize} 个词汇
         </button>
       </div>
 
