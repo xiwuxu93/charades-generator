@@ -84,10 +84,11 @@ export default function RootLayout({
         <Footer />
 
         {/* Analytics - lazy load after page is ready */}
-        <amp-auto-ads
-          type="adsense"
-          data-ad-client="ca-pub-4855228928819714"
-        ></amp-auto-ads>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: `<amp-auto-ads type="adsense" data-ad-client="ca-pub-4855228928819714"></amp-auto-ads>`
+          }}
+        />
         <Script
           id="gtag-init"
           strategy="lazyOnload"
