@@ -33,6 +33,8 @@ export default function CharadesGenerator({
   const [, setHistory] = useState<CharadesWord[]>([]);
   const [filtersExpanded, setFiltersExpanded] = useState<boolean>(false);
   const [batchSize, setBatchSize] = useState<number>(3);
+  const [isCustomMode, setIsCustomMode] = useState<boolean>(false);
+  const [customCount, setCustomCount] = useState<string>('');
 
   const generateBatchWords = useCallback((count: number) => {
     setHistory(prevHistory => {
@@ -76,11 +78,26 @@ export default function CharadesGenerator({
     });
   }, [selectedCategory, selectedDifficulty, selectedAgeGroup]);
 
-  const generateWords = useCallback(() => generateBatchWords(batchSize), [generateBatchWords, batchSize]);
+  const parsedCustomCount = Number.parseInt(customCount, 10);
+  const isCustomValid =
+    isCustomMode && !Number.isNaN(parsedCustomCount) && parsedCustomCount >= 1 && parsedCustomCount <= 50;
+
+  const generateWords = useCallback(() => {
+    if (isCustomMode) {
+      if (!isCustomValid) {
+        return;
+      }
+      setBatchSize(parsedCustomCount);
+      generateBatchWords(parsedCustomCount);
+      return;
+    }
+
+    generateBatchWords(batchSize);
+  }, [batchSize, generateBatchWords, isCustomMode, isCustomValid, parsedCustomCount]);
 
   useEffect(() => {
-    generateWords();
-  }, [generateWords]);
+    generateBatchWords(batchSize);
+  }, [generateBatchWords, batchSize]);
 
 
   const getDifficultyButtonColor = (difficulty: string) => {
@@ -91,6 +108,12 @@ export default function CharadesGenerator({
     };
     return colors[difficulty] || 'bg-gray-500';
   };
+
+  const quickPickOptions = [1, 3, 5, 10];
+  const buttonCountLabel = isCustomMode ? customCount || String(batchSize) : String(batchSize);
+  const buttonCountNumber = Number.parseInt(buttonCountLabel, 10);
+  const resolvedButtonCount = Number.isNaN(buttonCountNumber) ? batchSize : buttonCountNumber;
+  const buttonCountPlural = resolvedButtonCount === 1 ? 'Word' : 'Words';
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
@@ -264,7 +287,7 @@ export default function CharadesGenerator({
 
       {/* Generated Words Display */}
       {generatedWords.length > 0 && (
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+        <div className="bg-white rounded-xl shadow-lg p-4 mb-8">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">Your Charades Words</h2>
             <p className="text-gray-600">Ready to play! {generatedWords.length} {generatedWords.length === 1 ? 'word' : 'words'} generated</p>
@@ -273,15 +296,17 @@ export default function CharadesGenerator({
             <div className="mt-4">
               <div className="flex items-center justify-center gap-2">
                 <span className="text-sm font-medium text-gray-700 shrink-0">Generate:</span>
-                {[1, 3, 5, 10].map(num => (
+                {quickPickOptions.map(num => (
                   <button
                     key={num}
                     onClick={() => {
+                      setIsCustomMode(false);
+                      setCustomCount('');
                       setBatchSize(num);
                       generateBatchWords(num);
                     }}
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 touch-manipulation min-h-[40px] flex items-center justify-center ${
-                      batchSize === num 
+                      !isCustomMode && batchSize === num 
                         ? 'bg-blue-500 text-white shadow-md' 
                         : 'bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-700 active:bg-blue-200'
                     }`}
@@ -289,10 +314,60 @@ export default function CharadesGenerator({
                     {num}
                   </button>
                 ))}
+                <button
+                  onClick={() => {
+                    setIsCustomMode(true);
+                    if (!customCount) {
+                      setCustomCount(String(batchSize));
+                    }
+                  }}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 touch-manipulation min-h-[40px] flex items-center justify-center ${
+                    isCustomMode
+                      ? 'bg-blue-500 text-white shadow-md'
+                      : 'bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-700 active:bg-blue-200'
+                  }`}
+                >
+                  Custom
+                </button>
               </div>
+              {isCustomMode && (
+                <div className="mt-3 flex items-center justify-center gap-2">
+                  <span className="text-sm font-medium text-gray-700">Custom amount:</span>
+                  <input
+                    type="number"
+                    min="1"
+                    max="50"
+                    value={customCount}
+                    onChange={(e) => setCustomCount(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        const count = Number.parseInt(e.currentTarget.value, 10);
+                        if (!Number.isNaN(count) && count >= 1 && count <= 50) {
+                          setBatchSize(count);
+                          generateBatchWords(count);
+                        }
+                      }
+                    }}
+                    placeholder="1-50"
+                    className="w-16 px-2 py-1 border border-gray-300 rounded text-center text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                  <button
+                    onClick={() => {
+                      if (isCustomValid) {
+                        setBatchSize(parsedCustomCount);
+                        generateBatchWords(parsedCustomCount);
+                      }
+                    }}
+                    disabled={!isCustomValid}
+                    className="px-3 py-1 bg-green-500 text-white text-sm rounded hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                  >
+                    Apply
+                  </button>
+                </div>
+              )}
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {generatedWords.map((word, index) => (
               <div
@@ -320,9 +395,10 @@ export default function CharadesGenerator({
       <div className="text-center mb-6">
         <button
           onClick={generateWords}
-          className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 text-sm touch-manipulation"
+          disabled={isCustomMode && !isCustomValid}
+          className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 text-sm touch-manipulation"
         >
-          Generate New {batchSize} {batchSize === 1 ? 'Word' : 'Words'}
+          Generate New {buttonCountLabel} {buttonCountPlural}
         </button>
         <p className="text-xs text-gray-500 mt-2">Get fresh words for your next round!</p>
       </div>

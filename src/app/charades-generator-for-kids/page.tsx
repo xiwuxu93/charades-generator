@@ -11,14 +11,14 @@ export const metadata: Metadata = {
   keywords:
     "kids charades, children charades, kids party games, educational charades, animal charades kids",
   alternates: {
-    canonical: "https://charades-generator.com/charades-generator-for-kids",
+    canonical: "https://charades-generator.com/charades-generator-for-kids/",
   },
   openGraph: {
     title: "Kids Charades Generator - Free Children's Game Words",
     description:
       "Free kids charades with 500+ child-friendly words! Disney, animals, simple actions for children's parties & classroom activities.",
     type: "website",
-    url: "https://charades-generator.com/charades-generator-for-kids",
+    url: "https://charades-generator.com/charades-generator-for-kids/",
   },
   robots: "index, follow",
 };
@@ -27,15 +27,15 @@ export default function KidsCharadesPage() {
   return (
     <div className="bg-gray-50 min-h-screen">
       <BreadcrumbStructuredData items={[
-        { name: "Home", url: "https://charades-generator.com" },
-        { name: "Generators", url: "https://charades-generator.com" },
-        { name: "Kids Charades", url: "https://charades-generator.com/charades-generator-for-kids" }
+        { name: "Home", url: "https://charades-generator.com/" },
+        { name: "Generators", url: "https://charades-generator.com/" },
+        { name: "Kids Charades", url: "https://charades-generator.com/charades-generator-for-kids/" }
       ]} />
       <StructuredData
         type="Game"
         name="Kids Charades Generator"
         description="Free online charades generator designed specifically for children with age-appropriate words and themes"
-        url="https://charades-generator.com/charades-generator-for-kids"
+        url="https://charades-generator.com/charades-generator-for-kids/"
         category="Educational Game"
       />
       

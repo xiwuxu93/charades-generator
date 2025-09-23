@@ -40,7 +40,7 @@ export default function StructuredData({ type, name, description, url, category 
     "@type": type,
     "name": name,
     "description": description,
-    "url": url || "https://charades-generator.com",
+    "url": url || "https://charades-generator.com/",
     "isAccessibleForFree": true,
     "inLanguage": "en-US",
     "author": {

@@ -21,14 +21,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://charades-generator.com",
+    url: "https://charades-generator.com/",
     siteName: "Charades Generator",
     title: "Free Charades Generator - Instant Words for Your Game Night",
     description:
       "Generate instant charades words and ideas for kids and adults. Free online charades generator with movies, animals, actions, Disney themes and more.",
     images: [
       {
-        url: "/charades-generator.svg",
+        url: "/charades-generator-og.png",
         width: 1200,
         height: 630,
         alt: "Charades Generator - Free Online Game",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: "Free Charades Generator - Instant Words for Your Game Night",
     description:
       "Generate instant charades words and ideas for kids and adults. Perfect for parties and family fun!",
-    images: ["/charades-generator.svg"],
+    images: ["/charades-generator-og.png"],
   },
   viewport: "width=device-width, initial-scale=1",
   themeColor: "#3B82F6",
@@ -72,11 +72,6 @@ export default function RootLayout({
           .critical-flex{display:flex;justify-content:space-between;align-items:center;height:4rem}
           .critical-logo{height:4rem;width:auto}
         `}</style>
-        <script
-          async
-          custom-element="amp-auto-ads"
-          src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"
-        ></script>
       </head>
       <body className="antialiased">
         <Navigation />
@@ -84,11 +79,6 @@ export default function RootLayout({
         <Footer />
 
         {/* Analytics - lazy load after page is ready */}
-        <div
-          dangerouslySetInnerHTML={{
-            __html: `<amp-auto-ads type="adsense" data-ad-client="ca-pub-4855228928819714"></amp-auto-ads>`
-          }}
-        />
         <Script
           id="gtag-init"
           strategy="lazyOnload"

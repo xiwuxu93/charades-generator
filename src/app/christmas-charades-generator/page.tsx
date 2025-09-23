@@ -12,14 +12,14 @@ export const metadata: Metadata = {
   keywords:
     "christmas charades, holiday charades, christmas party games, santa charades, festive charades",
   alternates: {
-    canonical: "https://charades-generator.com/christmas-charades-generator",
+    canonical: "https://charades-generator.com/christmas-charades-generator/",
   },
   openGraph: {
     title: "Christmas Charades Generator - Holiday Party Games [2024]",
     description:
       "Free Christmas charades with 60+ festive words! Santa, reindeer, movies, songs for family parties & office holiday gatherings.",
     type: "website",
-    url: "https://charades-generator.com/christmas-charades-generator",
+    url: "https://charades-generator.com/christmas-charades-generator/",
   },
   robots: "index, follow",
 };
@@ -28,15 +28,15 @@ export default function ChristmasCharadesGenerator() {
   return (
     <div className="bg-gradient-to-b from-red-50 to-green-50 min-h-screen">
       <BreadcrumbStructuredData items={[
-        { name: "Home", url: "https://charades-generator.com" },
-        { name: "Generators", url: "https://charades-generator.com" },
-        { name: "Christmas Charades", url: "https://charades-generator.com/christmas-charades-generator" }
+        { name: "Home", url: "https://charades-generator.com/" },
+        { name: "Generators", url: "https://charades-generator.com/" },
+        { name: "Christmas Charades", url: "https://charades-generator.com/christmas-charades-generator/" }
       ]} />
       <StructuredData
         type="WebApplication"
         name="Christmas Charades Generator - Holiday Party Games"
         description="Generate instant Christmas charades words! 60+ festive holiday words for family Christmas parties and office holiday gatherings."
-        url="https://charades-generator.com/christmas-charades-generator"
+        url="https://charades-generator.com/christmas-charades-generator/"
         category="Holiday Party Games"
       />
       <FAQStructuredData />

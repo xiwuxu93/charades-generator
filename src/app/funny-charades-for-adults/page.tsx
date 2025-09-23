@@ -10,14 +10,14 @@ export const metadata: Metadata = {
   keywords:
     "funny charades adults, hilarious charades, adult party games, comedy charades, funny adult games",
   alternates: {
-    canonical: "https://charades-generator.com/funny-charades-for-adults",
+    canonical: "https://charades-generator.com/funny-charades-for-adults/",
   },
   openGraph: {
     title: "Funny Charades for Adults - Hilarious Party Games",
     description:
       "Free funny charades for adults with 150+ hilarious situations! Perfect for adult parties, game nights & getting everyone laughing.",
     type: "website",
-    url: "https://charades-generator.com/funny-charades-for-adults",
+    url: "https://charades-generator.com/funny-charades-for-adults/",
   },
 };
 
@@ -28,7 +28,7 @@ export default function FunnyCharadesPage() {
         type="Game"
         name="Funny Charades Generator for Adults"
         description="Hilarious charades generator designed for adult parties with funny situations and comedy themes"
-        url="https://charades-generator.com/funny-charades-for-adults"
+        url="https://charades-generator.com/funny-charades-for-adults/"
         category="Adult Comedy Game"
       />
       

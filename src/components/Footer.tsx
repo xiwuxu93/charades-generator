@@ -76,11 +76,13 @@ export default function Footer() {
               </ul>
             </div>
           ))}
-          <div className="space-y-4">
+         
+        </div>
+         <div className="space-y-4">
             <h3 className="font-semibold text-gray-800">Friendly Links</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 md:space-y-0 md:flex md:flex-wrap md:items-center md:gap-6">
               <li>
-                <a href="https://magicbox.tools" target="_blank">
+                <a href="https://magicbox.tools" target="_blank" rel="noopener noreferrer">
                   <Image
                     src="https://magicbox.tools/badge-dark.svg"
                     alt="Featured on MagicBox.tools"
@@ -89,11 +91,7 @@ export default function Footer() {
                   />
                 </a>
               </li>
-              <li>
-                <a href="https://kontext-ai.com/" target="_blank">
-                  Kontext AI
-                </a>
-              </li>
+             
               <li>
                 <a
                   href="https://imglab.dev/item/charades-generator-knot"
@@ -108,14 +106,39 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-               <a href="https://fwfw.app/item/charades-generator" target="_blank"><img src="https://fwfw.app/badge-white.svg" width="250" height="54" alt="Featured on FWFW" /></a>
+                <a
+                  href="https://fwfw.app/item/charades-generator"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="https://fwfw.app/badge-white.svg"
+                    width="250"
+                    height="54"
+                    alt="Featured on FWFW"
+                  />
+                </a>
               </li>
               <li>
-              <a target="_blank" href="https://acidtools.com"><img src="https://acidtools.com/assets/images/badge.png" alt="Acid Tools" height="54"></a>
+                <a
+                  target="_blank"
+                  href="https://acidtools.com"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="https://acidtools.com/assets/images/badge.png"
+                    alt="Acid Tools"
+                    height="54"
+                  />
+                </a>
+              </li>
+               <li className="md:leading-none">
+                <a href="https://kontext-ai.com/" target="_blank" rel="noopener noreferrer">
+                  Kontext AI
+                </a>
               </li>
             </ul>
           </div>
-        </div>
 
         {/* Bottom Section */}
         <div className="mt-8 pt-8 border-t border-gray-200">

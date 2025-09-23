@@ -10,14 +10,14 @@ export const metadata: Metadata = {
   keywords:
     "movie charades, film charades, movie title charades, cinema charades, hollywood charades",
   alternates: {
-    canonical: "https://charades-generator.com/movie-charades-generator",
+    canonical: "https://charades-generator.com/movie-charades-generator/",
   },
   openGraph: {
     title: "Movie Charades Generator - Free Film & Cinema Words",
     description:
       "Free movie charades with 200+ films! Hollywood classics to modern blockbusters. Perfect for movie night parties & cinema lovers.",
     type: "website",
-    url: "https://charades-generator.com/movie-charades-generator",
+    url: "https://charades-generator.com/movie-charades-generator/",
   },
 };
 
@@ -28,7 +28,7 @@ export default function MovieCharadesPage() {
         type="Game"
         name="Movie Charades Generator"
         description="Free online charades generator featuring classic and modern movies across all genres"
-        url="https://charades-generator.com/movie-charades-generator"
+        url="https://charades-generator.com/movie-charades-generator/"
         category="Movie Trivia Game"
       />
 

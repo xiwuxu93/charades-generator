@@ -4,18 +4,10 @@ export default function WebsiteStructuredData() {
     "@type": "WebSite",
     "name": "Charades Generator",
     "alternateName": "Free Charades Word Generator",
-    "url": "https://charades-generator.com",
+    "url": "https://charades-generator.com/",
     "description": "Free online charades generator with 1000+ words. Generate instant charades words for parties, family game nights, kids, adults, movies, Disney, Christmas and more.",
     "inLanguage": "en-US",
     "isAccessibleForFree": true,
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://charades-generator.com/?q={search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
-    },
     "mainEntity": {
       "@type": "WebApplication",
       "name": "Charades Generator",
@@ -40,7 +32,7 @@ export default function WebsiteStructuredData() {
       "@type": "Organization",
       "@id": "https://charades-generator.com/#organization",
       "name": "Charades Generator",
-      "url": "https://charades-generator.com",
+      "url": "https://charades-generator.com/",
       "logo": {
         "@type": "ImageObject",
         "url": "https://charades-generator.com/logo.svg",
@@ -57,7 +49,7 @@ export default function WebsiteStructuredData() {
     "@type": "Organization",
     "@id": "https://charades-generator.com/#organization",
     "name": "Charades Generator",
-    "url": "https://charades-generator.com",
+    "url": "https://charades-generator.com/",
     "logo": {
       "@type": "ImageObject",
       "url": "https://charades-generator.com/logo.svg",

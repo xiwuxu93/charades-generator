@@ -74,6 +74,8 @@ export default function Navigation() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 rounded-md text-gray-600 hover:text-blue-600 hover:bg-gray-100"
             aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
           >
             <svg
               className="w-6 h-6"
@@ -102,7 +104,7 @@ export default function Navigation() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-200">
+          <div id="mobile-navigation" className="md:hidden border-t border-gray-200">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigationItems.map((item) => (
                 <Link

@@ -10,14 +10,14 @@ export const metadata: Metadata = {
   keywords:
     "disney charades, disney characters, frozen charades, mickey mouse charades, disney party games",
   alternates: {
-    canonical: "https://charades-generator.com/disney-charades-generator",
+    canonical: "https://charades-generator.com/disney-charades-generator/",
   },
   openGraph: {
     title: "Disney Charades Generator - Free Characters & Movies",
     description:
       "Free Disney charades with 100+ characters! Frozen, Mickey Mouse, Moana, Lion King & more. Perfect for Disney parties & kids celebrations.",
     type: "website",
-    url: "https://charades-generator.com/disney-charades-generator",
+    url: "https://charades-generator.com/disney-charades-generator/",
   },
 };
 
@@ -28,7 +28,7 @@ export default function DisneyCharadesPage() {
         type="Game"
         name="Disney Charades Generator"
         description="Free Disney-themed charades generator featuring beloved characters and movies from the magical world of Disney"
-        url="https://charades-generator.com/disney-charades-generator"
+        url="https://charades-generator.com/disney-charades-generator/"
         category="Disney Family Game"
       />
 

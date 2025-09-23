@@ -15,8 +15,8 @@ export default function FAQ() {
   return (
     <div className="bg-gray-50 min-h-screen">
       <BreadcrumbStructuredData items={[
-        { name: "Home", url: "https://charades-generator.com" },
-        { name: "FAQ", url: "https://charades-generator.com/faq" }
+        { name: "Home", url: "https://charades-generator.com/" },
+        { name: "FAQ", url: "https://charades-generator.com/faq/" }
       ]} />
       <div className="max-w-4xl mx-auto px-6 py-8">
         <div className="bg-white rounded-lg shadow-md p-8">
