@@ -4,18 +4,18 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Funny Charades for Adults - Hilarious Party Games",
+  title: "Funny Charades for Adults – Party & Office Laughs",
   description:
-    "Free funny charades for adults with 150+ hilarious situations! Perfect for adult parties, game nights & getting everyone laughing.",
+    "Get 150+ funny charades ideas for adults, including party themes, bachelorette prompts, office-safe icebreakers, rules, and printable cards to keep everyone laughing.",
   keywords:
-    "funny charades adults, hilarious charades, adult party games, comedy charades, funny adult games",
+    "funny charades adults, adult party charades, bachelorette charades words, office charades",
   alternates: {
     canonical: "https://charades-generator.com/funny-charades-for-adults/",
   },
   openGraph: {
-    title: "Funny Charades for Adults - Hilarious Party Games",
+    title: "Funny Charades for Adults – Party & Office Laughs",
     description:
-      "Free funny charades for adults with 150+ hilarious situations! Perfect for adult parties, game nights & getting everyone laughing.",
+      "Get 150+ funny charades ideas for adults, including party themes, bachelorette prompts, office-safe icebreakers, rules, and printable cards to keep everyone laughing.",
     type: "website",
     url: "https://charades-generator.com/funny-charades-for-adults/",
   },
@@ -36,13 +36,36 @@ export default function FunnyCharadesPage() {
         defaultCategory="funny"
         defaultAgeGroup="adults"
         title="Funny Charades for Adults"
-        description="Hilarious charades words designed to get everyone laughing! Perfect for adult parties and game nights."
+        description="Hilarious charades words designed to get everyone laughing! Perfect for adult parties, work socials, and game nights."
         hideCategoryFilter={true}
         hideAgeGroupFilter={true}
       />
       
       {/* Funny adult charades specific content */}
       <div className="max-w-4xl mx-auto px-6 pb-8">
+        {/* Quick actions */}
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-5 mb-8 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="text-xl font-semibold text-blue-800">Need laughs fast?</h2>
+            <p className="text-blue-700 text-sm md:text-base">
+              Spin up a fresh list with the generator above, then use the party playbook and themed word banks below to keep every round fresh and hilarious.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link
+              href="/random-charades-generator/"
+              className="inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+            >
+              Try Random Mode
+            </Link>
+            <Link
+              href="#word-banks"
+              className="inline-flex items-center justify-center rounded-md border border-blue-500 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-100"
+            >
+              Jump to Word Banks
+            </Link>
+          </div>
+        </div>
         
         {/* Adult Party Ideas */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-orange-500">
@@ -69,6 +92,33 @@ export default function FunnyCharadesPage() {
                 <li>• Adult friend group activities</li>
                 <li>• Dinner party ice breakers</li>
                 <li>• Adult comedy night entertainment</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Adult Charades Party Playbook */}
+        <div id="word-banks" className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Adult Charades Party Playbook</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">Setup Checklist</h3>
+              <ul className="text-gray-600 space-y-2 text-sm">
+                <li>• Pick a theme such as office fails, 90s nostalgia, or weekend warriors</li>
+                <li>• Prep score sheets, a countdown timer, and fun props like wigs or meme cards</li>
+                <li>• Split friends into teams of 3-6 players to keep the energy high</li>
+                <li>• Lock in round length (60 seconds keeps things punchy)</li>
+                <li>• Add a &ldquo;steal&rdquo; rule so opposing teams can shout the answer for bonus points</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">Gameplay Variations</h3>
+              <ul className="text-gray-600 space-y-2 text-sm">
+                <li>• <strong>Lightning Round:</strong> one actor performs three prompts back-to-back</li>
+                <li>• <strong>Reverse Charades:</strong> the whole team acts while one person guesses</li>
+                <li>• <strong>Hashtag Mode:</strong> teammates shout a social caption when they guess right</li>
+                <li>• <strong>Truth or Charade:</strong> losing team pulls a funny dare card</li>
+                <li>• <strong>Office Safe Switch:</strong> tap the generator for work-friendly alternatives mid-game</li>
               </ul>
             </div>
           </div>
@@ -120,6 +170,49 @@ export default function FunnyCharadesPage() {
           </div>
         </div>
 
+        {/* Theme Word Banks */}
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Theme Word Banks & Prompt Ideas</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-600">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">Bachelorette Bash</h3>
+              <ul className="space-y-1">
+                <li>• Bridal bouquet juggling</li>
+                <li>• Karaoke mic drop</li>
+                <li>• Forgetting the vows</li>
+                <li>• Sneaking snacks into the rehearsal dinner</li>
+                <li>• Champagne tower disaster</li>
+              </ul>
+              <h3 className="text-lg font-semibold text-gray-800 mt-4 mb-2">Weekend Warriors</h3>
+              <ul className="space-y-1">
+                <li>• Five-minute planking challenge</li>
+                <li>• Airbnb check-in gone wrong</li>
+                <li>• Trying to assemble flat-pack furniture</li>
+                <li>• Oversleeping the road trip departure</li>
+                <li>• Group yoga fail</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">Office & Remote Life</h3>
+              <ul className="space-y-1">
+                <li>• Muted during a big presentation</li>
+                <li>• Coffee machine breakdown</li>
+                <li>• Surprise icebreaker on Zoom</li>
+                <li>• Keyboard covered in crumbs</li>
+                <li>• Bringing your pet to the team call</li>
+              </ul>
+              <h3 className="text-lg font-semibold text-gray-800 mt-4 mb-2">Comedy Classics</h3>
+              <ul className="space-y-1">
+                <li>• Slipping on a banana peel</li>
+                <li>• Juggling deadlines and pizza slices</li>
+                <li>• Mistaking shampoo for conditioner</li>
+                <li>• Awkward first date hug</li>
+                <li>• Laughing uncontrollably at the wrong moment</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         {/* Adult Charades FAQ */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Funny Adult Charades FAQ</h2>
@@ -143,6 +236,10 @@ export default function FunnyCharadesPage() {
             <div>
               <h3 className="font-semibold text-gray-800 mb-2">What types of funny situations are included?</h3>
               <p className="text-gray-600">Our database includes tech fails, adult life struggles, embarrassing social situations, relatable daily problems, and universal adult experiences that everyone can laugh about and relate to.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">Do you provide printable adult charades cards?</h3>
+              <p className="text-gray-600">Yes. Scroll up to the Adult Charades Toolkit section to request a free PDF pack with 60 prompts, score sheets, and a party planner. You can also remix the words with the generator for unlimited versions.</p>
             </div>
           </div>
         </div>
