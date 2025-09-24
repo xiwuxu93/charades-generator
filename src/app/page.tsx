@@ -87,7 +87,7 @@ export default function Home() {
               <div className="max-w-3xl">
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Pick a themed charades generator</h2>
                 <p className="text-gray-600 mt-2">
-                  Jump straight into curated word banks built for kids, movie buffs, holiday gatherings, or laugh-out-loud adult parties.
+                  Jump straight into curated word banks built for kids, movie buffs, holiday gatherings, or laugh-out-loud adult parties. Think of it as your all-in-one charades ideas generator.
                 </p>
               </div>
               <Link
@@ -113,7 +113,7 @@ export default function Home() {
                   {item.title}
                 </h3>
                 <p className="mt-2 text-sm text-gray-600 flex-1">
-                  {item.description}
+                  {item.description} It’s perfect when you need a fast charades words generator tailored to this theme.
                 </p>
                 <span className="mt-4 inline-flex items-center text-sm font-semibold text-blue-600">
                   Browse prompts

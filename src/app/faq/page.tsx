@@ -5,7 +5,7 @@ import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 export const metadata: Metadata = {
   title: "FAQ - Charades Generator Questions & Answers",
   description:
-    "Find answers about our free charades generator. Learn about word database, filters, game rules & troubleshooting. Quick help for better games!",
+    "Find answers about our free charades generator, charades ideas generator, and charades words generator. Learn about word database, filters, rules & troubleshooting.",
   keywords:
     "charades generator FAQ, charades questions, charades game help, charades troubleshooting",
   robots: "index, follow",

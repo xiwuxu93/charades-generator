@@ -7,7 +7,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Kids Charades Generator - Free Children's Game Words",
   description:
-    "Free kids charades with 500+ child-friendly words! Disney characters, animals, simple actions for children's parties & classroom activities.",
+    "Free kids charades with 500+ child-friendly words! Childrens charades generator for parties, Disney characters, animals, and classroom activities.",
   keywords:
     "kids charades, children charades, kids party games, educational charades, animal charades kids",
   alternates: {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Kids Charades Generator - Free Children's Game Words",
     description:
-      "Free kids charades with 500+ child-friendly words! Disney, animals, simple actions for children's parties & classroom activities.",
+      "Free kids charades with 500+ child-friendly words! Childrens charades generator for parties, Disney, animals, and classroom activities.",
     type: "website",
     url: "https://charades-generator.com/charades-generator-for-kids/",
   },
@@ -45,9 +45,15 @@ export default function KidsCharadesPage() {
         description="Safe and fun charades words perfect for children! All content is age-appropriate and educational."
         hideAgeGroupFilter={true}
       />
-      
+
       {/* Kids charades specific content */}
       <div className="max-w-4xl mx-auto px-6 pb-8">
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-5 mb-8">
+          <h2 className="text-xl font-semibold text-blue-800 mb-2">Your childrens charades generator toolkit</h2>
+          <p className="text-blue-700 text-sm sm:text-base">
+            Use this childrens charades generator to instantly pull age-appropriate prompts for birthday parties, classroom brain breaks, family gatherings, and rainy day fun. Bookmark it whenever you need new words fast!
+          </p>
+        </div>
         
         {/* Kids Party Ideas */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-green-500">

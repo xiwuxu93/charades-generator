@@ -5,9 +5,9 @@ import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 export const metadata: Metadata = {
   title: "How to Use Charades Generator - Complete Guide",
   description:
-    "Learn to use our free charades generator! Step-by-step instructions, game rules, tips for different age groups & perfect charades game setup.",
+    "Learn to use our charades generator, charades ideas generator, and charades words generator with step-by-step rules, tips, and set-up advice.",
   keywords:
-    "how to use charades generator, charades game instructions, charades rules, charades guide",
+    "how to use charades generator, charades ideas generator, charades words generator, charades rules, charades guide",
   robots: "index, follow",
 };
 
@@ -23,7 +23,7 @@ export default function HowToUse() {
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">How to Use Charades Generator</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
-              Your complete guide to getting the most out of our free charades word generator and creating unforgettable game experiences.
+              Your complete guide to getting the most out of our free charades word generator, using it as a charades ideas generator, and creating unforgettable game experiences.
             </p>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Ready to start playing? <Link href="/" className="text-blue-600 hover:text-blue-800 underline">Go to our charades generator</Link> to generate your first batch of words and get the party started!
@@ -79,6 +79,7 @@ export default function HowToUse() {
                         <li>Perfect for preparing game sessions</li>
                         <li>Great for party hosts and teachers</li>
                         <li>Save time during active gameplay</li>
+                        <li>Acts like a mini charades ideas generator you can print or share</li>
                       </ul>
                     </div>
                   </div>
