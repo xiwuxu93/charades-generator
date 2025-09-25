@@ -8,10 +8,7 @@
     }
   },
   "env": {
-    "NODE_ENV": "production",
-    "CLOUDFLARE_ACCOUNT_ID": "@cloudflare_account_id",
-    "CLOUDFLARE_API_TOKEN": "@cloudflare_api_token",
-    "CLOUDFLARE_KV_NAMESPACE_ID": "051dfaa61eea42d78d464e62dae7cb09"
+    "NODE_ENV": "production"
   },
   "headers": [
     {

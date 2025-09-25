@@ -56,11 +56,6 @@ export const en = {
       description: "Complete guide on using our charades generator! Learn rules, tips, setup instructions, and gameplay strategies for the perfect charades night.",
       keywords: "how to play charades, charades rules, charades guide, charades instructions, party game setup"
     },
-    feedback: {
-      title: "Feedback & Suggestions - Charades Generator",
-      description: "Share your feedback and suggestions for our charades generator! Help us improve the experience for all players.",
-      keywords: "charades feedback, user suggestions, game improvement, feature requests"
-    },
     about: {
       title: "About Us - Charades Generator Team",
       description: "Learn about the team behind the free charades generator and our mission to bring fun to families and friends worldwide.",
@@ -245,12 +240,6 @@ export const en = {
         href: "/faq/",
         description: "Answers to the most common gameplay questions, house rules, and customization ideas.",
       },
-      {
-        key: "feedback",
-        title: "Feedback & Feature Requests",
-        href: "/feedback/",
-        description: "Tell us what themes or printable packs you want next—we read every suggestion.",
-      },
     ],
   },
   pages: {
@@ -315,11 +304,6 @@ export const en = {
       readyToPlay: "Ready to Play?",
       readyToPlayDescription: "Now that you know the rules and tips, it's time to start your charades game!",
       startGenerating: "Start Generating Words"
-    },
-    feedback: {
-      title: "Feedback & Suggestions",
-      description: "We'd love to hear from you! Your feedback helps us improve the charades generator and create better experiences for everyone.",
-      helpImprove: "Help us improve the charades generator by sharing your thoughts, suggestions, or reporting any issues you encounter."
     },
     about: {
       title: "About Charades Generator",
@@ -455,7 +439,6 @@ export const en = {
           { title: "How to Use", href: "/how-to-use" },
           { title: "FAQ", href: "/faq" },
           { title: "About Us", href: "/about" },
-          { title: "Feedback", href: "/feedback" },
         ],
       },
       legal: {

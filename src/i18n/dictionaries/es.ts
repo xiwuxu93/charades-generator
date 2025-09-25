@@ -56,11 +56,6 @@ export const es = {
       description: "Guía completa sobre cómo usar nuestro generador de charadas! Aprende reglas, consejos, instrucciones de configuración y estrategias de juego.",
       keywords: "cómo jugar charadas, reglas charadas, guía charadas, instrucciones charadas, configuración juego fiesta"
     },
-    feedback: {
-      title: "Comentarios y Sugerencias - Generador de Charadas",
-      description: "Comparte tus comentarios y sugerencias para nuestro generador de charadas! Ayúdanos a mejorar la experiencia para todos los jugadores.",
-      keywords: "comentarios charadas, sugerencias usuarios, mejora juego, solicitudes características"
-    },
     about: {
       title: "Sobre Nosotros - Equipo Generador de Charadas",
       description: "Conoce al equipo detrás del generador gratuito de charadas y nuestra misión de llevar diversión a familias y amigos en todo el mundo.",
@@ -245,12 +240,6 @@ export const es = {
         href: "/faq/",
         description: "Resolvemos dudas comunes, reglas caseras y formas de personalizar el juego.",
       },
-      {
-        key: "feedback",
-        title: "Comentarios y sugerencias",
-        href: "/feedback/",
-        description: "Cuéntanos qué temas o imprimibles quieres ver: leemos cada propuesta.",
-      },
     ],
   },
   pages: {
@@ -315,11 +304,6 @@ export const es = {
       readyToPlay: "¿Listo para Jugar?",
       readyToPlayDescription: "Ahora que conoces las reglas y consejos, ¡es hora de comenzar tu juego de charadas!",
       startGenerating: "Comenzar a Generar Palabras"
-    },
-    feedback: {
-      title: "Comentarios y Sugerencias",
-      description: "¡Nos encantaría saber de ti! Tus comentarios nos ayudan a mejorar el generador de charadas y crear mejores experiencias para todos.",
-      helpImprove: "Ayúdanos a mejorar el generador de charadas compartiendo tus pensamientos, sugerencias o reportando cualquier problema que encuentres."
     },
     about: {
       title: "Sobre el Generador de Charadas",
@@ -455,7 +439,6 @@ export const es = {
           { title: "Cómo jugar", href: "/how-to-use" },
           { title: "Preguntas frecuentes", href: "/faq" },
           { title: "Sobre nosotros", href: "/about" },
-          { title: "Comentarios", href: "/feedback" },
         ],
       },
       legal: {
