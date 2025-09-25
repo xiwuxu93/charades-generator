@@ -1,27 +1,2 @@
-# Cloudflare Workers configuration for Next.js SSR
-name = "charades-generator-workers"
-compatibility_date = "2024-10-01"
-compatibility_flags = ["nodejs_compat"]
-
-# Build configuration - Cloudflare will run this
-[build]
-command = "npm run build"
-cwd = "./"
-
-# Environment variables
-[vars]
-NODE_ENV = "production"
-
-# KV Namespaces
-[[kv_namespaces]]
-binding = "FEEDBACK_KV"
-id = "051dfaa61eea42d78d464e62dae7cb09"
-preview_id = "64c1f557dc834e5dbb152b4a434d2bb1"
-
-# Preview environment
-[env.preview]
-vars = { NODE_ENV = "preview" }
-
-# Production environment
-[env.production]
-vars = { NODE_ENV = "production" }
+# Cloudflare Pages configuration for Next.js SSR
+name = "charades-generator"
