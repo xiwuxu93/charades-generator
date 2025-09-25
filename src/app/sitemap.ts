@@ -1,108 +1,97 @@
 import { MetadataRoute } from "next";
-import { statSync } from "node:fs";
-import { join } from "node:path";
+import { SUPPORTED_LOCALES } from "@/i18n/config";
 
 export const dynamic = "force-static";
 
-function getLastModified(relativePath: string): Date {
-  try {
-    return statSync(join(process.cwd(), relativePath)).mtime;
-  } catch {
-    return new Date("2024-01-01T00:00:00Z");
-  }
-}
+const baseUrl = "https://charades-generator.com";
 
-const routes: Array<{
-  url: string;
-  file: string;
+// Define all available routes with their properties
+const routeConfig: Array<{
+  path: string;
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
   priority: MetadataRoute.Sitemap[number]["priority"];
 }> = [
   {
-    url: "https://charades-generator.com/",
-    file: "src/app/page.tsx",
+    path: "/",
     changeFrequency: "daily",
-    priority: 1,
+    priority: 1.0,
   },
   {
-    url: "https://charades-generator.com/charades-generator-for-kids/",
-    file: "src/app/charades-generator-for-kids/page.tsx",
+    path: "/charades-generator-for-kids",
     changeFrequency: "weekly",
     priority: 0.8,
   },
   {
-    url: "https://charades-generator.com/movie-charades-generator/",
-    file: "src/app/movie-charades-generator/page.tsx",
+    path: "/movie-charades-generator",
     changeFrequency: "weekly",
     priority: 0.8,
   },
   {
-    url: "https://charades-generator.com/disney-charades-generator/",
-    file: "src/app/disney-charades-generator/page.tsx",
+    path: "/disney-charades-generator",
     changeFrequency: "weekly",
     priority: 0.8,
   },
   {
-    url: "https://charades-generator.com/funny-charades-for-adults/",
-    file: "src/app/funny-charades-for-adults/page.tsx",
+    path: "/funny-charades-for-adults",
     changeFrequency: "weekly",
     priority: 0.8,
   },
   {
-    url: "https://charades-generator.com/christmas-charades-generator/",
-    file: "src/app/christmas-charades-generator/page.tsx",
+    path: "/christmas-charades-generator",
     changeFrequency: "weekly",
     priority: 0.8,
   },
   {
-    url: "https://charades-generator.com/random-charades-generator/",
-    file: "src/app/random-charades-generator/page.tsx",
+    path: "/random-charades-generator",
     changeFrequency: "daily",
     priority: 0.9,
   },
   {
-    url: "https://charades-generator.com/feedback/",
-    file: "src/app/feedback/page.tsx",
-    changeFrequency: "monthly",
-    priority: 0.3,
-  },
-  {
-    url: "https://charades-generator.com/about/",
-    file: "src/app/about/page.tsx",
+    path: "/about",
     changeFrequency: "monthly",
     priority: 0.6,
   },
   {
-    url: "https://charades-generator.com/how-to-use/",
-    file: "src/app/how-to-use/page.tsx",
+    path: "/how-to-use",
     changeFrequency: "monthly",
     priority: 0.7,
   },
   {
-    url: "https://charades-generator.com/faq/",
-    file: "src/app/faq/page.tsx",
+    path: "/faq",
     changeFrequency: "monthly",
     priority: 0.7,
   },
   {
-    url: "https://charades-generator.com/privacy-policy/",
-    file: "src/app/privacy-policy/page.tsx",
+    path: "/privacy-policy",
     changeFrequency: "yearly",
     priority: 0.3,
   },
   {
-    url: "https://charades-generator.com/terms-of-service/",
-    file: "src/app/terms-of-service/page.tsx",
+    path: "/terms-of-service",
     changeFrequency: "yearly",
     priority: 0.3,
   },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map(({ url, file, changeFrequency, priority }) => ({
-    url,
-    lastModified: getLastModified(file),
-    changeFrequency,
-    priority,
-  }));
+  const sitemapEntries: MetadataRoute.Sitemap = [];
+  const lastModified = new Date();
+
+  // Generate sitemap entries for each supported locale
+  for (const locale of SUPPORTED_LOCALES) {
+    for (const route of routeConfig) {
+      const url = locale === 'en'
+        ? `${baseUrl}${route.path}${route.path === '/' ? '' : '/'}`
+        : `${baseUrl}/${locale}${route.path}${route.path === '/' ? '' : '/'}`
+
+      sitemapEntries.push({
+        url: url,
+        lastModified,
+        changeFrequency: route.changeFrequency,
+        priority: route.priority,
+      });
+    }
+  }
+
+  return sitemapEntries;
 }
