@@ -1,7 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -42,7 +40,14 @@ export const metadata: Metadata = {
       "Generate instant charades words and ideas for kids and adults. Perfect for parties and family fun!",
     images: ["/charades-generator-og.png"],
   },
-  viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 5,
+  userScalable: true,
   themeColor: "#3B82F6",
 };
 
@@ -57,12 +62,6 @@ export default function RootLayout({
         {/* Preload critical assets */}
         <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" />
 
-        {/* Viewport optimization for mobile */}
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5,user-scalable=yes"
-        />
-
         {/* Minimal critical CSS for initial render */}
         <style>{`
           *{box-sizing:border-box}
@@ -74,9 +73,7 @@ export default function RootLayout({
         `}</style>
       </head>
       <body className="antialiased">
-        <Navigation />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        {children}
 
         {/* Analytics - lazy load after page is ready */}
         <Script
@@ -87,13 +84,12 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              
-              // Load gtag script
+
               const script = document.createElement('script');
               script.async = true;
               script.src = 'https://www.googletagmanager.com/gtag/js?id=G-YC6P6CMMW2';
               document.head.appendChild(script);
-              
+
               script.onload = function() {
                 gtag('config', 'G-YC6P6CMMW2', {
                   page_title: document.title,

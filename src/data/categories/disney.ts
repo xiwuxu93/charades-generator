@@ -1,4 +1,4 @@
-import { CharadesWord } from '../charades-data';
+import { CharadesWord } from '../charades-types';
 
 export const disneyData: CharadesWord[] = [
   // Classic Disney Characters
@@ -9,7 +9,7 @@ export const disneyData: CharadesWord[] = [
   { word: "Pluto", category: "disney", difficulty: "easy", ageGroup: "kids", wordCount: 1 },
   { word: "Chip and Dale", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 3 },
   { word: "Scrooge McDuck", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 2 },
-  { word: "Huey Dewey Louie", category: "disney", difficulty: "hard", ageGroup: "kids", wordCount: 3 },
+  { word: "Huey, Dewey, and Louie", category: "disney", difficulty: "hard", ageGroup: "kids", wordCount: 4 },
   
   // Disney Princesses
   { word: "Snow White", category: "disney", difficulty: "easy", ageGroup: "kids", wordCount: 2 },
@@ -48,7 +48,7 @@ export const disneyData: CharadesWord[] = [
   { word: "Buzz Lightyear", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 2 },
   { word: "Rex", category: "disney", difficulty: "easy", ageGroup: "kids", wordCount: 1 },
   { word: "Hamm", category: "disney", difficulty: "easy", ageGroup: "kids", wordCount: 1 },
-  { word: "Mr Potato Head", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 3 },
+  { word: "Mr. Potato Head", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 3 },
   { word: "Slinky Dog", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 2 },
   { word: "Bo Peep", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 2 },
   { word: "Andy", category: "disney", difficulty: "easy", ageGroup: "kids", wordCount: 1 },
@@ -80,7 +80,7 @@ export const disneyData: CharadesWord[] = [
   { word: "Gaston", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 1 },
   { word: "Lumiere", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 1 },
   { word: "Cogsworth", category: "disney", difficulty: "hard", ageGroup: "kids", wordCount: 1 },
-  { word: "Mrs Potts", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 2 },
+  { word: "Mrs. Potts", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 2 },
   { word: "Chip", category: "disney", difficulty: "easy", ageGroup: "kids", wordCount: 1 },
   
   // Little Mermaid Characters
@@ -103,15 +103,15 @@ export const disneyData: CharadesWord[] = [
   { word: "Mike Wazowski", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 2 },
   { word: "Boo", category: "disney", difficulty: "easy", ageGroup: "kids", wordCount: 1 },
   { word: "Randall", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 1 },
-  { word: "Mr Waternoose", category: "disney", difficulty: "hard", ageGroup: "kids", wordCount: 2 },
+  { word: "Mr. Waternoose", category: "disney", difficulty: "hard", ageGroup: "kids", wordCount: 2 },
   { word: "Roz", category: "disney", difficulty: "easy", ageGroup: "kids", wordCount: 1 },
   
   // Incredibles Characters
-  { word: "Mr Incredible", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 2 },
+  { word: "Mr. Incredible", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 2 },
   { word: "Elastigirl", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 1 },
   { word: "Violet", category: "disney", difficulty: "easy", ageGroup: "kids", wordCount: 1 },
   { word: "Dash", category: "disney", difficulty: "easy", ageGroup: "kids", wordCount: 1 },
-  { word: "Jack Jack", category: "disney", difficulty: "easy", ageGroup: "kids", wordCount: 2 },
+  { word: "Jack-Jack", category: "disney", difficulty: "easy", ageGroup: "kids", wordCount: 1 },
   { word: "Syndrome", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 1 },
   { word: "Frozone", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 1 },
   { word: "Edna Mode", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 2 },
@@ -215,5 +215,5 @@ export const disneyData: CharadesWord[] = [
   { word: "Nani", category: "disney", difficulty: "easy", ageGroup: "kids", wordCount: 1 },
   { word: "David", category: "disney", difficulty: "easy", ageGroup: "kids", wordCount: 1 },
   { word: "Agent Pleakley", category: "disney", difficulty: "hard", ageGroup: "kids", wordCount: 2 },
-  { word: "Dr Jumba", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 2 },
+  { word: "Dr. Jumba", category: "disney", difficulty: "medium", ageGroup: "kids", wordCount: 2 },
 ];

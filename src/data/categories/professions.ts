@@ -1,4 +1,4 @@
-import { CharadesWord } from '../charades-data';
+import { CharadesWord } from '../charades-types';
 
 export const professionsData: CharadesWord[] = [
   // Common Professions - Easy
@@ -13,8 +13,8 @@ export const professionsData: CharadesWord[] = [
   { word: "Dentist", category: "professions", difficulty: "easy", ageGroup: "all", wordCount: 1 },
   { word: "Lawyer", category: "professions", difficulty: "easy", ageGroup: "all", wordCount: 1 },
   { word: "Judge", category: "professions", difficulty: "easy", ageGroup: "all", wordCount: 1 },
-  { word: "Mailman", category: "professions", difficulty: "easy", ageGroup: "all", wordCount: 1 },
-  { word: "Postman", category: "professions", difficulty: "easy", ageGroup: "all", wordCount: 1 },
+  { word: "Mail carrier", category: "professions", difficulty: "easy", ageGroup: "all", wordCount: 2 },
+  { word: "Delivery driver", category: "professions", difficulty: "easy", ageGroup: "all", wordCount: 2 },
   { word: "Cashier", category: "professions", difficulty: "easy", ageGroup: "all", wordCount: 1 },
   { word: "Waiter", category: "professions", difficulty: "easy", ageGroup: "all", wordCount: 1 },
   { word: "Waitress", category: "professions", difficulty: "easy", ageGroup: "all", wordCount: 1 },

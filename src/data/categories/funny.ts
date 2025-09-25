@@ -1,4 +1,4 @@
-import { CharadesWord } from '../charades-data';
+import { CharadesWord } from '../charades-types';
 
 export const funnyData: CharadesWord[] = [
   // Adult Life Struggles - Medium
@@ -33,7 +33,7 @@ export const funnyData: CharadesWord[] = [
   { word: "Wrong bathroom", category: "funny", difficulty: "medium", ageGroup: "adults", wordCount: 2 },
   { word: "Loud stomach growl", category: "funny", difficulty: "medium", ageGroup: "adults", wordCount: 3 },
   { word: "Brain freeze", category: "funny", difficulty: "easy", ageGroup: "all", wordCount: 2 },
-  { word: "Word vomit", category: "funny", difficulty: "medium", ageGroup: "adults", wordCount: 2 },
+  { word: "Saying the wrong thing", category: "funny", difficulty: "medium", ageGroup: "adults", wordCount: 4 },
 
   // Food Related Humor - Easy to Medium
   { word: "Hangry person", category: "funny", difficulty: "medium", ageGroup: "adults", wordCount: 2 },
@@ -47,7 +47,7 @@ export const funnyData: CharadesWord[] = [
   { word: "Fast food diet", category: "funny", difficulty: "medium", ageGroup: "adults", wordCount: 3 },
   { word: "Fridge archaeology", category: "funny", difficulty: "hard", ageGroup: "adults", wordCount: 2 },
   { word: "Cooking disaster", category: "funny", difficulty: "medium", ageGroup: "adults", wordCount: 2 },
-  { word: "Take out menu", category: "funny", difficulty: "easy", ageGroup: "adults", wordCount: 3 },
+  { word: "Takeout menu", category: "funny", difficulty: "easy", ageGroup: "adults", wordCount: 2 },
   { word: "Empty fridge", category: "funny", difficulty: "easy", ageGroup: "adults", wordCount: 2 },
   { word: "Grocery shopping", category: "funny", difficulty: "easy", ageGroup: "adults", wordCount: 2 },
   { word: "Impulse buying", category: "funny", difficulty: "medium", ageGroup: "adults", wordCount: 2 },
@@ -154,20 +154,15 @@ export const funnyData: CharadesWord[] = [
   { word: "Buyer's remorse", category: "funny", difficulty: "hard", ageGroup: "adults", wordCount: 2 },
   { word: "Sale addiction", category: "funny", difficulty: "medium", ageGroup: "adults", wordCount: 2 },
 
-  // Random Adult Absurdities - Medium to Hard
-  { word: "Adult coloring book", category: "funny", difficulty: "hard", ageGroup: "adults", wordCount: 3 },
-  { word: "Wine o'clock", category: "funny", difficulty: "medium", ageGroup: "adults", wordCount: 2 },
-  { word: "Bedtime procrastination", category: "funny", difficulty: "hard", ageGroup: "adults", wordCount: 2 },
-  { word: "Sunday scaries", category: "funny", difficulty: "hard", ageGroup: "adults", wordCount: 2 },
-  { word: "Decision fatigue", category: "funny", difficulty: "hard", ageGroup: "adults", wordCount: 2 },
-  { word: "Adulting skills", category: "funny", difficulty: "medium", ageGroup: "adults", wordCount: 2 },
-  { word: "Life crisis", category: "funny", difficulty: "medium", ageGroup: "adults", wordCount: 2 },
-  { word: "Comfort zone", category: "funny", difficulty: "medium", ageGroup: "adults", wordCount: 2 },
-  { word: "Procrastination nation", category: "funny", difficulty: "hard", ageGroup: "adults", wordCount: 2 },
-  { word: "Overthinking everything", category: "funny", difficulty: "hard", ageGroup: "adults", wordCount: 2 },
-  { word: "Analysis paralysis", category: "funny", difficulty: "hard", ageGroup: "adults", wordCount: 2 },
-  { word: "Imposter syndrome", category: "funny", difficulty: "hard", ageGroup: "adults", wordCount: 2 },
-  { word: "Quarter life crisis", category: "funny", difficulty: "hard", ageGroup: "adults", wordCount: 3 },
-  { word: "Midlife crisis", category: "funny", difficulty: "medium", ageGroup: "adults", wordCount: 2 },
-  { word: "Existential dread", category: "funny", difficulty: "hard", ageGroup: "adults", wordCount: 2 },
+  // Physical Comedy Moments - Easy to Medium
+  { word: "Slipping on a banana peel", category: "funny", difficulty: "easy", ageGroup: "all", wordCount: 5 },
+  { word: "Dancing badly at a wedding", category: "funny", difficulty: "medium", ageGroup: "all", wordCount: 5 },
+  { word: "Trying to catch popcorn", category: "funny", difficulty: "medium", ageGroup: "all", wordCount: 4 },
+  { word: "Juggling imaginary balls", category: "funny", difficulty: "medium", ageGroup: "all", wordCount: 3 },
+  { word: "Hiding a surprise gift", category: "funny", difficulty: "medium", ageGroup: "all", wordCount: 4 },
+  { word: "Laughing so hard you snort", category: "funny", difficulty: "hard", ageGroup: "all", wordCount: 5 },
+  { word: "Sneaking cookies at midnight", category: "funny", difficulty: "medium", ageGroup: "all", wordCount: 4 },
+  { word: "Chasing an ice cream truck", category: "funny", difficulty: "medium", ageGroup: "all", wordCount: 5 },
+  { word: "Opening a pickle jar", category: "funny", difficulty: "medium", ageGroup: "all", wordCount: 4 },
+  { word: "Tripping over shoelaces", category: "funny", difficulty: "easy", ageGroup: "all", wordCount: 3 },
 ];

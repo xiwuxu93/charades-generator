@@ -1,4 +1,5 @@
-// Import all category data
+import { DEFAULT_LOCALE, type Locale } from "@/i18n/config";
+import type { CharadesWord } from "./charades-types";
 import { moviesData } from "./categories/movies";
 import { animalsData } from "./categories/animals";
 import { actionsData } from "./categories/actions";
@@ -8,23 +9,9 @@ import { emotionsData } from "./categories/emotions";
 import { disneyData } from "./categories/disney";
 import { funnyData } from "./categories/funny";
 import { christmasData } from "./categories/christmas";
-// import { enhanceWordWithEmoji } from "@/utils/emojiMapper";
+import { esCharadesDatabase } from "./locales/es";
 
-export interface CharadesWord {
-  word: string;
-  category: string;
-  difficulty: "easy" | "medium" | "hard";
-  ageGroup: "kids" | "adults" | "all";
-  wordCount: number;
-  // Enhanced fields
-  emoji?: string; // Visual icon for the word
-  description?: string; // Brief description or hint
-  tags?: string[]; // Additional searchable tags
-  popularity?: number; // Usage frequency (1-10, higher = more popular)
-}
-
-// Combine all category data into one comprehensive database with emojis
-const rawDatabase = [
+const enDatabase: CharadesWord[] = [
   ...moviesData,
   ...animalsData,
   ...actionsData,
@@ -36,10 +23,12 @@ const rawDatabase = [
   ...christmasData,
 ];
 
-// Enhance all words with emojis
-export const charadesDatabase: CharadesWord[] = rawDatabase;
+const databaseByLocale: Record<Locale, CharadesWord[]> = {
+  en: enDatabase,
+  es: esCharadesDatabase,
+};
 
-export const categories = [
+export const categoryIds = [
   "all",
   "movies",
   "animals",
@@ -52,5 +41,11 @@ export const categories = [
   "christmas",
 ];
 
-export const difficulties = ["easy", "medium", "hard"];
-export const ageGroups = ["all", "kids", "adults"];
+export const difficulties = ["easy", "medium", "hard"] as const;
+export const ageGroups = ["all", "kids", "adults"] as const;
+
+export const charadesDatabase = enDatabase;
+
+export function getCharadesDatabase(locale: Locale = DEFAULT_LOCALE): CharadesWord[] {
+  return databaseByLocale[locale] ?? enDatabase;
+}

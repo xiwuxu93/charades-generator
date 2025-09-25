@@ -1,4 +1,4 @@
-import { CharadesWord } from '../charades-data';
+import { CharadesWord } from '../charades-types';
 
 export const moviesData: CharadesWord[] = [
   // Disney Movies - Kids
@@ -33,7 +33,7 @@ export const moviesData: CharadesWord[] = [
   { word: "Citizen Kane", category: "movies", difficulty: "hard", ageGroup: "adults", wordCount: 2 },
   { word: "Psycho", category: "movies", difficulty: "medium", ageGroup: "adults", wordCount: 1 },
   { word: "Vertigo", category: "movies", difficulty: "medium", ageGroup: "adults", wordCount: 1 },
-  { word: "Singin in the Rain", category: "movies", difficulty: "hard", ageGroup: "all", wordCount: 4 },
+  { word: "Singin' in the Rain", category: "movies", difficulty: "hard", ageGroup: "all", wordCount: 4 },
   
   // Modern Blockbusters - All Ages  
   { word: "Avatar", category: "movies", difficulty: "easy", ageGroup: "all", wordCount: 1 },
@@ -56,7 +56,7 @@ export const moviesData: CharadesWord[] = [
   
   // Comedy Movies - All Ages
   { word: "Home Alone", category: "movies", difficulty: "easy", ageGroup: "all", wordCount: 2 },
-  { word: "Mrs Doubtfire", category: "movies", difficulty: "medium", ageGroup: "all", wordCount: 2 },
+  { word: "Mrs. Doubtfire", category: "movies", difficulty: "medium", ageGroup: "all", wordCount: 2 },
   { word: "The Mask", category: "movies", difficulty: "easy", ageGroup: "all", wordCount: 2 },
   { word: "Dumb and Dumber", category: "movies", difficulty: "medium", ageGroup: "all", wordCount: 3 },
   { word: "Ace Ventura", category: "movies", difficulty: "medium", ageGroup: "all", wordCount: 2 },
@@ -90,7 +90,6 @@ export const moviesData: CharadesWord[] = [
   
   // Action Movies - All Ages
   { word: "Die Hard", category: "movies", difficulty: "easy", ageGroup: "adults", wordCount: 2 },
-  { word: "Terminator", category: "movies", difficulty: "easy", ageGroup: "adults", wordCount: 1 },
   { word: "Top Gun", category: "movies", difficulty: "easy", ageGroup: "all", wordCount: 2 },
   { word: "Mission Impossible", category: "movies", difficulty: "medium", ageGroup: "all", wordCount: 2 },
   { word: "Fast and Furious", category: "movies", difficulty: "medium", ageGroup: "all", wordCount: 3 },

@@ -3,42 +3,14 @@
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
-
-const navigationItems = [
-  {
-    title: "Free Generator",
-    href: "/",
-    description: "Main charades generator",
-  },
-  {
-    title: "Kids Charades",
-    href: "/charades-generator-for-kids",
-    description: "Child-friendly words",
-  },
-  {
-    title: "Movie Charades",
-    href: "/movie-charades-generator",
-    description: "Films & cinema",
-  },
-  {
-    title: "Disney Charades",
-    href: "/disney-charades-generator",
-    description: "Disney characters",
-  },
-  {
-    title: "Christmas Charades",
-    href: "/christmas-charades-generator",
-    description: "Holiday themed words",
-  },
-  {
-    title: "How to Use",
-    href: "/how-to-use",
-    description: "Complete guide & rules",
-  },
-];
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useLocale } from "@/contexts/LocaleContext";
+import { buildLocalePath } from "@/utils/localePaths";
 
 export default function Navigation() {
+  const { dictionary, locale } = useLocale();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigationItems = dictionary.navigation.items;
 
   return (
     <nav className="critical-nav">
@@ -61,12 +33,16 @@ export default function Navigation() {
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
-                href={item.href}
+                href={buildLocalePath(locale, item.href)}
                 className="px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors"
               >
                 {item.title}
               </Link>
             ))}
+          </div>
+
+          <div className="hidden md:flex items-center">
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile Menu Button */}
@@ -109,7 +85,7 @@ export default function Navigation() {
               {navigationItems.map((item) => (
                 <Link
                   key={item.href}
-                  href={item.href}
+                  href={buildLocalePath(locale, item.href)}
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -119,6 +95,9 @@ export default function Navigation() {
                   </div>
                 </Link>
               ))}
+              <div className="px-3 py-2">
+                <LanguageSwitcher />
+              </div>
             </div>
           </div>
         )}

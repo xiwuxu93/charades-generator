@@ -1,4 +1,4 @@
-import { CharadesWord } from '../charades-data';
+import { CharadesWord } from '../charades-types';
 
 export const emotionsData: CharadesWord[] = [
   // Basic Emotions - Easy
@@ -42,8 +42,8 @@ export const emotionsData: CharadesWord[] = [
   { word: "Hopeful", category: "emotions", difficulty: "medium", ageGroup: "all", wordCount: 1 },
   { word: "Optimistic", category: "emotions", difficulty: "hard", ageGroup: "adults", wordCount: 1 },
   { word: "Pessimistic", category: "emotions", difficulty: "hard", ageGroup: "adults", wordCount: 1 },
-  { word: "Depressed", category: "emotions", difficulty: "medium", ageGroup: "adults", wordCount: 1 },
-  { word: "Miserable", category: "emotions", difficulty: "medium", ageGroup: "adults", wordCount: 1 },
+  { word: "Feeling blue", category: "emotions", difficulty: "medium", ageGroup: "all", wordCount: 2 },
+  { word: "Feeling mopey", category: "emotions", difficulty: "medium", ageGroup: "all", wordCount: 2 },
 
   // Physical Emotional States - Easy to Medium
   { word: "Sick", category: "emotions", difficulty: "easy", ageGroup: "all", wordCount: 1 },
@@ -129,10 +129,10 @@ export const emotionsData: CharadesWord[] = [
   { word: "Petrified", category: "emotions", difficulty: "hard", ageGroup: "adults", wordCount: 1 },
   { word: "Horrified", category: "emotions", difficulty: "hard", ageGroup: "adults", wordCount: 1 },
   { word: "Panicked", category: "emotions", difficulty: "medium", ageGroup: "all", wordCount: 1 },
-  { word: "Hysterical", category: "emotions", difficulty: "hard", ageGroup: "adults", wordCount: 1 },
-  { word: "Devastated", category: "emotions", difficulty: "hard", ageGroup: "adults", wordCount: 1 },
+  { word: "Laughing hysterically", category: "emotions", difficulty: "hard", ageGroup: "all", wordCount: 2 },
+  { word: "Crying loudly", category: "emotions", difficulty: "medium", ageGroup: "all", wordCount: 2 },
   { word: "Heartbroken", category: "emotions", difficulty: "medium", ageGroup: "all", wordCount: 1 },
-  { word: "Grief-stricken", category: "emotions", difficulty: "hard", ageGroup: "adults", wordCount: 1 },
+  { word: "Missing a friend", category: "emotions", difficulty: "hard", ageGroup: "all", wordCount: 3 },
   { word: "Euphoric", category: "emotions", difficulty: "hard", ageGroup: "adults", wordCount: 1 },
   { word: "Elated", category: "emotions", difficulty: "hard", ageGroup: "adults", wordCount: 1 },
   { word: "Jubilant", category: "emotions", difficulty: "hard", ageGroup: "adults", wordCount: 1 },

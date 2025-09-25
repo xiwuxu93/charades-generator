@@ -1,4 +1,4 @@
-import { CharadesWord } from '../charades-data';
+import { CharadesWord } from '../charades-types';
 
 export const animalsData: CharadesWord[] = [
   // Common Animals - Easy

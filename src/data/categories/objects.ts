@@ -1,4 +1,4 @@
-import { CharadesWord } from '../charades-data';
+import { CharadesWord } from '../charades-types';
 
 export const objectsData: CharadesWord[] = [
   // Household Items - Easy

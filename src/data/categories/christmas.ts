@@ -1,4 +1,4 @@
-import { CharadesWord } from "../charades-data";
+import { CharadesWord } from "../charades-types";
 
 export const christmasData: CharadesWord[] = [
   // Christmas Characters
@@ -47,8 +47,8 @@ export const christmasData: CharadesWord[] = [
   { word: "Christmas Shopping", category: "christmas", difficulty: "easy", ageGroup: "all", wordCount: 2 },
   { word: "Caroling", category: "christmas", difficulty: "medium", ageGroup: "all", wordCount: 1 },
   { word: "Opening Presents", category: "christmas", difficulty: "easy", ageGroup: "all", wordCount: 2 },
-  { word: "Decorating Tree", category: "christmas", difficulty: "easy", ageGroup: "all", wordCount: 2 },
-  { word: "Making Snowman", category: "christmas", difficulty: "easy", ageGroup: "all", wordCount: 2 },
+  { word: "Decorating the tree", category: "christmas", difficulty: "easy", ageGroup: "all", wordCount: 3 },
+  { word: "Building a snowman", category: "christmas", difficulty: "easy", ageGroup: "all", wordCount: 3 },
   { word: "Sledding", category: "christmas", difficulty: "easy", ageGroup: "all", wordCount: 1 },
   { word: "Ice Skating", category: "christmas", difficulty: "medium", ageGroup: "all", wordCount: 2 },
   { word: "Building Gingerbread House", category: "christmas", difficulty: "hard", ageGroup: "all", wordCount: 3 },

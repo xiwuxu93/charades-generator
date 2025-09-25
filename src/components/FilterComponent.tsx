@@ -1,6 +1,6 @@
 'use client';
 
-import { categories, difficulties } from '@/data/charades-data';
+import { useLocale } from '@/contexts/LocaleContext';
 
 interface FilterComponentProps {
   selectedCategory: string;
@@ -11,6 +11,12 @@ interface FilterComponentProps {
   setSelectedDifficulty: (difficulty: string) => void;
   setSelectedAgeGroup: (ageGroup: string) => void;
   setFiltersExpanded: (expanded: boolean) => void;
+  categories: readonly string[];
+  difficulties: readonly string[];
+  ageGroups: readonly string[];
+  showCategoryFilter?: boolean;
+  showDifficultyFilter?: boolean;
+  showAgeGroupFilter?: boolean;
 }
 
 const getDifficultyColor = (difficulty: string) => {
@@ -30,8 +36,19 @@ export default function FilterComponent({
   setSelectedCategory,
   setSelectedDifficulty,
   setSelectedAgeGroup,
-  setFiltersExpanded
+  setFiltersExpanded,
+  categories,
+  difficulties,
+  ageGroups,
+  showCategoryFilter = true,
+  showDifficultyFilter = true,
+  showAgeGroupFilter = true,
 }: FilterComponentProps) {
+  const { dictionary } = useLocale();
+  const categoryLabels = dictionary.categories;
+  const difficultyLabels = dictionary.difficulties;
+  const ageGroupLabels = dictionary.ageGroups;
+
   return (
     <div className="mb-8">
       <button
@@ -39,10 +56,10 @@ export default function FilterComponent({
         className="w-full bg-gray-50 hover:bg-gray-100 rounded-lg p-4 flex items-center justify-between transition-colors border border-gray-200"
       >
         <div className="flex items-center space-x-2">
-          <span className="text-sm font-medium text-gray-700">Advanced Options</span>
+          <span className="text-sm font-medium text-gray-700">{dictionary.filter.advancedOptions}</span>
           {(selectedCategory !== 'all' || selectedDifficulty !== 'all' || selectedAgeGroup !== 'all') && (
             <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">
-              Custom Filters
+              {dictionary.filter.customFilters}
             </span>
           )}
         </div>
@@ -56,8 +73,9 @@ export default function FilterComponent({
       {filtersExpanded && (
         <div className="bg-white rounded-b-lg shadow-md p-6 border-t border-gray-100">
           {/* Category Filter */}
+          {showCategoryFilter && (
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-3">Category</label>
+            <label className="block text-sm font-medium text-gray-700 mb-3">{dictionary.filter.categoryLabel}</label>
             <div className="flex flex-wrap gap-2">
               {categories.map(category => (
                 <button
@@ -69,16 +87,17 @@ export default function FilterComponent({
                       : 'bg-gray-100 text-gray-700 hover:bg-blue-100'
                   }`}
                 >
-                  {category === 'all' ? 'All Categories' : 
-                   category.charAt(0).toUpperCase() + category.slice(1)}
+                  {categoryLabels[category as keyof typeof categoryLabels] ?? category}
                 </button>
               ))}
             </div>
           </div>
+          )}
 
           {/* Difficulty Filter */}
+          {showDifficultyFilter && (
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-3">Difficulty Level</label>
+            <label className="block text-sm font-medium text-gray-700 mb-3">{dictionary.filter.difficultyLabel}</label>
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedDifficulty('all')}
@@ -88,7 +107,7 @@ export default function FilterComponent({
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                All Levels
+                {dictionary.filter.allLevels}
               </button>
               {difficulties.map(difficulty => (
                 <button
@@ -100,17 +119,19 @@ export default function FilterComponent({
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+                  {difficultyLabels[difficulty as keyof typeof difficultyLabels] ?? difficulty}
                 </button>
               ))}
             </div>
           </div>
+          )}
 
           {/* Age Group Filter */}
+          {showAgeGroupFilter && (
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-3">Age Group</label>
+            <label className="block text-sm font-medium text-gray-700 mb-3">{dictionary.filter.ageGroupLabel}</label>
             <div className="flex flex-wrap gap-2">
-              {['all', 'kids', 'adults'].map(ageGroup => (
+              {ageGroups.map(ageGroup => (
                 <button
                   key={ageGroup}
                   onClick={() => setSelectedAgeGroup(ageGroup)}
@@ -122,35 +143,35 @@ export default function FilterComponent({
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  {ageGroup === 'all' ? 'All Ages' :
-                   ageGroup === 'kids' ? 'Kids Friendly' : 'Adults Only'}
+                  {ageGroupLabels[ageGroup as keyof typeof ageGroupLabels] ?? ageGroup}
                 </button>
               ))}
             </div>
           </div>
+          )}
 
           {/* Active Filters Summary */}
           <div className="pt-4 border-t border-gray-200">
             <div className="flex items-center space-x-2 text-sm text-gray-600">
-              <span className="font-medium">Active filters:</span>
+              <span className="font-medium">{dictionary.filter.activeFilters}</span>
               <div className="flex flex-wrap gap-1">
                 {selectedCategory !== 'all' && (
                   <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
-                    {selectedCategory}
+                    {categoryLabels[selectedCategory as keyof typeof categoryLabels] ?? selectedCategory}
                   </span>
                 )}
                 {selectedDifficulty !== 'all' && (
                   <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">
-                    {selectedDifficulty}
+                    {difficultyLabels[selectedDifficulty as keyof typeof difficultyLabels] ?? selectedDifficulty}
                   </span>
                 )}
                 {selectedAgeGroup !== 'all' && (
                   <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">
-                    {selectedAgeGroup}
+                    {ageGroupLabels[selectedAgeGroup as keyof typeof ageGroupLabels] ?? selectedAgeGroup}
                   </span>
                 )}
                 {selectedCategory === 'all' && selectedDifficulty === 'all' && selectedAgeGroup === 'all' && (
-                  <span className="text-gray-500 italic">None (showing all words)</span>
+                  <span className="text-gray-500 italic">{dictionary.filter.noFilters}</span>
                 )}
               </div>
             </div>
