@@ -6,16 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "cf:build": "npm run build && npx @cloudflare/next-on-pages",
-    "cf:dev": "npm run cf:build && wrangler dev",
-    "cf:preview": "npm run cf:build && wrangler deploy --env preview",
-    "cf:deploy": "npm run cf:build && wrangler deploy --env production",
-    "pages:build": "npx @cloudflare/next-on-pages",
-    "preview": "npm run cf:build && wrangler pages dev .vercel/output/static --config wrangler.dev.toml",
-    "deploy": "npm run cf:build && wrangler pages deploy .vercel/output/static",
-    "deploy:preview": "npm run cf:build && wrangler pages deploy .vercel/output/static --env preview",
-    "deploy:production": "npm run cf:build && wrangler pages deploy .vercel/output/static --env production"
+    "lint": "next lint"
   },
   "dependencies": {
     "@next/third-parties": "^15.4.6",
@@ -24,8 +15,6 @@
     "react-dom": "19.1.0"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.16",
-    "@cloudflare/workers-types": "^4.20250807.0",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
@@ -34,7 +23,6 @@
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "wrangler": "^4.28.0"
+    "typescript": "^5"
   }
 }
