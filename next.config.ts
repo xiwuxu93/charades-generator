@@ -6,6 +6,25 @@ const nextConfig: NextConfig = {
     // Remove console logs in production
     removeConsole: process.env.NODE_ENV === "production",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'imglab.dev',
+        pathname: '/svg/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'fwfw.app',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'acidtools.com',
+        pathname: '/assets/images/**',
+      },
+    ],
+  },
   // Cloudflare Workers configuration
   experimental: {
     optimizePackageImports: ['react-icons'],

@@ -68,20 +68,32 @@ export default function Footer() {
             </li>
             <li>
               <a href="https://imglab.dev/item/charades-generator-knot" target="_blank" rel="noopener noreferrer">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://imglab.dev/svg/badge.svg" alt="Listed on imglab" style={{ height: '54px', width: 'auto' }} />
+                <Image
+                  src="https://imglab.dev/svg/badge.svg"
+                  alt="Listed on imglab"
+                  width={125}
+                  height={60}
+                />
               </a>
             </li>
             <li>
               <a href="https://fwfw.app/item/charades-generator" target="_blank" rel="noopener noreferrer">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://fwfw.app/badge-white.svg" width="250" height="54" alt="Featured on FWFW" />
+                <Image
+                  src="https://fwfw.app/badge-white.svg"
+                  alt="Featured on FWFW"
+                  width={250}
+                  height={54}
+                />
               </a>
             </li>
             <li>
               <a href="https://acidtools.com" target="_blank" rel="noopener noreferrer">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://acidtools.com/assets/images/badge.png" alt="Acid Tools" height="54" />
+                <Image
+                  src="https://acidtools.com/assets/images/badge.png"
+                  alt="Acid Tools badge"
+                  width={159}
+                  height={54}
+                />
               </a>
             </li>
             <li className="md:leading-none">

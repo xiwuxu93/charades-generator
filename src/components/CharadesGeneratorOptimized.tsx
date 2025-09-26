@@ -174,7 +174,13 @@ export default function CharadesGeneratorOptimized({
 
       {/* Filters - Lazy loaded */}
       {!hideFilters && (
-        <Suspense fallback={<div className="mb-6 bg-gray-50 rounded-lg p-4">{dictionary.generator.loadingFilters}</div>}>
+        <Suspense
+          fallback={(
+            <div className="mb-8">
+              <div className="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 h-14 animate-pulse" />
+            </div>
+          )}
+        >
           <FilterComponent
             selectedCategory={selectedCategory}
             selectedDifficulty={selectedDifficulty}
