@@ -14,7 +14,6 @@ export const baseRoutes: RouteConfig[] = [
   { path: "/funny-charades-for-adults/", changeFrequency: "weekly", priority: 0.8 },
   { path: "/christmas-charades-generator/", changeFrequency: "weekly", priority: 0.8 },
   { path: "/random-charades-generator/", changeFrequency: "daily", priority: 0.9 },
-  { path: "/feedback/", changeFrequency: "monthly", priority: 0.3 },
   { path: "/about/", changeFrequency: "monthly", priority: 0.6 },
   { path: "/how-to-use/", changeFrequency: "monthly", priority: 0.7 },
   { path: "/faq/", changeFrequency: "monthly", priority: 0.7 },

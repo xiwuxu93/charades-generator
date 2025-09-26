@@ -56,6 +56,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isProduction = process.env.NODE_ENV === "production";
+
   return (
     <html lang="en">
       <head>
@@ -76,37 +78,39 @@ export default function RootLayout({
         {children}
 
         {/* Analytics - lazy load after page is ready */}
-        <Script
-          id="gtag-init"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
+        {isProduction && (
+          <Script
+            id="gtag-init"
+            strategy="lazyOnload"
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
 
-              const script = document.createElement('script');
-              script.async = true;
-              script.src = 'https://www.googletagmanager.com/gtag/js?id=G-YC6P6CMMW2';
-              document.head.appendChild(script);
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-YC6P6CMMW2';
+                document.head.appendChild(script);
 
-              script.onload = function() {
-                gtag('config', 'G-YC6P6CMMW2', {
-                  page_title: document.title,
-                  page_location: window.location.href,
-                });
-              };
-            `,
-          }}
-        />
+                script.onload = function() {
+                  gtag('config', 'G-YC6P6CMMW2', {
+                    page_title: document.title,
+                    page_location: window.location.href,
+                  });
+                };
+              `,
+            }}
+          />
+        )}
 
         {/* AdSense - lowest priority loading */}
-        <Script
+          {isProduction && (<Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855228928819714"
           crossOrigin="anonymous"
           strategy="lazyOnload"
-        />
+        />)}
       </body>
     </html>
   );

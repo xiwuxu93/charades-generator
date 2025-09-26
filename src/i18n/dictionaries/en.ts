@@ -226,7 +226,7 @@ export const en = {
     guidesLabel: "Plan & learn",
     guidesHeading: "Guides, rules, and ways to make charades unforgettable",
     guidesDescription:
-      "Learn new twists, download resources, and share feedback so we can keep improving the experience for your next game night.",
+      "Learn new twists, download resources, and stay in the loop as we keep improving the experience for your next game night.",
     playGuides: [
       {
         key: "howToUse",
@@ -239,6 +239,12 @@ export const en = {
         title: "Charades FAQ & Troubleshooting",
         href: "/faq/",
         description: "Answers to the most common gameplay questions, house rules, and customization ideas.",
+      },
+      {
+        key: "updates",
+        title: "Latest Updates & Roadmap",
+        href: "/about/",
+        description: "See what we're building next and how the generator continues to grow each month.",
       },
     ],
   },
@@ -347,7 +353,7 @@ export const en = {
       q4: "How do I play charades?",
       a4: "One player acts out a word without speaking while others guess. Use only gestures, facial expressions, and body language. No talking, pointing, or mouthing words allowed!",
       q5: "Can I suggest new words or categories?",
-      a5: "Yes! We love user suggestions. Use our feedback form to suggest new words, categories, or features you'd like to see added.",
+      a5: "Yes! We love user suggestions and continuously roll out new words, categories, and features based on what players request.",
       q6: "Does it work on mobile phones?",
       a6: "Yes! Our charades generator is fully optimized for mobile devices, making it perfect to use during parties and gatherings.",
       q7: "What age groups can play?",
@@ -355,8 +361,8 @@ export const en = {
       q8: "How many words should I generate for a game?",
       a8: "It depends on your group size and game duration. We recommend 5-10 words per player as a starting point, but you can always generate more during the game!",
       stillHaveQuestions: "Still Have Questions?",
-      contactDescription: "If you can't find the answer you're looking for, feel free to contact us through our feedback form.",
-      contactUs: "Contact Us"
+      contactDescription: "Ready to play? Jump back to our free charades generator and grab fresh prompts in seconds.",
+      contactUs: "Go to Homepage"
     },
     privacy: {
       title: "Privacy Policy",
@@ -382,7 +388,7 @@ export const en = {
       section7Title: "Updates to This Policy",
       section7Content: "We may update this privacy policy from time to time. Changes will be posted on this page with an updated revision date.",
       contactTitle: "Contact Information",
-      contactContent: "If you have questions about this privacy policy, please contact us through our feedback form."
+      contactContent: "If you have questions about this privacy policy, please visit our homepage for the latest updates and announcements."
     },
     terms: {
       title: "Terms of Service",
@@ -412,7 +418,7 @@ export const en = {
       section8Title: "Modifications",
       section8Content: "We may revise these terms of service at any time without notice. By using this site, you agree to be bound by the current version of these terms.",
       contactTitle: "Contact Information",
-      contactContent: "Questions about the Terms of Service should be sent to us through our feedback form."
+      contactContent: "Questions about the Terms of Service? Visit our homepage for the newest information and updates."
     }
   },
   footer: {

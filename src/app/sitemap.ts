@@ -44,7 +44,7 @@ const routeConfig: Array<{
   {
     path: "/random-charades-generator",
     changeFrequency: "daily",
-    priority: 0.9,
+    priority: 0.8,
   },
   {
     path: "/about",
@@ -80,9 +80,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Generate sitemap entries for each supported locale
   for (const locale of SUPPORTED_LOCALES) {
     for (const route of routeConfig) {
-      const url = locale === 'en'
-        ? `${baseUrl}${route.path}${route.path === '/' ? '' : '/'}`
-        : `${baseUrl}/${locale}${route.path}${route.path === '/' ? '' : '/'}`
+      const url =
+        locale === "en"
+          ? `${baseUrl}${route.path}${route.path === "/" ? "" : "/"}`
+          : `${baseUrl}/${locale}${route.path}${route.path === "/" ? "" : "/"}`;
 
       sitemapEntries.push({
         url: url,

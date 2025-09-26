@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { SUPPORTED_LOCALES, DEFAULT_LOCALE, type Locale } from '@/i18n/config';
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -11,6 +10,17 @@ export function middleware(request: NextRequest) {
     pathname.includes('.')
   ) {
     return NextResponse.next();
+  }
+
+  // Redirect any /en requests back to the root equivalents so the site never exposes /en URLs
+  if (pathname === '/en' || pathname.startsWith('/en/')) {
+    const redirectedUrl = request.nextUrl.clone();
+    let withoutLocale = pathname === '/en' ? '/' : pathname.replace(/^\/en/, '') || '/';
+    if (withoutLocale !== '/' && !withoutLocale.endsWith('/')) {
+      withoutLocale = `${withoutLocale}/`;
+    }
+    redirectedUrl.pathname = withoutLocale;
+    return NextResponse.redirect(redirectedUrl, 308);
   }
 
   // Check if path starts with /es/ - these go to Spanish locale

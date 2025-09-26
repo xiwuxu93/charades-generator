@@ -226,7 +226,7 @@ export const es = {
     guidesLabel: "Planifica y aprende",
     guidesHeading: "Guías y trucos para que la partida sea inolvidable",
     guidesDescription:
-      "Descubre variantes, descarga recursos y comparte ideas para seguir mejorando cada encuentro.",
+      "Descubre variantes, descarga recursos y mantente al día con las novedades del generador.",
     playGuides: [
       {
         key: "howToUse",
@@ -239,6 +239,12 @@ export const es = {
         title: "Preguntas frecuentes",
         href: "/faq/",
         description: "Resolvemos dudas comunes, reglas caseras y formas de personalizar el juego.",
+      },
+      {
+        key: "updates",
+        title: "Novedades y hoja de ruta",
+        href: "/about/",
+        description: "Conoce en qué estamos trabajando y cómo evoluciona el generador cada mes.",
       },
     ],
   },
@@ -347,7 +353,7 @@ export const es = {
       q4: "¿Cómo se juegan las charadas?",
       a4: "Un jugador actúa una palabra sin hablar mientras otros adivinan. ¡Usar solo gestos, expresiones faciales y lenguaje corporal. No hablar, señalar ni articular palabras con la boca!",
       q5: "¿Puedo sugerir nuevas palabras o categorías?",
-      a5: "¡Sí! Nos encantan las sugerencias de usuarios. Usa nuestro formulario de comentarios para sugerir nuevas palabras, categorías o características que te gustaría ver agregadas.",
+      a5: "¡Sí! Nos encantan las sugerencias y estamos agregando nuevas palabras, categorías y funciones según lo que la comunidad solicita.",
       q6: "¿Funciona en teléfonos móviles?",
       a6: "¡Sí! Nuestro generador de charadas está completamente optimizado para dispositivos móviles, haciéndolo perfecto para usar durante fiestas y reuniones.",
       q7: "¿Qué grupos de edad pueden jugar?",
@@ -355,8 +361,8 @@ export const es = {
       q8: "¿Cuántas palabras debo generar para un juego?",
       a8: "Depende del tamaño de tu grupo y la duración del juego. Recomendamos 5-10 palabras por jugador como punto de partida, ¡pero siempre puedes generar más durante el juego!",
       stillHaveQuestions: "¿Aún Tienes Preguntas?",
-      contactDescription: "Si no puedes encontrar la respuesta que buscas, siéntete libre de contactarnos a través de nuestro formulario de comentarios.",
-      contactUs: "Contáctanos"
+      contactDescription: "¿Listo para jugar? Regresa a nuestro generador gratuito y consigue nuevas palabras al instante.",
+      contactUs: "Volver al inicio"
     },
     privacy: {
       title: "Política de Privacidad",
@@ -382,7 +388,7 @@ export const es = {
       section7Title: "Actualizaciones a Esta Política",
       section7Content: "Podemos actualizar esta política de privacidad de vez en cuando. Los cambios se publicarán en esta página con una fecha de revisión actualizada.",
       contactTitle: "Información de Contacto",
-      contactContent: "Si tienes preguntas sobre esta política de privacidad, por favor contáctanos a través de nuestro formulario de comentarios."
+      contactContent: "Si tienes preguntas sobre esta política de privacidad, visita nuestra página principal para enterarte de las últimas novedades y avisos."
     },
     terms: {
       title: "Términos de Servicio",
@@ -412,7 +418,7 @@ export const es = {
       section8Title: "Modificaciones",
       section8Content: "Podemos revisar estos términos de servicio en cualquier momento sin aviso. Al usar este sitio, aceptas estar sujeto a la versión actual de estos términos.",
       contactTitle: "Información de Contacto",
-      contactContent: "Las preguntas sobre los Términos de Servicio deben enviarse a nosotros a través de nuestro formulario de comentarios."
+      contactContent: "¿Preguntas sobre los Términos de Servicio? Visita nuestra página principal para conocer las actualizaciones más recientes."
     }
   },
   footer: {
