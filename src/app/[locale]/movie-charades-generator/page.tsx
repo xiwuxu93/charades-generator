@@ -2,6 +2,7 @@ import CharadesGeneratorOptimized from "@/components/CharadesGeneratorOptimized"
 import StructuredData from "@/components/StructuredData";
 import Link from "next/link";
 import { Metadata } from "next";
+import { pickWords } from "@/utils/charades";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 
@@ -50,6 +51,7 @@ export default async function MovieCharadesPage({ params }: PageProps) {
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
   const copy = movieContent[locale] ?? movieContent.en;
+  const initialWords = pickWords("movies", "medium", "all", 3, locale);
 
   const baseUrl = "https://charades-generator.com";
   const canonicalUrl = locale === 'en'
@@ -65,6 +67,7 @@ export default async function MovieCharadesPage({ params }: PageProps) {
         defaultDifficulty="medium"
         defaultAgeGroup="all"
         hideCategoryFilter={true}
+        initialWords={initialWords}
       />
 
       <StructuredData

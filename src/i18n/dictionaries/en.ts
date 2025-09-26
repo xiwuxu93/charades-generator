@@ -156,6 +156,7 @@ export const en = {
     apply: "Apply",
     generateButton: "Generate {{count}} new words",
     loadingFilters: "Loading filters...",
+    errorFetchingWords: "We couldn't refresh your words. Please try again.",
     cardMeta: {
       difficulty: "Difficulty",
       category: "Category",

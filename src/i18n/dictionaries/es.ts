@@ -156,6 +156,7 @@ export const es = {
     apply: "Aplicar",
     generateButton: "Generar {{count}} palabras nuevas",
     loadingFilters: "Cargando filtros…",
+    errorFetchingWords: "No pudimos actualizar las palabras. Inténtalo de nuevo.",
     cardMeta: {
       difficulty: "Dificultad",
       category: "Categoría",

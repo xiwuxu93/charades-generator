@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { pickWords } from "@/utils/charades";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import CharadesGeneratorOptimized from "@/components/CharadesGeneratorOptimized";
@@ -50,6 +51,7 @@ export default async function ChristmasCharadesPage({ params }: PageProps) {
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
   const copy = christmasContent[locale] ?? christmasContent.en;
+  const initialWords = pickWords("christmas", "medium", "all", 3, locale);
 
   const baseUrl = "https://charades-generator.com";
   const canonicalUrl = locale === 'en'
@@ -63,6 +65,7 @@ export default async function ChristmasCharadesPage({ params }: PageProps) {
         description={dictionary.pages.christmas.description}
         defaultCategory="christmas"
         hideCategoryFilter={true}
+        initialWords={initialWords}
       />
 
       <StructuredData

@@ -10,6 +10,7 @@ import { disneyData } from "./categories/disney";
 import { funnyData } from "./categories/funny";
 import { christmasData } from "./categories/christmas";
 import { esCharadesDatabase } from "./locales/es";
+import { categoryIds, difficultyIds, ageGroupIds } from "./charades-metadata";
 
 const enDatabase: CharadesWord[] = [
   ...moviesData,
@@ -28,21 +29,7 @@ const databaseByLocale: Record<Locale, CharadesWord[]> = {
   es: esCharadesDatabase,
 };
 
-export const categoryIds = [
-  "all",
-  "movies",
-  "animals",
-  "actions",
-  "professions",
-  "objects",
-  "emotions",
-  "disney",
-  "funny",
-  "christmas",
-];
-
-export const difficulties = ["easy", "medium", "hard"] as const;
-export const ageGroups = ["all", "kids", "adults"] as const;
+export { categoryIds, difficultyIds as difficulties, ageGroupIds as ageGroups };
 
 export const charadesDatabase = enDatabase;
 

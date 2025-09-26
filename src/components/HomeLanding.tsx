@@ -1,9 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import CharadesGeneratorOptimized from '@/components/CharadesGeneratorOptimized';
-import { pickWords } from '@/utils/charades';
 import { useLocale } from '@/contexts/LocaleContext';
 import { buildLocalePath } from '@/utils/localePaths';
 import type { CharadesWord } from '@/data/charades-types';
@@ -15,18 +13,12 @@ interface HomeLandingProps {
 export default function HomeLanding({ initialWords }: HomeLandingProps) {
   const { locale, dictionary } = useLocale();
 
-  const [words, setWords] = useState<CharadesWord[]>(initialWords);
-
-  useEffect(() => {
-    setWords(pickWords('all', 'all', 'all', 3, locale));
-  }, [locale]);
-
   const themedGenerators = dictionary.home.themedGenerators;
   const playGuides = dictionary.home.playGuides;
 
   return (
     <>
-      <CharadesGeneratorOptimized initialWords={words} />
+      <CharadesGeneratorOptimized initialWords={initialWords} />
 
       <section className="bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">

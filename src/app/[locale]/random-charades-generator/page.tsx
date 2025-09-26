@@ -2,6 +2,7 @@ import CharadesGeneratorOptimized from "@/components/CharadesGeneratorOptimized"
 import StructuredData from "@/components/StructuredData";
 import Link from "next/link";
 import { Metadata } from "next";
+import { pickWords } from "@/utils/charades";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 
@@ -49,6 +50,7 @@ export default async function RandomCharadesPage({ params }: PageProps) {
   const { locale: localeParam } = await params;
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
+  const initialWords = pickWords("all", "all", "all", 3, locale);
   const copy = randomContent[locale] ?? randomContent.en;
 
   const baseUrl = "https://charades-generator.com";
@@ -64,6 +66,7 @@ export default async function RandomCharadesPage({ params }: PageProps) {
         defaultCategory="all"
         defaultDifficulty="all"
         defaultAgeGroup="all"
+        initialWords={initialWords}
       />
 
       <StructuredData

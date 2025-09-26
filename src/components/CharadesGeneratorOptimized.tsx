@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef, useMemo, lazy, Suspense } from 'react';
+import { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react';
 import type { CharadesWord } from '@/data/charades-types';
-import { pickWords } from '@/utils/charades';
 import { useLocale } from '@/contexts/LocaleContext';
-import { categoryIds, difficulties as difficultyIds, ageGroups as ageGroupIds } from '@/data/charades-data';
+import { categoryIds, difficultyIds, ageGroupIds } from '@/data/charades-metadata';
 
 const DEFAULT_BATCH_SIZE = 3;
 
@@ -51,6 +50,16 @@ export default function CharadesGeneratorOptimized({
   const [isCustomMode, setIsCustomMode] = useState<boolean>(false);
   const [generatedWords, setGeneratedWords] = useState<CharadesWord[]>(initialWords || []);
   const [hasHydrated, setHasHydrated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const pendingRequest = useRef<AbortController | null>(null);
+  const hasTriggeredInitialFetch = useRef(false);
+
+  useEffect(() => () => {
+    if (pendingRequest.current) {
+      pendingRequest.current.abort();
+    }
+  }, []);
 
   useEffect(() => {
     setSelectedCategory(defaultCategory);
@@ -64,25 +73,59 @@ export default function CharadesGeneratorOptimized({
     setSelectedAgeGroup(defaultAgeGroup);
   }, [defaultAgeGroup]);
 
-  // Handle client-side hydration and initial word generation
+  const generateBatchWords = useCallback(
+    async (count: number) => {
+      if (pendingRequest.current) {
+        pendingRequest.current.abort();
+      }
+
+      const controller = new AbortController();
+      pendingRequest.current = controller;
+      setIsLoading(true);
+      setErrorMessage(null);
+
+      try {
+        const response = await fetch('/api/charades', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            category: selectedCategory,
+            difficulty: selectedDifficulty,
+            ageGroup: selectedAgeGroup,
+            count,
+            locale,
+          }),
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch words');
+        }
+
+        const data = (await response.json()) as { words: CharadesWord[] };
+        setGeneratedWords(data.words);
+      } catch (error) {
+        if ((error as Error).name !== 'AbortError') {
+          setErrorMessage(dictionary.generator.errorFetchingWords);
+        }
+      } finally {
+        if (pendingRequest.current === controller) {
+          pendingRequest.current = null;
+        }
+        setIsLoading(false);
+      }
+    },
+    [dictionary.generator.errorFetchingWords, locale, selectedAgeGroup, selectedCategory, selectedDifficulty],
+  );
+
+  // Mark hydration complete so we can manage client-side requests
   useEffect(() => {
     if (!hasHydrated) {
       setHasHydrated(true);
-      // Only generate initial words if none were provided
-      if (!initialWords || initialWords.length === 0) {
-        const words = pickWords(defaultCategory, defaultDifficulty, defaultAgeGroup, DEFAULT_BATCH_SIZE, locale);
-        setGeneratedWords(words);
-      }
     }
-  }, [hasHydrated, initialWords, defaultCategory, defaultDifficulty, defaultAgeGroup, locale]);
-
-  const generateBatchWords = useCallback(
-    (count: number) => {
-      const words = pickWords(selectedCategory, selectedDifficulty, selectedAgeGroup, count, locale);
-      setGeneratedWords(words);
-    },
-    [locale, selectedAgeGroup, selectedCategory, selectedDifficulty],
-  );
+  }, [hasHydrated]);
 
   const parsedCustomCount = Number.parseInt(customCount, 10);
   const isCustomValid =
@@ -94,11 +137,11 @@ export default function CharadesGeneratorOptimized({
         return;
       }
       setBatchSize(parsedCustomCount);
-      generateBatchWords(parsedCustomCount);
+      void generateBatchWords(parsedCustomCount);
       return;
     }
 
-    generateBatchWords(batchSize);
+    void generateBatchWords(batchSize);
   }, [batchSize, generateBatchWords, isCustomMode, isCustomValid, parsedCustomCount]);
 
   useEffect(() => {
@@ -106,9 +149,16 @@ export default function CharadesGeneratorOptimized({
       return;
     }
 
+    if (!hasTriggeredInitialFetch.current) {
+      hasTriggeredInitialFetch.current = true;
+      if (initialWords && initialWords.length > 0) {
+        return;
+      }
+    }
+
     const effectiveCount = isCustomMode && isCustomValid ? parsedCustomCount : batchSize;
-    generateBatchWords(effectiveCount);
-  }, [hasHydrated, batchSize, generateBatchWords, isCustomMode, isCustomValid, parsedCustomCount, selectedCategory, selectedDifficulty, selectedAgeGroup]);
+    void generateBatchWords(effectiveCount);
+  }, [batchSize, generateBatchWords, hasHydrated, initialWords, isCustomMode, isCustomValid, parsedCustomCount, selectedAgeGroup, selectedCategory, selectedDifficulty]);
 
   const quickPickOptions = [1, 3, 5, 10];
   const displayCount = isCustomMode ? customCount || String(batchSize) : String(batchSize);
@@ -145,7 +195,7 @@ export default function CharadesGeneratorOptimized({
       )}
 
       {/* Generated Words - Critical content */}
-      {hasHydrated && generatedWords.length > 0 && (
+      {generatedWords.length > 0 && (
         <div className="bg-white rounded-xl shadow-lg p-4 mb-8">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">{dictionary.generator.yourWordsHeading}</h2>
@@ -201,7 +251,7 @@ export default function CharadesGeneratorOptimized({
                         const count = Number.parseInt(e.currentTarget.value, 10);
                         if (!Number.isNaN(count) && count >= 1 && count <= 50) {
                           setBatchSize(count);
-                          generateBatchWords(count);
+                          void generateBatchWords(count);
                         }
                       }
                     }}
@@ -212,6 +262,7 @@ export default function CharadesGeneratorOptimized({
                   onClick={() => {
                     if (isCustomValid) {
                       setBatchSize(parsedCustomCount);
+                      void generateBatchWords(parsedCustomCount);
                     }
                   }}
                     disabled={!isCustomValid}
@@ -224,48 +275,50 @@ export default function CharadesGeneratorOptimized({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {generatedWords.map((word, index) => (
-              <div
-                key={`${word.word}-${index}`}
-                className="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow"
-              >
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-800 mb-3">{word.word}</div>
-                <div className="flex justify-center gap-2 text-xs text-gray-500">
-                    <span className="bg-gray-100 px-2 py-1 rounded">{difficultiesLabel[word.difficulty as keyof typeof difficultiesLabel] ?? word.difficulty}</span>
-                    <span className="bg-gray-100 px-2 py-1 rounded">{categoriesLabel[word.category as keyof typeof categoriesLabel] ?? word.category}</span>
+          <div className="relative">
+            <div
+              className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 transition-opacity duration-200 ${
+                isLoading ? 'opacity-40 pointer-events-none' : 'opacity-100'
+              }`}
+            >
+              {generatedWords.map((word, index) => (
+                <div
+                  key={`${word.word}-${index}`}
+                  className="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow"
+                >
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-gray-800 mb-3">{word.word}</div>
+                  <div className="flex justify-center gap-2 text-xs text-gray-500">
+                      <span className="bg-gray-100 px-2 py-1 rounded">{difficultiesLabel[word.difficulty as keyof typeof difficultiesLabel] ?? word.difficulty}</span>
+                      <span className="bg-gray-100 px-2 py-1 rounded">{categoriesLabel[word.category as keyof typeof categoriesLabel] ?? word.category}</span>
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
+
+            {isLoading && hasHydrated && (
+              <div className="absolute inset-0 rounded-xl bg-white/80 backdrop-blur-[1px] flex items-center justify-center">
+                <div className="flex flex-wrap justify-center gap-4 w-full px-6">
+                  {Array.from({ length: Math.min(Math.max(batchSize, 1), 6) }, (_, index) => (
+                    <div
+                      key={`overlay-loading-${index}`}
+                      className="w-32 sm:w-40 bg-white border border-gray-200 rounded-xl p-4 animate-pulse"
+                    >
+                      <div className="h-6 bg-gray-200 rounded mb-3"></div>
+                      <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
+            )}
           </div>
         </div>
       )}
 
-      {/* Loading state during hydration */}
-      {!hasHydrated && (
-        <div className="bg-white rounded-xl shadow-lg p-4 mb-8">
-          <div className="text-center mb-6">
-            <div className="h-8 bg-gray-200 rounded mb-2 animate-pulse"></div>
-            <div className="h-4 bg-gray-200 rounded w-64 mx-auto animate-pulse"></div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {Array.from({ length: DEFAULT_BATCH_SIZE }, (_, index) => (
-              <div
-                key={`loading-${index}`}
-                className="bg-white border border-gray-200 rounded-xl p-4 animate-pulse"
-              >
-                <div className="text-center">
-                  <div className="h-8 bg-gray-200 rounded mb-3"></div>
-                  <div className="flex justify-center gap-2">
-                    <div className="h-4 w-16 bg-gray-200 rounded"></div>
-                    <div className="h-4 w-16 bg-gray-200 rounded"></div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+      {errorMessage && (
+        <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg p-4 mb-8 text-center">
+          {errorMessage}
         </div>
       )}
 
