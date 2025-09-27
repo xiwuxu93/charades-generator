@@ -4,78 +4,114 @@ export const en = {
   seo: {
     home: {
       title: "Charades Generator - Free 1000+ Words & Ideas",
-      description: "Free charades generator with 1000+ words! Instant charades words for kids, adults, parties. Movies, Disney, animals, actions & more categories.",
-      keywords: "charades generator, free charades words, charades game, party games, family games, disney charades",
+      description:
+        "Free charades generator with 1000+ words! Instant charades words for kids, adults, parties. Movies, Disney, animals, actions & more categories.",
+      keywords:
+        "charades generator, free charades words, charades game, party games, family games, disney charades",
       structuredDataName: "Charades Generator - Free Words & Ideas",
-      structuredDataDescription: "Charades Generator with 1000+ words database! Free instant charades words for kids, adults, parties. Includes movies, Disney, animals, actions, funny words."
+      structuredDataDescription:
+        "Charades Generator with 1000+ words database! Free instant charades words for kids, adults, parties. Includes movies, Disney, animals, actions, funny words.",
     },
     kids: {
       title: "Kids Charades Generator - Free Children's Game Words",
-      description: "Free kids charades with 500+ child-friendly words! Children's charades generator for parties, Disney characters, animals, and classroom activities.",
-      keywords: "kids charades, children charades, kids party games, educational charades, animal charades kids",
+      description:
+        "Free kids charades with 500+ child-friendly words! Children's charades generator for parties, Disney characters, animals, and classroom activities.",
+      keywords:
+        "kids charades, children charades, kids party games, educational charades, animal charades kids",
       structuredDataName: "Kids Charades Generator",
-      structuredDataDescription: "Child-friendly charades generator with safe words for kids parties and family fun"
+      structuredDataDescription:
+        "Child-friendly charades generator with safe words for kids parties and family fun",
     },
     disney: {
       title: "Disney Charades Generator - Free Disney Characters & Movies",
-      description: "Free Disney charades generator with characters, movies, and songs! Perfect for Disney fans, kids parties, and magical family game nights.",
-      keywords: "disney charades, disney characters, disney movies, family games, kids disney games",
+      description:
+        "Free Disney charades generator with characters, movies, and songs! Perfect for Disney fans, kids parties, and magical family game nights.",
+      keywords:
+        "disney charades, disney characters, disney movies, family games, kids disney games",
       structuredDataName: "Disney Charades Generator",
-      structuredDataDescription: "Disney-themed charades with characters, movies, and songs for magical family fun"
+      structuredDataDescription:
+        "Disney-themed charades with characters, movies, and songs for magical family fun",
     },
     movies: {
       title: "Movie Charades Generator - Free Film & Cinema Words",
-      description: "Free movie charades generator with classic films, blockbusters, and cinema words! Perfect for movie nights and film buff parties.",
-      keywords: "movie charades, film charades, cinema games, movie night games, Hollywood charades",
+      description:
+        "Free movie charades generator with classic films, blockbusters, and cinema words! Perfect for movie nights and film buff parties.",
+      keywords:
+        "movie charades, film charades, cinema games, movie night games, Hollywood charades",
       structuredDataName: "Movie Charades Generator",
-      structuredDataDescription: "Movie and cinema themed charades for film lovers and movie night entertainment"
+      structuredDataDescription:
+        "Movie and cinema themed charades for film lovers and movie night entertainment",
     },
     funny: {
       title: "Funny Charades for Adults - Hilarious Adult Party Games",
-      description: "Funny adult charades generator with hilarious scenarios and mature humor! Perfect for adult parties, office games, and grown-up fun.",
-      keywords: "funny charades adults, adult party games, hilarious charades, office party games, mature humor games",
+      description:
+        "Funny adult charades generator with hilarious scenarios and mature humor! Perfect for adult parties, office games, and grown-up fun.",
+      keywords:
+        "funny charades adults, adult party games, hilarious charades, office party games, mature humor games",
       structuredDataName: "Funny Adult Charades",
-      structuredDataDescription: "Hilarious adult charades generator for parties with mature humor and funny scenarios"
+      structuredDataDescription:
+        "Hilarious adult charades generator for parties with mature humor and funny scenarios",
     },
     random: {
       title: "Random Charades Generator - Surprise Word Mix",
-      description: "Random charades generator mixing all categories! Surprise words from movies, animals, actions, and more for unpredictable fun.",
-      keywords: "random charades, charades word generator, mixed charades, surprise charades, variety charades",
+      description:
+        "Random charades generator mixing all categories! Surprise words from movies, animals, actions, and more for unpredictable fun.",
+      keywords:
+        "random charades, charades word generator, mixed charades, surprise charades, variety charades",
       structuredDataName: "Random Charades Generator",
-      structuredDataDescription: "Random charades generator mixing all categories for surprising and varied gameplay"
+      structuredDataDescription:
+        "Random charades generator mixing all categories for surprising and varied gameplay",
     },
     christmas: {
       title: "Christmas Charades Generator - Holiday Party Games",
-      description: "Free Christmas charades with 60+ festive words! Santa, reindeer, movies, songs for family parties & office holiday gatherings.",
-      keywords: "christmas charades, holiday charades, christmas party games, santa charades, festive charades",
+      description:
+        "Free Christmas charades with 60+ festive words! Santa, reindeer, movies, songs for family parties & office holiday gatherings.",
+      keywords:
+        "christmas charades, holiday charades, christmas party games, santa charades, festive charades",
       structuredDataName: "Christmas Charades Generator",
-      structuredDataDescription: "Festive Christmas charades generator with holiday-themed words for family celebrations"
+      structuredDataDescription:
+        "Festive Christmas charades generator with holiday-themed words for family celebrations",
     },
     howToUse: {
       title: "How to Use Charades Generator - Complete Guide & Rules",
-      description: "Complete guide on using our charades generator! Learn rules, tips, setup instructions, and gameplay strategies for the perfect charades night.",
-      keywords: "how to play charades, charades rules, charades guide, charades instructions, party game setup"
+      description:
+        "Complete guide on using our charades generator! Learn rules, tips, setup instructions, and gameplay strategies for the perfect charades night.",
+      keywords:
+        "how to play charades, charades rules, charades guide, charades instructions, party game setup",
     },
     about: {
       title: "About Us - Charades Generator Team",
-      description: "Learn about the team behind the free charades generator and our mission to bring fun to families and friends worldwide.",
-      keywords: "about charades generator, team, mission, free party games, family entertainment"
+      description:
+        "Learn about the team behind the free charades generator and our mission to bring fun to families and friends worldwide.",
+      keywords:
+        "about charades generator, team, mission, free party games, family entertainment",
     },
     faq: {
       title: "FAQ - Frequently Asked Questions - Charades Generator",
-      description: "Answers to frequently asked questions about our charades generator, gameplay, features, and troubleshooting.",
-      keywords: "charades FAQ, questions answers, charades help, game support, troubleshooting"
+      description:
+        "Answers to frequently asked questions about our charades generator, gameplay, features, and troubleshooting.",
+      keywords:
+        "charades FAQ, questions answers, charades help, game support, troubleshooting",
     },
     privacy: {
       title: "Privacy Policy - Charades Generator",
-      description: "Privacy policy for Charades Generator website. Learn how we protect your data and ensure your privacy.",
-      keywords: "privacy policy, data protection, user privacy, website terms"
+      description:
+        "Privacy policy for Charades Generator website. Learn how we protect your data and ensure your privacy.",
+      keywords: "privacy policy, data protection, user privacy, website terms",
     },
     terms: {
       title: "Terms of Service - Charades Generator",
-      description: "Terms of service for using Charades Generator website and tools. User agreements and website policies.",
-      keywords: "terms of service, user agreement, website terms, legal policy"
-    }
+      description:
+        "Terms of service for using Charades Generator website and tools. User agreements and website policies.",
+      keywords: "terms of service, user agreement, website terms, legal policy",
+    },
+    contact: {
+      title: "Contact Charades Generator Support",
+      description:
+        "Get in touch with the Charades Generator team for support, feedback, partnerships, or media inquiries.",
+      keywords:
+        "contact charades generator, charades support email, charades generator help",
+    },
   },
   languageSwitcher: {
     label: "Language",
@@ -119,6 +155,14 @@ export const en = {
         href: "/how-to-use",
       },
     ],
+  },
+  consent: {
+    title: "We value your privacy",
+    description:
+      "We use cookies to measure performance and fund the project with minimal ads. You can enable or decline analytics and advertising cookies at any time.",
+    accept: "Accept all cookies",
+    reject: "Decline non-essential",
+    privacyLinkLabel: "Privacy policy",
   },
   categories: {
     all: "All Categories",
@@ -233,51 +277,106 @@ export const en = {
         key: "howToUse",
         title: "How to Use Charades Generator",
         href: "/how-to-use/",
-        description: "Step-by-step setup, scoring ideas, and tips for every group size.",
+        description:
+          "Step-by-step setup, scoring ideas, and tips for every group size.",
       },
       {
         key: "faq",
         title: "Charades FAQ & Troubleshooting",
         href: "/faq/",
-        description: "Answers to the most common gameplay questions, house rules, and customization ideas.",
+        description:
+          "Answers to the most common gameplay questions, house rules, and customization ideas.",
       },
       {
         key: "updates",
         title: "Latest Updates & Roadmap",
         href: "/about/",
-        description: "See what we're building next and how the generator continues to grow each month.",
+        description:
+          "See what we're building next and how the generator continues to grow each month.",
       },
     ],
+    expertInsights: {
+      title: "Expert insights from real game leaders",
+      description:
+        "Every prompt in our database has been field-tested by families, teachers, and facilitators. These playbooks show how different hosts keep energy high and players engaged.",
+      personas: [
+        {
+          title: "Family host · Seattle, WA",
+          quote:
+            "Our Sunday charades nights mix grandparents and teens. I segment rounds by difficulty so everyone closes with a win.",
+          tipsTitle: "Favorite tweaks",
+          tips: [
+            "Start with three easy animal cards, then add one wildcard to reset energy.",
+            "Use a 60-second phone timer and award bonus points for silent sound effects.",
+            "Keep a printable ‘gesture legend’ so new players learn category signals fast.",
+          ],
+        },
+        {
+          title: "Elementary teacher · Austin, TX",
+          quote:
+            "I run five-minute charades breaks between lessons. Students act out vocabulary and reflect on the verbs we just learned.",
+          tipsTitle: "Classroom routine",
+          tips: [
+            "Filter for kids-friendly verbs and emotions to reinforce SEL vocabulary.",
+            "Pair confident actors with shy guessers so every student participates.",
+            "Ask learners to journal the gesture they used—great for kinesthetic recall.",
+          ],
+        },
+        {
+          title: "Culture lead · Berlin, DE",
+          quote:
+            "Quarterly offsites need fast team bonding. We run lightning charades rounds and record highlight reels for retros.",
+          tipsTitle: "Office playbook",
+          tips: [
+            "Pre-build decks themed around recent product launches or in-jokes.",
+            "Use the random generator for tie-breakers so no team can ‘study ahead’.",
+            "Capture a 10-second video recap to open the next retrospective with laughs.",
+          ],
+        },
+      ],
+      shareTitle: "Have a proven charades format?",
+      shareDescription:
+        "We spotlight community strategies that elevate game nights, classrooms, and company socials. Send us your approach and we may feature it in the next update.",
+      shareCta: "Share your playbook",
+      shareHref: "/contact",
+    },
   },
   pages: {
     kids: {
       title: "Kids Charades Generator",
-      description: "Generate fun, child-friendly charades words perfect for kids parties, family game nights, and classroom activities."
+      description:
+        "Generate fun, child-friendly charades words perfect for kids parties, family game nights, and classroom activities.",
     },
     disney: {
       title: "Disney Charades Generator",
-      description: "Generate Disney-themed charades with beloved characters, magical movies, and enchanting songs."
+      description:
+        "Generate Disney-themed charades with beloved characters, magical movies, and enchanting songs.",
     },
     movies: {
       title: "Movie Charades Generator",
-      description: "Generate movie charades from classic films, blockbusters, and cinema favorites for your next movie night."
+      description:
+        "Generate movie charades from classic films, blockbusters, and cinema favorites for your next movie night.",
     },
     funny: {
       title: "Funny Charades for Adults",
-      description: "Generate hilarious adult charades with mature humor and funny scenarios perfect for grown-up parties."
+      description:
+        "Generate hilarious adult charades with mature humor and funny scenarios perfect for grown-up parties.",
     },
     random: {
       title: "Random Charades Generator",
-      description: "Generate surprise charades mixing all categories for unpredictable and varied gameplay fun."
+      description:
+        "Generate surprise charades mixing all categories for unpredictable and varied gameplay fun.",
     },
     christmas: {
       title: "Christmas Charades Generator",
-      description: "Generate festive Christmas charades words for your holiday parties! Perfect for family gatherings, office parties, and Christmas celebrations."
+      description:
+        "Generate festive Christmas charades words for your holiday parties! Perfect for family gatherings, office parties, and Christmas celebrations.",
     },
     howToUse: {
       title: "How to Use Charades Generator",
       whatIsCharades: "What is Charades?",
-      whatIsCharadesDescription: "Charades is a classic party game where players act out words or phrases without speaking while others try to guess what they're performing. It's perfect for parties, family gatherings, and team-building activities.",
+      whatIsCharadesDescription:
+        "Charades is a classic party game where players act out words or phrases without speaking while others try to guess what they're performing. It's perfect for parties, family gatherings, and team-building activities.",
       howToPlay: "How to Play Charades",
       step1: "Divide into teams or play individually",
       step2: "One player picks a word and acts it out silently",
@@ -292,7 +391,8 @@ export const en = {
       rule4: "Use hand signals for categories (movie, book, song, etc.)",
       rule5: "Set a time limit (usually 1-3 minutes per word)",
       usingGenerator: "Using Our Generator",
-      generatorDescription: "Our charades generator makes it easy to get instant words for your game:",
+      generatorDescription:
+        "Our charades generator makes it easy to get instant words for your game:",
       generatorStep1: "Choose your category (movies, animals, actions, etc.)",
       generatorStep2: "Select difficulty level and age group",
       generatorStep3: "Click generate to get your charades words",
@@ -308,16 +408,57 @@ export const en = {
       benefit2: "Building creativity and imagination",
       benefit3: "Encouraging teamwork and social interaction",
       benefit4: "Providing screen-free entertainment for all ages",
+      fieldNotesTitle: "Field notes from experienced hosts",
+      fieldNotesDescription:
+        "These quick case studies show how other facilitators structure rounds, manage energy, and keep charades inclusive.",
+      fieldNotes: [
+        {
+          heading: "Family showdown with mixed ages",
+          description:
+            "Host Leah rotates through three playlists: warmup animals for kids, movie titles for teens, and medium-difficulty actions for adults. They finish with a collaborative ‘speed round’ to celebrate wins together.",
+          takeawaysTitle: "Key takeaways",
+          takeaways: [
+            "Stack rounds from easiest to hardest so every player scores early.",
+            "Let kids choose the final wildcard word to keep ownership high.",
+            "Use a whiteboard scoreboard so grandparents can track the action.",
+          ],
+        },
+        {
+          heading: "Curriculum-aligned classroom break",
+          description:
+            "Mr. Alvarez pulls vocabulary words from the ‘Actions’ and ‘Emotions’ sets to reinforce his English language unit. Students earn bonus points when they connect the word to a sentence after the round.",
+          takeawaysTitle: "Key takeaways",
+          takeaways: [
+            "Filter by ‘kids’ and ‘easy’ for safe, curriculum-friendly cards.",
+            "Rotate captains so quieter students call the shots for a round.",
+            "Debrief with one reflective question to lock in new language.",
+          ],
+        },
+        {
+          heading: "Remote team energiser",
+          description:
+            "Product ops manager Nina runs 10-minute charades sprints during hybrid retros. Teammates act out product features, bug nicknames, and company lore to strengthen shared knowledge.",
+          takeawaysTitle: "Key takeaways",
+          takeaways: [
+            "Screen-share the generator so remote players feel included.",
+            "Record funny rounds (with consent) to replay at quarter-end socials.",
+            "Tag each prompt by project to reinforce cross-team context.",
+          ],
+        },
+      ],
       readyToPlay: "Ready to Play?",
-      readyToPlayDescription: "Now that you know the rules and tips, it's time to start your charades game!",
-      startGenerating: "Start Generating Words"
+      readyToPlayDescription:
+        "Now that you know the rules and tips, it's time to start your charades game!",
+      startGenerating: "Start Generating Words",
     },
     about: {
       title: "About Charades Generator",
       mission: "Our Mission",
-      missionDescription: "We're dedicated to bringing families and friends together through the timeless joy of charades. Our free charades generator makes it easy to create memorable game nights and social gatherings.",
+      missionDescription:
+        "We're dedicated to bringing families and friends together through the timeless joy of charades. Our free charades generator makes it easy to create memorable game nights and social gatherings.",
       whatWeDo: "What We Do",
-      whatWeDoDescription: "We provide a comprehensive charades word generator with:",
+      whatWeDoDescription:
+        "We provide a comprehensive charades word generator with:",
       feature1: "1000+ carefully curated words across multiple categories",
       feature2: "Age-appropriate filtering for kids and family-friendly games",
       feature3: "Themed generators for movies, Disney, Christmas, and more",
@@ -325,13 +466,17 @@ export const en = {
       feature5: "Mobile-optimized design for easy use during parties",
       whyChooseUs: "Why Choose Our Generator?",
       reason1Title: "Always Free",
-      reason1Description: "Our charades generator is completely free with no hidden costs or premium features.",
+      reason1Description:
+        "Our charades generator is completely free with no hidden costs or premium features.",
       reason2Title: "Carefully Curated",
-      reason2Description: "Every word is hand-selected to ensure quality and appropriateness for different age groups.",
+      reason2Description:
+        "Every word is hand-selected to ensure quality and appropriateness for different age groups.",
       reason3Title: "Easy to Use",
-      reason3Description: "Simple interface that works perfectly on phones, tablets, and computers.",
+      reason3Description:
+        "Simple interface that works perfectly on phones, tablets, and computers.",
       reason4Title: "Regular Updates",
-      reason4Description: "We continuously add new words and improve features based on user feedback.",
+      reason4Description:
+        "We continuously add new words and improve features based on user feedback.",
       howItWorks: "How It Works",
       howItWorksDescription: "Using our charades generator is simple:",
       workStep1: "Choose your preferred category and difficulty level",
@@ -339,9 +484,10 @@ export const en = {
       workStep3: "Start acting out the words with your friends and family",
       workStep4: "Have fun and create lasting memories together!",
       getStarted: "Get Started Today",
-      getStartedDescription: "Ready to bring more fun to your next gathering? Try our charades generator now!",
+      getStartedDescription:
+        "Ready to bring more fun to your next gathering? Try our charades generator now!",
       startGenerating: "Start Generating",
-      learnMore: "Learn How to Play"
+      learnMore: "Learn How to Play",
     },
     faq: {
       title: "Frequently Asked Questions",
@@ -362,81 +508,144 @@ export const en = {
       q8: "How many words should I generate for a game?",
       a8: "It depends on your group size and game duration. We recommend 5-10 words per player as a starting point, but you can always generate more during the game!",
       stillHaveQuestions: "Still Have Questions?",
-      contactDescription: "Ready to play? Jump back to our free charades generator and grab fresh prompts in seconds.",
-      contactUs: "Go to Homepage"
+      contactDescription:
+        "Need direct support? Drop us a note at support@charades-generator.com and we’ll reply within one business day.",
+      contactUs: "Email Support",
     },
     privacy: {
       title: "Privacy Policy",
       lastUpdated: "Last updated: December 2024",
       section1Title: "Information We Collect",
-      section1Content: "We collect minimal information to provide our charades generator service. This includes basic analytics data to understand how our service is used and improve the user experience.",
+      section1Content:
+        "We collect minimal information to provide our charades generator service. This includes basic analytics data to understand how our service is used and improve the user experience.",
       section2Title: "How We Use Information",
       section2Content: "We use the information we collect to:",
-      dataType1: "Improve our charades word database and generator functionality",
+      dataType1:
+        "Improve our charades word database and generator functionality",
       dataType2: "Analyze usage patterns to enhance user experience",
       dataType3: "Monitor and maintain the security of our service",
       section3Title: "Information Sharing",
-      section3Content: "We do not sell, trade, or otherwise transfer your personal information to third parties. We may use aggregated, anonymized data for analytical purposes.",
+      section3Content:
+        "We do not sell, trade, or otherwise transfer your personal information to third parties. We may use aggregated, anonymized data for analytical purposes.",
       use1: "Provide and maintain our charades generator service",
       use2: "Improve and optimize the user experience",
       use3: "Communicate with users about service updates or issues",
       section4Title: "Data Security",
-      section4Content: "We implement appropriate security measures to protect against unauthorized access, alteration, disclosure, or destruction of your personal information.",
+      section4Content:
+        "We implement appropriate security measures to protect against unauthorized access, alteration, disclosure, or destruction of your personal information.",
       section5Title: "Cookies and Tracking",
-      section5Content: "We use cookies and similar tracking technologies to analyze usage patterns and improve our service. You can control cookie preferences through your browser settings.",
+      section5Content:
+        "We use cookies and similar tracking technologies to analyze usage patterns and improve our service. You can control cookie preferences through your browser settings.",
       section6Title: "Third-Party Services",
-      section6Content: "Our website may contain links to third-party services. We are not responsible for the privacy practices of these external sites.",
+      section6Content:
+        "Our website may contain links to third-party services. We are not responsible for the privacy practices of these external sites.",
       section7Title: "Updates to This Policy",
-      section7Content: "We may update this privacy policy from time to time. Changes will be posted on this page with an updated revision date.",
+      section7Content:
+        "We may update this privacy policy from time to time. Changes will be posted on this page with an updated revision date.",
       contactTitle: "Contact Information",
-      contactContent: "If you have questions about this privacy policy, please visit our homepage for the latest updates and announcements."
+      contactContent:
+        "Have privacy questions? Email support@charades-generator.com with the subject line ‘Privacy inquiry’ and our data team will assist you.",
     },
     terms: {
       title: "Terms of Service",
       lastUpdated: "Last updated: December 2024",
       section1Title: "Acceptance of Terms",
-      section1Content: "By accessing and using the Charades Generator website, you accept and agree to be bound by the terms and provision of this agreement.",
+      section1Content:
+        "By accessing and using the Charades Generator website, you accept and agree to be bound by the terms and provision of this agreement.",
       section2Title: "Use License",
-      section2Content: "Permission is granted to temporarily use our charades generator for personal, non-commercial transitory viewing only. This includes:",
-      acceptable1: "Using the generator for personal entertainment and party games",
+      section2Content:
+        "Permission is granted to temporarily use our charades generator for personal, non-commercial transitory viewing only. This includes:",
+      acceptable1:
+        "Using the generator for personal entertainment and party games",
       acceptable2: "Sharing generated words during social gatherings",
       acceptable3: "Using the service for educational or family activities",
       acceptable4: "Accessing the service through standard web browsers",
       section3Title: "Prohibited Uses",
       section3Content: "You may not:",
       prohibited1: "Modify or copy the service materials without permission",
-      prohibited2: "Use the service for commercial purposes without authorization",
+      prohibited2:
+        "Use the service for commercial purposes without authorization",
       prohibited3: "Remove copyright or proprietary notations from materials",
-      prohibited4: "Transfer materials to another person or mirror on another server",
+      prohibited4:
+        "Transfer materials to another person or mirror on another server",
       section4Title: "Disclaimer",
-      section4Content: "The materials on Charades Generator are provided on an 'as is' basis. We make no warranties, expressed or implied, regarding the accuracy or reliability of the content.",
+      section4Content:
+        "The materials on Charades Generator are provided on an 'as is' basis. We make no warranties, expressed or implied, regarding the accuracy or reliability of the content.",
       section5Title: "Limitations",
-      section5Content: "In no event shall Charades Generator be liable for any damages arising from the use or inability to use the materials on our website.",
+      section5Content:
+        "In no event shall Charades Generator be liable for any damages arising from the use or inability to use the materials on our website.",
       section6Title: "Accuracy of Materials",
-      section6Content: "The materials appearing on our website could include technical, typographical, or photographic errors. We do not warrant that the materials are accurate or complete.",
+      section6Content:
+        "The materials appearing on our website could include technical, typographical, or photographic errors. We do not warrant that the materials are accurate or complete.",
       section7Title: "Links",
-      section7Content: "We have not reviewed all sites linked to our website and are not responsible for the contents of any such linked site.",
+      section7Content:
+        "We have not reviewed all sites linked to our website and are not responsible for the contents of any such linked site.",
       section8Title: "Modifications",
-      section8Content: "We may revise these terms of service at any time without notice. By using this site, you agree to be bound by the current version of these terms.",
+      section8Content:
+        "We may revise these terms of service at any time without notice. By using this site, you agree to be bound by the current version of these terms.",
       contactTitle: "Contact Information",
-      contactContent: "Questions about the Terms of Service? Visit our homepage for the newest information and updates."
-    }
+      contactContent:
+        'Questions about the Terms of Service? Email us at support@charades-generator.com and include "Terms of Service" in the subject line so we can route your note quickly.',
+    },
+    contact: {
+      title: "Contact the Charades Generator Team",
+      intro:
+        "We read every message and typically reply within one business day. Choose the category that best matches your request so the right person can respond.",
+      responseTime: "Average response time: 24 hours on weekdays.",
+      email: "support@charades-generator.com",
+      sections: [
+        {
+          heading: "Product support",
+          body: "Need help using the generator or spotted a bug? Share the device, browser, and a short description of what happened, along with screenshots if possible.",
+        },
+        {
+          heading: "Word list suggestions",
+          body: "Have theme ideas or want to contribute new prompts? Send us your list and we’ll review it for upcoming releases.",
+        },
+        {
+          heading: "Partnerships & media",
+          body: "For collaboration, sponsorship, or press requests, outline your proposal, preferred timelines, and any supporting materials.",
+        },
+      ],
+      nextStepsHeading: "How to reach us",
+      nextSteps: [
+        "Send an email to support@charades-generator.com",
+        "Use a descriptive subject line such as ‘Support’, ‘Word suggestion’, or ‘Partnership’",
+        "Include relevant links, screenshots, or documents so we can resolve your request faster",
+      ],
+    },
   },
   footer: {
     brandTitle: "Charades Generator",
     brandDescription:
       "Free online charades generator with 1000+ words and ideas. Perfect for parties, family game nights, and fun gatherings.",
-    brandTagline: "Generate instant charades for kids, adults, movies, Disney, and more!",
+    brandTagline:
+      "Generate instant charades for kids, adults, movies, Disney, and more!",
     sections: {
       charades: {
         title: "Charades Generators",
         links: [
           { title: "Free Charades Generator", href: "/" },
-          { title: "Random Charades Generator", href: "/random-charades-generator" },
-          { title: "Kids Charades Generator", href: "/charades-generator-for-kids" },
-          { title: "Movie Charades Generator", href: "/movie-charades-generator" },
-          { title: "Disney Charades Generator", href: "/disney-charades-generator" },
-          { title: "Christmas Charades Generator", href: "/christmas-charades-generator" },
+          {
+            title: "Random Charades Generator",
+            href: "/random-charades-generator",
+          },
+          {
+            title: "Kids Charades Generator",
+            href: "/charades-generator-for-kids",
+          },
+          {
+            title: "Movie Charades Generator",
+            href: "/movie-charades-generator",
+          },
+          {
+            title: "Disney Charades Generator",
+            href: "/disney-charades-generator",
+          },
+          {
+            title: "Christmas Charades Generator",
+            href: "/christmas-charades-generator",
+          },
           { title: "Funny Adult Charades", href: "/funny-charades-for-adults" },
         ],
       },
@@ -446,6 +655,7 @@ export const en = {
           { title: "How to Use", href: "/how-to-use" },
           { title: "FAQ", href: "/faq" },
           { title: "About Us", href: "/about" },
+          { title: "Contact", href: "/contact" },
         ],
       },
       legal: {

@@ -1,9 +1,13 @@
+import type { Locale } from "@/i18n/config";
+import { DEFAULT_LOCALE } from "@/i18n/config";
+
 interface StructuredDataProps {
-  type: 'WebApplication' | 'Game' | 'Article';
+  type: "WebApplication" | "Game" | "Article";
   name: string;
   description: string;
   url?: string;
   category?: string;
+  locale?: Locale;
 }
 
 interface BaseStructure {
@@ -14,6 +18,7 @@ interface BaseStructure {
   url: string;
   isAccessibleForFree: boolean;
   inLanguage: string;
+  "@id"?: string;
   applicationCategory?: string;
   operatingSystem?: string;
   offers?: {
@@ -34,7 +39,17 @@ interface BaseStructure {
   playMode?: string;
 }
 
-export default function StructuredData({ type, name, description, url, category }: StructuredDataProps) {
+function getLanguageTag(locale: Locale) {
+  switch (locale) {
+    case "es":
+      return "es-ES";
+    default:
+      return "en-US";
+  }
+}
+
+export default function StructuredData({ type, name, description, url, category, locale = DEFAULT_LOCALE }: StructuredDataProps) {
+  const languageTag = getLanguageTag(locale);
   const baseStructure: BaseStructure = {
     "@context": "https://schema.org",
     "@type": type,
@@ -42,7 +57,7 @@ export default function StructuredData({ type, name, description, url, category 
     "description": description,
     "url": url || "https://charades-generator.com/",
     "isAccessibleForFree": true,
-    "inLanguage": "en-US",
+    "inLanguage": languageTag,
     "author": {
       "@type": "Organization",
       "name": "Charades Generator"
@@ -50,7 +65,8 @@ export default function StructuredData({ type, name, description, url, category 
     "publisher": {
       "@type": "Organization",
       "name": "Charades Generator"
-    }
+    },
+    "@id": `${url || "https://charades-generator.com/"}#${type.toLowerCase()}`,
   };
 
   // Add fields specific to WebApplication type

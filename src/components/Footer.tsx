@@ -1,29 +1,38 @@
-'use client';
+import Link from "next/link";
+import Image from "next/image";
+import { buildLocalePath } from "@/utils/localePaths";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionary";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { useLocale } from '@/contexts/LocaleContext';
-import { buildLocalePath } from '@/utils/localePaths';
+interface FooterProps {
+  locale: Locale;
+  footer: Dictionary["footer"];
+}
 
-export default function Footer() {
+function interpolate(template: string, replacements: Record<string, string | number>) {
+  return template.replace(/{{\s*([^}]+)\s*}}/g, (_, key) => {
+    const value = replacements[key.trim()];
+    return value === undefined ? "" : String(value);
+  });
+}
+
+export default function Footer({ locale, footer }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  const { dictionary, t, locale } = useLocale();
-
   const sections = [
     {
-      key: 'charades',
-      title: dictionary.footer.sections.charades.title,
-      links: dictionary.footer.sections.charades.links,
+      key: "charades",
+      title: footer.sections.charades.title,
+      links: footer.sections.charades.links,
     },
     {
-      key: 'info',
-      title: dictionary.footer.sections.info.title,
-      links: dictionary.footer.sections.info.links,
+      key: "info",
+      title: footer.sections.info.title,
+      links: footer.sections.info.links,
     },
     {
-      key: 'legal',
-      title: dictionary.footer.sections.legal.title,
-      links: dictionary.footer.sections.legal.links,
+      key: "legal",
+      title: footer.sections.legal.title,
+      links: footer.sections.legal.links,
     },
   ] as const;
 
@@ -33,10 +42,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <span className="font-bold text-lg text-gray-800">{dictionary.footer.brandTitle}</span>
+              <span className="text-lg font-bold text-gray-800">{footer.brandTitle}</span>
             </div>
-            <p className="text-gray-600 text-sm">{dictionary.footer.brandDescription}</p>
-            <div className="text-sm text-gray-500">{dictionary.footer.brandTagline}</div>
+            <p className="text-sm text-gray-600">{footer.brandDescription}</p>
+            <div className="text-sm text-gray-500">{footer.brandTagline}</div>
           </div>
 
           {sections.map(({ key, title, links }) => (
@@ -47,7 +56,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={buildLocalePath(locale, link.href)}
-                      className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
+                      className="text-sm text-gray-600 transition-colors hover:text-blue-600"
                     >
                       {link.title}
                     </Link>
@@ -59,8 +68,8 @@ export default function Footer() {
         </div>
 
         <div className="space-y-4 mt-8">
-          <h3 className="font-semibold text-gray-800">{dictionary.footer.sections.partnersTitle}</h3>
-          <ul className="space-y-2 md:space-y-0 md:flex md:flex-wrap md:items-center md:gap-6">
+          <h3 className="font-semibold text-gray-800">{footer.sections.partnersTitle}</h3>
+          <ul className="flex flex-wrap items-center gap-6 text-sm text-gray-600">
             <li>
               <a href="https://magicbox.tools" target="_blank" rel="noopener noreferrer">
                 <Image src="https://magicbox.tools/badge-dark.svg" alt="Featured on MagicBox.tools" width={200} height={54} />
@@ -96,7 +105,7 @@ export default function Footer() {
                 />
               </a>
             </li>
-            <li className="md:leading-none">
+            <li className="leading-none">
               <a href="https://kontext-ai.com/" target="_blank" rel="noopener noreferrer">
                 Kontext AI
               </a>
@@ -104,10 +113,10 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-gray-200">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-sm text-gray-600">{t('footer.rights', { year: currentYear })}</div>
-            <div className="text-sm text-gray-600">{dictionary.footer.slogan}</div>
+        <div className="mt-8 border-t border-gray-200 pt-8">
+          <div className="flex flex-col items-center justify-between gap-4 text-sm text-gray-600 md:flex-row md:gap-0">
+            <div>{interpolate(footer.rights, { year: currentYear })}</div>
+            <div>{footer.slogan}</div>
           </div>
         </div>
       </div>

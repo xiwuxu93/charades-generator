@@ -41,6 +41,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "website",
       url: canonicalUrl,
       locale: locale === 'en' ? 'en_US' : 'es_ES',
+      images: [
+        {
+          url: `${baseUrl}/charades-generator-og.png`,
+          width: 1200,
+          height: 630,
+          alt: dictionary.seo.funny.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dictionary.seo.funny.title,
+      description: dictionary.seo.funny.description,
+      images: [`${baseUrl}/charades-generator-og.png`],
     },
     robots: "index, follow",
   };
@@ -77,6 +91,7 @@ export default async function FunnyCharadesPage({ params }: PageProps) {
         description={dictionary.seo.funny.structuredDataDescription}
         url={canonicalUrl}
         category="Adult Party Games"
+        locale={locale}
       />
 
       <div className="max-w-4xl mx-auto px-6 pb-10">

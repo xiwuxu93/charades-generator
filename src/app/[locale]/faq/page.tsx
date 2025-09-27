@@ -38,6 +38,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "website",
       url: canonicalUrl,
       locale: locale === 'en' ? 'en_US' : 'es_ES',
+      images: [
+        {
+          url: `${baseUrl}/charades-generator-og.png`,
+          width: 1200,
+          height: 630,
+          alt: dictionary.seo.faq.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dictionary.seo.faq.title,
+      description: dictionary.seo.faq.description,
+      images: [`${baseUrl}/charades-generator-og.png`],
     },
     robots: "index, follow",
   };
@@ -109,12 +123,13 @@ export default async function FAQPage({ params }: PageProps) {
         <p className="text-blue-800 mb-4">
           {dictionary.pages.faq.contactDescription}
         </p>
-        <Link
-          href={locale === 'en' ? '/' : `/${locale}`}
+        <a
+          href={`mailto:${dictionary.pages.contact?.email ?? 'support@charades-generator.com'}`}
           className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+          rel="noopener noreferrer"
         >
           {dictionary.pages.faq.contactUs}
-        </Link>
+        </a>
       </div>
     </div>
   );

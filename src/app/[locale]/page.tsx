@@ -40,6 +40,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "website",
       url: canonicalUrl,
       locale: locale === 'en' ? 'en_US' : 'es_ES',
+      images: [
+        {
+          url: `${baseUrl}/charades-generator-og.png`,
+          width: 1200,
+          height: 630,
+          alt: dictionary.seo.home.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dictionary.seo.home.title,
+      description: dictionary.seo.home.description,
+      images: [`${baseUrl}/charades-generator-og.png`],
     },
     robots: "index, follow",
   };
@@ -58,14 +72,15 @@ export default async function Home({ params }: PageProps) {
     <div className="bg-gray-50 min-h-screen">
       <HomeLanding initialWords={initialWords} />
 
-      <WebsiteStructuredData />
-      <SiteLinksStructuredData />
+      <WebsiteStructuredData locale={locale} dictionary={dictionary} />
+      <SiteLinksStructuredData locale={locale} dictionary={dictionary} />
       <StructuredData
         type="WebApplication"
         name={dictionary.seo.home.structuredDataName}
         description={dictionary.seo.home.structuredDataDescription}
         url={canonicalUrl}
         category="Party Games"
+        locale={locale}
       />
     </div>
   );

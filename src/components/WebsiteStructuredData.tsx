@@ -1,16 +1,46 @@
-export default function WebsiteStructuredData() {
+import type { Locale } from "@/i18n/config";
+import { DEFAULT_LOCALE } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionary";
+
+interface WebsiteStructuredDataProps {
+  locale?: Locale;
+  dictionary: Dictionary;
+  baseUrl?: string;
+}
+
+function getLanguageTag(locale: Locale) {
+  switch (locale) {
+    case "es":
+      return "es-ES";
+    default:
+      return "en-US";
+  }
+}
+
+export default function WebsiteStructuredData({
+  locale = DEFAULT_LOCALE,
+  dictionary,
+  baseUrl = "https://charades-generator.com",
+}: WebsiteStructuredDataProps) {
+  const languageTag = getLanguageTag(locale);
+  const siteName = dictionary.footer.brandTitle;
+  const description = dictionary.seo.home.description;
+  const alternateName = locale === "es" ? "Generador de Charadas Gratis" : "Free Charades Word Generator";
+
   const websiteData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Charades Generator",
-    "alternateName": "Free Charades Word Generator",
-    "url": "https://charades-generator.com/",
-    "description": "Free online charades generator with 1000+ words. Generate instant charades words for parties, family game nights, kids, adults, movies, Disney, Christmas and more.",
-    "inLanguage": "en-US",
+    "name": siteName,
+    "alternateName": alternateName,
+    "url": `${baseUrl}/`,
+    "description": description,
+    "inLanguage": languageTag,
     "isAccessibleForFree": true,
+    "@id": `${baseUrl}/#website`,
     "mainEntity": {
       "@type": "WebApplication",
-      "name": "Charades Generator",
+      "@id": `${baseUrl}/#webapp`,
+      "name": siteName,
       "applicationCategory": "GameApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -30,16 +60,21 @@ export default function WebsiteStructuredData() {
     },
     "publisher": {
       "@type": "Organization",
-      "@id": "https://charades-generator.com/#organization",
-      "name": "Charades Generator",
-      "url": "https://charades-generator.com/",
+      "@id": `${baseUrl}/#organization`,
+      "name": siteName,
+      "url": `${baseUrl}/`,
       "logo": {
         "@type": "ImageObject",
-        "url": "https://charades-generator.com/logo.svg",
+        "url": `${baseUrl}/logo.svg`,
         "width": 160,
         "height": 62
       },
       "sameAs": []
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": `${baseUrl}/?q={search_term_string}`,
+      "query-input": "required name=search_term_string"
     }
   };
 
@@ -47,21 +82,22 @@ export default function WebsiteStructuredData() {
   const organizationData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": "https://charades-generator.com/#organization",
-    "name": "Charades Generator",
-    "url": "https://charades-generator.com/",
+    "@id": `${baseUrl}/#organization`,
+    "name": siteName,
+    "url": `${baseUrl}/`,
     "logo": {
       "@type": "ImageObject",
-      "url": "https://charades-generator.com/logo.svg",
+      "url": `${baseUrl}/logo.svg`,
       "width": 160,
       "height": 62
     },
-    "description": "Provider of free online charades word generation tools for entertainment and educational purposes.",
+    "description": description,
     "foundingDate": "2024",
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer service",
-      "email": "support@charades-generator.com"
+      "email": "support@charades-generator.com",
+      "availableLanguage": [languageTag]
     },
     "areaServed": "Worldwide",
     "serviceType": "Entertainment Software"

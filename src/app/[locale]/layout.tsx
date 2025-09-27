@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { LocaleProvider } from "@/contexts/LocaleContext";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionary";
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -15,12 +16,13 @@ export async function generateStaticParams() {
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const { locale: localeParam } = await params;
   const locale = localeParam as Locale;
+  const dictionary = getDictionary(locale);
 
   return (
     <LocaleProvider initialLocale={locale}>
-      <Navigation />
+      <Navigation locale={locale} items={dictionary.navigation.items} />
       <main className="min-h-screen bg-gray-50">{children}</main>
-      <Footer />
+      <Footer locale={locale} footer={dictionary.footer} />
     </LocaleProvider>
   );
 }

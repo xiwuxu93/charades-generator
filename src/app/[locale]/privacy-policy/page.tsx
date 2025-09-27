@@ -37,6 +37,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "website",
       url: canonicalUrl,
       locale: locale === 'en' ? 'en_US' : 'es_ES',
+      images: [
+        {
+          url: `${baseUrl}/charades-generator-og.png`,
+          width: 1200,
+          height: 630,
+          alt: dictionary.seo.privacy.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dictionary.seo.privacy.title,
+      description: dictionary.seo.privacy.description,
+      images: [`${baseUrl}/charades-generator-og.png`],
     },
     robots: "index, follow",
   };

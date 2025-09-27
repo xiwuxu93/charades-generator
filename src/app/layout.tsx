@@ -1,6 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
+import { cookies, headers } from "next/headers";
+import { isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionary";
+import ConsentManager from "@/components/ConsentManager";
+import { ensureUrlCanParse } from "@/utils/polyfills";
 import "./globals.css";
+
+const LOCALE_COOKIE = "site-locale";
+const CONSENT_COOKIE = "cg-consent";
+
+function resolveLocale(cookieLocale: string | undefined, headerLocale: string | null): Locale {
+  const fallback = cookieLocale ?? headerLocale ?? DEFAULT_LOCALE;
+  return isLocale(fallback) ? fallback : DEFAULT_LOCALE;
+}
+
+function localeToHtmlAttributes(locale: Locale) {
+  switch (locale) {
+    case "es":
+      return { lang: "es", dir: "ltr" as const };
+    default:
+      return { lang: "en", dir: "ltr" as const };
+  }
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://charades-generator.com"),
@@ -56,10 +77,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  ensureUrlCanParse();
   const isProduction = process.env.NODE_ENV === "production";
+  const cookieStore = cookies();
+  const headerStore = headers();
+  const locale = resolveLocale(cookieStore.get(LOCALE_COOKIE)?.value, headerStore.get("x-site-locale"));
+  const consentCookie = cookieStore.get(CONSENT_COOKIE)?.value;
+  const consentStatus = consentCookie === "granted" ? "granted" : consentCookie === "denied" ? "denied" : "pending";
+  const dictionary = getDictionary(locale);
+  const htmlAttributes = localeToHtmlAttributes(locale);
 
   return (
-    <html lang="en">
+    <html lang={htmlAttributes.lang} dir={htmlAttributes.dir} data-locale={locale}>
       <head>
         {/* Preload critical assets */}
         <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" />
@@ -76,41 +105,12 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         {children}
-
-        {/* Analytics - lazy load after page is ready */}
-        {isProduction && (
-          <Script
-            id="gtag-init"
-            strategy="lazyOnload"
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-
-                const script = document.createElement('script');
-                script.async = true;
-                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-YC6P6CMMW2';
-                document.head.appendChild(script);
-
-                script.onload = function() {
-                  gtag('config', 'G-YC6P6CMMW2', {
-                    page_title: document.title,
-                    page_location: window.location.href,
-                  });
-                };
-              `,
-            }}
-          />
-        )}
-
-        {/* AdSense - lowest priority loading */}
-          {isProduction && (<Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855228928819714"
-          crossOrigin="anonymous"
-          strategy="lazyOnload"
-        />)}
+        <ConsentManager
+          initialStatus={consentStatus}
+          locale={locale}
+          copy={dictionary.consent}
+          isProduction={isProduction}
+        />
       </body>
     </html>
   );

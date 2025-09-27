@@ -1,9 +1,34 @@
 import { MetadataRoute } from "next";
 import { SUPPORTED_LOCALES } from "@/i18n/config";
+import { statSync } from "fs";
+import { join } from "path";
 
 export const dynamic = "force-static";
 
 const baseUrl = "https://charades-generator.com";
+
+// Function to get file modification time
+function getFileModificationTime(filePath: string): Date {
+  try {
+    const stats = statSync(filePath);
+    return stats.mtime;
+  } catch (error) {
+    // If file doesn't exist, return a default date
+    return new Date("2025-08-01");
+  }
+}
+
+// Function to get page file path
+function getPageFilePath(routePath: string): string {
+  const basePath = join(process.cwd(), "src/app/[locale]");
+
+  if (routePath === "/") {
+    return join(basePath, "page.tsx");
+  }
+
+  const trimmed = routePath.replace(/^\/+/, "").replace(/\/+$/, "");
+  return join(basePath, trimmed, "page.tsx");
+}
 
 // Define all available routes with their properties
 const routeConfig: Array<{
@@ -52,6 +77,11 @@ const routeConfig: Array<{
     priority: 0.6,
   },
   {
+    path: "/contact",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
     path: "/how-to-use",
     changeFrequency: "monthly",
     priority: 0.7,
@@ -75,7 +105,6 @@ const routeConfig: Array<{
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const sitemapEntries: MetadataRoute.Sitemap = [];
-  const lastModified = new Date();
 
   // Generate sitemap entries for each supported locale
   for (const locale of SUPPORTED_LOCALES) {
@@ -84,6 +113,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         locale === "en"
           ? `${baseUrl}${route.path}${route.path === "/" ? "" : "/"}`
           : `${baseUrl}/${locale}${route.path}${route.path === "/" ? "" : "/"}`;
+
+      // Get the actual file modification time
+      const pageFilePath = getPageFilePath(route.path);
+      const lastModified = getFileModificationTime(pageFilePath);
 
       sitemapEntries.push({
         url: url,

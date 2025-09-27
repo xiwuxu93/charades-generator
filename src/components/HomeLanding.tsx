@@ -15,6 +15,7 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
 
   const themedGenerators = dictionary.home.themedGenerators;
   const playGuides = dictionary.home.playGuides;
+  const expertInsights = dictionary.home.expertInsights;
 
   return (
     <>
@@ -105,6 +106,48 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
                 </span>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white border-t border-gray-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-3xl">
+            <h2 className="text-3xl font-bold text-gray-900">{expertInsights.title}</h2>
+            <p className="mt-3 text-gray-600">{expertInsights.description}</p>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+            {expertInsights.personas.map((persona) => (
+              <article key={persona.title} className="flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900">{persona.title}</h3>
+                <p className="mt-2 text-sm text-gray-600 italic">“{persona.quote}”</p>
+                <h4 className="mt-4 text-sm font-semibold text-gray-800 uppercase tracking-wide">
+                  {persona.tipsTitle}
+                </h4>
+                <ul className="mt-2 space-y-2 text-sm text-gray-600">
+                  {persona.tips.map((tip) => (
+                    <li key={tip} className="flex gap-2">
+                      <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-indigo-500" />
+                      <span>{tip}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-col gap-4 rounded-2xl border border-indigo-200 bg-indigo-50 p-6 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 className="text-lg font-semibold text-indigo-900">{expertInsights.shareTitle}</h3>
+              <p className="mt-1 text-sm text-indigo-800">{expertInsights.shareDescription}</p>
+            </div>
+            <Link
+              href={buildLocalePath(locale, expertInsights.shareHref)}
+              className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700"
+            >
+              {expertInsights.shareCta}
+            </Link>
           </div>
         </div>
       </section>

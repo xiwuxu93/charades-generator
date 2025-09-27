@@ -38,6 +38,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "article",
       url: canonicalUrl,
       locale: locale === 'en' ? 'en_US' : 'es_ES',
+      images: [
+        {
+          url: `${baseUrl}/charades-generator-og.png`,
+          width: 1200,
+          height: 630,
+          alt: dictionary.seo.howToUse.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dictionary.seo.howToUse.title,
+      description: dictionary.seo.howToUse.description,
+      images: [`${baseUrl}/charades-generator-og.png`],
     },
     robots: "index, follow",
   };
@@ -131,6 +145,29 @@ export default async function HowToUsePage({ params }: PageProps) {
             <li>{dictionary.pages.howToUse.benefit3}</li>
             <li>{dictionary.pages.howToUse.benefit4}</li>
           </ul>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            {dictionary.pages.howToUse.fieldNotesTitle}
+          </h2>
+          <p className="text-gray-700 mb-6">{dictionary.pages.howToUse.fieldNotesDescription}</p>
+          <div className="space-y-6">
+            {dictionary.pages.howToUse.fieldNotes.map((note) => (
+              <article key={note.heading} className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+                <h3 className="text-xl font-semibold text-gray-900">{note.heading}</h3>
+                <p className="mt-2 text-gray-600">{note.description}</p>
+                <h4 className="mt-4 text-sm font-semibold uppercase tracking-wide text-gray-800">
+                  {note.takeawaysTitle}
+                </h4>
+                <ul className="mt-2 list-disc list-inside space-y-1 text-sm text-gray-600">
+                  {note.takeaways.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
         </section>
 
         <div className="mt-12 p-6 bg-blue-50 rounded-lg">

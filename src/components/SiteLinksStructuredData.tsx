@@ -1,71 +1,66 @@
-export default function SiteLinksStructuredData() {
+import type { Locale } from "@/i18n/config";
+import { DEFAULT_LOCALE } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionary";
+import { buildLocalePath } from "@/utils/localePaths";
+
+interface SiteLinksStructuredDataProps {
+  locale?: Locale;
+  dictionary: Dictionary;
+  baseUrl?: string;
+}
+
+function toAbsoluteUrl(baseUrl: string, locale: Locale, path: string) {
+  const localized = buildLocalePath(locale, path);
+  if (/^https?:\/\//i.test(localized)) {
+    return localized.endsWith("/") ? localized : `${localized}/`;
+  }
+  const normalised = localized.endsWith("/") ? localized : `${localized}/`;
+  return `${baseUrl}${normalised}`;
+}
+
+export default function SiteLinksStructuredData({
+  locale = DEFAULT_LOCALE,
+  dictionary,
+  baseUrl = "https://charades-generator.com",
+}: SiteLinksStructuredDataProps) {
+  const navigationItems = dictionary.navigation.items.map((item, index) => ({
+    "@type": "SiteNavigationElement",
+    position: index + 1,
+    name: item.title,
+    url: toAbsoluteUrl(baseUrl, locale, item.href),
+  }));
+
+  const supplementalLinks = [
+    { title: dictionary.pages.faq?.title, href: "/faq" },
+    { title: dictionary.pages.about?.title, href: "/about" },
+    { title: dictionary.pages.howToUse?.title, href: "/how-to-use" },
+    { title: dictionary.pages.contact?.title, href: "/contact" },
+    { title: dictionary.pages.privacy?.title, href: "/privacy-policy" },
+    { title: dictionary.pages.terms?.title, href: "/terms-of-service" },
+  ].filter((link): link is { title: string; href: string } => Boolean(link.title));
+
+  const expandedList = [
+    ...navigationItems,
+    ...supplementalLinks.map((link, index) => ({
+      "@type": "SiteNavigationElement",
+      position: navigationItems.length + index + 1,
+      name: link.title,
+      url: toAbsoluteUrl(baseUrl, locale, link.href),
+    })),
+  ];
+
   const siteLinksData = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": "Charades Generator Site Navigation",
-    "itemListElement": [
-      {
-        "@type": "SiteNavigationElement",
-        "position": 1,
-        "name": "Free Charades Generator",
-        "url": "https://charades-generator.com/"
-      },
-      {
-        "@type": "SiteNavigationElement",
-        "position": 2,
-        "name": "Random Charades Generator",
-        "url": "https://charades-generator.com/random-charades-generator/"
-      },
-      {
-        "@type": "SiteNavigationElement",
-        "position": 3,
-        "name": "Kids Charades Generator",
-        "url": "https://charades-generator.com/charades-generator-for-kids/"
-      },
-      {
-        "@type": "SiteNavigationElement",
-        "position": 4,
-        "name": "Movie Charades Generator",
-        "url": "https://charades-generator.com/movie-charades-generator/"
-      },
-      {
-        "@type": "SiteNavigationElement",
-        "position": 5,
-        "name": "Disney Charades Generator",
-        "url": "https://charades-generator.com/disney-charades-generator/"
-      },
-      {
-        "@type": "SiteNavigationElement",
-        "position": 6,
-        "name": "Christmas Charades Generator",
-        "url": "https://charades-generator.com/christmas-charades-generator/"
-      },
-      {
-        "@type": "SiteNavigationElement",
-        "position": 7,
-        "name": "How to Use Charades",
-        "url": "https://charades-generator.com/how-to-use/"
-      },
-      {
-        "@type": "SiteNavigationElement",
-        "position": 8,
-        "name": "FAQ",
-        "url": "https://charades-generator.com/faq/"
-      },
-      {
-        "@type": "SiteNavigationElement",
-        "position": 9,
-        "name": "About",
-        "url": "https://charades-generator.com/about/"
-      }
-    ]
+    "name": `${dictionary.footer.brandTitle} Site Navigation`,
+    "itemListElement": expandedList,
   };
 
   return (
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(siteLinksData)
+        __html: JSON.stringify(siteLinksData),
       }}
     />
   );
