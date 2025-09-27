@@ -72,15 +72,15 @@ export const viewport: Viewport = {
   themeColor: "#3B82F6",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   ensureUrlCanParse();
   const isProduction = process.env.NODE_ENV === "production";
-  const cookieStore = cookies();
-  const headerStore = headers();
+  const cookieStore = await cookies();
+  const headerStore = await headers();
   const locale = resolveLocale(cookieStore.get(LOCALE_COOKIE)?.value, headerStore.get("x-site-locale"));
   const consentCookie = cookieStore.get(CONSENT_COOKIE)?.value;
   const consentStatus = consentCookie === "granted" ? "granted" : consentCookie === "denied" ? "denied" : "pending";

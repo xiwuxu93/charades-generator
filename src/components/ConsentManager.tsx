@@ -69,6 +69,7 @@ function ensureDefaultConsent() {
 declare global {
   interface Window {
     __cgConsentDefaultApplied?: boolean;
+    dataLayer?: unknown[][];
   }
 }
 
