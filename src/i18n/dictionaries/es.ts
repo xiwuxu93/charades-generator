@@ -207,7 +207,69 @@ export const es = {
     cardMeta: {
       difficulty: "Dificultad",
       category: "Categoría",
+      ageGroup: "Público",
     },
+    scenarioHeading: "¿Necesitas empezar ya?",
+    scenarioSubheading:
+      "Elige un preset pensado para los escenarios más comunes. Ajustamos filtros y cantidad de palabras; siempre puedes personalizar más antes de generar.",
+    scenarioReset: "Limpiar preset",
+    scenarioAppliedLabel: "Preset activo:",
+    scenarioToggleOpen: "Mostrar presets",
+    scenarioToggleClose: "Ocultar presets",
+    scenarioMarkUsed: "Usé este preset",
+    scenarioMarkedMessage: "¡Gracias! Usaremos tu feedback para mejorar los próximos ajustes.",
+    cardCountLabel: "{{count}} tarjetas",
+    roundLengthLabel: "Duración sugerida",
+    tipLabel: "Consejo de anfitrión",
+    copyListButton: "Copiar lista",
+    copySuccess: "¡Copiado al portapapeles! Pégalo en Notas, Docs o chat.",
+    copyError: "No se pudo copiar. Selecciona y copia manualmente.",
+    scenarios: [
+      {
+        id: "family-night",
+        title: "Noche familiar",
+        description: "Lista equilibrada para edades mixtas con comodín opcional.",
+        category: "all",
+        difficulty: "easy",
+        ageGroup: "all",
+        wordCount: 10,
+        roundLength: "60–90 segundos",
+        tip: "Deja que la infancia elija un comodín por ronda para mantener la emoción.",
+      },
+      {
+        id: "classroom-break",
+        title: "Pausa en el aula",
+        description: "Verbos y emociones seguros para un mini descanso curricular.",
+        category: "actions",
+        difficulty: "easy",
+        ageGroup: "kids",
+        wordCount: 8,
+        roundLength: "45–60 segundos",
+        tip: "Cierra pidiendo a estudiantes que usen la palabra en una oración o dibujo.",
+      },
+      {
+        id: "team-icebreaker",
+        title: "Icebreaker de equipo",
+        description: "Mezcla dinámica para reuniones híbridas y team building.",
+        category: "all",
+        difficulty: "medium",
+        ageGroup: "adults",
+        wordCount: 9,
+        roundLength: "60 segundos",
+        tip: "Rota capitanes para que personas tímidas lideren una ronda y asigna puntos extra por creatividad.",
+      },
+      {
+        id: "adult-party",
+        title: "Fiesta adulta",
+        description: "Prompts con humor y pistas retadoras para risas nocturnas.",
+        category: "funny",
+        difficulty: "medium",
+        ageGroup: "adults",
+        wordCount: 12,
+        roundLength: "45–75 segundos",
+        tip: "Usa desempates relámpago de una palabra para mantener la energía alta.",
+      },
+    ],
     howToPlayHeading: "Cómo jugar",
     howToPlaySteps: [
       "Un jugador actúa la palabra sin hablar",
@@ -297,6 +359,30 @@ export const es = {
           "Conoce en qué estamos trabajando y cómo evoluciona el generador cada mes.",
       },
     ],
+    quickResources: {
+      title: "Kit exprés para jugar",
+      description:
+        "Arranca la partida en menos de un minuto: imprime reglas, temporizador y hojas de puntuación para que el grupo se alinee al instante.",
+      items: [
+        {
+          title: "Resumen de reglas en 30 segundos",
+          description: "Hoja imprimible con orden de turnos, gestos básicos y desempates comunes.",
+          href: "/quick-play-kit#rules",
+        },
+        {
+          title: "Temporizador y marcador",
+          description: "Plantilla para seguir rondas, tiempos y puntajes de hasta tres equipos.",
+          href: "/quick-play-kit#score",
+        },
+        {
+          title: "Póster de señales",
+          description: "Muestra a las personas nuevas cómo indicar película, libro, canción y sílabas.",
+          href: "/quick-play-kit#signals",
+        },
+      ],
+      actionLabel: "Abrir kit rápido",
+      printLabel: "Imprimir ahora",
+    },
     expertInsights: {
       title: "Experiencias reales de anfitriones expertos",
       description:
@@ -341,6 +427,73 @@ export const es = {
         "Destacamos estrategias de la comunidad que elevan noches de juego, clases y eventos corporativos. Cuéntanos tu enfoque y podríamos publicarlo en la próxima actualización.",
       shareCta: "Compartir mi playbook",
       shareHref: "/contact",
+    },
+    communityPlaybooks: {
+      title: "Playbooks de la comunidad",
+      description:
+        "Casos prácticos enviados por anfitriones con formatos listos para usar. Adáptalos a tu propio grupo o tómalos como inspiración.",
+      shareHref: "/contact",
+      shareCta: "Enviar mi playbook",
+      followLabel: "Seguir este formato",
+      entries: [
+        {
+          id: "family-friday",
+          persona: "Leah · Madre y anfitriona",
+          location: "Seattle, EE. UU.",
+          scenario: "Viernes familiar (edades 6 a 72)",
+          summary:
+            "Cinco rondas que combinan cartas fáciles con comodines para mantener motivados a peques y abuelos.",
+          highlights: [
+            "Secuencia: Fácil → Fácil → Media → Media → Relámpago en equipo",
+            "La infancia elige el comodín cada ronda",
+            "Marcador en pizarra con doodles y premios espontáneos",
+          ],
+          steps: [
+            "Genera 10 palabras con el preset familiar y colócalas en un bol.",
+            "Rota mímicos en sentido horario; adultos pueden apoyar con mímica extra si alguien se queda en blanco.",
+            "Finaliza con una ronda colaborativa de 60 segundos donde todos miman para acumular puntos conjuntos.",
+          ],
+          lastTested: "2025-08-18",
+        },
+        {
+          id: "spanish-class",
+          persona: "Profesor Álvarez · 5.º de primaria",
+          location: "Austin, EE. UU.",
+          scenario: "Pausa de vocabulario",
+          summary:
+            "Descanso de 7 minutos para repasar verbos y emociones; el alumnado gana puntos extra si usa la palabra en una frase.",
+          highlights: [
+            "Filtros: Acciones + Emociones · Dificultad fácil · Público infantil",
+            "Reflexión escrita inmediata tras cada ronda",
+            "Temporizador a 45 segundos para mantener ritmo",
+          ],
+          steps: [
+            "Selecciona 8 palabras con el preset escolar y prepara el temporizador del kit rápido.",
+            "Dos equipos alternan turnos de 45 segundos; las palabras no adivinadas vuelven a la pila.",
+            "Cierra con una pregunta de reflexión: ‘¿Qué verbo resultó más difícil y por qué?’",
+          ],
+          lastTested: "2025-09-05",
+        },
+        {
+          id: "retro-lab",
+          persona: "Nina · Líder de operaciones",
+          location: "Berlín, Alemania",
+          scenario: "Energizante para retrospectiva híbrida",
+          summary:
+            "Sprints de 10 minutos con prompts de proyectos recientes; los mejores clips se proyectan en la siguiente retro.",
+          highlights: [
+            "Filtros: Todas las categorías · Dificultad media · Público adulto",
+            "Etiquetar tarjetas por proyecto para reforzar aprendizajes",
+            "Columna de bonus para ‘mejor improvisación’ votada en equipo",
+          ],
+          steps: [
+            "Genera 9 palabras y copia la lista con el botón de ‘Copiar’ del preset.",
+            "Comparte pantalla para que personas remotas vean la carta mientras el equipo presencial actúa.",
+            "Graba (con consentimiento) los tres mejores momentos y abre la próxima retro con ese video.",
+          ],
+          lastTested: "2025-08-29",
+        },
+      ],
     },
   },
   pages: {
@@ -459,6 +612,56 @@ export const es = {
         "Ahora que conoces las reglas y consejos, ¡es hora de comenzar tu juego de charadas!",
       startGenerating: "Comenzar a Generar Palabras",
     },
+    quickKit: {
+      title: "Kit rápido para jugar",
+      description:
+        "Reglas imprimibles, temporizadores y hojas de seguimiento para lanzar una partida en cuestión de segundos.",
+      updated: "Actualizado septiembre 2025",
+      printCta: "Imprimir kit",
+      copyLink: "Copiar enlace",
+      copyConfirmation: "¡Enlace copiado al portapapeles!",
+      copyError: "No se pudo copiar. Usa el menú de tu navegador.",
+      intro: [
+        "Diseño de bajo consumo de tinta compatible con papel carta y A4.",
+        "Funciona junto con los presets de familia, aula, equipo y fiestas adultas.",
+        "Pensado para que una persona nueva dirija la partida sin memorizar reglas complejas.",
+      ],
+      sections: [
+        {
+          id: "rules",
+          title: "Resumen de reglas en 30 segundos",
+          description:
+            "Colócalo junto al anfitrión para que el grupo comprenda el flujo de inmediato.",
+          bullets: [
+            "Temporizadores sugeridos: 60 s (fácil), 45 s (media), 30 s (relámpago).",
+            "Lista de chequeo: sin hablar, sin objetos, cuántos pases están permitidos.",
+            "Desempates recomendados: pista súbita, pantomima grupal o relevo de charadas.",
+          ],
+        },
+        {
+          id: "score",
+          title: "Temporizador y marcador",
+          description:
+            "Controla hasta tres equipos con espacio para premios extra y rotación de capitanes.",
+          bullets: [
+            "Columnas para rondas, palabras adivinadas, puntos totales y bonus creativos.",
+            "Recordatorio para cambiar de mímico en cada ronda y mantener la equidad.",
+            "Área adicional para notas, ajustes de reglas o empates.",
+          ],
+        },
+        {
+          id: "signals",
+          title: "Póster de señales",
+          description:
+            "Colócalo en la pared para que todas las personas reconozcan los gestos de categorías y sílabas.",
+          bullets: [
+            "Gestos para película, libro, canción, serie, cita, persona, lugar y objeto.",
+            "Cómo indicar número de sílabas y cuál se está interpretando.",
+            "Guía para palabras compuestas (dividir, actuar sílabas y luego el término completo).",
+          ],
+        },
+      ],
+    },
     about: {
       title: "Sobre el Generador de Charadas",
       mission: "Nuestra Misión",
@@ -500,6 +703,39 @@ export const es = {
         "¿Listo para traer más diversión a tu próxima reunión? ¡Prueba nuestro generador de charadas ahora!",
       startGenerating: "Comenzar a Generar",
       learnMore: "Aprender Cómo Jugar",
+    },
+    changelog: {
+      title: "Historial de actualizaciones",
+      description: "Un registro de las últimas mejoras en palabras, experiencia y cumplimiento.",
+      items: [
+        {
+          date: "2025-09-25",
+          title: "Presets rápidos, Quick-Play Kit y playbooks de la comunidad",
+          highlights: [
+            "Nuevos presets de un clic para familia, aula, equipos y fiestas adultas con consejos de anfitrión.",
+            "Publicamos el Kit rápido para jugar con reglas imprimibles, temporizador y póster de señales.",
+            "Creamos la biblioteca de playbooks comunitarios y el formulario para compartir experiencias reales.",
+          ],
+        },
+        {
+          date: "2025-08-10",
+          title: "Actualización del sitio en español",
+          highlights: [
+            "Ampliamos la base de palabras con referencias hispanas y culturales.",
+            "Localizamos datos estructurados, navegación y hreflang para mejorar el SEO bilingüe.",
+            "Añadimos casos de uso escolares gracias al feedback de docentes.",
+          ],
+        },
+        {
+          date: "2025-07-01",
+          title: "Mejoras de rendimiento y cumplimiento",
+          highlights: [
+            "Convertimos navegación y pie en componentes de servidor para reducir la hidratación un 18%.",
+            "Implementamos el gestor de consentimiento compatible con normativa europea.",
+            "Refinamos la accesibilidad con navegación por teclado en filtros y tarjetas.",
+          ],
+        },
+      ],
     },
     faq: {
       title: "Preguntas Frecuentes",
@@ -627,6 +863,25 @@ export const es = {
         "Utiliza un asunto descriptivo como ‘Soporte’, ‘Sugerencia de palabras’ o ‘Alianza’",
         "Incluye enlaces, capturas o documentos relevantes para acelerar la respuesta",
       ],
+      playbookHeading: "Comparte tu playbook de charadas",
+      playbookDescription:
+        "Cuéntanos cómo organizas las charadas con tu familia, aula o equipo. Publicamos experiencias reales en la portada y en la guía de uso.",
+      form: {
+        nameLabel: "Tu nombre",
+        emailLabel: "Correo (responderemos aquí)",
+        scenarioLabel: "¿Dónde aplicas este playbook?",
+        playersLabel: "Tamaño habitual del grupo",
+        difficultyLabel: "Categorías o dificultades favoritas",
+        detailsLabel: "Describe el flujo, reglas caseras, consejos de tiempo o recursos imprimibles.",
+        permissionLabel: "Autorizo publicar mi playbook (mención por nombre/rol)",
+        submit: "Revisar y enviar",
+        subject: "Envío de playbook de charadas",
+        mailtoIntro: "Este es mi playbook de charadas:",
+        scenarioPlaceholder: "Noche familiar, Aula de 4.º grado, Retro de equipo, etc.",
+        playersPlaceholder: "ej. 6–8 participantes",
+        detailsPlaceholder: "Explica cómo organizas la partida, señales personalizadas, sistema de puntos o recursos.",
+        confirmation: "Abre tu cliente de correo para completar el envío.",
+      },
     },
   },
   footer: {
@@ -662,6 +917,7 @@ export const es = {
         links: [
           { title: "Cómo jugar", href: "/how-to-use" },
           { title: "Preguntas frecuentes", href: "/faq" },
+          { title: "Kit rápido", href: "/quick-play-kit" },
           { title: "Sobre nosotros", href: "/about" },
           { title: "Contacto", href: "/contact" },
         ],

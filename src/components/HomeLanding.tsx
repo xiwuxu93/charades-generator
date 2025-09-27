@@ -5,6 +5,7 @@ import CharadesGeneratorOptimized from '@/components/CharadesGeneratorOptimized'
 import { useLocale } from '@/contexts/LocaleContext';
 import { buildLocalePath } from '@/utils/localePaths';
 import type { CharadesWord } from '@/data/charades-types';
+import CommunityPlaybooks from '@/components/CommunityPlaybooks';
 
 interface HomeLandingProps {
   initialWords: CharadesWord[];
@@ -16,6 +17,7 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
   const themedGenerators = dictionary.home.themedGenerators;
   const playGuides = dictionary.home.playGuides;
   const expertInsights = dictionary.home.expertInsights;
+  const quickResources = dictionary.home.quickResources;
 
   return (
     <>
@@ -110,6 +112,57 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
         </div>
       </section>
 
+      {quickResources && (
+        <section className="bg-white border-t border-gray-200">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="max-w-3xl">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                {quickResources.title}
+              </h2>
+              <p className="mt-2 text-gray-600">{quickResources.description}</p>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+              {quickResources.items.map((item) => (
+                <Link
+                  key={item.href}
+                  href={buildLocalePath(locale, item.href)}
+                  className="group flex h-full flex-col justify-between rounded-2xl border border-gray-200 bg-gray-50 p-5 transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-md"
+                >
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-700">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-gray-600">{item.description}</p>
+                  </div>
+                  <span className="mt-4 inline-flex items-center text-sm font-semibold text-blue-600">
+                    {quickResources.actionLabel}
+                    <svg
+                      className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-6">
+              <Link
+                href={buildLocalePath(locale, '/quick-play-kit/')}
+                className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
+              >
+                {quickResources.printLabel}
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="max-w-3xl">
@@ -151,6 +204,8 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
           </div>
         </div>
       </section>
+
+      <CommunityPlaybooks />
     </>
   );
 }

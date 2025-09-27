@@ -77,6 +77,11 @@ const routeConfig: Array<{
     priority: 0.6,
   },
   {
+    path: "/quick-play-kit",
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
+  {
     path: "/contact",
     changeFrequency: "monthly",
     priority: 0.6,

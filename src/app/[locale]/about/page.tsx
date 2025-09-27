@@ -61,9 +61,31 @@ export default async function AboutPage({ params }: PageProps) {
   const { locale: localeParam } = await params;
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
+  const changelog = dictionary.pages.changelog;
+  const changelogSchema = changelog
+    ? {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: changelog.title,
+        itemListElement: changelog.items.map((item: { date: string; title: string; highlights: string[] }, index: number) => ({
+          "@type": "Article",
+          position: index + 1,
+          headline: item.title,
+          datePublished: item.date,
+          author: {
+            "@type": "Organization",
+            name: dictionary.footer.brandTitle,
+          },
+          description: item.highlights.join(" "),
+        })),
+      }
+    : null;
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white">
+      {changelogSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(changelogSchema) }} />
+      )}
       <h1 className="text-3xl font-bold text-gray-900 mb-8">
         {dictionary.pages.about.title}
       </h1>
@@ -172,6 +194,32 @@ export default async function AboutPage({ params }: PageProps) {
           </div>
         </div>
       </div>
+
+      {changelog && (
+        <section className="mt-12 space-y-6">
+          <h2 className="text-2xl font-bold text-gray-900">{changelog.title}</h2>
+          <p className="text-gray-600">{changelog.description}</p>
+          <div className="space-y-6">
+            {changelog.items.map((entry: { date: string; title: string; highlights: string[] }) => (
+              <article key={entry.date} className="rounded-xl border border-gray-200 bg-gray-50 p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">
+                  {new Date(entry.date).toLocaleDateString(locale, {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </p>
+                <h3 className="mt-1 text-lg font-semibold text-gray-900">{entry.title}</h3>
+                <ul className="mt-3 list-disc list-inside space-y-1 text-sm text-gray-700">
+                  {entry.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

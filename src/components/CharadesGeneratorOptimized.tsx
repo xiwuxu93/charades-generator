@@ -1,11 +1,23 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react';
+import { useState, useEffect, useCallback, useRef, lazy, Suspense, useMemo } from 'react';
 import type { CharadesWord } from '@/data/charades-types';
 import { useLocale } from '@/contexts/LocaleContext';
 import { categoryIds, difficultyIds, ageGroupIds } from '@/data/charades-metadata';
 
 const DEFAULT_BATCH_SIZE = 3;
+
+interface ScenarioPreset {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  difficulty: string;
+  ageGroup: string;
+  wordCount: number;
+  roundLength: string;
+  tip: string;
+}
 
 // Lazy load non-critical components
 const FilterComponent = lazy(() => import('@/components/FilterComponent'));
@@ -38,8 +50,10 @@ export default function CharadesGeneratorOptimized({
   const { locale, dictionary, t } = useLocale();
   const difficultiesLabel = dictionary.difficulties;
   const categoriesLabel = dictionary.categories;
+  const ageGroupLabels = dictionary.ageGroups;
   const resolvedTitle = title ?? dictionary.generator.defaultTitle;
   const resolvedDescription = description ?? dictionary.generator.defaultDescription;
+  const scenarios = (dictionary.generator.scenarios ?? []) as ScenarioPreset[];
 
   const [selectedCategory, setSelectedCategory] = useState<string>(defaultCategory);
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>(defaultDifficulty);
@@ -54,12 +68,35 @@ export default function CharadesGeneratorOptimized({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const pendingRequest = useRef<AbortController | null>(null);
   const hasTriggeredInitialFetch = useRef(false);
+  const [activeScenarioId, setActiveScenarioId] = useState<string | null>(null);
+  const [copyFeedback, setCopyFeedback] = useState<'idle' | 'success' | 'error'>('idle');
+  const [scenarioUsage, setScenarioUsage] = useState<Record<string, boolean>>({});
+  const [scenariosExpanded, setScenariosExpanded] = useState(false);
 
   useEffect(() => () => {
     if (pendingRequest.current) {
       pendingRequest.current.abort();
     }
   }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    const stored = window.localStorage.getItem('cg-scenario-usage');
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored) as Record<string, boolean>;
+        setScenarioUsage(parsed);
+      } catch {
+        // ignore parsing errors
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    setActiveScenarioId(null);
+  }, [locale]);
 
   useEffect(() => {
     setSelectedCategory(defaultCategory);
@@ -72,6 +109,12 @@ export default function CharadesGeneratorOptimized({
   useEffect(() => {
     setSelectedAgeGroup(defaultAgeGroup);
   }, [defaultAgeGroup]);
+
+  useEffect(() => {
+    if (!scenarios.find((scenario) => scenario.id === activeScenarioId)) {
+      setActiveScenarioId(null);
+    }
+  }, [scenarios, activeScenarioId]);
 
   const generateBatchWords = useCallback(
     async (count: number) => {
@@ -120,6 +163,44 @@ export default function CharadesGeneratorOptimized({
     [dictionary.generator.errorFetchingWords, locale, selectedAgeGroup, selectedCategory, selectedDifficulty],
   );
 
+  const activeScenario = useMemo(() => {
+    if (!activeScenarioId) return null;
+    return scenarios.find((scenario) => scenario.id === activeScenarioId) ?? null;
+  }, [activeScenarioId, scenarios]);
+
+  const handleApplyScenario = useCallback(
+    (scenario: ScenarioPreset) => {
+      setActiveScenarioId(scenario.id);
+      setSelectedCategory(scenario.category);
+      setSelectedDifficulty(scenario.difficulty);
+      setSelectedAgeGroup(scenario.ageGroup);
+      setBatchSize(scenario.wordCount);
+      setIsCustomMode(false);
+      setCustomCount('');
+      setScenariosExpanded(true);
+    },
+    [],
+  );
+
+  const handleScenarioReset = useCallback(() => {
+    setActiveScenarioId(null);
+    setSelectedCategory(defaultCategory);
+    setSelectedDifficulty(defaultDifficulty);
+    setSelectedAgeGroup(defaultAgeGroup);
+    setBatchSize(DEFAULT_BATCH_SIZE);
+    setIsCustomMode(false);
+    setCustomCount('');
+  }, [defaultAgeGroup, defaultCategory, defaultDifficulty]);
+
+  const markScenarioUsed = useCallback(() => {
+    if (!activeScenario) return;
+    const next = { ...scenarioUsage, [activeScenario.id]: true };
+    setScenarioUsage(next);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('cg-scenario-usage', JSON.stringify(next));
+    }
+  }, [activeScenario, scenarioUsage]);
+
   // Mark hydration complete so we can manage client-side requests
   useEffect(() => {
     if (!hasHydrated) {
@@ -163,6 +244,42 @@ export default function CharadesGeneratorOptimized({
   const quickPickOptions = [1, 3, 5, 10];
   const displayCount = isCustomMode ? customCount || String(batchSize) : String(batchSize);
 
+  const handleCopyWords = useCallback(async () => {
+    if (!generatedWords.length) return;
+    const list = generatedWords
+      .map((word) => {
+        const difficultyLabel =
+          difficultiesLabel[word.difficulty as keyof typeof difficultiesLabel] ?? word.difficulty;
+        const categoryLabel =
+          categoriesLabel[word.category as keyof typeof categoriesLabel] ?? word.category;
+        const ageLabel = ageGroupLabels[word.ageGroup as keyof typeof ageGroupLabels] ?? word.ageGroup;
+        return `${word.word} — ${difficultyLabel} · ${categoryLabel} · ${ageLabel}`;
+      })
+      .join('\n');
+
+    try {
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        await navigator.clipboard.writeText(list);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = list;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+      setCopyFeedback('success');
+    } catch {
+      setCopyFeedback('error');
+    }
+
+    window.setTimeout(() => {
+      setCopyFeedback('idle');
+    }, 3000);
+  }, [generatedWords, difficultiesLabel, categoriesLabel, ageGroupLabels]);
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-6">
       {/* Header - Critical for LCP */}
@@ -171,6 +288,134 @@ export default function CharadesGeneratorOptimized({
         <p className="text-gray-600 text-lg">{resolvedDescription}</p>
         <p className="text-gray-500 text-sm mt-2">{dictionary.generator.wordsCountSublabel}</p>
       </header>
+
+      {scenarios.length > 0 && (
+        <section className="mb-8 rounded-2xl border border-indigo-100 bg-indigo-50 p-5 sm:p-6">
+          <div className="sm:flex sm:items-start sm:justify-between gap-3">
+            <div className="max-w-2xl">
+              <button
+                type="button"
+                onClick={() => setScenariosExpanded((prev) => !prev)}
+                className="flex items-center gap-2 text-left text-lg font-semibold text-indigo-900"
+                aria-expanded={scenariosExpanded}
+              >
+                <span>{dictionary.generator.scenarioHeading}</span>
+                <svg
+                  className={`h-4 w-4 transition-transform ${scenariosExpanded ? 'rotate-180' : ''}`}
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+              {scenariosExpanded && (
+                <p className="mt-1 text-sm text-indigo-800">
+                  {dictionary.generator.scenarioSubheading}
+                </p>
+              )}
+            </div>
+            <div className="mt-3 flex shrink-0 items-center gap-2 sm:mt-0">
+              <button
+                type="button"
+                onClick={() => setScenariosExpanded((prev) => !prev)}
+                className="inline-flex items-center rounded-md border border-indigo-300 px-3 py-1.5 text-sm font-semibold text-indigo-700 transition hover:bg-indigo-100"
+              >
+                {scenariosExpanded
+                  ? dictionary.generator.scenarioToggleClose
+                  : dictionary.generator.scenarioToggleOpen}
+              </button>
+              {activeScenario && (
+                <button
+                  type="button"
+                  onClick={handleScenarioReset}
+                  className="inline-flex items-center rounded-md border border-indigo-300 px-3 py-1.5 text-sm font-semibold text-indigo-700 transition hover:bg-indigo-100"
+                >
+                  {dictionary.generator.scenarioReset}
+                </button>
+              )}
+            </div>
+          </div>
+
+          {scenariosExpanded && (
+            <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
+              {scenarios.map((scenario) => {
+                const isActive = scenario.id === activeScenarioId;
+                const difficultyLabel =
+                  difficultiesLabel[scenario.difficulty as keyof typeof difficultiesLabel] ?? scenario.difficulty;
+                const categoryLabel =
+                categoriesLabel[scenario.category as keyof typeof categoriesLabel] ?? scenario.category;
+              const ageLabel =
+                ageGroupLabels[scenario.ageGroup as keyof typeof ageGroupLabels] ?? scenario.ageGroup;
+
+              return (
+                <button
+                  key={scenario.id}
+                  type="button"
+                  onClick={() => handleApplyScenario(scenario)}
+                  aria-pressed={isActive}
+                  className={`text-left rounded-xl border p-4 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
+                    isActive
+                      ? 'border-indigo-400 bg-white shadow-sm'
+                      : 'border-transparent bg-white/80 hover:border-indigo-200 hover:bg-white'
+                  }`}
+                >
+                  <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-indigo-600">
+                    <span className="rounded-full bg-indigo-100 px-2 py-0.5">{difficultyLabel}</span>
+                    <span className="rounded-full bg-indigo-100 px-2 py-0.5">{categoryLabel}</span>
+                    <span className="rounded-full bg-indigo-100 px-2 py-0.5">{ageLabel}</span>
+                  </div>
+                  <h3 className="mt-3 text-base font-semibold text-indigo-900">{scenario.title}</h3>
+                  <p className="mt-2 text-sm text-indigo-800">{scenario.description}</p>
+                  <p className="mt-3 text-xs uppercase tracking-wide text-indigo-600">
+                    {t('generator.cardCountLabel', { count: scenario.wordCount })}
+                  </p>
+                </button>
+              );
+            })}
+            </div>
+          )}
+
+          {activeScenario && scenariosExpanded && (
+            <div className="mt-5 rounded-xl border border-indigo-200 bg-white p-4 text-sm text-indigo-800">
+              <p className="font-semibold text-indigo-900">
+                {dictionary.generator.scenarioAppliedLabel} {activeScenario.title}
+              </p>
+              <p className="mt-1">{activeScenario.description}</p>
+              <p className="mt-3 flex flex-wrap gap-3 text-sm">
+                <span>
+                  {t('generator.cardCountLabel', { count: activeScenario.wordCount })}
+                </span>
+                <span>• {dictionary.generator.roundLengthLabel}: {activeScenario.roundLength}</span>
+                <span>• {dictionary.generator.tipLabel}: {activeScenario.tip}</span>
+              </p>
+              <div className="mt-3 flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={markScenarioUsed}
+                  className={`rounded-md border px-3 py-1.5 text-xs font-semibold transition ${
+                    scenarioUsage[activeScenario.id]
+                      ? 'border-indigo-200 bg-indigo-50 text-indigo-700 cursor-default'
+                      : 'border-indigo-300 bg-white text-indigo-700 hover:bg-indigo-100'
+                  }`}
+                  disabled={scenarioUsage[activeScenario.id] ?? false}
+                >
+                  {dictionary.generator.scenarioMarkUsed}
+                </button>
+                {scenarioUsage[activeScenario.id] && (
+                  <span className="text-xs text-indigo-600">
+                    {dictionary.generator.scenarioMarkedMessage}
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+        </section>
+      )}
 
       {/* Filters - Lazy loaded */}
       {!hideFilters && (
@@ -206,6 +451,22 @@ export default function CharadesGeneratorOptimized({
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">{dictionary.generator.yourWordsHeading}</h2>
             <p className="text-gray-600">{t('generator.readyToPlay', { count: generatedWords.length })}</p>
+            <div className="mt-3 flex items-center justify-center gap-2 text-sm text-indigo-700">
+              <button
+                type="button"
+                onClick={handleCopyWords}
+                className="inline-flex items-center rounded-md border border-indigo-300 px-3 py-1.5 font-semibold text-indigo-700 transition hover:bg-indigo-100"
+              >
+                {dictionary.generator.copyListButton}
+              </button>
+              <span aria-live="polite" className="min-h-[1rem] text-xs text-gray-500">
+                {copyFeedback === 'success'
+                  ? dictionary.generator.copySuccess
+                  : copyFeedback === 'error'
+                    ? dictionary.generator.copyError
+                    : ''}
+              </span>
+            </div>
 
               {/* Batch Size Selector */}
               <div className="mt-4 space-y-3">
@@ -297,6 +558,7 @@ export default function CharadesGeneratorOptimized({
                   <div className="flex justify-center gap-2 text-xs text-gray-500">
                       <span className="bg-gray-100 px-2 py-1 rounded">{difficultiesLabel[word.difficulty as keyof typeof difficultiesLabel] ?? word.difficulty}</span>
                       <span className="bg-gray-100 px-2 py-1 rounded">{categoriesLabel[word.category as keyof typeof categoriesLabel] ?? word.category}</span>
+                      <span className="bg-gray-100 px-2 py-1 rounded">{ageGroupLabels[word.ageGroup as keyof typeof ageGroupLabels] ?? word.ageGroup}</span>
                     </div>
                   </div>
                 </div>

@@ -204,7 +204,69 @@ export const en = {
     cardMeta: {
       difficulty: "Difficulty",
       category: "Category",
+      ageGroup: "Audience",
     },
+    scenarioHeading: "Need a quick start?",
+    scenarioSubheading:
+      "Choose a preset tailored for common groups. We’ll prefill filters and batch size—you can still adjust anything before generating.",
+    scenarioReset: "Clear preset",
+    scenarioAppliedLabel: "Preset applied:",
+    scenarioToggleOpen: "Show presets",
+    scenarioToggleClose: "Hide presets",
+    scenarioMarkUsed: "I used this preset",
+    scenarioMarkedMessage: "Thanks! Your feedback helps us prioritise new tweaks.",
+    cardCountLabel: "{{count}} cards",
+    roundLengthLabel: "Suggested round length",
+    tipLabel: "Host tip",
+    copyListButton: "Copy word list",
+    copySuccess: "Copied to clipboard! Paste it into Notes, Docs, or chat.",
+    copyError: "Copy failed. Select the list manually instead.",
+    scenarios: [
+      {
+        id: "family-night",
+        title: "Family game night",
+        description: "Balanced clues for mixed ages with an optional wildcard.",
+        category: "all",
+        difficulty: "easy",
+        ageGroup: "all",
+        wordCount: 10,
+        roundLength: "60–90 seconds",
+        tip: "Let younger players choose one wildcard each round so everyone stays bought in.",
+      },
+      {
+        id: "classroom-break",
+        title: "Classroom brain break",
+        description: "Curriculum-safe verbs and emotions for a 5-minute reset.",
+        category: "actions",
+        difficulty: "easy",
+        ageGroup: "kids",
+        wordCount: 8,
+        roundLength: "45–60 seconds",
+        tip: "Wrap up by asking students to use the acted word in a sentence or drawing.",
+      },
+      {
+        id: "team-icebreaker",
+        title: "Team icebreaker",
+        description: "Lively mix for hybrid stand-ups and offsites.",
+        category: "all",
+        difficulty: "medium",
+        ageGroup: "adults",
+        wordCount: 9,
+        roundLength: "60 seconds",
+        tip: "Rotate captains so quieter teammates lead a round and give bonus points for themed guesses.",
+      },
+      {
+        id: "adult-party",
+        title: "Adult party chaos",
+        description: "Meme-heavy prompts and trickier clues for late-night laughs.",
+        category: "funny",
+        difficulty: "medium",
+        ageGroup: "adults",
+        wordCount: 12,
+        roundLength: "45–75 seconds",
+        tip: "Use lightning tie-breakers with one-word clues to keep the energy spiking.",
+      },
+    ],
     howToPlayHeading: "How to Play",
     howToPlaySteps: [
       "One player acts out the word without speaking",
@@ -295,6 +357,30 @@ export const en = {
           "See what we're building next and how the generator continues to grow each month.",
       },
     ],
+    quickResources: {
+      title: "Quick-play toolkit",
+      description:
+        "Need to get the round started in under a minute? Grab printable rules, timers, and score sheets so everyone knows the plan.",
+      items: [
+        {
+          title: "30-second rules rundown",
+          description: "Printable cheat sheet covering turn order, gestures, and easy tie-breakers.",
+          href: "/quick-play-kit#rules",
+        },
+        {
+          title: "Timer & score tracker",
+          description: "One-page tracker with round timer suggestions and space for three teams.",
+          href: "/quick-play-kit#score",
+        },
+        {
+          title: "Signal legend poster",
+          description: "Show new players what the movie/book/song and syllable signals look like.",
+          href: "/quick-play-kit#signals",
+        },
+      ],
+      actionLabel: "Open quick kit",
+      printLabel: "Print instantly",
+    },
     expertInsights: {
       title: "Expert insights from real game leaders",
       description:
@@ -339,6 +425,73 @@ export const en = {
         "We spotlight community strategies that elevate game nights, classrooms, and company socials. Send us your approach and we may feature it in the next update.",
       shareCta: "Share your playbook",
       shareHref: "/contact",
+    },
+    communityPlaybooks: {
+      title: "Community playbooks you can borrow",
+      description:
+        "Curated case studies from hosts who shared their proven routines. Use them as-is or remix the structure for your next session.",
+      shareHref: "/contact",
+      shareCta: "Submit your playbook",
+      followLabel: "Follow this format",
+      entries: [
+        {
+          id: "family-friday",
+          persona: "Leah · Parent & game host",
+          location: "Seattle, USA",
+          scenario: "Family Friday showdown (ages 6–72)",
+          summary:
+            "A five-round format that keeps young kids energized while grandparents stay included—featuring wildcard picks and collaborative finales.",
+          highlights: [
+            "Rounds go Easy → Easy → Medium → Medium → Team Lightning",
+            "Kids pick the wildcard word each round to boost ownership",
+            "Scoreboard on kitchen whiteboard with doodles for bonus laughs",
+          ],
+          steps: [
+            "Start with 3 animal cards to build confidence, then introduce a mystery wildcard.",
+            "Rotate clue givers clockwise; helpers can whisper if younger kids get stuck.",
+            "Finish with a 60-second ‘everyone acts together’ round to rack up shared points.",
+          ],
+          lastTested: "2025-08-18",
+        },
+        {
+          id: "spanish-class",
+          persona: "Mr. Alvarez · Grade 5 teacher",
+          location: "Austin, USA",
+          scenario: "Classroom vocabulary warm-up",
+          summary:
+            "A 7-minute brain break aligning with curriculum targets—students act verbs to reinforce retention, ending with reflective journaling.",
+          highlights: [
+            "Filters: Actions + Emotions · Difficulty easy · Age kids",
+            "Bonus points for using the acted word in a full sentence",
+            "Students journal the gesture and meaning for next-day recall",
+          ],
+          steps: [
+            "Select eight action words using the classroom preset and print the quick timer sheet.",
+            "Run two teams alternating 45-second turns; misguessed words return to the pool.",
+            "Close with a two-minute reflection asking: ‘Which verb was trickiest and why?’",
+          ],
+          lastTested: "2025-09-05",
+        },
+        {
+          id: "retro-lab",
+          persona: "Nina · Product ops lead",
+          location: "Berlin, Germany",
+          scenario: "Hybrid retro energiser",
+          summary:
+            "10-minute lightning rounds during retrospectives using project-specific prompts, recorded for quarterly highlight reels.",
+          highlights: [
+            "Filters: All categories · Difficulty medium · Age adults",
+            "Tag cards with project names to reinforce shared knowledge",
+            "Use bonus column for ‘best improv moment’ voted by the team",
+          ],
+          steps: [
+            "Generate nine words and copy them to the notepad using the preset copy button.",
+            "Share screen with remote teammates while in-room members mime.",
+            "Record top three guesses (with consent) for a montage in the next retro opener.",
+          ],
+          lastTested: "2025-08-29",
+        },
+      ],
     },
   },
   pages: {
@@ -451,6 +604,56 @@ export const en = {
         "Now that you know the rules and tips, it's time to start your charades game!",
       startGenerating: "Start Generating Words",
     },
+    quickKit: {
+      title: "Quick-Play Kit",
+      description:
+        "Printable rules, timers, and tracking sheets so you can launch a charades session in seconds.",
+      updated: "Updated September 2025",
+      printCta: "Print this kit",
+      copyLink: "Copy shareable link",
+      copyConfirmation: "Link copied to your clipboard!",
+    copyError: "Copy unavailable. Use your browser menu instead.",
+      intro: [
+        "Minimal-ink layout sized for Letter and A4.",
+        "Works alongside the family, classroom, team, and adult presets.",
+        "Designed so a new host can run the game without memorising anything.",
+      ],
+      sections: [
+        {
+          id: "rules",
+          title: "30-second rules rundown",
+          description:
+            "Keep this beside the host so new players instantly understand the flow.",
+          bullets: [
+            "Default timers: 60s (easy), 45s (medium), 30s (lightning).",
+            "House rules checklist: no talking, no props, how many passes allowed.",
+            "Tie-break suggestions: sudden-death clue, team pantomime, or charade relay.",
+          ],
+        },
+        {
+          id: "score",
+          title: "Timer & score tracker",
+          description:
+            "Track up to three teams with space for bonus awards and captain rotation.",
+          bullets: [
+            "Columns for rounds, guessed words, total points, and improvisation bonuses.",
+            "Reminder line to swap clue givers every round for fairness.",
+            "Extra notes area for sudden rule tweaks or tie markers.",
+          ],
+        },
+        {
+          id: "signals",
+          title: "Signal legend poster",
+          description:
+            "Stick this on a wall so everyone recognises the gestures for categories and syllables.",
+          bullets: [
+            "Movie, book, song, TV show, quote, person, place, and object signals.",
+            "How to indicate syllable count and which syllable you are performing.",
+            "Guidance for compound words (split, act syllables, act whole).",
+          ],
+        },
+      ],
+    },
     about: {
       title: "About Charades Generator",
       mission: "Our Mission",
@@ -488,6 +691,39 @@ export const en = {
         "Ready to bring more fun to your next gathering? Try our charades generator now!",
       startGenerating: "Start Generating",
       learnMore: "Learn How to Play",
+    },
+    changelog: {
+      title: "Release notes & update log",
+      description: "Track the latest word packs, features, and compliance upgrades across the generator.",
+      items: [
+        {
+          date: "2025-09-25",
+          title: "Scenario presets, Quick-Play Kit, and community playbooks",
+          highlights: [
+            "Released one-click presets for family, classroom, team, and adult sessions with host guidance.",
+            "Published the printable Quick-Play Kit with rule rundown, timer sheet, and signal legend.",
+            "Launched community playbook library plus submission workflow to spotlight real hosts.",
+          ],
+        },
+        {
+          date: "2025-08-10",
+          title: "Spanish locale refresh",
+          highlights: [
+            "Expanded ES word lists with Latin American and Iberian cultural prompts.",
+            "Localized structured data, navigation, and hreflang for better bilingual coverage.",
+            "Documented classroom use cases based on feedback from bilingual teachers.",
+          ],
+        },
+        {
+          date: "2025-07-01",
+          title: "Performance and compliance upgrade",
+          highlights: [
+            "Migrated navigation/footer to server components reducing hydration by 18%.",
+            "Introduced EU-compliant consent manager gating GTM and AdSense.",
+            "Improved keyboard accessibility and focus states across filters.",
+          ],
+        },
+      ],
     },
     faq: {
       title: "Frequently Asked Questions",
@@ -613,6 +849,25 @@ export const en = {
         "Use a descriptive subject line such as ‘Support’, ‘Word suggestion’, or ‘Partnership’",
         "Include relevant links, screenshots, or documents so we can resolve your request faster",
       ],
+      playbookHeading: "Share your charades playbook",
+      playbookDescription:
+        "Tell us how you run charades for your friends, class, or team. We regularly feature real experiences on the homepage and in the how-to guide.",
+      form: {
+        nameLabel: "Your name",
+        emailLabel: "Email (we’ll reply here)",
+        scenarioLabel: "Where do you use this playbook?",
+        playersLabel: "Typical group size",
+        difficultyLabel: "Favorite categories or difficulties",
+        detailsLabel: "Share the flow, house rules, timer tips, or printable resources you use.",
+        permissionLabel: "You can publish my playbook (credit me by first name / role)",
+        submit: "Review & send",
+        subject: "Charades playbook submission",
+        mailtoIntro: "Here’s my charades playbook:",
+        scenarioPlaceholder: "Family night, Grade 4 classroom, Product team retro, etc.",
+        playersPlaceholder: "e.g. 6–8 players",
+        detailsPlaceholder: "Explain how you set up, any custom signals, scoring twists, or printable resources.",
+        confirmation: "Open your email client to finish sending."
+      },
     },
   },
   footer: {
@@ -654,6 +909,7 @@ export const en = {
         links: [
           { title: "How to Use", href: "/how-to-use" },
           { title: "FAQ", href: "/faq" },
+          { title: "Quick-Play Kit", href: "/quick-play-kit" },
           { title: "About Us", href: "/about" },
           { title: "Contact", href: "/contact" },
         ],

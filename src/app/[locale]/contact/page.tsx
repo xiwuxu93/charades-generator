@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
+import PlaybookSubmissionForm from "@/components/PlaybookSubmissionForm";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -133,6 +134,17 @@ export default async function ContactPage({ params }: PageProps) {
             <li key={item}>{item}</li>
           ))}
         </ul>
+      </section>
+
+      <section className="mt-10 rounded-lg border border-gray-200 bg-gray-50 p-6">
+        <h2 className="text-xl font-semibold text-gray-900">
+          {dictionary.pages.contact.playbookHeading}
+        </h2>
+        <p className="mt-2 text-sm text-gray-600">{dictionary.pages.contact.playbookDescription}</p>
+        <PlaybookSubmissionForm
+          email={dictionary.pages.contact.email}
+          formCopy={dictionary.pages.contact.form}
+        />
       </section>
     </main>
   );
