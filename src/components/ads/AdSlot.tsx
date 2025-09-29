@@ -24,99 +24,61 @@ export default function AdSlot({
   responsive = true,
 }: AdSlotProps) {
   const slotRef = useRef<HTMLModElement | null>(null);
-  const loadAttempts = useRef(0);
-  const [consentEnabled, setConsentEnabled] = useState<boolean>(
-    typeof window !== "undefined" ? Boolean((window as Window & { __cgScriptsEnabled?: boolean }).__cgScriptsEnabled) : false,
-  );
+  const [consentEnabled, setConsentEnabled] = useState(false);
 
   useEffect(() => {
-    loadAttempts.current = 0;
-    if (slotRef.current) {
-      slotRef.current.removeAttribute("data-cg-requested");
-    }
-  }, [slot]);
+    if (typeof window === "undefined") return;
+    setConsentEnabled(Boolean((window as Window & { __cgScriptsEnabled?: boolean }).__cgScriptsEnabled));
 
-  useEffect(() => {
-    if (!slot) return;
-
-    const hasCompletedRender = () => slotRef.current?.getAttribute("data-adsbygoogle-status") === "done";
-    const hasPendingRequest = () => slotRef.current?.getAttribute("data-cg-requested") === "true";
-
-    const attemptLoad = () => {
-      if (!slotRef.current) return;
-      if (hasCompletedRender()) return;
-
-      const ads = (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle;
-      if (!Array.isArray(ads)) return;
-
-      try {
-        if (!hasPendingRequest()) {
-          slotRef.current.setAttribute("data-cg-requested", "true");
-        }
-        ads.push({});
-        loadAttempts.current += 1;
-      } catch {
-        // Ignore errors and retry later
-      }
-    };
-
-    const ensureBootstrap = () => {
-      const target = window as unknown as { adsbygoogle?: unknown[] };
-      if (!Array.isArray(target.adsbygoogle)) {
-        target.adsbygoogle = [];
-      }
-    };
-
-    ensureBootstrap();
-    attemptLoad();
-
-    const handleScriptsEnabled = () => {
-      ensureBootstrap();
-      attemptLoad();
-      setConsentEnabled(true);
-    };
-
-    document.addEventListener("cg-scripts-enabled", handleScriptsEnabled);
-
+    const handler = () => setConsentEnabled(true);
+    document.addEventListener("cg-scripts-enabled", handler);
     return () => {
-      document.removeEventListener("cg-scripts-enabled", handleScriptsEnabled);
+      document.removeEventListener("cg-scripts-enabled", handler);
     };
+  }, []);
+
+  useEffect(() => {
+    const el = slotRef.current;
+    if (!el) return;
+    el.removeAttribute("data-ad-slot-initialized");
+    el.removeAttribute("data-adsbygoogle-status");
   }, [slot]);
 
   useEffect(() => {
     if (!consentEnabled) return;
-    if (!slotRef.current) return;
+    if (!slot || !isAdUnitConfigured(slot)) return;
 
-    const ads = (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle;
-    if (!Array.isArray(ads)) {
+    const el = slotRef.current;
+    if (!el) return;
+
+    if (el.getAttribute("data-adsbygoogle-status") === "done") {
       return;
     }
 
-    const hasCompletedRender = () => slotRef.current?.getAttribute("data-adsbygoogle-status") === "done";
-    const initialAttempts = loadAttempts.current;
-    const interval = window.setInterval(() => {
-      if (!slotRef.current) {
-        window.clearInterval(interval);
-        return;
-      }
+    if (el.getAttribute("data-ad-slot-initialized") === "true") {
+      return;
+    }
 
-       if (hasCompletedRender()) {
-         window.clearInterval(interval);
-         return;
-       }
+    const adsGlobal = window as unknown as { adsbygoogle?: unknown[] };
+    if (!Array.isArray(adsGlobal.adsbygoogle)) {
+      adsGlobal.adsbygoogle = [];
+    }
 
-      ads.push({});
-      loadAttempts.current += 1;
+    el.setAttribute("data-ad-slot-initialized", "true");
 
-      if (loadAttempts.current > initialAttempts + 3) {
-        window.clearInterval(interval);
-      }
-    }, 1500);
+    try {
+      adsGlobal.adsbygoogle!.push({});
+    } catch (error) {
+      el.removeAttribute("data-ad-slot-initialized");
+      console.warn("AdSense push failed", error);
+    }
 
     return () => {
-      window.clearInterval(interval);
+      if (el.getAttribute("data-adsbygoogle-status") !== "done") {
+        el.removeAttribute("data-ad-slot-initialized");
+      }
     };
-  }, [consentEnabled]);
+  }, [consentEnabled, slot]);
 
   if (!slot || !isAdUnitConfigured(slot)) {
     return null;
