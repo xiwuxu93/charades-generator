@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Script from "next/script";
 import { buildLocalePath } from "@/utils/localePaths";
 import type { Locale } from "@/i18n/config";
+import { ADSENSE_CLIENT, AD_UNITS, isAdUnitConfigured } from "@/config/ads";
 
 const CONSENT_COOKIE = "cg-consent";
 const CONSENT_MAX_AGE = 60 * 60 * 24 * 180; // 180 days
@@ -109,6 +110,42 @@ export default function ConsentManager({ initialStatus, locale, copy, isProducti
     }
   }, [scriptsEnabled, isProduction]);
 
+  useEffect(() => {
+    if (!isProduction || !scriptsEnabled) {
+      return;
+    }
+
+    if (typeof document === "undefined") {
+      return;
+    }
+
+    if (!ADSENSE_CLIENT || !isAdUnitConfigured(ADSENSE_CLIENT)) {
+      return;
+    }
+
+    const hasConfiguredUnit = Object.values(AD_UNITS).some((value) => isAdUnitConfigured(value));
+    if (!hasConfiguredUnit) {
+      return;
+    }
+
+    const existing = document.querySelector('script[data-cg-adsense="true"]');
+    if (existing) {
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(ADSENSE_CLIENT)}`;
+    script.crossOrigin = "anonymous";
+    script.setAttribute("data-cg-adsense", "true");
+    document.head.appendChild(script);
+
+    const adsGlobal = window as unknown as { adsbygoogle?: unknown[] };
+    if (!Array.isArray(adsGlobal.adsbygoogle)) {
+      adsGlobal.adsbygoogle = [];
+    }
+  }, [scriptsEnabled, isProduction]);
+
   const handleAccept = () => {
     setConsentCookie("granted");
     setStatus("granted");
@@ -139,12 +176,6 @@ export default function ConsentManager({ initialStatus, locale, copy, isProducti
               });
             `}
           </Script>
-          <Script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4855228928819714"
-            crossOrigin="anonymous"
-            strategy="afterInteractive"
-          />
         </>
       )}
 
