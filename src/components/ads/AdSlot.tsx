@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
-import { ADSENSE_CLIENT } from "@/config/ads";
+import { ADSENSE_CLIENT, isAdUnitConfigured } from "@/config/ads";
 
 export interface AdSlotProps {
   slot?: string;
@@ -24,19 +24,21 @@ export default function AdSlot({
   responsive = true,
 }: AdSlotProps) {
   const slotRef = useRef<HTMLModElement | null>(null);
-  const hasRequested = useRef(false);
+  const loadAttempts = useRef(0);
+  const [consentEnabled, setConsentEnabled] = useState<boolean>(
+    typeof window !== "undefined" ? Boolean((window as Window & { __cgScriptsEnabled?: boolean }).__cgScriptsEnabled) : false,
+  );
 
   useEffect(() => {
     if (!slot) return;
 
     const attemptLoad = () => {
-      if (hasRequested.current) return;
       if (!slotRef.current) return;
       const ads = (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle;
       if (!Array.isArray(ads)) return;
       try {
         ads.push({});
-        hasRequested.current = true;
+        loadAttempts.current += 1;
       } catch {
         // Ignore errors and retry later
       }
@@ -52,32 +54,49 @@ export default function AdSlot({
     ensureBootstrap();
     attemptLoad();
 
-    if (hasRequested.current) {
-      return;
-    }
-
     const handleScriptsEnabled = () => {
       ensureBootstrap();
       attemptLoad();
+      setConsentEnabled(true);
     };
 
     document.addEventListener("cg-scripts-enabled", handleScriptsEnabled);
 
+    return () => {
+      document.removeEventListener("cg-scripts-enabled", handleScriptsEnabled);
+    };
+  }, [slot]);
+
+  useEffect(() => {
+    if (!consentEnabled) return;
+    if (!slotRef.current) return;
+
+    const ads = (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle;
+    if (!Array.isArray(ads)) {
+      return;
+    }
+
+    const initialAttempts = loadAttempts.current;
     const interval = window.setInterval(() => {
-      ensureBootstrap();
-      attemptLoad();
-      if (hasRequested.current) {
+      if (!slotRef.current) {
+        window.clearInterval(interval);
+        return;
+      }
+
+      ads.push({});
+      loadAttempts.current += 1;
+
+      if (loadAttempts.current > initialAttempts + 3) {
         window.clearInterval(interval);
       }
     }, 1500);
 
     return () => {
-      document.removeEventListener("cg-scripts-enabled", handleScriptsEnabled);
       window.clearInterval(interval);
     };
-  }, [slot]);
+  }, [consentEnabled]);
 
-  if (!slot) {
+  if (!slot || !isAdUnitConfigured(slot)) {
     return null;
   }
 
