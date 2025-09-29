@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Script from "next/script";
-import Head from "next/head";
 import { buildLocalePath } from "@/utils/localePaths";
 import type { Locale } from "@/i18n/config";
 import { ADSENSE_CLIENT, AD_UNITS, isAdUnitConfigured } from "@/config/ads";
@@ -111,6 +110,30 @@ export default function ConsentManager({ initialStatus, locale, copy, isProducti
     }
   }, [scriptsEnabled, isProduction]);
 
+  useEffect(() => {
+    if (!isProduction || !scriptsEnabled) return;
+    if (!ADSENSE_CLIENT) return;
+    if (!hasAdUnitsConfigured) return;
+    if (typeof document === "undefined") return;
+
+    const existing = document.querySelector('script[data-cg-adsense="true"]');
+    if (existing) {
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(ADSENSE_CLIENT)}`;
+    script.crossOrigin = "anonymous";
+    script.setAttribute("data-cg-adsense", "true");
+    document.head.appendChild(script);
+
+    const adsGlobal = window as unknown as { adsbygoogle?: unknown[] };
+    if (!Array.isArray(adsGlobal.adsbygoogle)) {
+      adsGlobal.adsbygoogle = [];
+    }
+  }, [isProduction, scriptsEnabled, hasAdUnitsConfigured]);
+
   const hasAdUnitsConfigured = useMemo(
     () => Object.values(AD_UNITS).some((value) => isAdUnitConfigured(value)),
     [],
@@ -132,17 +155,6 @@ export default function ConsentManager({ initialStatus, locale, copy, isProducti
 
   return (
     <>
-      {isProduction && ADSENSE_CLIENT && hasAdUnitsConfigured && (
-        <Head>
-          <script
-            key="cg-adsense-loader"
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(ADSENSE_CLIENT)}`}
-            crossOrigin="anonymous"
-          />
-        </Head>
-      )}
-
       {isProduction && scriptsEnabled && (
         <>
           <Script src="https://www.googletagmanager.com/gtag/js?id=G-YC6P6CMMW2" strategy="afterInteractive" />
