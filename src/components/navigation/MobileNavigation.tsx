@@ -19,7 +19,7 @@ export default function MobileNavigation({ locale, items }: MobileNavigationProp
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <div className="md:hidden">
+    <div className="relative md:hidden">
       <button
         onClick={toggleMenu}
         className="p-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-blue-600"
@@ -37,7 +37,10 @@ export default function MobileNavigation({ locale, items }: MobileNavigationProp
       </button>
 
       {isOpen && (
-        <div id="mobile-navigation" className="mt-2 space-y-2 rounded-lg border border-gray-200 bg-white p-3 shadow-lg">
+        <div
+          id="mobile-navigation"
+          className="absolute  right-0 z-50 mt-2 max-h-[calc(100vh-5.5rem)] space-y-2 overflow-y-auto rounded-lg border border-gray-200 bg-white p-3 shadow-lg"
+        >
           {items.map((item) => (
             <Link
               key={item.href}
