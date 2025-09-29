@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
+import { LabeledAdSlot, PageHeaderAd } from "@/components/ads";
+import { AD_UNITS, isAdUnitConfigured } from "@/config/ads";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -90,6 +92,8 @@ export default async function AboutPage({ params }: PageProps) {
         {dictionary.pages.about.title}
       </h1>
 
+      <PageHeaderAd />
+
       <div className="prose prose-lg max-w-none">
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
@@ -115,6 +119,16 @@ export default async function AboutPage({ params }: PageProps) {
             <li>{dictionary.pages.about.feature5}</li>
           </ul>
         </section>
+
+        {isAdUnitConfigured(AD_UNITS.articleInline) && (
+          <LabeledAdSlot
+            slot={AD_UNITS.articleInline}
+            format="auto"
+            responsive
+            style={{ display: "block", minHeight: 250 }}
+            wrapperClassName="my-10"
+          />
+        )}
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">

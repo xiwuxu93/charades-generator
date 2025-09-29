@@ -3,6 +3,8 @@ import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import PrintButton from "@/components/PrintButton";
 import CopyLinkButton from "@/components/CopyLinkButton";
+import { LabeledAdSlot, PageHeaderAd } from "@/components/ads";
+import { AD_UNITS, isAdUnitConfigured } from "@/config/ads";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -99,6 +101,18 @@ export default async function QuickPlayKitPage({ params }: PageProps) {
             ))}
           </ul>
         </header>
+
+        <PageHeaderAd />
+
+        {isAdUnitConfigured(AD_UNITS.articleInline) && (
+          <LabeledAdSlot
+            slot={AD_UNITS.articleInline}
+            format="auto"
+            responsive
+            style={{ display: "block", minHeight: 250 }}
+            wrapperClassName="mb-10"
+          />
+        )}
 
         <main className="space-y-10">
           {quickKit.sections.map((section: { id: string; title: string; description: string; bullets: string[] }) => (

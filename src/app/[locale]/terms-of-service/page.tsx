@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
+import { LabeledAdSlot, PageHeaderAd } from "@/components/ads";
+import { AD_UNITS, isAdUnitConfigured } from "@/config/ads";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -67,6 +69,8 @@ export default async function TermsOfServicePage({ params }: PageProps) {
         {dictionary.pages.terms.title}
       </h1>
 
+      <PageHeaderAd />
+
       <div className="prose prose-lg max-w-none">
         <p className="text-gray-600 mb-8">
           {dictionary.pages.terms.lastUpdated}
@@ -95,6 +99,16 @@ export default async function TermsOfServicePage({ params }: PageProps) {
             <li>{dictionary.pages.terms.acceptable4}</li>
           </ul>
         </section>
+
+        {isAdUnitConfigured(AD_UNITS.articleInline) && (
+          <LabeledAdSlot
+            slot={AD_UNITS.articleInline}
+            format="auto"
+            responsive
+            style={{ display: "block", minHeight: 250 }}
+            wrapperClassName="my-10"
+          />
+        )}
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">

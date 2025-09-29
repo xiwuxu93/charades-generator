@@ -12,7 +12,7 @@ function getFileModificationTime(filePath: string): Date {
   try {
     const stats = statSync(filePath);
     return stats.mtime;
-  } catch (error) {
+  } catch {
     // If file doesn't exist, return a default date
     return new Date("2025-08-01");
   }

@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback, useRef, lazy, Suspense, useMemo } fro
 import type { CharadesWord } from '@/data/charades-types';
 import { useLocale } from '@/contexts/LocaleContext';
 import { categoryIds, difficultyIds, ageGroupIds } from '@/data/charades-metadata';
+import { LabeledAdSlot, PageHeaderAd } from '@/components/ads';
+import { AD_UNITS } from '@/config/ads';
 
 const DEFAULT_BATCH_SIZE = 3;
 
@@ -53,7 +55,13 @@ export default function CharadesGeneratorOptimized({
   const ageGroupLabels = dictionary.ageGroups;
   const resolvedTitle = title ?? dictionary.generator.defaultTitle;
   const resolvedDescription = description ?? dictionary.generator.defaultDescription;
-  const scenarios = (dictionary.generator.scenarios ?? []) as ScenarioPreset[];
+  const scenarios = useMemo<ScenarioPreset[]>(() => {
+    const source = dictionary.generator.scenarios;
+    if (Array.isArray(source)) {
+      return source as ScenarioPreset[];
+    }
+    return [];
+  }, [dictionary]);
 
   const [selectedCategory, setSelectedCategory] = useState<string>(defaultCategory);
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>(defaultDifficulty);
@@ -283,11 +291,13 @@ export default function CharadesGeneratorOptimized({
   return (
     <div className="max-w-4xl mx-auto px-4 py-6">
       {/* Header - Critical for LCP */}
-      <header className="text-center mb-8">
+      <header className="text-center mb-4">
         <h1 className="text-4xl font-bold text-gray-800 mb-2">{resolvedTitle}</h1>
         <p className="text-gray-600 text-lg">{resolvedDescription}</p>
         <p className="text-gray-500 text-sm mt-2">{dictionary.generator.wordsCountSublabel}</p>
       </header>
+
+      <PageHeaderAd className="mb-8" />
 
       {scenarios.length > 0 && (
         <section className="mb-8 rounded-2xl border border-indigo-100 bg-indigo-50 p-5 sm:p-6">
@@ -583,6 +593,14 @@ export default function CharadesGeneratorOptimized({
           </div>
         </div>
       )}
+
+      <LabeledAdSlot
+        slot={AD_UNITS.generatorResponsive}
+        format="auto"
+        responsive
+        style={{ display: "block", minHeight: 250 }}
+        wrapperClassName="my-8"
+      />
 
       {errorMessage && (
         <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg p-4 mb-8 text-center">

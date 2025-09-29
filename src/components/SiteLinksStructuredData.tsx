@@ -9,6 +9,25 @@ interface SiteLinksStructuredDataProps {
   baseUrl?: string;
 }
 
+function getQuickKitTitle(pages: Dictionary["pages"]): string | undefined {
+  if (typeof pages.quickKit?.title === "string") {
+    return pages.quickKit.title;
+  }
+
+  const howToUse = pages.howToUse;
+  if (howToUse && typeof howToUse === "object" && "quickKit" in howToUse) {
+    const quickKit = (howToUse as { quickKit?: { title?: unknown } }).quickKit;
+    if (quickKit && typeof quickKit === "object" && "title" in quickKit) {
+      const { title } = quickKit as { title?: unknown };
+      if (typeof title === "string") {
+        return title;
+      }
+    }
+  }
+
+  return undefined;
+}
+
 function toAbsoluteUrl(baseUrl: string, locale: Locale, path: string) {
   const localized = buildLocalePath(locale, path);
   if (/^https?:\/\//i.test(localized)) {
@@ -30,8 +49,7 @@ export default function SiteLinksStructuredData({
     url: toAbsoluteUrl(baseUrl, locale, item.href),
   }));
 
-  const pagesAny = dictionary.pages as unknown as Record<string, any>;
-  const quickKitTitle = pagesAny.quickKit?.title ?? pagesAny.howToUse?.quickKit?.title;
+  const quickKitTitle = getQuickKitTitle(dictionary.pages);
 
   const supplementalLinks = [
     { title: dictionary.pages.faq?.title, href: "/faq" },

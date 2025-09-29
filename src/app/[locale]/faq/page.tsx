@@ -1,7 +1,8 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
+import { LabeledAdSlot, PageHeaderAd } from "@/components/ads";
+import { AD_UNITS, isAdUnitConfigured } from "@/config/ads";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -103,6 +104,8 @@ export default async function FAQPage({ params }: PageProps) {
         {dictionary.pages.faq.title}
       </h1>
 
+      <PageHeaderAd />
+
       <div className="space-y-8">
         {faqs.map((faq, index) => (
           <div key={index} className="border-b border-gray-200 pb-6">
@@ -115,6 +118,16 @@ export default async function FAQPage({ params }: PageProps) {
           </div>
         ))}
       </div>
+
+      {isAdUnitConfigured(AD_UNITS.articleInline) && (
+        <LabeledAdSlot
+          slot={AD_UNITS.articleInline}
+          format="auto"
+          responsive
+          style={{ display: "block", minHeight: 250 }}
+          wrapperClassName="my-10"
+        />
+      )}
 
       <div className="mt-12 p-6 bg-blue-50 rounded-lg">
         <h3 className="text-xl font-semibold text-blue-900 mb-4">

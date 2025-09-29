@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import PlaybookSubmissionForm from "@/components/PlaybookSubmissionForm";
+import { LabeledAdSlot, PageHeaderAd } from "@/components/ads";
+import { AD_UNITS, isAdUnitConfigured } from "@/config/ads";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -104,6 +106,8 @@ export default async function ContactPage({ params }: PageProps) {
       <h1 className="text-3xl font-bold text-gray-900 mb-6">
         {dictionary.pages.contact.title}
       </h1>
+
+      <PageHeaderAd />
       <p className="text-gray-700 mb-4">{dictionary.pages.contact.intro}</p>
       <p className="text-sm text-gray-500 mb-8">{dictionary.pages.contact.responseTime}</p>
 
@@ -124,6 +128,16 @@ export default async function ContactPage({ params }: PageProps) {
           </section>
         ))}
       </div>
+
+      {isAdUnitConfigured(AD_UNITS.articleInline) && (
+        <LabeledAdSlot
+          slot={AD_UNITS.articleInline}
+          format="auto"
+          responsive
+          style={{ display: "block", minHeight: 250 }}
+          wrapperClassName="mb-10"
+        />
+      )}
 
       <section className="bg-blue-50 border border-blue-200 rounded-lg p-5">
         <h2 className="text-lg font-semibold text-blue-900 mb-3">

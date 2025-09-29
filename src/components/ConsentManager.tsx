@@ -70,6 +70,7 @@ declare global {
   interface Window {
     __cgConsentDefaultApplied?: boolean;
     dataLayer?: unknown[][];
+    __cgScriptsEnabled?: boolean;
   }
 }
 
@@ -95,6 +96,18 @@ export default function ConsentManager({ initialStatus, locale, copy, isProducti
       setScriptsEnabled(false);
     }
   }, [status, isProduction]);
+
+  useEffect(() => {
+    if (!isProduction) return;
+    if (scriptsEnabled) {
+      document.dispatchEvent(new CustomEvent("cg-scripts-enabled"));
+      if (typeof window !== "undefined") {
+        window.__cgScriptsEnabled = true;
+      }
+    } else if (typeof window !== "undefined") {
+      window.__cgScriptsEnabled = false;
+    }
+  }, [scriptsEnabled, isProduction]);
 
   const handleAccept = () => {
     setConsentCookie("granted");

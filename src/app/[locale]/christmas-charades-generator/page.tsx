@@ -5,6 +5,8 @@ import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import CharadesGeneratorOptimized from "@/components/CharadesGeneratorOptimized";
 import StructuredData from "@/components/StructuredData";
+import { LabeledAdSlot } from "@/components/ads";
+import { AD_UNITS, isAdUnitConfigured } from "@/config/ads";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -116,6 +118,16 @@ export default async function ChristmasCharadesPage({ params }: PageProps) {
             ))}
           </div>
         </section>
+
+        {isAdUnitConfigured(AD_UNITS.articleInline) && (
+          <LabeledAdSlot
+            slot={AD_UNITS.articleInline}
+            format="auto"
+            responsive
+            style={{ display: "block", minHeight: 280 }}
+            wrapperClassName="my-8"
+          />
+        )}
 
         <section className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">{copy.categoriesTitle}</h2>

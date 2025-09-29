@@ -6,6 +6,8 @@ import { useLocale } from '@/contexts/LocaleContext';
 import { buildLocalePath } from '@/utils/localePaths';
 import type { CharadesWord } from '@/data/charades-types';
 import CommunityPlaybooks from '@/components/CommunityPlaybooks';
+import { LabeledAdSlot } from '@/components/ads';
+import { AD_UNITS, isAdUnitConfigured } from '@/config/ads';
 
 interface HomeLandingProps {
   initialWords: CharadesWord[];
@@ -22,6 +24,19 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
   return (
     <>
       <CharadesGeneratorOptimized initialWords={initialWords} />
+
+      {isAdUnitConfigured(AD_UNITS.homeMidpage) && (
+        <section className="bg-gray-50 border-t border-gray-200">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <LabeledAdSlot
+              slot={AD_UNITS.homeMidpage}
+              format="auto"
+              responsive
+              style={{ display: "block", minHeight: 280 }}
+            />
+          </div>
+        </section>
+      )}
 
       <section className="bg-white border-t border-gray-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">

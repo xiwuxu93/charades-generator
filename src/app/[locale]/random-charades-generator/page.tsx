@@ -5,6 +5,8 @@ import { Metadata } from "next";
 import { pickWords } from "@/utils/charades";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
+import { LabeledAdSlot } from "@/components/ads";
+import { AD_UNITS, isAdUnitConfigured } from "@/config/ads";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -109,6 +111,16 @@ export default async function RandomCharadesPage({ params }: PageProps) {
             {copy.differenceFooter.after}
           </p>
         </section>
+
+        {isAdUnitConfigured(AD_UNITS.articleInline) && (
+          <LabeledAdSlot
+            slot={AD_UNITS.articleInline}
+            format="auto"
+            responsive
+            style={{ display: "block", minHeight: 280 }}
+            wrapperClassName="my-8"
+          />
+        )}
 
         <section className="bg-gradient-to-r from-indigo-100 to-sky-100 rounded-lg p-6 mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{copy.presetsTitle}</h2>
