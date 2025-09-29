@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useId } from "react";
 import type { CSSProperties } from "react";
 import { ADSENSE_CLIENT, isAdUnitConfigured } from "@/config/ads";
 import { usePathname } from "next/navigation";
@@ -26,10 +26,13 @@ export default function AdSlot({
 }: AdSlotProps) {
   const slotRef = useRef<HTMLModElement | null>(null);
   const pathname = usePathname();
+  const id = useId();
   const [consentEnabled, setConsentEnabled] = useState<boolean>(() => {
     if (typeof window === "undefined") return false;
     return Boolean((window as Window & { __cgScriptsEnabled?: boolean }).__cgScriptsEnabled);
   });
+  const [refreshKey, setRefreshKey] = useState<number>(0);
+
   useEffect(() => {
     const handleScriptsEnabled = () => {
       setConsentEnabled(true);
@@ -41,6 +44,11 @@ export default function AdSlot({
       document.removeEventListener("cg-scripts-enabled", handleScriptsEnabled);
     };
   }, []);
+
+  // 监听路径变化，强制刷新广告
+  useEffect(() => {
+    setRefreshKey(prev => prev + 1);
+  }, [pathname]);
 
   useEffect(() => {
     if (!consentEnabled) return;
@@ -57,20 +65,28 @@ export default function AdSlot({
       adsGlobal.adsbygoogle = [];
     }
 
-    // 使用 setTimeout 确保 DOM 完全渲染后再推送广告
+    // 延迟推送广告，确保页面完全加载
     const timeoutId = setTimeout(() => {
       try {
-        // 检查元素是否仍然存在于 DOM 中
-        if (element.isConnected) {
+        // 双重检查元素状态
+        if (element.isConnected && element.offsetParent !== null) {
+          // 重新设置所有必要的属性
+          element.setAttribute("data-ad-client", ADSENSE_CLIENT);
+          element.setAttribute("data-ad-slot", slot);
+          if (format) element.setAttribute("data-ad-format", format);
+          if (layout) element.setAttribute("data-ad-layout", layout);
+          if (layoutKey) element.setAttribute("data-ad-layout-key", layoutKey);
+          if (responsive) element.setAttribute("data-full-width-responsive", "true");
+
           adsGlobal.adsbygoogle!.push({});
         }
       } catch (error) {
         console.warn("AdSense push failed:", error);
       }
-    }, 100);
+    }, 300);
 
     return () => clearTimeout(timeoutId);
-  }, [consentEnabled, slot, pathname]);
+  }, [consentEnabled, slot, pathname, format, layout, layoutKey, responsive, refreshKey]);
 
   if (!slot || !isAdUnitConfigured(slot)) {
     return null;
@@ -78,7 +94,7 @@ export default function AdSlot({
 
   const isProduction = process.env.NODE_ENV === "production";
   const resolvedStyle: CSSProperties = style ?? { display: "block", minHeight: 90 };
-  const elementKey = `${slot}-${pathname}`;
+  const elementKey = `${slot}-${pathname}-${id}`;
 
   return (
     <ins

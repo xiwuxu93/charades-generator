@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { buildLocalePath } from "@/utils/localePaths";
@@ -18,8 +18,23 @@ export default function MobileNavigation({ locale, items }: MobileNavigationProp
   const toggleMenu = () => setIsOpen((previous) => !previous);
   const closeMenu = () => setIsOpen(false);
 
+  // 点击外部关闭菜单
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('#mobile-navigation') && !target.closest('[aria-controls="mobile-navigation"]')) {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isOpen]);
+
   return (
-    <div className="md:hidden">
+    <div className="md:hidden relative">
       <button
         onClick={toggleMenu}
         className="p-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-blue-600"
@@ -37,7 +52,10 @@ export default function MobileNavigation({ locale, items }: MobileNavigationProp
       </button>
 
       {isOpen && (
-        <div id="mobile-navigation" className="mt-2 space-y-2 rounded-lg border border-gray-200 bg-white p-3 shadow-lg">
+        <div
+          id="mobile-navigation"
+          className="absolute right-0 top-full mt-2 w-80 max-w-[calc(100vw-2rem)] space-y-2 rounded-lg border border-gray-200 bg-white p-3 shadow-xl z-[200]"
+        >
           {items.map((item) => (
             <Link
               key={item.href}

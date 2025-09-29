@@ -172,7 +172,7 @@ export default async function RootLayout({
         <style>{`
           *{box-sizing:border-box}
           body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--background);color:var(--foreground)}
-          .critical-nav{position:sticky;top:0;z-index:50;background:white;border-bottom:1px solid #e5e7eb}
+          .critical-nav{position:sticky;top:0;z-index:100;background:white;border-bottom:1px solid #e5e7eb}
           .critical-container{max-width:72rem;margin:0 auto;padding:0 1rem}
           .critical-flex{display:flex;justify-content:space-between;align-items:center;height:4rem}
           .critical-logo{height:4rem;width:auto}
