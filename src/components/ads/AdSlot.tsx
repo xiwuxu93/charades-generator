@@ -30,13 +30,29 @@ export default function AdSlot({
   );
 
   useEffect(() => {
+    loadAttempts.current = 0;
+    if (slotRef.current) {
+      slotRef.current.removeAttribute("data-cg-requested");
+    }
+  }, [slot]);
+
+  useEffect(() => {
     if (!slot) return;
+
+    const hasCompletedRender = () => slotRef.current?.getAttribute("data-adsbygoogle-status") === "done";
+    const hasPendingRequest = () => slotRef.current?.getAttribute("data-cg-requested") === "true";
 
     const attemptLoad = () => {
       if (!slotRef.current) return;
+      if (hasCompletedRender()) return;
+
       const ads = (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle;
       if (!Array.isArray(ads)) return;
+
       try {
+        if (!hasPendingRequest()) {
+          slotRef.current.setAttribute("data-cg-requested", "true");
+        }
         ads.push({});
         loadAttempts.current += 1;
       } catch {
@@ -76,12 +92,18 @@ export default function AdSlot({
       return;
     }
 
+    const hasCompletedRender = () => slotRef.current?.getAttribute("data-adsbygoogle-status") === "done";
     const initialAttempts = loadAttempts.current;
     const interval = window.setInterval(() => {
       if (!slotRef.current) {
         window.clearInterval(interval);
         return;
       }
+
+       if (hasCompletedRender()) {
+         window.clearInterval(interval);
+         return;
+       }
 
       ads.push({});
       loadAttempts.current += 1;
