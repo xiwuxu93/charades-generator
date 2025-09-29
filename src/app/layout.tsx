@@ -9,6 +9,75 @@ import "./globals.css";
 const LOCALE_COOKIE = "site-locale";
 const CONSENT_COOKIE = "cg-consent";
 
+const CONSENT_REQUIRED_COUNTRIES = new Set([
+  "AT",
+  "BE",
+  "BG",
+  "HR",
+  "CY",
+  "CZ",
+  "DK",
+  "EE",
+  "FI",
+  "FR",
+  "DE",
+  "GR",
+  "HU",
+  "IS",
+  "IE",
+  "IT",
+  "LI",
+  "LT",
+  "LU",
+  "LV",
+  "MT",
+  "NL",
+  "NO",
+  "PL",
+  "PT",
+  "RO",
+  "SE",
+  "SI",
+  "SK",
+  "ES",
+  "GB",
+  "UK",
+  "CH",
+  "GG",
+  "IM",
+  "JE",
+]);
+
+const CONSENT_REQUIRED_LOCALES = new Set<Locale>(["es"]);
+
+function getCountryFromHeaders(headerStore: Headers) {
+  const candidates = [
+    "cf-ipcountry",
+    "x-vercel-ip-country",
+    "x-forwarded-country",
+    "x-country-code",
+  ];
+
+  for (const key of candidates) {
+    const value = headerStore.get(key);
+    if (!value) continue;
+    const normalized = value.trim().toUpperCase();
+    if (normalized && normalized !== "T1" && normalized !== "XX") {
+      return normalized;
+    }
+  }
+
+  return undefined;
+}
+
+function regionRequiresConsent(countryCode: string | undefined, locale: Locale) {
+  if (countryCode && CONSENT_REQUIRED_COUNTRIES.has(countryCode)) {
+    return true;
+  }
+
+  return CONSENT_REQUIRED_LOCALES.has(locale);
+}
+
 function resolveLocale(cookieLocale: string | undefined, headerLocale: string | null): Locale {
   const fallback = cookieLocale ?? headerLocale ?? DEFAULT_LOCALE;
   return isLocale(fallback) ? fallback : DEFAULT_LOCALE;
@@ -82,8 +151,14 @@ export default async function RootLayout({
   const cookieStore = await cookies();
   const headerStore = await headers();
   const locale = resolveLocale(cookieStore.get(LOCALE_COOKIE)?.value, headerStore.get("x-site-locale"));
+  const countryCode = getCountryFromHeaders(headerStore);
   const consentCookie = cookieStore.get(CONSENT_COOKIE)?.value;
-  const consentStatus = consentCookie === "granted" ? "granted" : consentCookie === "denied" ? "denied" : "pending";
+  const consentStatus = (() => {
+    if (consentCookie === "granted" || consentCookie === "denied") {
+      return consentCookie;
+    }
+    return regionRequiresConsent(countryCode, locale) ? "pending" : "granted";
+  })();
   const dictionary = getDictionary(locale);
   const htmlAttributes = localeToHtmlAttributes(locale);
 
