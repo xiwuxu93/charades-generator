@@ -72,6 +72,7 @@ declare global {
     __cgConsentDefaultApplied?: boolean;
     dataLayer?: unknown[][];
     __cgScriptsEnabled?: boolean;
+    __cgAdsenseScriptLoaded?: boolean;
   }
 }
 
@@ -118,24 +119,44 @@ export default function ConsentManager({ initialStatus, locale, copy, isProducti
     if (!isProduction || !scriptsEnabled) return;
     if (!ADSENSE_CLIENT) return;
     if (!hasAdUnitsConfigured) return;
-    if (typeof document === "undefined") return;
+    if (typeof document === "undefined" || typeof window === "undefined") return;
 
-    const existing = document.querySelector('script[data-cg-adsense="true"]');
+    const globalWindow = window as Window;
+    const scriptSrc = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(ADSENSE_CLIENT)}`;
+
+    if (globalWindow.__cgAdsenseScriptLoaded) {
+      if (!Array.isArray((globalWindow as unknown as { adsbygoogle?: unknown[] }).adsbygoogle)) {
+        (globalWindow as unknown as { adsbygoogle?: unknown[] }).adsbygoogle = [];
+      }
+      return;
+    }
+
+    const existing = Array.from(document.querySelectorAll<HTMLScriptElement>("script[src]")).find((script) =>
+      script.src.includes("pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"),
+    );
+
     if (existing) {
+      globalWindow.__cgAdsenseScriptLoaded = true;
+      if (!Array.isArray((globalWindow as unknown as { adsbygoogle?: unknown[] }).adsbygoogle)) {
+        (globalWindow as unknown as { adsbygoogle?: unknown[] }).adsbygoogle = [];
+      }
       return;
     }
 
     const script = document.createElement("script");
     script.async = true;
-    script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(ADSENSE_CLIENT)}`;
+    script.src = scriptSrc;
     script.crossOrigin = "anonymous";
-    script.setAttribute("data-cg-adsense", "true");
+    script.onload = () => {
+      globalWindow.__cgAdsenseScriptLoaded = true;
+      if (!Array.isArray((globalWindow as unknown as { adsbygoogle?: unknown[] }).adsbygoogle)) {
+        (globalWindow as unknown as { adsbygoogle?: unknown[] }).adsbygoogle = [];
+      }
+    };
+    script.onerror = () => {
+      globalWindow.__cgAdsenseScriptLoaded = false;
+    };
     document.head.appendChild(script);
-
-    const adsGlobal = window as unknown as { adsbygoogle?: unknown[] };
-    if (!Array.isArray(adsGlobal.adsbygoogle)) {
-      adsGlobal.adsbygoogle = [];
-    }
   }, [isProduction, scriptsEnabled, hasAdUnitsConfigured]);
 
   const handleAccept = () => {

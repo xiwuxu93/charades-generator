@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { ADSENSE_CLIENT, isAdUnitConfigured } from "@/config/ads";
+import { usePathname } from "next/navigation";
 
 export interface AdSlotProps {
   slot?: string;
@@ -25,6 +26,8 @@ export default function AdSlot({
 }: AdSlotProps) {
   const slotRef = useRef<HTMLModElement | null>(null);
   const [consentEnabled, setConsentEnabled] = useState(false);
+  const [renderKey, setRenderKey] = useState(0);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -36,6 +39,10 @@ export default function AdSlot({
       document.removeEventListener("cg-scripts-enabled", handler);
     };
   }, []);
+
+  useEffect(() => {
+    setRenderKey((prev) => prev + 1);
+  }, [pathname, slot]);
 
   useEffect(() => {
     const el = slotRef.current;
@@ -51,20 +58,10 @@ export default function AdSlot({
     const el = slotRef.current;
     if (!el) return;
 
-    if (el.getAttribute("data-adsbygoogle-status") === "done") {
-      return;
-    }
-
-    if (el.getAttribute("data-ad-slot-initialized") === "true") {
-      return;
-    }
-
     const adsGlobal = window as unknown as { adsbygoogle?: unknown[] };
     if (!Array.isArray(adsGlobal.adsbygoogle)) {
       adsGlobal.adsbygoogle = [];
     }
-
-    el.setAttribute("data-ad-slot-initialized", "true");
 
     try {
       adsGlobal.adsbygoogle!.push({});
@@ -72,13 +69,7 @@ export default function AdSlot({
       el.removeAttribute("data-ad-slot-initialized");
       console.warn("AdSense push failed", error);
     }
-
-    return () => {
-      if (el.getAttribute("data-adsbygoogle-status") !== "done") {
-        el.removeAttribute("data-ad-slot-initialized");
-      }
-    };
-  }, [consentEnabled, slot]);
+  }, [consentEnabled, slot, renderKey]);
 
   if (!slot || !isAdUnitConfigured(slot)) {
     return null;
@@ -89,6 +80,7 @@ export default function AdSlot({
 
   return (
     <ins
+      key={renderKey}
       className={`adsbygoogle${className ? ` ${className}` : ""}`}
       ref={slotRef}
       style={resolvedStyle}
