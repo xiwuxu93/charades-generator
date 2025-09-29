@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import type { CSSProperties } from "react";
 import { ADSENSE_CLIENT, isAdUnitConfigured } from "@/config/ads";
-import { usePathname } from "next/navigation";
 
 export interface AdSlotProps {
   slot?: string;
@@ -13,6 +12,14 @@ export interface AdSlotProps {
   layout?: string;
   layoutKey?: string;
   responsive?: boolean;
+}
+
+function enqueueAdRender(ins: HTMLElement) {
+  if (!(window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle) {
+    (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle = [];
+  }
+  (window as unknown as { adsbygoogle: unknown[] }).adsbygoogle.push({});
+  ins.dataset.adsRequested = "true";
 }
 
 export default function AdSlot({
@@ -25,51 +32,32 @@ export default function AdSlot({
   responsive = true,
 }: AdSlotProps) {
   const slotRef = useRef<HTMLModElement | null>(null);
-  const [consentEnabled, setConsentEnabled] = useState(false);
-  const [renderKey, setRenderKey] = useState(0);
-  const pathname = usePathname();
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    setConsentEnabled(Boolean((window as Window & { __cgScriptsEnabled?: boolean }).__cgScriptsEnabled));
+    const ins = slotRef.current;
+    if (!ins) return;
 
-    const handler = () => setConsentEnabled(true);
+    ins.removeAttribute("data-adsbygoogle-status");
+    ins.dataset.adsRequested = "false";
+
+    const render = () => {
+      if (!slot) return;
+      if (!isAdUnitConfigured(slot)) return;
+      if (ins.dataset.adsbygoogleStatus === "done") return;
+      if (ins.dataset.adsRequested === "true") return;
+      enqueueAdRender(ins);
+    };
+
+    if ((window as Window & { __cgScriptsEnabled?: boolean }).__cgScriptsEnabled) {
+      render();
+    }
+
+    const handler = () => render();
     document.addEventListener("cg-scripts-enabled", handler);
     return () => {
       document.removeEventListener("cg-scripts-enabled", handler);
     };
-  }, []);
-
-  useEffect(() => {
-    setRenderKey((prev) => prev + 1);
-  }, [pathname, slot]);
-
-  useEffect(() => {
-    const el = slotRef.current;
-    if (!el) return;
-    el.removeAttribute("data-ad-slot-initialized");
-    el.removeAttribute("data-adsbygoogle-status");
   }, [slot]);
-
-  useEffect(() => {
-    if (!consentEnabled) return;
-    if (!slot || !isAdUnitConfigured(slot)) return;
-
-    const el = slotRef.current;
-    if (!el) return;
-
-    const adsGlobal = window as unknown as { adsbygoogle?: unknown[] };
-    if (!Array.isArray(adsGlobal.adsbygoogle)) {
-      adsGlobal.adsbygoogle = [];
-    }
-
-    try {
-      adsGlobal.adsbygoogle!.push({});
-    } catch (error) {
-      el.removeAttribute("data-ad-slot-initialized");
-      console.warn("AdSense push failed", error);
-    }
-  }, [consentEnabled, slot, renderKey]);
 
   if (!slot || !isAdUnitConfigured(slot)) {
     return null;
@@ -80,7 +68,7 @@ export default function AdSlot({
 
   return (
     <ins
-      key={renderKey}
+      key={slot}
       className={`adsbygoogle${className ? ` ${className}` : ""}`}
       ref={slotRef}
       style={resolvedStyle}
