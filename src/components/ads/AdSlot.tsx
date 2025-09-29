@@ -30,34 +30,20 @@ export default function AdSlot({
     if (typeof window === "undefined") return false;
     return Boolean((window as Window & { __cgScriptsEnabled?: boolean }).__cgScriptsEnabled);
   });
-  const [adsenseLoaded, setAdsenseLoaded] = useState<boolean>(() => {
-    if (typeof window === "undefined") return false;
-    return Boolean((window as Window & { __cgAdsenseScriptLoaded?: boolean }).__cgAdsenseScriptLoaded);
-  });
-
   useEffect(() => {
     const handleScriptsEnabled = () => {
-      console.log("Scripts enabled event received");
       setConsentEnabled(true);
-    };
-    const handleAdsenseLoaded = () => {
-      console.log("AdSense loaded event received");
-      setAdsenseLoaded(true);
     };
 
     document.addEventListener("cg-scripts-enabled", handleScriptsEnabled);
-    document.addEventListener("cg-adsense-loaded", handleAdsenseLoaded);
 
     return () => {
       document.removeEventListener("cg-scripts-enabled", handleScriptsEnabled);
-      document.removeEventListener("cg-adsense-loaded", handleAdsenseLoaded);
     };
   }, []);
 
   useEffect(() => {
-    console.log(`AdSlot effect: consent=${consentEnabled}, adsense=${adsenseLoaded}, slot=${slot}, path=${pathname}`);
-
-    if (!consentEnabled || !adsenseLoaded) return;
+    if (!consentEnabled) return;
     if (!slot || !isAdUnitConfigured(slot)) return;
     const element = slotRef.current;
     if (!element) return;
@@ -76,19 +62,15 @@ export default function AdSlot({
       try {
         // 检查元素是否仍然存在于 DOM 中
         if (element.isConnected) {
-          console.log(`Pushing ad for slot: ${slot} on path: ${pathname}`);
           adsGlobal.adsbygoogle!.push({});
-          console.log(`Ad pushed successfully for slot: ${slot}`);
-        } else {
-          console.warn(`Element not connected for slot: ${slot}`);
         }
       } catch (error) {
-        console.error("AdSense push failed", { slot, pathname, error });
+        console.warn("AdSense push failed:", error);
       }
-    }, 150);
+    }, 100);
 
     return () => clearTimeout(timeoutId);
-  }, [consentEnabled, adsenseLoaded, slot, pathname]);
+  }, [consentEnabled, slot, pathname]);
 
   if (!slot || !isAdUnitConfigured(slot)) {
     return null;
