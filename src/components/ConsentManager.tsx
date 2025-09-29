@@ -78,6 +78,10 @@ declare global {
 export default function ConsentManager({ initialStatus, locale, copy, isProduction }: ConsentManagerProps) {
   const [status, setStatus] = useState<ConsentStatus>(initialStatus);
   const [scriptsEnabled, setScriptsEnabled] = useState<boolean>(isProduction && initialStatus === "granted");
+  const hasAdUnitsConfigured = useMemo(
+    () => Object.values(AD_UNITS).some((value) => isAdUnitConfigured(value)),
+    [],
+  );
 
   useEffect(() => {
     if (!isProduction) return;
@@ -133,11 +137,6 @@ export default function ConsentManager({ initialStatus, locale, copy, isProducti
       adsGlobal.adsbygoogle = [];
     }
   }, [isProduction, scriptsEnabled, hasAdUnitsConfigured]);
-
-  const hasAdUnitsConfigured = useMemo(
-    () => Object.values(AD_UNITS).some((value) => isAdUnitConfigured(value)),
-    [],
-  );
 
   const handleAccept = () => {
     setConsentCookie("granted");
