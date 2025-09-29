@@ -128,6 +128,11 @@ export default function ConsentManager({ initialStatus, locale, copy, isProducti
       if (!Array.isArray((globalWindow as unknown as { adsbygoogle?: unknown[] }).adsbygoogle)) {
         (globalWindow as unknown as { adsbygoogle?: unknown[] }).adsbygoogle = [];
       }
+      // 如果脚本已经加载，立即触发事件
+      setTimeout(() => {
+        console.log("AdSense script already loaded, dispatching event");
+        document.dispatchEvent(new CustomEvent("cg-adsense-loaded"));
+      }, 0);
       return;
     }
 
@@ -140,6 +145,11 @@ export default function ConsentManager({ initialStatus, locale, copy, isProducti
       if (!Array.isArray((globalWindow as unknown as { adsbygoogle?: unknown[] }).adsbygoogle)) {
         (globalWindow as unknown as { adsbygoogle?: unknown[] }).adsbygoogle = [];
       }
+      // 如果脚本已经存在，立即触发事件
+      setTimeout(() => {
+        console.log("AdSense script found in DOM, dispatching event");
+        document.dispatchEvent(new CustomEvent("cg-adsense-loaded"));
+      }, 0);
       return;
     }
 
@@ -152,6 +162,9 @@ export default function ConsentManager({ initialStatus, locale, copy, isProducti
       if (!Array.isArray((globalWindow as unknown as { adsbygoogle?: unknown[] }).adsbygoogle)) {
         (globalWindow as unknown as { adsbygoogle?: unknown[] }).adsbygoogle = [];
       }
+      // 触发事件通知所有广告组件重新加载
+      console.log("AdSense script loaded, dispatching event");
+      document.dispatchEvent(new CustomEvent("cg-adsense-loaded"));
     };
     script.onerror = () => {
       globalWindow.__cgAdsenseScriptLoaded = false;
