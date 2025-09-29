@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { ADSENSE_CLIENT, isAdUnitConfigured } from "@/config/ads";
+import { usePathname } from "next/navigation";
 
 export interface AdSlotProps {
   slot?: string;
@@ -12,14 +13,6 @@ export interface AdSlotProps {
   layout?: string;
   layoutKey?: string;
   responsive?: boolean;
-}
-
-function enqueueAdRender(ins: HTMLElement) {
-  if (!(window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle) {
-    (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle = [];
-  }
-  (window as unknown as { adsbygoogle: unknown[] }).adsbygoogle.push({});
-  ins.dataset.adsRequested = "true";
 }
 
 export default function AdSlot({
@@ -32,32 +25,41 @@ export default function AdSlot({
   responsive = true,
 }: AdSlotProps) {
   const slotRef = useRef<HTMLModElement | null>(null);
+  const pathname = usePathname();
+  const [consentEnabled, setConsentEnabled] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return Boolean((window as Window & { __cgScriptsEnabled?: boolean }).__cgScriptsEnabled);
+  });
 
   useEffect(() => {
-    const ins = slotRef.current;
-    if (!ins) return;
+    const handler = () => setConsentEnabled(true);
+    document.addEventListener("cg-scripts-enabled", handler);
+    return () => document.removeEventListener("cg-scripts-enabled", handler);
+  }, []);
 
-    ins.removeAttribute("data-adsbygoogle-status");
-    ins.dataset.adsRequested = "false";
+  useEffect(() => {
+    const element = slotRef.current;
+    if (!element) return;
+    element.removeAttribute("data-adsbygoogle-status");
+  }, [slot, pathname]);
 
-    const render = () => {
-      if (!slot) return;
-      if (!isAdUnitConfigured(slot)) return;
-      if (ins.dataset.adsbygoogleStatus === "done") return;
-      if (ins.dataset.adsRequested === "true") return;
-      enqueueAdRender(ins);
-    };
+  useEffect(() => {
+    if (!consentEnabled) return;
+    if (!slot || !isAdUnitConfigured(slot)) return;
+    const element = slotRef.current;
+    if (!element) return;
 
-    if ((window as Window & { __cgScriptsEnabled?: boolean }).__cgScriptsEnabled) {
-      render();
+    const adsGlobal = window as unknown as { adsbygoogle?: unknown[] };
+    if (!Array.isArray(adsGlobal.adsbygoogle)) {
+      adsGlobal.adsbygoogle = [];
     }
 
-    const handler = () => render();
-    document.addEventListener("cg-scripts-enabled", handler);
-    return () => {
-      document.removeEventListener("cg-scripts-enabled", handler);
-    };
-  }, [slot]);
+    try {
+      adsGlobal.adsbygoogle!.push({});
+    } catch (error) {
+      console.warn("AdSense push failed", error);
+    }
+  }, [consentEnabled, slot, pathname]);
 
   if (!slot || !isAdUnitConfigured(slot)) {
     return null;
@@ -65,10 +67,11 @@ export default function AdSlot({
 
   const isProduction = process.env.NODE_ENV === "production";
   const resolvedStyle: CSSProperties = style ?? { display: "block", minHeight: 90 };
+  const elementKey = `${slot}-${pathname}`;
 
   return (
     <ins
-      key={slot}
+      key={elementKey}
       className={`adsbygoogle${className ? ` ${className}` : ""}`}
       ref={slotRef}
       style={resolvedStyle}
