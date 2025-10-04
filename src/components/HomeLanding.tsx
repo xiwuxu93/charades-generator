@@ -34,12 +34,12 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">{dictionary.home.themedHeading}</h2>
                 <p className="text-gray-600 mt-2">{dictionary.home.themedDescription}</p>
               </div>
-              <Link
+              {/* <Link
                 href={buildLocalePath(locale, '/random-charades-generator/')}
                 className="inline-flex items-center justify-center rounded-md border border-blue-500 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50"
               >
                 {dictionary.home.luckyLabel}
-              </Link>
+              </Link> */}
             </div>
           </div>
 
