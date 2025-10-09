@@ -187,7 +187,7 @@ export const en = {
     adults: "Adults Only",
   },
   generator: {
-    defaultTitle: "Charades Generator - Free & Instant",
+    defaultTitle: "Charades Generator",
     defaultDescription:
       "Generate charades words instantly from our database of 1000+ carefully curated words and ideas!",
     wordsCountSublabel: "1000+ words across 9 categories",
@@ -214,7 +214,8 @@ export const en = {
     scenarioToggleOpen: "Show presets",
     scenarioToggleClose: "Hide presets",
     scenarioMarkUsed: "I used this preset",
-    scenarioMarkedMessage: "Thanks! Your feedback helps us prioritise new tweaks.",
+    scenarioMarkedMessage:
+      "Thanks! Your feedback helps us prioritise new tweaks.",
     cardCountLabel: "{{count}} cards",
     roundLengthLabel: "Suggested round length",
     tipLabel: "Host tip",
@@ -258,7 +259,8 @@ export const en = {
       {
         id: "adult-party",
         title: "Adult party chaos",
-        description: "Meme-heavy prompts and trickier clues for late-night laughs.",
+        description:
+          "Meme-heavy prompts and trickier clues for late-night laughs.",
         category: "funny",
         difficulty: "medium",
         ageGroup: "adults",
@@ -364,17 +366,20 @@ export const en = {
       items: [
         {
           title: "30-second rules rundown",
-          description: "Printable cheat sheet covering turn order, gestures, and easy tie-breakers.",
+          description:
+            "Printable cheat sheet covering turn order, gestures, and easy tie-breakers.",
           href: "/quick-play-kit#rules",
         },
         {
           title: "Timer & score tracker",
-          description: "One-page tracker with round timer suggestions and space for three teams.",
+          description:
+            "One-page tracker with round timer suggestions and space for three teams.",
           href: "/quick-play-kit#score",
         },
         {
           title: "Signal legend poster",
-          description: "Show new players what the movie/book/song and syllable signals look like.",
+          description:
+            "Show new players what the movie/book/song and syllable signals look like.",
           href: "/quick-play-kit#signals",
         },
       ],
@@ -612,7 +617,7 @@ export const en = {
       printCta: "Print this kit",
       copyLink: "Copy shareable link",
       copyConfirmation: "Link copied to your clipboard!",
-    copyError: "Copy unavailable. Use your browser menu instead.",
+      copyError: "Copy unavailable. Use your browser menu instead.",
       intro: [
         "Minimal-ink layout sized for Letter and A4.",
         "Works alongside the family, classroom, team, and adult presets.",
@@ -694,7 +699,8 @@ export const en = {
     },
     changelog: {
       title: "Release notes & update log",
-      description: "Track the latest word packs, features, and compliance upgrades across the generator.",
+      description:
+        "Track the latest word packs, features, and compliance upgrades across the generator.",
       items: [
         {
           date: "2025-09-25",
@@ -858,15 +864,19 @@ export const en = {
         scenarioLabel: "Where do you use this playbook?",
         playersLabel: "Typical group size",
         difficultyLabel: "Favorite categories or difficulties",
-        detailsLabel: "Share the flow, house rules, timer tips, or printable resources you use.",
-        permissionLabel: "You can publish my playbook (credit me by first name / role)",
+        detailsLabel:
+          "Share the flow, house rules, timer tips, or printable resources you use.",
+        permissionLabel:
+          "You can publish my playbook (credit me by first name / role)",
         submit: "Review & send",
         subject: "Charades playbook submission",
         mailtoIntro: "Here’s my charades playbook:",
-        scenarioPlaceholder: "Family night, Grade 4 classroom, Product team retro, etc.",
+        scenarioPlaceholder:
+          "Family night, Grade 4 classroom, Product team retro, etc.",
         playersPlaceholder: "e.g. 6–8 players",
-        detailsPlaceholder: "Explain how you set up, any custom signals, scoring twists, or printable resources.",
-        confirmation: "Open your email client to finish sending."
+        detailsPlaceholder:
+          "Explain how you set up, any custom signals, scoring twists, or printable resources.",
+        confirmation: "Open your email client to finish sending.",
       },
     },
   },
