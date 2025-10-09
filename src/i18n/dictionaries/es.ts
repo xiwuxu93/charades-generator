@@ -189,7 +189,7 @@ export const es = {
     adults: "Solo adultos",
   },
   generator: {
-    defaultTitle: "Generador de charadas - Gratis e instantáneo",
+    defaultTitle: "Generador de charadas",
     defaultDescription:
       "Crea palabras para charadas al instante con nuestra base de datos curada de más de 1000 ideas.",
     wordsCountSublabel: "Más de 1000 palabras en 9 categorías",
@@ -217,7 +217,8 @@ export const es = {
     scenarioToggleOpen: "Mostrar presets",
     scenarioToggleClose: "Ocultar presets",
     scenarioMarkUsed: "Usé este preset",
-    scenarioMarkedMessage: "¡Gracias! Usaremos tu feedback para mejorar los próximos ajustes.",
+    scenarioMarkedMessage:
+      "¡Gracias! Usaremos tu feedback para mejorar los próximos ajustes.",
     cardCountLabel: "{{count}} tarjetas",
     roundLengthLabel: "Duración sugerida",
     tipLabel: "Consejo de anfitrión",
@@ -228,7 +229,8 @@ export const es = {
       {
         id: "family-night",
         title: "Noche familiar",
-        description: "Lista equilibrada para edades mixtas con comodín opcional.",
+        description:
+          "Lista equilibrada para edades mixtas con comodín opcional.",
         category: "all",
         difficulty: "easy",
         ageGroup: "all",
@@ -239,7 +241,8 @@ export const es = {
       {
         id: "classroom-break",
         title: "Pausa en el aula",
-        description: "Verbos y emociones seguros para un mini descanso curricular.",
+        description:
+          "Verbos y emociones seguros para un mini descanso curricular.",
         category: "actions",
         difficulty: "easy",
         ageGroup: "kids",
@@ -261,7 +264,8 @@ export const es = {
       {
         id: "adult-party",
         title: "Fiesta adulta",
-        description: "Prompts con humor y pistas retadoras para risas nocturnas.",
+        description:
+          "Prompts con humor y pistas retadoras para risas nocturnas.",
         category: "funny",
         difficulty: "medium",
         ageGroup: "adults",
@@ -366,17 +370,20 @@ export const es = {
       items: [
         {
           title: "Resumen de reglas en 30 segundos",
-          description: "Hoja imprimible con orden de turnos, gestos básicos y desempates comunes.",
+          description:
+            "Hoja imprimible con orden de turnos, gestos básicos y desempates comunes.",
           href: "/quick-play-kit#rules",
         },
         {
           title: "Temporizador y marcador",
-          description: "Plantilla para seguir rondas, tiempos y puntajes de hasta tres equipos.",
+          description:
+            "Plantilla para seguir rondas, tiempos y puntajes de hasta tres equipos.",
           href: "/quick-play-kit#score",
         },
         {
           title: "Póster de señales",
-          description: "Muestra a las personas nuevas cómo indicar película, libro, canción y sílabas.",
+          description:
+            "Muestra a las personas nuevas cómo indicar película, libro, canción y sílabas.",
           href: "/quick-play-kit#signals",
         },
       ],
@@ -706,7 +713,8 @@ export const es = {
     },
     changelog: {
       title: "Historial de actualizaciones",
-      description: "Un registro de las últimas mejoras en palabras, experiencia y cumplimiento.",
+      description:
+        "Un registro de las últimas mejoras en palabras, experiencia y cumplimiento.",
       items: [
         {
           date: "2025-09-25",
@@ -872,14 +880,18 @@ export const es = {
         scenarioLabel: "¿Dónde aplicas este playbook?",
         playersLabel: "Tamaño habitual del grupo",
         difficultyLabel: "Categorías o dificultades favoritas",
-        detailsLabel: "Describe el flujo, reglas caseras, consejos de tiempo o recursos imprimibles.",
-        permissionLabel: "Autorizo publicar mi playbook (mención por nombre/rol)",
+        detailsLabel:
+          "Describe el flujo, reglas caseras, consejos de tiempo o recursos imprimibles.",
+        permissionLabel:
+          "Autorizo publicar mi playbook (mención por nombre/rol)",
         submit: "Revisar y enviar",
         subject: "Envío de playbook de charadas",
         mailtoIntro: "Este es mi playbook de charadas:",
-        scenarioPlaceholder: "Noche familiar, Aula de 4.º grado, Retro de equipo, etc.",
+        scenarioPlaceholder:
+          "Noche familiar, Aula de 4.º grado, Retro de equipo, etc.",
         playersPlaceholder: "ej. 6–8 participantes",
-        detailsPlaceholder: "Explica cómo organizas la partida, señales personalizadas, sistema de puntos o recursos.",
+        detailsPlaceholder:
+          "Explica cómo organizas la partida, señales personalizadas, sistema de puntos o recursos.",
         confirmation: "Abre tu cliente de correo para completar el envío.",
       },
     },

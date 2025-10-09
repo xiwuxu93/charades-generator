@@ -33,6 +33,7 @@ interface CharadesGeneratorProps {
   hideCategoryFilter?: boolean;
   hideDifficultyFilter?: boolean;
   hideAgeGroupFilter?: boolean;
+  isShowScenarios?: boolean;
 }
 
 export default function CharadesGeneratorOptimized({
@@ -46,6 +47,7 @@ export default function CharadesGeneratorOptimized({
   hideCategoryFilter = false,
   hideDifficultyFilter = false,
   hideAgeGroupFilter = false,
+  isShowScenarios= false
 }: CharadesGeneratorProps = {}) {
   const { locale, dictionary, t } = useLocale();
   const difficultiesLabel = dictionary.difficulties;
@@ -289,8 +291,8 @@ export default function CharadesGeneratorOptimized({
         <p className="text-gray-500 text-sm mt-2">{dictionary.generator.wordsCountSublabel}</p>
       </header>
 
-      {scenarios.length > 0 && (
-        <section className="mb-8 rounded-2xl border border-indigo-100 bg-indigo-50 p-5 sm:p-6">
+      {scenarios.length > 0 &&  isShowScenarios && (
+        <section className="mb-8 rounded-2xl border border-indigo-100 bg-indigo-50 p-5 pt-4 pb-4 sm:p-6 sm:pt-4 sm:pb-4">
           <div className="sm:flex sm:items-start sm:justify-between gap-3">
             <div className="max-w-2xl">
               <button
