@@ -30,8 +30,13 @@ export default function SiteLinksStructuredData({
     url: toAbsoluteUrl(baseUrl, locale, item.href),
   }));
 
-  const pagesAny = dictionary.pages as unknown as Record<string, any>;
-  const quickKitTitle = pagesAny.quickKit?.title ?? pagesAny.howToUse?.quickKit?.title;
+  const howToUseNode = dictionary.pages.howToUse;
+  const quickKitFromHowToUse =
+    typeof howToUseNode === "object" && howToUseNode !== null && "quickKit" in howToUseNode
+      ? (howToUseNode as { quickKit?: { title?: string } }).quickKit?.title
+      : undefined;
+
+  const quickKitTitle = dictionary.pages.quickKit?.title ?? quickKitFromHowToUse;
 
   const supplementalLinks = [
     { title: dictionary.pages.faq?.title, href: "/faq" },

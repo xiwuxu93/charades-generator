@@ -18,13 +18,103 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
   const playGuides = dictionary.home.playGuides;
   const expertInsights = dictionary.home.expertInsights;
   const quickResources = dictionary.home.quickResources;
+  const generatorDeepDive = dictionary.home.generatorDeepDive;
+
+  const difference = generatorDeepDive.difference;
+  const presets = generatorDeepDive.presets;
+  const useCases = generatorDeepDive.useCases;
+  const tips = generatorDeepDive.tips;
+  const faq = generatorDeepDive.faq;
 
   return (
     <>
       <CharadesGeneratorOptimized initialWords={initialWords} isShowScenarios={true} />
 
+      <div className="max-w-4xl mx-auto px-6 pb-10">
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-indigo-500">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">{difference.title}</h2>
+          <p className="text-gray-600 mb-4">{difference.lead}</p>
+          <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4">
+            {difference.bullets.map((bullet) => (
+              <li key={bullet}>{bullet}</li>
+            ))}
+          </ul>
+          <p className="text-gray-600">
+            {difference.footer.before}{" "}
+            <Link
+              href={buildLocalePath(locale, difference.footer.href)}
+              className="text-indigo-600 hover:text-indigo-800 underline"
+            >
+              {difference.footer.linkText}
+            </Link>
+            {" "}
+            {difference.footer.after}
+          </p>
+        </section>
+
+        <section className="bg-gradient-to-r from-indigo-100 to-sky-100 rounded-lg p-6 mb-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">{presets.title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {presets.items.map((preset) => (
+              <div key={preset.title} className="bg-white/70 rounded-xl border border-indigo-200 p-5 shadow-sm">
+                <h3 className="text-lg font-semibold text-indigo-700 mb-2">{preset.title}</h3>
+                <p className="text-sm text-gray-700 mb-2">{preset.description}</p>
+                <p className="text-xs uppercase tracking-wider text-indigo-500 font-semibold">{preset.note}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">{useCases.title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {useCases.columns.map((column) => (
+              <div key={column.title} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                <h3 className="font-semibold text-gray-800 mb-3">{column.title}</h3>
+                <ul className="space-y-2 text-sm text-gray-600">
+                  {column.items.map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-indigo-500" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">{tips.title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {tips.cards.map((card) => (
+              <div key={card.title} className="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                <h3 className="text-lg font-semibold text-slate-800 mb-3">{card.title}</h3>
+                <ul className="list-disc list-inside space-y-2 text-gray-700">
+                  {card.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">{faq.title}</h2>
+          <div className="space-y-4">
+            {faq.items.map((item) => (
+              <div key={item.question} className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                <h3 className="font-semibold text-gray-800 mb-2">{item.question}</h3>
+                <p className="text-gray-600">{item.answer}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
       <section className="bg-white border-t border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="max-w-4xl mx-auto px-6 py-10">
           <div className="mb-8">
             <p className="text-xs font-semibold text-blue-600 uppercase tracking-[0.2em]">
               {dictionary.home.exploreLabel}
@@ -43,7 +133,7 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {themedGenerators.map((item) => (
               <Link
                 key={item.href}
@@ -76,7 +166,7 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
       </section>
 
       <section className="bg-gray-100 border-t border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="max-w-4xl mx-auto px-6 py-10">
           <div className="mb-8 max-w-3xl">
             <p className="text-xs font-semibold text-green-600 uppercase tracking-[0.2em]">
               {dictionary.home.guidesLabel}
@@ -85,7 +175,7 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
             <p className="mt-2 text-gray-600">{dictionary.home.guidesDescription}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {playGuides.map((resource) => (
               <Link
                 key={resource.href}
@@ -114,7 +204,7 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
 
       {quickResources && (
         <section className="bg-white border-t border-gray-200">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-4xl mx-auto px-6 py-12">
             <div className="max-w-3xl">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
                 {quickResources.title}
@@ -122,7 +212,7 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
               <p className="mt-2 text-gray-600">{quickResources.description}</p>
             </div>
 
-            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {quickResources.items.map((item) => (
                 <Link
                   key={item.href}
@@ -164,13 +254,13 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
       )}
 
       <section className="bg-white border-t border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="max-w-3xl">
             <h2 className="text-3xl font-bold text-gray-900">{expertInsights.title}</h2>
             <p className="mt-3 text-gray-600">{expertInsights.description}</p>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {expertInsights.personas.map((persona) => (
               <article key={persona.title} className="flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
                 <h3 className="text-lg font-semibold text-gray-900">{persona.title}</h3>

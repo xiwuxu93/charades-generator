@@ -47,7 +47,7 @@ export default function CommunityPlaybooks() {
 
   return (
     <section className="bg-white border-t border-gray-200">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-6 py-12">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
@@ -59,7 +59,7 @@ export default function CommunityPlaybooks() {
           <p className="mt-2 text-gray-600">{playbooks.description}</p>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {playbooks.entries.map((entry: PlaybookEntry) => (
             <article
               key={entry.id}

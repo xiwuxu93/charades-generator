@@ -363,6 +363,123 @@ export const es = {
           "Conoce en qué estamos trabajando y cómo evoluciona el generador cada mes.",
       },
     ],
+    generatorDeepDive: {
+      difference: {
+        title: "Por qué este generador de charadas destaca",
+        lead:
+          "Organiza cada partida desde un solo lugar. El generador de charadas principal concentra filtros, presets y reglas para lanzar rondas en segundos.",
+        bullets: [
+          "Combina categorías, niveles y edades en el generador de charadas sin cambiar de página.",
+          "Activa presets probados por anfitriones que preparan el generador para clases, equipos y familias.",
+          "Copia, imprime o comparte listas directamente desde el generador de charadas para que todas las personas sigan el mismo plan.",
+          "Las instrucciones integradas mantienen a quienes se inician seguros mientras el generador de charadas entrega nuevas palabras al instante.",
+        ],
+        footer: {
+          before: "¿Quieres caos total? Visita el",
+          linkText: "generador de charadas aleatorio",
+          after: "para barajar todos los temas.",
+          href: "/random-charades-generator/",
+        },
+      },
+      presets: {
+        title: "Presets listos en el generador de charadas",
+        items: [
+          {
+            title: "Noche familiar",
+            description:
+              "Palabras fáciles con comodines para que el generador de charadas mantenga entretenidos a peques y abuelos.",
+            note: "10 palabras · dificultad fácil",
+          },
+          {
+            title: "Sprint para equipos híbridos",
+            description:
+              "Sube a dificultad media y público adulto en el generador de charadas para dinamizar stand-ups y retros.",
+            note: "9 palabras · rondas de 60 s",
+          },
+          {
+            title: "Pausa activa en el aula",
+            description:
+              "Filtra verbos aptos para peques en el generador de charadas y refuerza vocabulario en cinco minutos.",
+            note: "8 palabras · acciones + emociones",
+          },
+        ],
+      },
+      useCases: {
+        title: "Ideas del generador de charadas para cada grupo",
+        columns: [
+          {
+            title: "Familias y amistades",
+            items: [
+              "Comparte una lista imprimible del generador de charadas antes de reunirte.",
+              "Rota presets para que cada grupo de edad elija una ronda especial.",
+              "Guarda tandas favoritas y reutilízalas en futuras celebraciones.",
+            ],
+          },
+          {
+            title: "Aulas",
+            items: [
+              "Refuerza vocabulario SEL o de idiomas con el generador de charadas.",
+              "Pide a ayudantes que copien la última tanda para quien falte a clase.",
+              "Registra qué filtros del generador aumentan la participación.",
+            ],
+          },
+          {
+            title: "Equipos y eventos",
+            items: [
+              "Abre retrospectivas con una ronda exprés del generador de charadas.",
+              "Sube a dificultad alta para retar a personas fan de las trivias.",
+              "Comparte el enlace del generador en chat para que el equipo remoto juegue.",
+            ],
+          },
+        ],
+      },
+      tips: {
+        title: "Consejos para exprimir el generador de charadas",
+        cards: [
+          {
+            title: "Varía los filtros",
+            items: [
+              "Empieza en \"todo\" para mostrar el alcance del generador de charadas y cierra con temas específicos.",
+              "Alterna la cantidad de palabras para que nadie sepa qué viene.",
+              "Duplica la pestaña y prepara la siguiente tanda mientras juegan.",
+            ],
+          },
+          {
+            title: "Mantén el ritmo",
+            items: [
+              "Usa el botón de copiar para pegar resultados del generador en Notas o Slack.",
+              "Marca los presets que ya usaste y así el generador recomienda combinaciones nuevas.",
+              "Combina los temporizadores del kit rápido con la duración sugerida por el generador.",
+            ],
+          },
+        ],
+      },
+      faq: {
+        title: "Preguntas frecuentes del generador de charadas",
+        items: [
+          {
+            question: "¿Cuántos prompts incluye el generador de charadas?",
+            answer:
+              "El generador principal reúne más de 1.000 palabras curadas en nueve categorías y añadimos nuevas cada mes.",
+          },
+          {
+            question: "¿Puedo elegir cuántas palabras generar?",
+            answer:
+              "Sí. Usa los botones rápidos de 1, 3, 5 o 10, o escribe cualquier cantidad entre 1 y 50 para crear tandas personalizadas en el generador de charadas.",
+          },
+          {
+            question: "¿Los presets son definitivos?",
+            answer:
+              "Los presets solo rellenan el generador de charadas. Puedes cambiar categoría, dificultad o público antes de generar.",
+          },
+          {
+            question: "¿Dónde consigo reglas imprimibles?",
+            answer:
+              "Visita el kit exprés debajo del generador de charadas para descargar hojas de puntuación, temporizadores y la guía de gestos.",
+          },
+        ],
+      },
+    },
     quickResources: {
       title: "Kit exprés para jugar",
       description:

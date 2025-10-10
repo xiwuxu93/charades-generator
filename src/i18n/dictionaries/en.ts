@@ -359,6 +359,123 @@ export const en = {
           "See what we're building next and how the generator continues to grow each month.",
       },
     ],
+    generatorDeepDive: {
+      difference: {
+        title: "Why this charades generator stands out",
+        lead:
+          "Run every game night from one hub. The main charades generator keeps filters, presets, and rules in one streamlined interface so you can launch a round in seconds.",
+        bullets: [
+          "Mix categories, difficulties, and age ranges inside a single charades generator without jumping between pages.",
+          "Preview host-tested presets that instantly populate the charades generator for classroom breaks, team icebreakers, and family nights.",
+          "Copy, print, or share word lists directly from the charades generator so everyone stays aligned.",
+          "Built-in How to Play reminders keep new players confident while the charades generator serves fresh prompts on demand.",
+        ],
+        footer: {
+          before: "Craving total unpredictability? Hop over to the",
+          linkText: "random charades generator",
+          after: "for a full shuffle of every theme.",
+          href: "/random-charades-generator/",
+        },
+      },
+      presets: {
+        title: "Ready-to-go charades generator presets",
+        items: [
+          {
+            title: "Family Night Mix",
+            description:
+              "Balanced easy prompts and wildcards so the charades generator keeps grandparents and kids engaged together.",
+            note: "Start with 10 words, difficulty easy",
+          },
+          {
+            title: "Hybrid Stand-up Sprint",
+            description:
+              "Switch to medium difficulty and adults-only in the charades generator for fast-moving team energizers.",
+            note: "9 words • 60-second rounds",
+          },
+          {
+            title: "Classroom Brain Break",
+            description:
+              "Filter for kids-friendly verbs in the charades generator to reinforce vocab during five-minute pauses.",
+            note: "8 words • actions + emotions",
+          },
+        ],
+      },
+      useCases: {
+        title: "Charades generator ideas for every group",
+        columns: [
+          {
+            title: "Family & friends",
+            items: [
+              "Share a printable charades generator list before gatherings.",
+              "Rotate presets so each age group picks a feature round.",
+              "Save favorite word batches to reuse at future parties.",
+            ],
+          },
+          {
+            title: "Classrooms",
+            items: [
+              "Use the charades generator to refresh SEL or language vocab.",
+              "Assign helpers to copy the latest batch for absent students.",
+              "Track progress by logging which generator filters boosted engagement.",
+            ],
+          },
+          {
+            title: "Teams & events",
+            items: [
+              "Kick off retros with a charades generator speed round.",
+              "Switch to hard clues to challenge trivia pros at offsites.",
+              "Drop generator links in chat so remote teammates play along.",
+            ],
+          },
+        ],
+      },
+      tips: {
+        title: "Tips for getting more from the charades generator",
+        cards: [
+          {
+            title: "Mix filters each round",
+            items: [
+              "Start on \"all\" to showcase the full charades generator range, then narrow to themes for finals.",
+              "Alternate word counts so no team knows what is coming next.",
+              "Duplicate the tab and prep the next batch while players act.",
+            ],
+          },
+          {
+            title: "Keep the momentum",
+            items: [
+              "Use the copy button to paste generator results into Notes or Slack.",
+              "Mark used presets so the charades generator recommends fresh combos.",
+              "Pair the quick-play kit timers with the generator’s suggested round lengths.",
+            ],
+          },
+        ],
+      },
+      faq: {
+        title: "Charades Generator FAQ",
+        items: [
+          {
+            question: "How many prompts are in the charades generator?",
+            answer:
+              "The main charades generator pulls from a library of 1,000+ curated words across nine categories, with new additions each month.",
+          },
+          {
+            question: "Can I customize the number of words?",
+            answer:
+              "Yes. Choose quick buttons for 1, 3, 5, or 10 prompts, or type any amount between 1 and 50 for a custom charades generator batch.",
+          },
+          {
+            question: "Do preset filters lock me in?",
+            answer:
+              "Presets simply pre-fill the charades generator. You can adjust category, difficulty, or age group before generating.",
+          },
+          {
+            question: "What if I need printable rules?",
+            answer:
+              "Head to the quick-play kit linked below the charades generator for score sheets, timers, and gesture legends.",
+          },
+        ],
+      },
+    },
     quickResources: {
       title: "Quick-play toolkit",
       description:
