@@ -1,5 +1,6 @@
 import CharadesGeneratorOptimized from "@/components/CharadesGeneratorOptimized";
 import StructuredData from "@/components/StructuredData";
+import FAQStructuredData from "@/components/FAQStructuredData";
 import Link from "next/link";
 import { Metadata } from "next";
 import { pickWords } from "@/utils/charades";
@@ -92,6 +93,7 @@ export default async function CharadesForKidsPage({ params }: PageProps) {
         category="Kids Games"
         locale={locale}
       />
+      <FAQStructuredData items={copy.faq ?? []} />
 
       <div className="max-w-4xl mx-auto px-6 pb-10">
         <section className="bg-blue-50 border border-blue-200 rounded-lg p-5 mb-8">

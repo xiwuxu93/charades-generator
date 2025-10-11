@@ -5,6 +5,7 @@ import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import CharadesGeneratorOptimized from "@/components/CharadesGeneratorOptimized";
 import StructuredData from "@/components/StructuredData";
+import FAQStructuredData from "@/components/FAQStructuredData";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -90,6 +91,7 @@ export default async function ChristmasCharadesPage({ params }: PageProps) {
         category="Holiday Games"
         locale={locale}
       />
+      <FAQStructuredData items={copy.faq ?? []} />
 
       <div className="max-w-4xl mx-auto px-6 pb-10">
         <section className="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-red-500">

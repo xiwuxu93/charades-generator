@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
+import FAQStructuredData from "@/components/FAQStructuredData";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -99,6 +100,7 @@ export default async function FAQPage({ params }: PageProps) {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white">
+      <FAQStructuredData items={faqs} />
       <h1 className="text-3xl font-bold text-gray-900 mb-8">
         {dictionary.pages.faq.title}
       </h1>

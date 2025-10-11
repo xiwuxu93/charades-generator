@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const dictionary = getDictionary(locale);
 
   const baseUrl = "https://charades-generator.com";
-  const canonicalUrl = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`;
+  const canonicalUrl = locale === 'en' ? `${baseUrl}/` : `${baseUrl}/${locale}/`;
 
   return {
     title: dictionary.seo.home.title,
@@ -30,8 +30,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        'en': baseUrl,
-        'es': `${baseUrl}/es`,
+        'en': `${baseUrl}/`,
+        'es': `${baseUrl}/es/`,
       }
     },
     openGraph: {
@@ -66,7 +66,7 @@ export default async function Home({ params }: PageProps) {
   const initialWords = pickWords("all", "all", "all", 3, locale);
 
   const baseUrl = "https://charades-generator.com";
-  const canonicalUrl = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`;
+  const canonicalUrl = locale === 'en' ? `${baseUrl}/` : `${baseUrl}/${locale}/`;
 
   return (
     <div className="bg-gray-50 min-h-screen">

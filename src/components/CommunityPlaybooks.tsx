@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import { useMemo } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
 
 interface PlaybookEntry {
@@ -17,6 +18,23 @@ interface PlaybookEntry {
 export default function CommunityPlaybooks() {
   const { dictionary, locale } = useLocale();
   const playbooks = dictionary.home.communityPlaybooks;
+  const dateFormatter = useMemo(() => {
+    return new Intl.DateTimeFormat(locale, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      timeZone: "UTC",
+    });
+  }, [locale]);
+
+  const formatDate = (isoDate: string) => {
+    try {
+      const safeDate = new Date(`${isoDate}T00:00:00Z`);
+      return dateFormatter.format(safeDate);
+    } catch {
+      return isoDate;
+    }
+  };
 
   if (!playbooks) {
     return null;
@@ -84,11 +102,7 @@ export default function CommunityPlaybooks() {
 
               <div className="mt-4 space-y-2">
                 <p className="text-xs text-gray-500">
-                  {entry.location} · {new Date(entry.lastTested).toLocaleDateString(locale, {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
+                  {entry.location} · {formatDate(entry.lastTested)}
                 </p>
                 <details className="rounded-md border border-indigo-200 bg-white px-3 py-2 text-sm text-gray-700">
                   <summary className="cursor-pointer font-semibold text-indigo-700">

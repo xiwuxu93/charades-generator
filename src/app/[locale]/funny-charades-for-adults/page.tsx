@@ -1,5 +1,6 @@
 import CharadesGeneratorOptimized from "@/components/CharadesGeneratorOptimized";
 import StructuredData from "@/components/StructuredData";
+import FAQStructuredData from "@/components/FAQStructuredData";
 import Link from "next/link";
 import { Metadata } from "next";
 import { pickWords } from "@/utils/charades";
@@ -93,6 +94,7 @@ export default async function FunnyCharadesPage({ params }: PageProps) {
         category="Adult Party Games"
         locale={locale}
       />
+      <FAQStructuredData items={copy.faq ?? []} />
 
       <div className="max-w-4xl mx-auto px-6 pb-10">
         <section className="bg-blue-50 border border-blue-200 rounded-lg p-5 mb-8 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
