@@ -1,5 +1,6 @@
 import HomeLanding from "@/components/HomeLanding";
 import StructuredData from "@/components/StructuredData";
+import FAQStructuredData from "@/components/FAQStructuredData";
 import WebsiteStructuredData from "@/components/WebsiteStructuredData";
 import SiteLinksStructuredData from "@/components/SiteLinksStructuredData";
 import { Metadata } from "next";
@@ -82,6 +83,7 @@ export default async function Home({ params }: PageProps) {
         category="Party Games"
         locale={locale}
       />
+      <FAQStructuredData items={dictionary.home.generatorDeepDive.faq.items ?? []} />
     </div>
   );
 }

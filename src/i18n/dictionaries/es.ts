@@ -3,17 +3,17 @@ export const es = {
   localeName: "Español",
   seo: {
     home: {
-      title: "Generador de Charadas - Más de 1000 Palabras Gratis",
+      title: "Generador de Charadas Gratis",
       description:
         "Generador gratuito de charadas con más de 1000 palabras! Palabras instantáneas para niños, adultos, fiestas. Películas, Disney, animales, acciones y más categorías.",
       keywords:
         "generador charadas, palabras charadas gratis, juego charadas, juegos fiesta, juegos familiares, charadas disney",
-      structuredDataName: "Generador de Charadas - Palabras e Ideas Gratis",
+      structuredDataName: "Generador de Charadas Gratis",
       structuredDataDescription:
         "Generador de Charadas con base de datos de más de 1000 palabras! Palabras instantáneas gratis para niños, adultos, fiestas. Incluye películas, Disney, animales, acciones, palabras divertidas.",
     },
     kids: {
-      title: "Generador de Charadas para Niños - Palabras Infantiles Gratis",
+      title: "Charadas para Niños Gratis",
       description:
         "Charadas gratis para niños con más de 500 palabras aptas para menores! Generador de charadas infantiles para fiestas, personajes Disney, animales y actividades escolares.",
       keywords:
@@ -23,7 +23,7 @@ export const es = {
         "Generador de charadas para niños con palabras seguras para fiestas infantiles y diversión familiar",
     },
     disney: {
-      title: "Generador de Charadas Disney - Personajes y Películas Gratis",
+      title: "Charadas Disney Gratis",
       description:
         "Generador gratuito de charadas Disney con personajes, películas y canciones! Perfecto para fanáticos Disney, fiestas infantiles y noches familiares mágicas.",
       keywords:
@@ -33,7 +33,7 @@ export const es = {
         "Charadas temáticas Disney con personajes, películas y canciones para diversión familiar mágica",
     },
     movies: {
-      title: "Generador de Charadas de Películas - Palabras de Cine Gratis",
+      title: "Charadas de Películas Gratis",
       description:
         "Generador gratuito de charadas de películas con clásicos, éxitos de taquilla y palabras del cine! Perfecto para noches de película y fiestas de cinéfilos.",
       keywords:
@@ -43,7 +43,7 @@ export const es = {
         "Charadas temáticas de películas y cine para amantes del séptimo arte y entretenimiento nocturno",
     },
     funny: {
-      title: "Charadas Divertidas para Adultos - Juegos Hilarantes",
+      title: "Charadas Divertidas para Adultos",
       description:
         "Generador de charadas divertidas para adultos con escenarios divertidos y humor maduro! Perfecto para fiestas de adultos, juegos de oficina y diversión para mayores.",
       keywords:
@@ -53,7 +53,7 @@ export const es = {
         "Generador de charadas divertidas para adultos con humor maduro y escenarios graciosos",
     },
     random: {
-      title: "Generador de Charadas Aleatorias - Mezcla de Sorpresas",
+      title: "Charadas Aleatorias Gratis",
       description:
         "Generador de charadas aleatorias mezclando todas las categorías! Palabras sorpresa de películas, animales, acciones y más para diversión impredecible.",
       keywords:
@@ -63,7 +63,7 @@ export const es = {
         "Generador de charadas aleatorias mezclando todas las categorías para juego sorprendente y variado",
     },
     christmas: {
-      title: "Generador de Charadas de Navidad - Juegos Navideños",
+      title: "Charadas de Navidad Gratis",
       description:
         "Charadas navideñas gratis con más de 60 palabras festivas! Santa, renos, películas, canciones para fiestas familiares y celebraciones navideñas.",
       keywords:
@@ -73,21 +73,21 @@ export const es = {
         "Generador de charadas navideñas con palabras temáticas para celebraciones familiares",
     },
     howToUse: {
-      title: "Cómo Usar el Generador de Charadas - Guía Completa y Reglas",
+      title: "Cómo Usar el Generador",
       description:
         "Guía completa sobre cómo usar nuestro generador de charadas! Aprende reglas, consejos, instrucciones de configuración y estrategias de juego.",
       keywords:
         "cómo jugar charadas, reglas charadas, guía charadas, instrucciones charadas, configuración juego fiesta",
     },
     about: {
-      title: "Sobre Nosotros - Equipo Generador de Charadas",
+      title: "Sobre Charades Generator",
       description:
         "Conoce al equipo detrás del generador gratuito de charadas y nuestra misión de llevar diversión a familias y amigos en todo el mundo.",
       keywords:
         "sobre generador charadas, equipo, misión, juegos fiesta gratis, entretenimiento familiar",
     },
     faq: {
-      title: "Preguntas Frecuentes - Generador de Charadas",
+      title: "Preguntas Frecuentes Charadas",
       description:
         "Respuestas a preguntas frecuentes sobre nuestro generador de charadas, jugabilidad, características y solución de problemas.",
       keywords:
