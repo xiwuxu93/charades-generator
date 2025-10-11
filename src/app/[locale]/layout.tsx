@@ -4,6 +4,8 @@ import { LocaleProvider } from "@/contexts/LocaleContext";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 
+export const dynamic = "force-static";
+
 interface LocaleLayoutProps {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
