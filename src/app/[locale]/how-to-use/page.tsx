@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
+import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -16,10 +17,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
 
-  const baseUrl = "https://charades-generator.com";
-  const canonicalUrl = locale === 'en'
-    ? `${baseUrl}/how-to-use/`
-    : `${baseUrl}/${locale}/how-to-use/`;
+  const canonicalPath = "/how-to-use";
+  const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
 
   return {
     title: dictionary.seo.howToUse.title,
@@ -27,10 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     keywords: dictionary.seo.howToUse.keywords,
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'en': `${baseUrl}/how-to-use/`,
-        'es': `${baseUrl}/es/how-to-use/`,
-      }
+      languages: buildAlternateLanguages(canonicalPath),
     },
     openGraph: {
       title: dictionary.seo.howToUse.title,
@@ -40,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       locale: locale === 'en' ? 'en_US' : 'es_ES',
       images: [
         {
-          url: `${baseUrl}/charades-generator-og.png`,
+          url: `${BASE_URL}/charades-generator-og.png`,
           width: 1200,
           height: 630,
           alt: dictionary.seo.howToUse.title,
@@ -51,7 +47,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: dictionary.seo.howToUse.title,
       description: dictionary.seo.howToUse.description,
-      images: [`${baseUrl}/charades-generator-og.png`],
+      images: [`${BASE_URL}/charades-generator-og.png`],
     },
     robots: "index, follow",
   };

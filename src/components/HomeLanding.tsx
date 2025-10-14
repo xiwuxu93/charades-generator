@@ -1,19 +1,18 @@
-'use client';
-
-import Link from 'next/link';
-import CharadesGeneratorOptimized from '@/components/CharadesGeneratorOptimized';
-import { useLocale } from '@/contexts/LocaleContext';
-import { buildLocalePath } from '@/utils/localePaths';
-import type { CharadesWord } from '@/data/charades-types';
-import CommunityPlaybooks from '@/components/CommunityPlaybooks';
+import Link from "next/link";
+import CharadesGeneratorOptimized from "@/components/CharadesGeneratorOptimized";
+import { buildLocalePath } from "@/utils/localePaths";
+import type { CharadesWord } from "@/data/charades-types";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionary";
+import CommunityPlaybooks from "@/components/CommunityPlaybooks";
 
 interface HomeLandingProps {
   initialWords: CharadesWord[];
+  dictionary: Dictionary;
+  locale: Locale;
 }
 
-export default function HomeLanding({ initialWords }: HomeLandingProps) {
-  const { locale, dictionary } = useLocale();
-
+export default function HomeLanding({ initialWords, dictionary, locale }: HomeLandingProps) {
   const themedGenerators = dictionary.home.themedGenerators;
   const playGuides = dictionary.home.playGuides;
   const expertInsights = dictionary.home.expertInsights;
@@ -28,7 +27,7 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
 
   return (
     <>
-      <CharadesGeneratorOptimized initialWords={initialWords} isShowScenarios={true} />
+      <CharadesGeneratorOptimized initialWords={initialWords} isShowScenarios />
 
       <div className="max-w-4xl mx-auto px-6 pb-10">
         <section className="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-indigo-500">
@@ -46,8 +45,7 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
               className="text-indigo-600 hover:text-indigo-800 underline"
             >
               {difference.footer.linkText}
-            </Link>
-            {" "}
+            </Link>{" "}
             {difference.footer.after}
           </p>
         </section>
@@ -124,12 +122,6 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">{dictionary.home.themedHeading}</h2>
                 <p className="text-gray-600 mt-2">{dictionary.home.themedDescription}</p>
               </div>
-              {/* <Link
-                href={buildLocalePath(locale, '/random-charades-generator/')}
-                className="inline-flex items-center justify-center rounded-md border border-blue-500 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50"
-              >
-                {dictionary.home.luckyLabel}
-              </Link> */}
             </div>
           </div>
 
@@ -202,84 +194,28 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
         </div>
       </section>
 
-      {quickResources && (
-        <section className="bg-white border-t border-gray-200">
-          <div className="max-w-4xl mx-auto px-6 py-12">
-            <div className="max-w-3xl">
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                {quickResources.title}
-              </h2>
-              <p className="mt-2 text-gray-600">{quickResources.description}</p>
-            </div>
-
-            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {quickResources.items.map((item) => (
-                <Link
-                  key={item.href}
-                  href={buildLocalePath(locale, item.href)}
-                  className="group flex h-full flex-col justify-between rounded-2xl border border-gray-200 bg-gray-50 p-5 transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-md"
-                >
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-700">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-gray-600">{item.description}</p>
-                  </div>
-                  <span className="mt-4 inline-flex items-center text-sm font-semibold text-blue-600">
-                    {quickResources.actionLabel}
-                    <svg
-                      className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </Link>
-              ))}
-            </div>
-
-            <div className="mt-6">
-              <Link
-                href={buildLocalePath(locale, '/quick-play-kit/')}
-                className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
-              >
-                {quickResources.printLabel}
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
-
       <section className="bg-white border-t border-gray-200">
-        <div className="max-w-4xl mx-auto px-6 py-12">
-          <div className="max-w-3xl">
-            <h2 className="text-3xl font-bold text-gray-900">{expertInsights.title}</h2>
-            <p className="mt-3 text-gray-600">{expertInsights.description}</p>
+        <div className="max-w-4xl mx-auto px-6 py-10">
+          <div className="mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">{expertInsights.title}</h2>
+            <p className="mt-2 text-gray-600">{expertInsights.description}</p>
           </div>
-
-          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {expertInsights.personas.map((persona) => (
-              <article key={persona.title} className="flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+              <article key={persona.title} className="rounded-xl border border-gray-200 bg-gray-50 p-6 shadow-sm">
                 <h3 className="text-lg font-semibold text-gray-900">{persona.title}</h3>
                 <p className="mt-2 text-sm text-gray-600 italic">“{persona.quote}”</p>
-                <h4 className="mt-4 text-sm font-semibold text-gray-800 uppercase tracking-wide">
+                <h4 className="mt-4 text-sm font-semibold uppercase tracking-wide text-gray-800">
                   {persona.tipsTitle}
                 </h4>
-                <ul className="mt-2 space-y-2 text-sm text-gray-600">
+                <ul className="mt-2 list-disc list-inside space-y-1 text-sm text-gray-700">
                   {persona.tips.map((tip) => (
-                    <li key={tip} className="flex gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-indigo-500" />
-                      <span>{tip}</span>
-                    </li>
+                    <li key={tip}>{tip}</li>
                   ))}
                 </ul>
               </article>
             ))}
           </div>
-
           <div className="mt-10 flex flex-col gap-4 rounded-2xl border border-indigo-200 bg-indigo-50 p-6 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h3 className="text-lg font-semibold text-indigo-900">{expertInsights.shareTitle}</h3>
@@ -295,7 +231,55 @@ export default function HomeLanding({ initialWords }: HomeLandingProps) {
         </div>
       </section>
 
-      <CommunityPlaybooks />
+      {quickResources && (
+        <section className="bg-gray-100 border-t border-gray-200">
+          <div className="max-w-4xl mx-auto px-6 py-10">
+            <div className="mb-8 max-w-3xl">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">{quickResources.title}</h2>
+              <p className="mt-2 text-gray-600">{quickResources.description}</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {quickResources.items.map((item) => (
+                <article key={item.title} className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
+                  <p className="mt-2 text-sm text-gray-600">{item.description}</p>
+                  <Link
+                    className="mt-4 inline-flex items-center text-sm font-semibold text-orange-600"
+                    href={buildLocalePath(locale, item.href)}
+                  >
+                    {quickResources.actionLabel}
+                    <svg
+                      className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </article>
+              ))}
+            </div>
+            <div className="mt-6">
+              <Link
+                href={buildLocalePath(locale, "/quick-play-kit/")}
+                className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
+              >
+                {quickResources.printLabel}
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {dictionary.home.communityPlaybooks && (
+        <CommunityPlaybooks
+          locale={locale}
+          playbooks={dictionary.home.communityPlaybooks}
+          fallbackShareCta={dictionary.home.expertInsights.shareCta}
+        />
+      )}
     </>
   );
 }

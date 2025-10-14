@@ -2,12 +2,11 @@ import { Metadata } from "next";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import PlaybookSubmissionForm from "@/components/PlaybookSubmissionForm";
+import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
-
-const BASE_URL = "https://charades-generator.com";
 
 function getLanguageTag(locale: Locale) {
   switch (locale) {
@@ -26,7 +25,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { locale: localeParam } = await params;
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
-  const canonicalUrl = locale === "en" ? `${BASE_URL}/contact/` : `${BASE_URL}/${locale}/contact/`;
+  const canonicalPath = "/contact";
+  const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
 
   return {
     title: dictionary.seo.contact.title,
@@ -34,10 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     keywords: dictionary.seo.contact.keywords,
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        en: `${BASE_URL}/contact/`,
-        es: `${BASE_URL}/es/contact/`,
-      },
+      languages: buildAlternateLanguages(canonicalPath),
     },
     openGraph: {
       title: dictionary.seo.contact.title,
@@ -68,7 +65,8 @@ export default async function ContactPage({ params }: PageProps) {
   const { locale: localeParam } = await params;
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
-  const canonicalUrl = locale === "en" ? `${BASE_URL}/contact/` : `${BASE_URL}/${locale}/contact/`;
+  const canonicalPath = "/contact";
+  const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
   const languageTag = getLanguageTag(locale);
 
   const structuredData = {
@@ -87,7 +85,6 @@ export default async function ContactPage({ params }: PageProps) {
       contactType: "customer service",
       email: dictionary.pages.contact.email,
       availableLanguage: [languageTag],
-      areaServed: "Worldwide",
       hoursAvailable: {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],

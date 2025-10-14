@@ -3,12 +3,11 @@ import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import PrintButton from "@/components/PrintButton";
 import CopyLinkButton from "@/components/CopyLinkButton";
+import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
-
-const BASE_URL = "https://charades-generator.com";
 
 interface QuickKitContent {
   title: string;
@@ -31,17 +30,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
   const kitData = ((dictionary.pages as unknown) as { quickKit: QuickKitContent }).quickKit;
-  const canonicalUrl = locale === "en" ? `${BASE_URL}/quick-play-kit/` : `${BASE_URL}/${locale}/quick-play-kit/`;
+  const canonicalPath = "/quick-play-kit";
+  const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
 
   return {
     title: kitData.title,
     description: kitData.description,
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        en: `${BASE_URL}/quick-play-kit/`,
-        es: `${BASE_URL}/es/quick-play-kit/`,
-      },
+      languages: buildAlternateLanguages(canonicalPath),
     },
     openGraph: {
       title: kitData.title,
@@ -73,7 +70,8 @@ export default async function QuickPlayKitPage({ params }: PageProps) {
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
   const quickKit = ((dictionary.pages as unknown) as { quickKit: QuickKitContent }).quickKit;
-  const canonicalUrl = locale === "en" ? `${BASE_URL}/quick-play-kit/` : `${BASE_URL}/${locale}/quick-play-kit/`;
+  const canonicalPath = "/quick-play-kit";
+  const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
 
   return (
     <div className="bg-white">

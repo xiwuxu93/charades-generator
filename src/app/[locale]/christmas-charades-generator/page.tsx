@@ -6,6 +6,7 @@ import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import CharadesGeneratorOptimized from "@/components/CharadesGeneratorOptimized";
 import StructuredData from "@/components/StructuredData";
 import FAQStructuredData from "@/components/FAQStructuredData";
+import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -20,10 +21,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
 
-  const baseUrl = "https://charades-generator.com";
-  const canonicalUrl = locale === 'en'
-    ? `${baseUrl}/christmas-charades-generator/`
-    : `${baseUrl}/${locale}/christmas-charades-generator/`;
+  const canonicalPath = "/christmas-charades-generator";
+  const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
 
   return {
     title: dictionary.seo.christmas.title,
@@ -31,10 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     keywords: dictionary.seo.christmas.keywords,
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'en': `${baseUrl}/christmas-charades-generator/`,
-        'es': `${baseUrl}/es/christmas-charades-generator/`,
-      }
+      languages: buildAlternateLanguages(canonicalPath),
     },
     openGraph: {
       title: dictionary.seo.christmas.title,
@@ -44,7 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       locale: locale === 'en' ? 'en_US' : 'es_ES',
       images: [
         {
-          url: `${baseUrl}/charades-generator-og.png`,
+          url: `${BASE_URL}/charades-generator-og.png`,
           width: 1200,
           height: 630,
           alt: dictionary.seo.christmas.title,
@@ -55,7 +51,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: dictionary.seo.christmas.title,
       description: dictionary.seo.christmas.description,
-      images: [`${baseUrl}/charades-generator-og.png`],
+      images: [`${BASE_URL}/charades-generator-og.png`],
     },
     robots: "index, follow",
   };
@@ -68,10 +64,8 @@ export default async function ChristmasCharadesPage({ params }: PageProps) {
   const copy = christmasContent[locale] ?? christmasContent.en;
   const initialWords = pickWords("christmas", "medium", "all", 3, locale);
 
-  const baseUrl = "https://charades-generator.com";
-  const canonicalUrl = locale === 'en'
-    ? `${baseUrl}/christmas-charades-generator/`
-    : `${baseUrl}/${locale}/christmas-charades-generator/`;
+  const canonicalPath = "/christmas-charades-generator";
+  const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
 
   return (
     <div className="bg-gradient-to-b from-red-50 to-green-50 min-h-screen">

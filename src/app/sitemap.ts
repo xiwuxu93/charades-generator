@@ -1,11 +1,9 @@
 import { MetadataRoute } from "next";
-import { SUPPORTED_LOCALES } from "@/i18n/config";
 import { statSync } from "fs";
 import { join } from "path";
+import { buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
 
 export const dynamic = "force-static";
-
-const baseUrl = "https://charades-generator.com";
 
 // Function to get file modification time
 function getFileModificationTime(filePath: string): Date {
@@ -111,25 +109,21 @@ const routeConfig: Array<{
 export default function sitemap(): MetadataRoute.Sitemap {
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
-  // Generate sitemap entries for each supported locale
-  for (const locale of SUPPORTED_LOCALES) {
-    for (const route of routeConfig) {
-      const url =
-        locale === "en"
-          ? `${baseUrl}${route.path}${route.path === "/" ? "" : "/"}`
-          : `${baseUrl}/${locale}${route.path}${route.path === "/" ? "" : "/"}`;
+  for (const route of routeConfig) {
+    const languages = buildAlternateLanguages(route.path);
+    const primaryUrl = buildCanonicalUrl("en", route.path);
+    const pageFilePath = getPageFilePath(route.path);
+    const lastModified = getFileModificationTime(pageFilePath);
 
-      // Get the actual file modification time
-      const pageFilePath = getPageFilePath(route.path);
-      const lastModified = getFileModificationTime(pageFilePath);
-
-      sitemapEntries.push({
-        url: url,
-        lastModified,
-        changeFrequency: route.changeFrequency,
-        priority: route.priority,
-      });
-    }
+    sitemapEntries.push({
+      url: primaryUrl,
+      lastModified,
+      changeFrequency: route.changeFrequency,
+      priority: route.priority,
+      alternates: {
+        languages,
+      },
+    });
   }
 
   return sitemapEntries;

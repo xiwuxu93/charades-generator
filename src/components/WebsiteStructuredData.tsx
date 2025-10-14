@@ -70,11 +70,6 @@ export default function WebsiteStructuredData({
         "height": 62
       },
       "sameAs": []
-    },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": `${baseUrl}/?q={search_term_string}`,
-      "query-input": "required name=search_term_string"
     }
   };
 
@@ -99,7 +94,6 @@ export default function WebsiteStructuredData({
       "email": "support@charades-generator.com",
       "availableLanguage": [languageTag]
     },
-    "areaServed": "Worldwide",
     "serviceType": "Entertainment Software"
   };
 
