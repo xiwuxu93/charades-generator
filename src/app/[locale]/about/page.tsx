@@ -58,22 +58,41 @@ export default async function AboutPage({ params }: PageProps) {
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
   const changelog = dictionary.pages.changelog;
+  const canonicalPath = "/about";
+  const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
+
+  const slugify = (text: string) =>
+    text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 80);
   const changelogSchema = changelog
     ? {
         "@context": "https://schema.org",
         "@type": "ItemList",
         name: changelog.title,
-        itemListElement: changelog.items.map((item: { date: string; title: string; highlights: string[] }, index: number) => ({
-          "@type": "Article",
-          position: index + 1,
-          headline: item.title,
-          datePublished: item.date,
-          author: {
-            "@type": "Organization",
-            name: dictionary.footer.brandTitle,
-          },
-          description: item.highlights.join(" "),
-        })),
+        itemListElement: changelog.items.map((item: { date: string; title: string; highlights: string[] }, index: number) => {
+          const slug = slugify(`${item.date}-${item.title}`) || `entry-${index + 1}`;
+          const url = `${canonicalUrl}#${slug}`;
+
+          return {
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              "@type": "Article",
+              "@id": url,
+              url,
+              headline: item.title,
+              datePublished: item.date,
+              author: {
+                "@type": "Organization",
+                name: dictionary.footer.brandTitle,
+              },
+              description: item.highlights.join(" "),
+            },
+          };
+        }),
       }
     : null;
 
@@ -196,8 +215,12 @@ export default async function AboutPage({ params }: PageProps) {
           <h2 className="text-2xl font-bold text-gray-900">{changelog.title}</h2>
           <p className="text-gray-600">{changelog.description}</p>
           <div className="space-y-6">
-            {changelog.items.map((entry: { date: string; title: string; highlights: string[] }) => (
-              <article key={entry.date} className="rounded-xl border border-gray-200 bg-gray-50 p-5">
+            {changelog.items.map((entry: { date: string; title: string; highlights: string[] }, index: number) => (
+              <article
+                key={entry.date}
+                id={slugify(`${entry.date}-${entry.title}`) || `entry-${index + 1}`}
+                className="rounded-xl border border-gray-200 bg-gray-50 p-5"
+              >
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">
                   {new Date(entry.date).toLocaleDateString(locale, {
                     year: 'numeric',

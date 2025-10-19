@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
+import { buildLocalePath } from "@/utils/localePaths";
 
 interface PlaybookEntry {
   id: string;
@@ -23,6 +24,7 @@ interface CommunityPlaybooksProps {
     entries: PlaybookEntry[];
   };
   fallbackShareCta: string;
+  baseUrl?: string;
 }
 
 function formatDate(locale: Locale, isoDate: string) {
@@ -40,30 +42,42 @@ function formatDate(locale: Locale, isoDate: string) {
   }
 }
 
-export default function CommunityPlaybooks({ locale, playbooks, fallbackShareCta }: CommunityPlaybooksProps) {
+export default function CommunityPlaybooks({
+  locale,
+  playbooks,
+  fallbackShareCta,
+  baseUrl = "https://charades-generator.com",
+}: CommunityPlaybooksProps) {
   if (!playbooks?.entries?.length) {
     return null;
   }
+
+  const localizedRoot = buildLocalePath(locale, "/");
 
   const schema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: playbooks.title,
     itemListElement: playbooks.entries.map((entry: PlaybookEntry, index: number) => ({
-      "@type": "HowTo",
+      "@type": "ListItem",
       position: index + 1,
-      name: entry.scenario,
-      description: entry.summary,
-      dateModified: entry.lastTested,
-      author: {
-        "@type": "Person",
-        name: entry.persona,
+      item: {
+        "@type": "HowTo",
+        "@id": `${baseUrl}${localizedRoot}#${entry.id}`,
+        url: `${baseUrl}${localizedRoot}#${entry.id}`,
+        name: entry.scenario,
+        description: entry.summary,
+        dateModified: entry.lastTested,
+        author: {
+          "@type": "Person",
+          name: entry.persona,
+        },
+        step: entry.steps.map((step, stepIndex) => ({
+          "@type": "HowToStep",
+          position: stepIndex + 1,
+          text: step,
+        })),
       },
-      step: entry.steps.map((step, stepIndex) => ({
-        "@type": "HowToStep",
-        position: stepIndex + 1,
-        text: step,
-      })),
     })),
   };
 
@@ -85,6 +99,7 @@ export default function CommunityPlaybooks({ locale, playbooks, fallbackShareCta
           {playbooks.entries.map((entry: PlaybookEntry) => (
             <article
               key={entry.id}
+              id={entry.id}
               className="flex h-full flex-col justify-between rounded-2xl border border-gray-200 bg-gray-50 p-6 shadow-sm"
             >
               <div>

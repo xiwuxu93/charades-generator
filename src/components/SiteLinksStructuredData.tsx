@@ -23,11 +23,9 @@ export default function SiteLinksStructuredData({
   dictionary,
   baseUrl = "https://charades-generator.com",
 }: SiteLinksStructuredDataProps) {
-  const navigationItems = dictionary.navigation.items.map((item, index) => ({
-    "@type": "SiteNavigationElement",
-    position: index + 1,
-    name: item.title,
-    url: toAbsoluteUrl(baseUrl, locale, item.href),
+  const navigationEntries = dictionary.navigation.items.map((item) => ({
+    title: item.title,
+    href: item.href,
   }));
 
   const howToUseNode = dictionary.pages.howToUse;
@@ -48,21 +46,23 @@ export default function SiteLinksStructuredData({
     { title: dictionary.pages.terms?.title, href: "/terms-of-service" },
   ].filter((link): link is { title: string; href: string } => Boolean(link.title));
 
-  const expandedList = [
-    ...navigationItems,
-    ...supplementalLinks.map((link, index) => ({
+  const combinedLinks = [...navigationEntries, ...supplementalLinks];
+
+  const itemListElement = combinedLinks.map((link, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
       "@type": "SiteNavigationElement",
-      position: navigationItems.length + index + 1,
       name: link.title,
       url: toAbsoluteUrl(baseUrl, locale, link.href),
-    })),
-  ];
+    },
+  }));
 
   const siteLinksData = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": `${dictionary.footer.brandTitle} Site Navigation`,
-    "itemListElement": expandedList,
+    "itemListElement": itemListElement,
   };
 
   return (

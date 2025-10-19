@@ -362,8 +362,7 @@ export const en = {
     generatorDeepDive: {
       difference: {
         title: "Why this charades generator stands out",
-        lead:
-          "Run every game night from one hub. The main charades generator keeps filters, presets, and rules in one streamlined interface so you can launch a round in seconds.",
+        lead: "Run every game night from one hub. The main charades generator keeps filters, presets, and rules in one streamlined interface so you can launch a round in seconds.",
         bullets: [
           "Mix categories, difficulties, and age ranges inside a single charades generator without jumping between pages.",
           "Preview host-tested presets that instantly populate the charades generator for classroom breaks, team icebreakers, and family nights.",
@@ -435,7 +434,7 @@ export const en = {
           {
             title: "Mix filters each round",
             items: [
-              "Start on \"all\" to showcase the full charades generator range, then narrow to themes for finals.",
+              'Start on "all" to showcase the full charades generator range, then narrow to themes for finals.',
               "Alternate word counts so no team knows what is coming next.",
               "Duplicate the tab and prep the next batch while players act.",
             ],
@@ -819,6 +818,15 @@ export const en = {
       description:
         "Track the latest word packs, features, and compliance upgrades across the generator.",
       items: [
+        {
+          date: "2025-10-19",
+          title: "Structured data overhaul for navigation & playbooks",
+          highlights: [
+            "Rebuilt ItemList JSON-LD for site navigation, breadcrumbs, playbooks, and changelog entries using ListItem objects with canonical URLs.",
+            "Synced on-page anchors with structured data @id targets so Google rich results stay accurate across locales.",
+            "Validated production build output to confirm canonical, hreflang, and head metadata render correctly after the SEO refresh.",
+          ],
+        },
         {
           date: "2025-09-25",
           title: "Scenario presets, Quick-Play Kit, and community playbooks",
