@@ -182,7 +182,37 @@ export default async function AnimalCharadesPage({ params }: PageProps) {
   );
 }
 
-const animalContent = {
+type AnimalContent = {
+  introTitle: string;
+  introLead: string;
+  introCards: Array<{
+    title: string;
+    description: string;
+    items: string[];
+    background: string;
+    headingColor: string;
+    textColor: string;
+  }>;
+  gameModesTitle: string;
+  gameModes: Array<{
+    title: string;
+    description: string;
+    items: string[];
+  }>;
+  educatorTitle: string;
+  educatorTips: Array<{
+    title: string;
+    items: string[];
+  }>;
+  resourcesTitle: string;
+  resourcesLead: string;
+  resourcesPrimary: { label: string; href: string } | null;
+  resourcesSecondary: { label: string; href: string };
+  faqTitle: string;
+  faq: Array<{ question: string; answer: string }>;
+};
+
+const animalContent: Record<Locale, AnimalContent> = {
   en: {
     introTitle: "Animal charades keeps every age roaring with laughter",
     introLead:
@@ -405,35 +435,4 @@ const animalContent = {
       },
     ],
   },
-} satisfies Record<
-  Locale,
-  {
-    introTitle: string;
-    introLead: string;
-    introCards: Array<{
-      title: string;
-      description: string;
-      items: string[];
-      background: string;
-      headingColor: string;
-      textColor: string;
-    }>;
-    gameModesTitle: string;
-    gameModes: Array<{
-      title: string;
-      description: string;
-      items: string[];
-    }>;
-    educatorTitle: string;
-    educatorTips: Array<{
-      title: string;
-      items: string[];
-    }>;
-    resourcesTitle: string;
-    resourcesLead: string;
-    resourcesPrimary: { label: string; href: string } | null;
-    resourcesSecondary: { label: string; href: string };
-    faqTitle: string;
-    faq: Array<{ question: string; answer: string }>;
-  }
->;
+};
