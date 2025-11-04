@@ -70,6 +70,17 @@ const routeConfig: Array<{
     priority: 0.8,
   },
   {
+    path: "/animal-charades-game",
+    changeFrequency: "daily",
+    priority: 0.8,
+  },
+  {
+    path: "/reverse-charades-game",
+    changeFrequency: "daily",
+    priority: 0.8,
+  },
+
+  {
     path: "/about",
     changeFrequency: "monthly",
     priority: 0.6,
