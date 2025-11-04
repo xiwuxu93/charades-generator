@@ -70,14 +70,24 @@ const routeConfig: Array<{
     priority: 0.8,
   },
   {
+    path: "/emotion-charades",
+    changeFrequency: "weekly",
+    priority: 0.75,
+  },
+  {
     path: "/animal-charades-game",
-    changeFrequency: "daily",
-    priority: 0.8,
+    changeFrequency: "weekly",
+    priority: 0.75,
   },
   {
     path: "/reverse-charades-game",
-    changeFrequency: "daily",
-    priority: 0.8,
+    changeFrequency: "weekly",
+    priority: 0.75,
+  },
+  {
+    path: "/hard-charades-ideas",
+    changeFrequency: "weekly",
+    priority: 0.75,
   },
 
   {
