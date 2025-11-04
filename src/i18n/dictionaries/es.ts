@@ -72,6 +72,46 @@ export const es = {
       structuredDataDescription:
         "Generador de charadas navideñas con palabras temáticas para celebraciones familiares",
     },
+    reverse: {
+      title: "Reverse Charades - Reglas y generador de palabras",
+      description:
+        "Aprende a jugar reverse charades con equipos, consigue consejos de puntuación y genera prompts al instante para rondas ruidosas.",
+      keywords:
+        "reverse charades, juego reverse charades, reglas reverse charades, charadas equipo, charadas grupos grandes",
+      structuredDataName: "Generador de Reverse Charades",
+      structuredDataDescription:
+        "Generador y guía de reverse charades para equipos, fiestas y dinámicas de grupo",
+    },
+    emotions: {
+      title: "Charadas de emociones - Generador SEL y aulas",
+      description:
+        "Prompts de emociones para clases SEL, sesiones terapéuticas y conversaciones familiares. Genera pistas sobre sentimientos al instante.",
+      keywords:
+        "charadas emociones, juegos emociones, sel charadas, charadas aula, inteligencia emocional",
+      structuredDataName: "Generador de charadas de emociones",
+      structuredDataDescription:
+        "Generador centrado en emociones para aprendizaje socioemocional, terapia y juego expresivo",
+    },
+    animals: {
+      title: "Charadas de animales - Juego familiar y escolar",
+      description:
+        "Generador de charadas de animales con mascotas, zoológicos y fauna salvaje para familias, clases y grupos ESL.",
+      keywords:
+        "charadas animales, juego charadas animales, palabras charadas animales, juegos infantiles animales, charadas zoológico",
+      structuredDataName: "Generador de charadas de animales",
+      structuredDataDescription:
+        "Prompts de animales para noches familiares, aulas y rompehielos",
+    },
+    hard: {
+      title: "Ideas difíciles para charadas - Generador avanzado",
+      description:
+        "Sube el reto con ideas difíciles, pistas de varias palabras y consejos estratégicos para noches competitivas.",
+      keywords:
+        "charadas difíciles, ideas difíciles charadas, palabras complicadas charadas, charadas avanzadas, retos charadas",
+      structuredDataName: "Generador de charadas difíciles",
+      structuredDataDescription:
+        "Generador avanzado con prompts exigentes y estrategias para anfitriones",
+    },
     howToUse: {
       title: "Cómo Usar el Generador",
       description:
@@ -149,6 +189,12 @@ export const es = {
         title: "Charadas navideñas",
         description: "Ideas festivas y familiares",
         href: "/christmas-charades-generator",
+      },
+      {
+        key: "reverse",
+        title: "Reverse charades",
+        description: "Modo equipos y reglas",
+        href: "/reverse-charades-game",
       },
       {
         key: "howToUse",
@@ -299,7 +345,7 @@ export const es = {
     exploreLabel: "Explora más",
     themedHeading: "Elige un generador temático",
     themedDescription:
-      "Accede a listas diseñadas para peques, cinéfilos, fiestas navideñas o reuniones llenas de risas. Todo tu banco de ideas en un solo lugar.",
+      "Accede a bancos curados para peques, cinéfilos, docentes o fiestas adultas y mantén tu generador de palabras para charadas lleno de ideas en segundos.",
     luckyLabel: "Tengo suerte →",
     browsePromptsLabel: "Ver ideas",
     readMoreLabel: "Ver más",
@@ -336,6 +382,38 @@ export const es = {
           "Dinámicas perfectas para la oficina, despedidas y reuniones nocturnas.",
         badge: "Listo para la fiesta",
       },
+      {
+        key: "reverse",
+        title: "Reverse charades",
+        href: "/reverse-charades-game/",
+        description:
+          "Todos actúan y una persona adivina: incluye reglas para equipos y hojas de puntuación.",
+        badge: "Modo equipos",
+      },
+      {
+        key: "emotions",
+        title: "Charadas de emociones",
+        href: "/emotion-charades/",
+        description:
+          "Cartas SEL con sentimientos para trabajar emociones en aula, terapia o familia.",
+        badge: "SEL listo",
+      },
+      {
+        key: "animals",
+        title: "Charadas de animales",
+        href: "/animal-charades-game/",
+        description:
+          "Mascotas, granja y fauna salvaje para clases, ESL y tardes familiares.",
+        badge: "Apto peques",
+      },
+      {
+        key: "hard",
+        title: "Charadas difíciles",
+        href: "/hard-charades-ideas/",
+        description:
+          "Prompts retadores y consejos avanzados para grupos competitivos.",
+        badge: "Nivel pro",
+      },
     ],
     guidesLabel: "Planifica y aprende",
     guidesHeading: "Guías y trucos para que la partida sea inolvidable",
@@ -367,12 +445,12 @@ export const es = {
       difference: {
         title: "Por qué este generador de charadas destaca",
         lead:
-          "Organiza cada partida desde un solo lugar. El generador de charadas principal concentra filtros, presets y reglas para lanzar rondas en segundos.",
+          "Organiza cada partida desde un solo generador de palabras para charadas. Los filtros, presets y reglas viven en un mismo panel para que lances la ronda en segundos.",
         bullets: [
-          "Combina categorías, niveles y edades en el generador de charadas sin cambiar de página.",
-          "Activa presets probados por anfitriones que preparan el generador para clases, equipos y familias.",
-          "Copia, imprime o comparte listas directamente desde el generador de charadas para que todas las personas sigan el mismo plan.",
-          "Las instrucciones integradas mantienen a quienes se inician seguros mientras el generador de charadas entrega nuevas palabras al instante.",
+          "Combina categorías, niveles y edades en el generador de palabras para charadas sin saltar de página.",
+          "Activa presets probados que dejan el generador listo para clases, equipos y familias.",
+          "Copia, imprime o comparte una lista de palabras en un clic para que todo el grupo siga el mismo plan.",
+          "Las instrucciones integradas tranquilizan a quienes se inician mientras el generador entrega nuevas ideas al instante.",
         ],
         footer: {
           before: "¿Quieres caos total? Visita el",
@@ -624,7 +702,7 @@ export const es = {
     kids: {
       title: "Generador de Charadas para Niños",
       description:
-        "Genera palabras divertidas y apropiadas para niños, perfectas para fiestas infantiles, noches familiares y actividades escolares.",
+        "Genera palabras divertidas y apropiadas con una mini guía sobre cómo jugar charadas con niños en fiestas, noches familiares y clases.",
     },
     disney: {
       title: "Generador de Charadas Disney",
@@ -644,12 +722,32 @@ export const es = {
     random: {
       title: "Generador de Charadas Aleatorias",
       description:
-        "Genera charadas sorpresa mezclando todas las categorías para diversión impredecible y variada.",
+        "Generador aleatorio de palabras para charadas que mezcla todas las categorías, ideal cuando alguien pide “palabras para charadas” o una lista imprimible al instante.",
     },
     christmas: {
       title: "Generador de Charadas de Navidad",
       description:
         "Genera palabras navideñas para charadas en tus fiestas navideñas! Perfecto para reuniones familiares, fiestas de oficina y celebraciones navideñas.",
+    },
+    reverse: {
+      title: "Reverse Charades",
+      description:
+        "Genera prompts ideales para equipos y sigue la guía completa de reverse charades para rondas llenas de energía.",
+    },
+    emotions: {
+      title: "Generador de charadas de emociones",
+      description:
+        "Genera cartas de emociones que refuerzan sesiones SEL, terapias y juegos expresivos en casa.",
+    },
+    animals: {
+      title: "Generador de charadas de animales",
+      description:
+        "Genera cartas de animales con mascotas, zoológicos y fauna salvaje para clases y noches familiares.",
+    },
+    hard: {
+      title: "Generador de charadas difíciles",
+      description:
+        "Genera ideas desafiantes con pistas complejas y consejos avanzados para jugadores competitivos.",
     },
     howToUse: {
       title: "Cómo Usar el Generador de Charadas",
@@ -880,6 +978,14 @@ export const es = {
       a7: "¡Las charadas son apropiadas para todas las edades! Nuestro generador incluye filtros de grupo de edad para que puedas encontrar palabras apropiadas para niños, familias o reuniones solo de adultos.",
       q8: "¿Cuántas palabras debo generar para un juego?",
       a8: "Depende del tamaño de tu grupo y la duración del juego. Recomendamos 5-10 palabras por jugador como punto de partida, ¡pero siempre puedes generar más durante el juego!",
+      q9: "¿Se puede hablar en las charadas?",
+      a9: "No. Nada de hablar, sonidos ni deletrear con la boca. Usa gestos, expresiones y las señales de categoría descritas en la guía de uso.",
+      q10: "¿Cómo juego charadas con equipos o grupos grandes?",
+      a10:
+        "Divide en escuadras de 3 a 6 personas, alterna turnos de 60 segundos y rota quién actúa cada ronda. Nuestro Quick-Play Kit incluye planillas para llevar la puntuación sin enredos.",
+      q11: "¿Cómo se actúa “casarse” en charadas?",
+      a11:
+        "Cuenta una mini historia de boda: finge sostener un ramo, simula poner un anillo y termina con las manos en el corazón. Se entiende de inmediato sin usar palabras.",
       stillHaveQuestions: "¿Aún Tienes Preguntas?",
       contactDescription:
         "¿Necesitas ayuda directa? Escríbenos a support@charades-generator.com y te responderemos en un día hábil.",

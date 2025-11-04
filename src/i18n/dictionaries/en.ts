@@ -72,6 +72,46 @@ export const en = {
       structuredDataDescription:
         "Festive Christmas charades generator with holiday-themed words for family celebrations",
     },
+    reverse: {
+      title: "Reverse Charades Game - Team Rules & Word Generator",
+      description:
+        "Learn how to play reverse charades with teams, grab scorekeeping tips, and spin up instant prompts for loud party rounds.",
+      keywords:
+        "reverse charades, reverse charades game, reverse charades rules, team charades, charades for large groups",
+      structuredDataName: "Reverse Charades Game Generator",
+      structuredDataDescription:
+        "Reverse charades word generator plus team-based rules, tips, and FAQ for high-energy groups",
+    },
+    emotions: {
+      title: "Emotion Charades - SEL & Classroom Word Generator",
+      description:
+        "Emotion charades prompts for SEL lessons, counseling sessions, and family conversations. Generate feelings-based clues instantly.",
+      keywords:
+        "emotion charades, feelings charades, sel charades, classroom charades, emotional intelligence games",
+      structuredDataName: "Emotion Charades Word Generator",
+      structuredDataDescription:
+        "Emotion-focused charades generator for social-emotional learning, therapy, and expressive play",
+    },
+    animals: {
+      title: "Animal Charades Game - Family & Classroom Prompts",
+      description:
+        "Animal charades generator packed with pets, zoo animals, and wildlife prompts for kids, families, and ESL classrooms.",
+      keywords:
+        "animal charades, animal charades game, animal charades words, kids animal games, zoo charades",
+      structuredDataName: "Animal Charades Word Generator",
+      structuredDataDescription:
+        "Animal charades prompts for family nights, classrooms, and party icebreakers",
+    },
+    hard: {
+      title: "Hard Charades Ideas - Advanced Word Generator",
+      description:
+        "Push your group with hard charades ideas, multi-word clues, and expert hosting tips for competitive game nights.",
+      keywords:
+        "hard charades, hard charades ideas, difficult charades words, advanced charades, challenging charades prompts",
+      structuredDataName: "Hard Charades Ideas Generator",
+      structuredDataDescription:
+        "Advanced charades generator with tough prompts, scoring twists, and host strategies",
+    },
     howToUse: {
       title: "How to Use Charades Generator - Complete Guide & Rules",
       description:
@@ -147,6 +187,12 @@ export const en = {
         title: "Christmas Charades",
         description: "Holiday themed words",
         href: "/christmas-charades-generator",
+      },
+      {
+        key: "reverse",
+        title: "Reverse Charades",
+        description: "Team play rules",
+        href: "/reverse-charades-game",
       },
       {
         key: "howToUse",
@@ -294,7 +340,7 @@ export const en = {
     exploreLabel: "Explore more",
     themedHeading: "Pick a themed charades generator",
     themedDescription:
-      "Jump straight into curated word banks built for kids, movie buffs, holiday gatherings, or laugh-out-loud adult parties. Think of it as your all-in-one charades ideas generator.",
+      "Jump straight into curated word banks built for kids, movie buffs, teachers, or adult parties so your charades word generator session starts with the perfect prompts.",
     luckyLabel: "I feel lucky →",
     browsePromptsLabel: "Browse prompts",
     readMoreLabel: "Read more",
@@ -331,6 +377,38 @@ export const en = {
           "From office icebreakers to late-night parties, grab hilarious scenarios on demand.",
         badge: "Party ready",
       },
+      {
+        key: "reverse",
+        title: "Reverse Charades Game",
+        href: "/reverse-charades-game/",
+        description:
+          "Team-vs-team mode with shared acting prompts, score sheets, and loud laugh potential.",
+        badge: "Team mode",
+      },
+      {
+        key: "emotions",
+        title: "Emotion Charades",
+        href: "/emotion-charades/",
+        description:
+          "SEL-friendly cards that help kids, teens, and adults name feelings through play.",
+        badge: "SEL ready",
+      },
+      {
+        key: "animals",
+        title: "Animal Charades Game",
+        href: "/animal-charades-game/",
+        description:
+          "Pet, farm, and wildlife prompts perfect for classrooms, ESL groups, and family nights.",
+        badge: "Kid approved",
+      },
+      {
+        key: "hard",
+        title: "Hard Charades Ideas",
+        href: "/hard-charades-ideas/",
+        description:
+          "Challenge advanced players with multi-word prompts, mashups, and expert host tips.",
+        badge: "Level up",
+      },
     ],
     guidesLabel: "Plan & learn",
     guidesHeading: "Guides, rules, and ways to make charades unforgettable",
@@ -363,12 +441,12 @@ export const en = {
       difference: {
         title: "Why this charades generator stands out",
         lead:
-          "Run every game night from one hub. The main charades generator keeps filters, presets, and rules in one streamlined interface so you can launch a round in seconds.",
+          "Run every game night from one charades word generator hub. Filters, presets, and rules stay in a single interface so you can launch a round in seconds.",
         bullets: [
-          "Mix categories, difficulties, and age ranges inside a single charades generator without jumping between pages.",
-          "Preview host-tested presets that instantly populate the charades generator for classroom breaks, team icebreakers, and family nights.",
-          "Copy, print, or share word lists directly from the charades generator so everyone stays aligned.",
-          "Built-in How to Play reminders keep new players confident while the charades generator serves fresh prompts on demand.",
+          "Mix categories, difficulties, and age ranges inside a single charades word generator without jumping between pages.",
+          "Preview host-tested presets that instantly populate the generator for classroom breaks, team icebreakers, and family nights.",
+          "Copy, print, or share a charades word list in one click so even last-minute hosts look prepared.",
+          "Built-in How to Play reminders keep new players confident while the generator serves fresh prompts on demand.",
         ],
         footer: {
           before: "Craving total unpredictability? Hop over to the",
@@ -620,7 +698,7 @@ export const en = {
     kids: {
       title: "Kids Charades Generator",
       description:
-        "Generate fun, child-friendly charades words perfect for kids parties, family game nights, and classroom activities.",
+        "Generate fun, child-friendly charades words plus a quick “how to play charades for kids” guide for parties, family nights, and classrooms.",
     },
     disney: {
       title: "Disney Charades Generator",
@@ -640,12 +718,32 @@ export const en = {
     random: {
       title: "Random Charades Generator",
       description:
-        "Generate surprise charades mixing all categories for unpredictable and varied gameplay fun.",
+        "Random charades word generator that mixes every category—ideal when someone needs “words for charades generator” or a printable charades word list.",
     },
     christmas: {
       title: "Christmas Charades Generator",
       description:
         "Generate festive Christmas charades words for your holiday parties! Perfect for family gatherings, office parties, and Christmas celebrations.",
+    },
+    reverse: {
+      title: "Reverse Charades Game",
+      description:
+        "Generate team-friendly prompts and follow the reverse charades playbook for loud, high-energy rounds.",
+    },
+    emotions: {
+      title: "Emotion Charades Generator",
+      description:
+        "Generate emotion charades cards that reinforce SEL lessons, counseling check-ins, and expressive play at home.",
+    },
+    animals: {
+      title: "Animal Charades Generator",
+      description:
+        "Generate animal charades cards packed with pets, zoo stars, and wildlife for classrooms and family nights.",
+    },
+    hard: {
+      title: "Hard Charades Ideas Generator",
+      description:
+        "Generate challenging charades ideas with multi-word prompts and advanced hosting tips for competitive players.",
     },
     howToUse: {
       title: "How to Use Charades Generator",
@@ -866,6 +964,14 @@ export const en = {
       a7: "Charades is suitable for all ages! Our generator includes age group filters so you can find appropriate words for kids, families, or adult-only gatherings.",
       q8: "How many words should I generate for a game?",
       a8: "It depends on your group size and game duration. We recommend 5-10 words per player as a starting point, but you can always generate more during the game!",
+      q9: "Can you talk in charades?",
+      a9: "No talking, mouthing, or sound effects are allowed. Stick to gestures, facial expressions, and the category signals outlined in our How to Use guide.",
+      q10: "How do you play charades with a large group or in teams?",
+      a10:
+        "Split big groups into squads of 3-6 players, rotate clue givers every round, and alternate 60-second turns so the pacing stays lively. Our Quick-Play Kit template makes score tracking painless.",
+      q11: "How do you act out “marry” in charades?",
+      a11:
+        "Use a wedding mini-story: mime holding a bouquet, pretend to slide a ring on someone’s finger, then clasp your hands over your heart. It communicates the idea instantly without needing props.",
       stillHaveQuestions: "Still Have Questions?",
       contactDescription:
         "Need direct support? Drop us a note at support@charades-generator.com and we’ll reply within one business day.",

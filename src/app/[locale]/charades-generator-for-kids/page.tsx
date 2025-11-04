@@ -162,6 +162,19 @@ export default async function CharadesForKidsPage({ params }: PageProps) {
           </div>
         </section>
 
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">{copy.playGuideTitle}</h2>
+          <ol className="list-decimal list-inside space-y-2 text-gray-700">
+            {copy.playGuideList.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ol>
+          <div className="mt-6 rounded-lg border border-green-200 bg-green-50 p-4">
+            <h3 className="text-lg font-semibold text-green-900 mb-2">{copy.marryTitle}</h3>
+            <p className="text-gray-700">{copy.marryDescription}</p>
+          </div>
+        </section>
+
         <section className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">{copy.faqTitle}</h2>
           <div className="space-y-4">
@@ -261,12 +274,28 @@ const kidsContent = {
       ],
       physicalHeadingColor: "#a16207",
     },
+    playGuideTitle: "How to play charades for kids (quick guide)",
+    playGuideList: [
+      "Group kids into teams or pairs so shy players always have support.",
+      "Pick easy categories (animals, emotions, daily routines) inside the kids charades generator.",
+      "Show the clue-giver the word, set a 60-second timer, and remind them there’s no talking—only gestures.",
+      "Offer one gentle hint after 30 seconds and celebrate every correct guess loudly.",
+      "Rotate clue-givers so each child gets a turn before refreshing the word list.",
+    ],
+    marryTitle: "How do you act out “marry” in charades?",
+    marryDescription:
+      "Link both hands together like holding a bouquet, mime sliding a ring onto a finger, then clasp your hands over your heart. Kids immediately recognize the wedding gesture, so it’s a safe go-to when someone asks for the “marry” action.",
     faqTitle: "Kids Charades FAQ",
     faq: [
       {
         question: "What age is appropriate for kids charades?",
         answer:
           "Our kids charades generator is perfect for ages 4-12! We include simple words for preschoolers, elementary-friendly content for ages 7-9, and slightly more challenging words for tweens, all completely age-appropriate.",
+      },
+      {
+        question: "How do you play charades for kids?",
+        answer:
+          "Keep rounds short, choose kid-safe prompts, and let players team up. We suggest 60 seconds on the timer, unlimited acting, and gentle hints halfway through the round—exactly what you’ll find in the quick guide above.",
       },
       {
         question: "Are all charades words safe for children?",
@@ -282,6 +311,11 @@ const kidsContent = {
         question: "How do I make charades easier for younger children?",
         answer:
           "For preschoolers and young kids, use familiar animals and simple actions, give gentle hints, use longer time limits, and focus on participation rather than competition. Let them work in teams for extra support!",
+      },
+      {
+        question: "How do you act out “marry” in kids charades?",
+        answer:
+          "Join your hands like you’re holding flowers, mime exchanging rings, and finish with a big hug motion. The visual story makes “marry” easy to guess without needing any words or props.",
       },
       {
         question: "What categories work best for children?",
@@ -372,12 +406,28 @@ const kidsContent = {
       ],
       physicalHeadingColor: "#a16207",
     },
+    playGuideTitle: "Guía rápida: cómo jugar charadas con niños",
+    playGuideList: [
+      "Forma equipos o parejas para que los tímidos tengan compañía.",
+      "Selecciona categorías fáciles (animales, emociones, rutinas) dentro del generador infantil.",
+      "Muestra la palabra al actor, marca 60 segundos y recuerda que solo se usan gestos.",
+      "Ofrece una pista amable hacia la mitad y celebra cada acierto con aplausos.",
+      "Rota al actor en cada turno antes de generar una tanda nueva de palabras.",
+    ],
+    marryTitle: "¿Cómo representar “casarse” en charadas?",
+    marryDescription:
+      "Une las manos como si sostuvieras un ramo, imita que colocas un anillo y termina con un gran abrazo imaginario. Ese gesto de boda es fácil de entender incluso para los más pequeños.",
     faqTitle: "Preguntas frecuentes sobre charadas infantiles",
     faq: [
       {
         question: "¿Para qué edades es ideal el juego?",
         answer:
           "Nuestro generador funciona perfecto entre los 4 y 12 años. Hay palabras sencillas para preescolar, contenido para primaria y retos ligeros para preadolescentes, siempre 100% apropiado.",
+      },
+      {
+        question: "¿Cómo se juega a charadas con niños?",
+        answer:
+          "Haz rondas cortas, mantén categorías conocidas y deja que los niños actúen en equipo. Con 60 segundos por turno, pistas suaves y mucha celebración cada vez que aciertan, la dinámica se vuelve irresistible.",
       },
       {
         question: "¿Todas las palabras son seguras para niños?",
@@ -393,6 +443,11 @@ const kidsContent = {
         question: "¿Cómo lo adapto para los más pequeños?",
         answer:
           "Elige animales y acciones conocidas, ofrece pistas amables, usa tiempos más largos y prioriza la participación antes que la competencia. Los equipos colaborativos ayudan mucho.",
+      },
+      {
+        question: "¿Cómo se actúa “casarse” en charadas?",
+        answer:
+          "Haz el gesto de ramo, intercambia anillos imaginarios y termina con un abrazo grande. Es una escena que todos identifican y no necesita palabras.",
       },
       {
         question: "¿Qué categorías disfrutan más?",
@@ -435,6 +490,10 @@ const kidsContent = {
     physicalItems: string[];
     physicalHeadingColor: string;
   };
+  playGuideTitle: string;
+  playGuideList: string[];
+  marryTitle: string;
+  marryDescription: string;
   faqTitle: string;
   faq: Array<{
     question: string;

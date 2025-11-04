@@ -91,6 +91,18 @@ export default async function FAQPage({ params }: PageProps) {
       question: dictionary.pages.faq.q8,
       answer: dictionary.pages.faq.a8,
     },
+    {
+      question: dictionary.pages.faq.q9,
+      answer: dictionary.pages.faq.a9,
+    },
+    {
+      question: dictionary.pages.faq.q10,
+      answer: dictionary.pages.faq.a10,
+    },
+    {
+      question: dictionary.pages.faq.q11,
+      answer: dictionary.pages.faq.a11,
+    },
   ];
 
   return (

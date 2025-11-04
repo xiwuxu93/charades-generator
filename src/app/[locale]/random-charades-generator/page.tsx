@@ -171,12 +171,13 @@ const randomContent = {
   en: {
     differenceTitle: "What makes Random mode different?",
     differenceLead:
-      "Hit shuffle and the generator pulls fresh prompts from every category, difficulty, and age group—no two batches are ever the same.",
+      "Hit shuffle and this random charades word generator pulls fresh prompts from every category, difficulty, and age group—no two batches are ever the same.",
     differenceBullets: [
       "Uses the full 1000+ word bank with every click for genuine variety.",
       "Ignores theme filters by default so movie, Disney, actions, and seasonal prompts collide in one mix.",
       "Supports 1–50-word bursts, perfect for on-the-fly game packs or last-second tie breakers.",
       "Balances easy, medium, and hard ideas so mixed skill groups stay engaged.",
+      "Doubles as an instant charades word list whenever people ask for “words for charades generator”.",
     ],
     differenceFooter: {
       before: "Need a curated experience instead? Jump back to the",
@@ -270,17 +271,23 @@ const randomContent = {
         answer:
           "The homepage highlights curated themes. Random mode removes the guardrails so every click blends movies, actions, emojis, holidays, and more into one unpredictable list.",
       },
+      {
+        question: "Can I copy a charades word list from this page?",
+        answer:
+          "Yes. Generate any batch, tap “Copy word list,” and paste it into Notes, Docs, or chat. It’s the fastest way to hand someone a ready-to-play list when they literally search for “words for charades generator.”",
+      },
     ],
   },
   es: {
     differenceTitle: "¿Qué hace único al modo aleatorio?",
     differenceLead:
-      "Pulsa mezclar y el generador trae palabras frescas de todas las categorías, dificultades y edades; ninguna tanda se repite.",
+      "Pulsa mezclar y este generador aleatorio de palabras para charadas trae ideas frescas de todas las categorías, dificultades y edades; ninguna tanda se repite.",
     differenceBullets: [
       "Usa el banco completo de más de 1000 palabras en cada clic para una verdadera variedad.",
       "Ignora los filtros temáticos por defecto, así películas, Disney, acciones y fiestas aparecen juntos.",
       "Permite ráfagas de 1 a 50 palabras, ideal para preparar partidas express o desempates sorpresa.",
       "Equilibra ideas fáciles, medias y difíciles para que grupos mixtos sigan enganchados.",
+      "También funciona como lista instantánea de palabras cuando alguien pide “palabras para charadas” al generador.",
     ],
     differenceFooter: {
       before: "¿Prefieres una experiencia curada? Vuelve al",
@@ -373,6 +380,11 @@ const randomContent = {
         question: "¿En qué se diferencia del generador principal?",
         answer:
           "La portada resalta temas curados. El modo aleatorio quita esas barandillas y mezcla películas, acciones, emojis, festividades y más en cada clic.",
+      },
+      {
+        question: "¿Puedo copiar una lista de palabras desde aquí?",
+        answer:
+          "Claro. Genera cualquier tanda, pulsa “Copy word list” y pégala en Notas, Docs o tu chat favorito. Es la forma más rápida de compartir palabras cuando alguien busca literalmente “palabras para charadas”.",
       },
     ],
   },

@@ -179,7 +179,7 @@ const movieContent = {
     partyDescription: {
       before: "Beyond movies? Discover our",
       linkText: "complete charades generator",
-      after: "featuring books, TV shows, animals, actions, and dozens of other entertaining categories.",
+      after: "featuring books, TV shows, animals, actions, and dozens of other entertaining categories so you can build the ultimate charades movie game lineup.",
       href: "/",
     },
     partyColumns: [
@@ -282,7 +282,7 @@ const movieContent = {
     partyDescription: {
       before: "¿Quieres más que películas? Descubre nuestro",
       linkText: "generador completo de charadas",
-      after: "con libros, series, animales, acciones y decenas de categorías divertidas.",
+      after: "con libros, series, animales, acciones y decenas de categorías para armar el mejor juego de charadas de películas.",
       href: "/es/",
     },
     partyColumns: [

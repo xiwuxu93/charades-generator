@@ -4,6 +4,65 @@ import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
 
+const howToExtras = {
+  en: {
+    teamTitle: "Running charades with teams & large groups",
+    teamDescription:
+      "When people search how to play charades in teams or with a large group, they’re really asking for structure. Keep games flowing with staggered timers and clear hosting roles.",
+    teamTips: [
+      "Split into two to four squads of 3-6 players so no one waits more than a couple minutes.",
+      "Use alternating 60-second turns and let opposing teams steal for bonus points.",
+      "Bring a whiteboard or shared doc to log scores, captains, and standout improv moments.",
+      "Recycle unused prompts into a sudden-death pile for lightning tie-breakers.",
+    ],
+    kitTitle: "Need a printable score & timer sheet?",
+    kitDescription: "Download the Quick-Play Kit for round trackers, signal legends, and host cues.",
+    kitCta: "Open the Quick-Play Kit",
+    reverseTitle: "Reverse charades basics",
+    reverseDescription:
+      "Reverse charades flips the format: the whole team acts while one person guesses. It’s perfect for loud groups and shows up constantly in “how to play reverse charades” searches.",
+    reverseSteps: [
+      "Choose one guesser per round and have the rest of the team read the same prompt.",
+      "Give actors 15 seconds to plan silent gestures before the timer starts.",
+      "If the guesser is stuck, allow the team one tag-in where another member becomes the guesser.",
+      "Rotate through every player so everyone experiences acting and guessing.",
+    ],
+  },
+  es: {
+    teamTitle: "Cómo gestionar charadas con equipos o grupos grandes",
+    teamDescription:
+      "Cuando alguien busca cómo jugar charadas en equipos o con grupos grandes, necesita orden. Define turnos, capitanes y temporizadores desde el inicio para que el ritmo no se pierda.",
+    teamTips: [
+      "Crea dos a cuatro equipos de 3-6 jugadores para evitar esperas largas.",
+      "Alterna turnos de 60 segundos y permite que el equipo rival robe el punto si acierta.",
+      "Usa una pizarra o documento compartido para anotar puntajes, capitanes y mejores mímicas.",
+      "Reserva las palabras no usadas para un desempate relámpago al final.",
+    ],
+    kitTitle: "¿Necesitas plantillas imprimibles?",
+    kitDescription: "Descarga el Quick-Play Kit con tableros de puntuación, señales y recordatorios para el anfitrión.",
+    kitCta: "Abrir Quick-Play Kit",
+    reverseTitle: "Conceptos básicos de reverse charades",
+    reverseDescription:
+      "En reverse charades todo el equipo actúa y una sola persona adivina. Es ideal para grupos ruidosos y es una de las preguntas más frecuentes sobre el juego.",
+    reverseSteps: [
+      "Elige a un adivinador por ronda y permite que el resto lea el mismo prompt.",
+      "Da 15 segundos para planear gestos en silencio antes de iniciar el cronómetro.",
+      "Si el adivinador se queda bloqueado, permite un “tag-in” para cambiar de rol una vez.",
+      "Rota los papeles para que todos actúen y adivinen durante la sesión.",
+    ],
+  },
+} satisfies Record<Locale, {
+  teamTitle: string;
+  teamDescription: string;
+  teamTips: string[];
+  kitTitle: string;
+  kitDescription: string;
+  kitCta: string;
+  reverseTitle: string;
+  reverseDescription: string;
+  reverseSteps: string[];
+}>;
+
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
@@ -57,6 +116,8 @@ export default async function HowToUsePage({ params }: PageProps) {
   const { locale: localeParam } = await params;
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
+  const extras = howToExtras[locale] ?? howToExtras.en;
+  const quickKitHref = locale === 'en' ? '/quick-play-kit' : `/${locale}/quick-play-kit`;
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white">
@@ -141,6 +202,36 @@ export default async function HowToUsePage({ params }: PageProps) {
             <li>{dictionary.pages.howToUse.benefit3}</li>
             <li>{dictionary.pages.howToUse.benefit4}</li>
           </ul>
+        </section>
+
+        <section className="mb-8 rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-3">{extras.teamTitle}</h2>
+          <p className="text-gray-700 mb-4">{extras.teamDescription}</p>
+          <ul className="list-disc list-inside space-y-2 text-gray-700">
+            {extras.teamTips.map((tip) => (
+              <li key={tip}>{tip}</li>
+            ))}
+          </ul>
+          <div className="mt-5 rounded-xl border border-green-200 bg-white p-4">
+            <h3 className="text-lg font-semibold text-green-900 mb-1">{extras.kitTitle}</h3>
+            <p className="text-gray-700 mb-3">{extras.kitDescription}</p>
+            <Link
+              href={quickKitHref}
+              className="inline-flex items-center rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700"
+            >
+              {extras.kitCta}
+            </Link>
+          </div>
+        </section>
+
+        <section className="mb-8 rounded-2xl border border-indigo-200 bg-indigo-50 p-6">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-3">{extras.reverseTitle}</h2>
+          <p className="text-gray-700 mb-4">{extras.reverseDescription}</p>
+          <ol className="list-decimal list-inside space-y-2 text-gray-700">
+            {extras.reverseSteps.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
         </section>
 
         <section className="mb-8">
