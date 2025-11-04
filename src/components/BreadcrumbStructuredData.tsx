@@ -15,10 +15,14 @@ export default function BreadcrumbStructuredData({ items }: BreadcrumbStructured
     "@type": "BreadcrumbList",
     "itemListElement": items.map((item, index) => ({
       "@type": "ListItem",
-      "position": index + 1,
-      "name": item.name,
-      "item": item.url
-    }))
+      position: index + 1,
+      item: {
+        "@type": "WebPage",
+        "@id": item.url,
+        url: item.url,
+        name: item.name,
+      },
+    })),
   };
 
   return (

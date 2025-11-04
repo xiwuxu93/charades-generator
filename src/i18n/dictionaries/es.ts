@@ -444,8 +444,7 @@ export const es = {
     generatorDeepDive: {
       difference: {
         title: "Por qué este generador de charadas destaca",
-        lead:
-          "Organiza cada partida desde un solo generador de palabras para charadas. Los filtros, presets y reglas viven en un mismo panel para que lances la ronda en segundos.",
+        lead: "Organiza cada partida desde un solo generador de palabras para charadas. Los filtros, presets y reglas viven en un mismo panel para que lances la ronda en segundos.",
         bullets: [
           "Combina categorías, niveles y edades en el generador de palabras para charadas sin saltar de página.",
           "Activa presets probados que dejan el generador listo para clases, equipos y familias.",
@@ -517,7 +516,7 @@ export const es = {
           {
             title: "Varía los filtros",
             items: [
-              "Empieza en \"todo\" para mostrar el alcance del generador de charadas y cierra con temas específicos.",
+              'Empieza en "todo" para mostrar el alcance del generador de charadas y cierra con temas específicos.',
               "Alterna la cantidad de palabras para que nadie sepa qué viene.",
               "Duplica la pestaña y prepara la siguiente tanda mientras juegan.",
             ],
@@ -932,6 +931,16 @@ export const es = {
         "Un registro de las últimas mejoras en palabras, experiencia y cumplimiento.",
       items: [
         {
+          date: "2025-10-19",
+          title:
+            "Reestructura de datos estructurados para navegación y playbooks",
+          highlights: [
+            "Reconstruimos los JSON-LD de ItemList para navegación, migas de pan, playbooks y el historial usando ListItem con URLs canónicas.",
+            "Sincronizamos los anclajes visibles con los @id del marcado para mantener precisos los resultados enriquecidos en Google en todos los idiomas.",
+            "Validamos el build de producción para confirmar que canonical, hreflang y los metadatos del head se mantienen correctos tras la optimización SEO.",
+          ],
+        },
+        {
           date: "2025-09-25",
           title: "Presets rápidos, Quick-Play Kit y playbooks de la comunidad",
           highlights: [
@@ -981,11 +990,9 @@ export const es = {
       q9: "¿Se puede hablar en las charadas?",
       a9: "No. Nada de hablar, sonidos ni deletrear con la boca. Usa gestos, expresiones y las señales de categoría descritas en la guía de uso.",
       q10: "¿Cómo juego charadas con equipos o grupos grandes?",
-      a10:
-        "Divide en escuadras de 3 a 6 personas, alterna turnos de 60 segundos y rota quién actúa cada ronda. Nuestro Quick-Play Kit incluye planillas para llevar la puntuación sin enredos.",
+      a10: "Divide en escuadras de 3 a 6 personas, alterna turnos de 60 segundos y rota quién actúa cada ronda. Nuestro Quick-Play Kit incluye planillas para llevar la puntuación sin enredos.",
       q11: "¿Cómo se actúa “casarse” en charadas?",
-      a11:
-        "Cuenta una mini historia de boda: finge sostener un ramo, simula poner un anillo y termina con las manos en el corazón. Se entiende de inmediato sin usar palabras.",
+      a11: "Cuenta una mini historia de boda: finge sostener un ramo, simula poner un anillo y termina con las manos en el corazón. Se entiende de inmediato sin usar palabras.",
       stillHaveQuestions: "¿Aún Tienes Preguntas?",
       contactDescription:
         "¿Necesitas ayuda directa? Escríbenos a support@charades-generator.com y te responderemos en un día hábil.",
