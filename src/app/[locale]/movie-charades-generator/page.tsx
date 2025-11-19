@@ -7,6 +7,7 @@ import { pickWords } from "@/utils/charades";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { buildLocalePath } from "@/utils/localePaths";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -168,6 +169,21 @@ export default async function MovieCharadesPage({ params }: PageProps) {
             ))}
           </div>
         </section>
+
+        <section className="mt-8 bg-blue-50 rounded-lg border border-blue-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            {copy.rulesTitle}
+          </h2>
+          <p className="text-gray-700 mb-3">
+            {copy.rulesDescription}
+          </p>
+          <Link
+            href={buildLocalePath(locale, "/how-to-use/")}
+            className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            {copy.rulesCta}
+          </Link>
+        </section>
       </div>
     </div>
   );
@@ -276,6 +292,10 @@ const movieContent = {
           "Our database covers action movies, romantic comedies, animated films, horror classics, sci-fi blockbusters, drama favorites, superhero movies, and timeless cinema classics from every era.",
       },
     ],
+    rulesTitle: "Need a refresher on charades rules?",
+    rulesDescription:
+      "If some players are new to charades, walk them through the basic rules and variations before you start your movie rounds.",
+    rulesCta: "View full charades rules",
   },
   es: {
     partyTitle: "Ideal para noches de cine",
@@ -379,6 +399,10 @@ const movieContent = {
           "Encontrarás acción, comedia romántica, animación, terror clásico, ciencia ficción, dramas, superhéroes y clásicos eternos de todas las épocas.",
       },
     ],
+    rulesTitle: "¿Necesitas repasar las reglas de charadas?",
+    rulesDescription:
+      "Si hay personas nuevas en el juego, dedica un minuto a revisar las reglas básicas y las variantes antes de empezar las rondas de películas.",
+    rulesCta: "Ver reglas completas de charadas",
   },
 } satisfies Record<Locale, {
   partyTitle: string;
@@ -417,4 +441,7 @@ const movieContent = {
     question: string;
     answer: string;
   }>;
+  rulesTitle: string;
+  rulesDescription: string;
+  rulesCta: string;
 }>;

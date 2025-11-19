@@ -7,6 +7,7 @@ import CharadesGeneratorOptimized from "@/components/CharadesGeneratorOptimized"
 import StructuredData from "@/components/StructuredData";
 import FAQStructuredData from "@/components/FAQStructuredData";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { buildLocalePath } from "@/utils/localePaths";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -155,7 +156,7 @@ export default async function ChristmasCharadesPage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-md p-6">
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">{copy.faqTitle}</h2>
           <div className="space-y-4">
             {copy.faq.map((item) => (
@@ -165,6 +166,21 @@ export default async function ChristmasCharadesPage({ params }: PageProps) {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="bg-blue-50 rounded-lg border border-blue-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            {copy.rulesTitle}
+          </h2>
+          <p className="text-gray-700 mb-3">
+            {copy.rulesDescription}
+          </p>
+          <Link
+            href={buildLocalePath(locale, "/how-to-use/")}
+            className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            {copy.rulesCta}
+          </Link>
         </section>
       </div>
     </div>
@@ -279,6 +295,10 @@ const christmasContent = {
           "Yes! Our Christmas charades generator offers Easy (Santa, Tree), Medium (Caroling, Ornament), and Hard (Mistletoe, Christmas Tradition) difficulty levels to match your group's needs.",
       },
     ],
+    rulesTitle: "Need a reminder of the core rules?",
+    rulesDescription:
+      "If you’re mixing kids and adults at the same table, glance over the full charades rules so everyone knows how to play before the holiday rounds begin.",
+    rulesCta: "View full charades guide",
   },
   es: {
     calloutTitle: "Ideal para fiestas navideñas",
@@ -387,6 +407,10 @@ const christmasContent = {
           "Sí. El generador navideño tiene niveles Fácil (Santa, Árbol), Medio (Villancico, Adorno) y Difícil (Muérdago, Tradición navideña) para adaptarse a cada grupo.",
       },
     ],
+    rulesTitle: "¿Quieres repasar las reglas básicas?",
+    rulesDescription:
+      "Si juegas con niños y adultos en la misma mesa, revisa antes la guía completa de charadas para que todos entiendan cómo funciona el juego.",
+    rulesCta: "Ver guía completa de charadas",
   },
 } satisfies Record<Locale, {
   calloutTitle: string;
@@ -425,4 +449,7 @@ const christmasContent = {
     question: string;
     answer: string;
   }>;
+  rulesTitle: string;
+  rulesDescription: string;
+  rulesCta: string;
 }>;

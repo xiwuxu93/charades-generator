@@ -7,6 +7,7 @@ import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import { pickWords } from "@/utils/charades";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { buildLocalePath } from "@/utils/localePaths";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -166,7 +167,7 @@ export default async function EmotionCharadesPage({ params }: PageProps) {
           </p>
         </section>
 
-        <section className="bg-white rounded-lg shadow-md p-6">
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">{copy.faqTitle}</h2>
           <div className="space-y-4">
             {copy.faq.map((item) => (
@@ -176,6 +177,21 @@ export default async function EmotionCharadesPage({ params }: PageProps) {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="bg-blue-50 rounded-lg border border-blue-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            {copy.rulesCtaTitle}
+          </h2>
+          <p className="text-gray-700 mb-3">
+            {copy.rulesCtaDescription}
+          </p>
+          <Link
+            href={buildLocalePath(locale, "/how-to-use/")}
+            className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            {copy.rulesCtaLabel}
+          </Link>
         </section>
       </div>
     </div>
@@ -283,12 +299,6 @@ const emotionContent = {
         ],
       },
     ],
-    integrationFooter: {
-      before: "Need a general word bank after your SEL block?",
-      linkText: "Jump back to the main charades generator",
-      after: "and keep the game night going with mixed prompts.",
-      href: "/",
-    },
     faqTitle: "Emotion charades FAQ",
     faq: [
       {
@@ -312,6 +322,16 @@ const emotionContent = {
           "Yes. Blend in actions, animals, or objects for reward rounds, or use the random charades generator for closing games once the SEL goal is met.",
       },
     ],
+    integrationFooter: {
+      before: "Need a general word bank after your SEL block?",
+      linkText: "Jump back to the main charades generator",
+      after: "and keep the game night going with mixed prompts.",
+      href: "/",
+    },
+    rulesCtaTitle: "Need classic charades rules alongside SEL prompts?",
+    rulesCtaDescription:
+      "When you use emotion charades as part of a lesson or session, it helps to align on the basic game rules first so students can focus on feelings instead of mechanics.",
+    rulesCtaLabel: "Open full charades guide",
   },
   es: {
     introTitle: "Charadas de emociones para practicar empatía en movimiento",
@@ -442,6 +462,10 @@ const emotionContent = {
           "Sí. Alterna con acciones, animales u objetos como rondas de recompensa o usa el generador aleatorio para cerrar la actividad una vez cubierto el objetivo SEL.",
       },
     ],
+    rulesCtaTitle: "¿Quieres repasar también las reglas clásicas?",
+    rulesCtaDescription:
+      "Cuando uses charadas de emociones dentro de una sesión SEL, conviene alinear primero las reglas básicas para que el foco se mantenga en los sentimientos y no en la mecánica.",
+    rulesCtaLabel: "Abrir guía completa de charadas",
   },
 } satisfies Record<
   Locale,
@@ -477,8 +501,11 @@ const emotionContent = {
       linkText: string;
       after: string;
       href: string;
-    };
+      };
     faqTitle: string;
     faq: Array<{ question: string; answer: string }>;
+    rulesCtaTitle: string;
+    rulesCtaDescription: string;
+    rulesCtaLabel: string;
   }
 >;

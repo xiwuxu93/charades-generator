@@ -7,6 +7,7 @@ import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import { pickWords } from "@/utils/charades";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { buildLocalePath } from "@/utils/localePaths";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -157,7 +158,7 @@ export default async function ReverseCharadesPage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-md p-6">
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">{copy.faqTitle}</h2>
           <div className="space-y-4">
             {copy.faq.map((item) => (
@@ -167,6 +168,21 @@ export default async function ReverseCharadesPage({ params }: PageProps) {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="bg-blue-50 rounded-lg border border-blue-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            {copy.rulesCtaTitle}
+          </h2>
+          <p className="text-gray-700 mb-3">
+            {copy.rulesCtaDescription}
+          </p>
+          <Link
+            href={buildLocalePath(locale, "/how-to-use/")}
+            className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            {copy.rulesCtaLabel}
+          </Link>
         </section>
       </div>
     </div>
@@ -246,6 +262,10 @@ const reverseContent = {
           "Yes. Share the prompt privately with in-room actors, place remote teammates on the guessing side, and use our copy-to-clipboard button to send fresh words into chat without revealing them.",
       },
     ],
+    rulesCtaTitle: "Need classic charades rules too?",
+    rulesCtaDescription:
+      "If some players are brand new to charades, quickly walk through the standard rules before switching into the louder reverse mode.",
+    rulesCtaLabel: "Open full charades guide",
   },
   es: {
     introTitle: "Por qué reverse charades sube el volumen de cualquier fiesta",
@@ -319,6 +339,10 @@ const reverseContent = {
           "Sí. Comparte el prompt en privado con quienes actúan en sala, deja que las personas remotas adivinen y usa el botón de copiar lista para enviar palabras frescas por chat sin revelar la carta.",
       },
     ],
+    rulesCtaTitle: "¿También necesitas las reglas clásicas?",
+    rulesCtaDescription:
+      "Si hay personas nuevas en el juego, repasa rápido las reglas de charadas tradicionales antes de pasar al modo más ruidoso de reverse charades.",
+    rulesCtaLabel: "Abrir guía completa de charadas",
   },
 } satisfies Record<
   Locale,
@@ -339,5 +363,8 @@ const reverseContent = {
     resourcesSecondaryCta: string;
     faqTitle: string;
     faq: Array<{ question: string; answer: string }>;
+    rulesCtaTitle: string;
+    rulesCtaDescription: string;
+    rulesCtaLabel: string;
   }
 >;

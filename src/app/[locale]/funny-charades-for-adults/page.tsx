@@ -7,6 +7,7 @@ import { pickWords } from "@/utils/charades";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { buildLocalePath } from "@/utils/localePaths";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -207,7 +208,7 @@ export default async function FunnyCharadesPage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-md p-6">
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">{copy.faqTitle}</h2>
           <div className="space-y-4">
             {copy.faq.map((item) => (
@@ -217,6 +218,48 @@ export default async function FunnyCharadesPage({ params }: PageProps) {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="bg-yellow-50 rounded-lg shadow-md p-6 mb-8 border border-yellow-200">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">{copy.gearTitle}</h2>
+          <p className="text-gray-700 mb-4">{copy.gearDescription}</p>
+          <p className="text-xs font-semibold text-gray-500 mb-3">
+            {copy.gearDisclaimer}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {copy.gearItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col rounded-xl bg-white p-4 border border-yellow-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <span className="text-xs font-semibold text-yellow-700 uppercase tracking-wide mb-1">
+                  {item.tag}
+                </span>
+                <h3 className="text-sm font-semibold text-gray-900 mb-1 group-hover:text-yellow-700">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-gray-600 flex-1">{item.description}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-blue-50 rounded-lg border border-blue-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            {copy.rulesTitle}
+          </h2>
+          <p className="text-gray-700 mb-3">
+            {copy.rulesDescription}
+          </p>
+          <Link
+            href={buildLocalePath(locale, "/how-to-use/")}
+            className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            {copy.rulesCta}
+          </Link>
         </section>
       </div>
     </div>
@@ -435,6 +478,35 @@ const funnyContent = {
           "Yes. Scroll up to the Adult Charades Playbook section to request a free PDF pack with 60 prompts, score sheets, and a party planner. You can also remix the words with the generator for unlimited versions.",
       },
     ],
+    gearTitle: "Optional party extras for adult charades",
+    gearDescription:
+      "If you’d like to dress up charades night, these ideas pair nicely with the generator. Links below are affiliate links—if you buy, we may earn a small commission at no extra cost to you.",
+    gearDisclaimer: "Affiliate links below – please choose age-appropriate, responsible-party options for your group.",
+    gearItems: [
+      {
+        title: "Simple party game accessory kit",
+        description: "Props like hats, glasses, and signs that make awkward prompts even funnier on camera.",
+        href: "https://amzn.to/3JWjaXG",
+        tag: "Affiliate link",
+      },
+      {
+        title: "Scoreboard and dry-erase markers",
+        description: "Track teams, bonus points, and lightning-round records without hunting for scrap paper.",
+        href: "https://amzn.to/49m1vD4",
+        tag: "Affiliate link",
+      },
+      {
+        title: "Party game bundle for adults",
+        description:
+          "Bundle charades with one or two other light party games so the night has built-in breaks and variety.",
+        href: "https://amzn.to/484awyq",
+        tag: "Affiliate link",
+      },
+    ],
+    rulesTitle: "Want a reminder of the core charades rules?",
+    rulesDescription:
+      "Before the party gets loud, make sure everyone is on the same page about timing, gestures, and what counts as a win.",
+    rulesCta: "Review full charades rules",
   },
   es: {
     quickActions: {
@@ -647,6 +719,36 @@ const funnyContent = {
           "Sí. Sube a la sección del manual para solicitar un PDF con 60 prompts, hojas de puntaje y planificador. También puedes generar infinitas variantes desde el generador.",
       },
     ],
+    gearTitle: "Extras opcionales para fiestas de charadas adultas",
+    gearDescription:
+      "Si quieres vestir un poco más la noche de juegos, estas ideas combinan bien con el generador. Los enlaces son de afiliado: si compras, es posible que ganemos una pequeña comisión sin coste extra para ti.",
+    gearDisclaimer:
+      "Enlaces de afiliado a continuación: elige siempre opciones responsables y adecuadas a tu grupo.",
+    gearItems: [
+      {
+        title: "Kit sencillo de accesorios de fiesta",
+        description: "Gorros, gafas y pequeños props que hacen aún más divertidas las escenas incómodas.",
+        href: "https://amzn.to/49YtPLR",
+        tag: "Enlace de afiliado",
+      },
+      {
+        title: "Pizarra de puntuación con rotuladores",
+        description: "Para llevar la cuenta de equipos, puntos extra y récords de rondas relámpago.",
+        href: "https://amzn.to/489uW9e",
+        tag: "Enlace de afiliado",
+      },
+      {
+        title: "Pack de juegos para adultos",
+        description:
+          "Combina charadas con uno o dos juegos ligeros más para alternar dinámicas durante la noche.",
+        href: "https://amzn.to/3LLl2D8",
+        tag: "Enlace de afiliado",
+      },
+    ],
+    rulesTitle: "¿Quieres repasar las reglas básicas?",
+    rulesDescription:
+      "Antes de que la fiesta se descontrole, asegúrate de que todos tengan claras las reglas, los tiempos y qué cuenta como acierto.",
+    rulesCta: "Ver reglas completas de charadas",
   },
 } satisfies Record<Locale, {
   quickActions: {
@@ -703,4 +805,16 @@ const funnyContent = {
     question: string;
     answer: string;
   }>;
+  gearTitle: string;
+  gearDescription: string;
+  gearDisclaimer: string;
+  gearItems: Array<{
+    title: string;
+    description: string;
+    href: string;
+    tag: string;
+  }>;
+  rulesTitle: string;
+  rulesDescription: string;
+  rulesCta: string;
 }>;

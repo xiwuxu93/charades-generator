@@ -7,6 +7,7 @@ import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import { pickWords } from "@/utils/charades";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { buildLocalePath } from "@/utils/localePaths";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -166,7 +167,7 @@ export default async function AnimalCharadesPage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-md p-6">
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">{copy.faqTitle}</h2>
           <div className="space-y-4">
             {copy.faq.map((item) => (
@@ -176,6 +177,21 @@ export default async function AnimalCharadesPage({ params }: PageProps) {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="bg-blue-50 rounded-lg border border-blue-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            {copy.rulesTitle}
+          </h2>
+          <p className="text-gray-700 mb-3">
+            {copy.rulesDescription}
+          </p>
+          <Link
+            href={buildLocalePath(locale, "/how-to-use/")}
+            className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            {copy.rulesCta}
+          </Link>
         </section>
       </div>
     </div>
@@ -210,6 +226,9 @@ type AnimalContent = {
   resourcesSecondary: { label: string; href: string };
   faqTitle: string;
   faq: Array<{ question: string; answer: string }>;
+  rulesTitle: string;
+  rulesDescription: string;
+  rulesCta: string;
 };
 
 const animalContent: Record<Locale, AnimalContent> = {
@@ -323,6 +342,10 @@ const animalContent: Record<Locale, AnimalContent> = {
           "Keep a scoreboard, award style points for creative acting, or run bracket-style playoffs. For advanced groups, require the actor to use only tail or wing gestures without full-body movement.",
       },
     ],
+    rulesTitle: "Need a refresher on core charades rules?",
+    rulesDescription:
+      "Before you unleash the animal chaos, review the full charades rules so kids and adults all know how the game works.",
+    rulesCta: "Open full charades guide",
   },
   es: {
     introTitle: "Charadas de animales: diversión garantizada para todas las edades",
@@ -434,5 +457,9 @@ const animalContent: Record<Locale, AnimalContent> = {
           "Lleva marcador, premia la creatividad o arma playoffs. Para grupos avanzados, limita los gestos a cola o alas sin usar todo el cuerpo.",
       },
     ],
+    rulesTitle: "¿Quieres repasar las reglas básicas?",
+    rulesDescription:
+      "Antes de convertir el aula en una selva, revisa la guía completa de charadas para que peques y adultos tengan claras las reglas.",
+    rulesCta: "Ver guía completa de charadas",
   },
 };

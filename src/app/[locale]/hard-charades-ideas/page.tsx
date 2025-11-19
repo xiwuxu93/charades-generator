@@ -7,6 +7,7 @@ import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import { pickWords } from "@/utils/charades";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { buildLocalePath } from "@/utils/localePaths";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -157,7 +158,7 @@ export default async function HardCharadesPage({ params }: PageProps) {
           </p>
         </section>
 
-        <section className="bg-white rounded-lg shadow-md p-6">
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">{copy.faqTitle}</h2>
           <div className="space-y-4">
             {copy.faq.map((item) => (
@@ -167,6 +168,21 @@ export default async function HardCharadesPage({ params }: PageProps) {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="bg-blue-50 rounded-lg border border-blue-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            {copy.rulesCtaTitle}
+          </h2>
+          <p className="text-gray-700 mb-3">
+            {copy.rulesCtaDescription}
+          </p>
+          <Link
+            href={buildLocalePath(locale, "/how-to-use/")}
+            className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            {copy.rulesCtaLabel}
+          </Link>
         </section>
       </div>
     </div>
@@ -271,6 +287,10 @@ const hardContent = {
           "Definitely. Reverse charades plus hard prompts equals hilarious chaos—just brief the acting squad so they plan a multi-step approach before the timer starts.",
       },
     ],
+    rulesCtaTitle: "Need to align on rules before going hard mode?",
+    rulesCtaDescription:
+      "When prompts get tricky, clear rules keep the night fun instead of frustrating. Review the standard charades guide before cranking difficulty up.",
+    rulesCtaLabel: "Open full charades guide",
   },
   es: {
     introTitle: "Ideas difíciles para charadas cuando ya dominas el juego",
@@ -369,6 +389,10 @@ const hardContent = {
           "Totalmente. Reverse charades sumado a cartas difíciles genera caos hilarante, solo pide al equipo actor que planifique un guion rápido antes de iniciar el cronómetro.",
       },
     ],
+    rulesCtaTitle: "¿Quieres alinear reglas antes del modo experto?",
+    rulesCtaDescription:
+      "Cuando las cartas se complican, tener reglas claras evita frustraciones. Revisa la guía general de charadas antes de subir la dificultad.",
+    rulesCtaLabel: "Ver guía completa de charadas",
   },
 } satisfies Record<
   Locale,
@@ -385,5 +409,8 @@ const hardContent = {
     variantsFooter: { before: string; linkText: string; after: string; href: string };
     faqTitle: string;
     faq: Array<{ question: string; answer: string }>;
+    rulesCtaTitle: string;
+    rulesCtaDescription: string;
+    rulesCtaLabel: string;
   }
 >;

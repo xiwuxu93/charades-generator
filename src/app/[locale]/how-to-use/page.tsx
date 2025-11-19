@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { buildLocalePath } from "@/utils/localePaths";
 
 const howToExtras = {
   en: {
@@ -63,6 +64,50 @@ const howToExtras = {
   reverseSteps: string[];
 }>;
 
+const supportingGuides = {
+  en: [
+    {
+      title: "Classroom charades guide",
+      description: "Lesson-friendly formats for teachers using kids and random generators.",
+      href: "/classroom-charades-guide/",
+    },
+    {
+      title: "Online & Zoom charades",
+      description: "Remote-friendly charades ideas powered by random and reverse modes.",
+      href: "/online-charades-guide/",
+    },
+    {
+      title: "Family game night playbook",
+      description: "Step-by-step plan for running family charades nights at home.",
+      href: "/family-game-night/",
+    },
+  ],
+  es: [
+    {
+      title: "Guía de charadas en el aula",
+      description: "Formatos listos para clase usando los modos infantil y aleatorio.",
+      href: "/classroom-charades-guide/",
+    },
+    {
+      title: "Charadas online y por Zoom",
+      description: "Ideas para videollamadas usando los modos aleatorio y reverse.",
+      href: "/online-charades-guide/",
+    },
+    {
+      title: "Playbook de noche de juegos en familia",
+      description: "Plan sencillo para noches de charadas en casa con peques y adultos.",
+      href: "/family-game-night/",
+    },
+  ],
+} satisfies Record<
+  Locale,
+  Array<{
+    title: string;
+    description: string;
+    href: string;
+  }>
+>;
+
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
@@ -118,6 +163,8 @@ export default async function HowToUsePage({ params }: PageProps) {
   const dictionary = getDictionary(locale);
   const extras = howToExtras[locale] ?? howToExtras.en;
   const quickKitHref = locale === 'en' ? '/quick-play-kit' : `/${locale}/quick-play-kit`;
+  const themedGenerators = dictionary.home?.themedGenerators;
+  const guides = supportingGuides[locale] ?? supportingGuides.en;
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white">
@@ -202,6 +249,96 @@ export default async function HowToUsePage({ params }: PageProps) {
             <li>{dictionary.pages.howToUse.benefit3}</li>
             <li>{dictionary.pages.howToUse.benefit4}</li>
           </ul>
+        </section>
+
+        {themedGenerators && (
+          <section className="mb-8 rounded-2xl border border-blue-200 bg-blue-50 p-6">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+              {dictionary.home.themedHeading}
+            </h2>
+            <p className="text-gray-700 mb-4">
+              {dictionary.home.themedDescription}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {themedGenerators.slice(0, 5).map((generator) => (
+                <Link
+                  key={generator.href}
+                  href={buildLocalePath(locale, generator.href)}
+                  className="group flex flex-col rounded-xl border border-blue-100 bg-white/80 p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <span className="inline-flex w-fit items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-semibold text-blue-700">
+                    {generator.badge}
+                  </span>
+                  <h3 className="mt-3 text-lg font-semibold text-gray-900 group-hover:text-blue-700">
+                    {generator.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-600 flex-1">
+                    {generator.description}
+                  </p>
+                  <span className="mt-3 inline-flex items-center text-sm font-semibold text-blue-600">
+                    {dictionary.home.browsePromptsLabel}
+                    <svg
+                      className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="mb-8 rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+            {locale === 'en' ? "Charades playbooks for specific situations" : "Playbooks de charadas para situaciones concretas"}
+          </h2>
+          <p className="text-gray-700 mb-4">
+            {locale === 'en'
+              ? "Once you know the core rules, dive into focused guides for classrooms, remote teams, and family nights."
+              : "Una vez que tengas claras las reglas, profundiza en guías específicas para aulas, equipos remotos y noches de juegos en familia."}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {guides.map((guide) => (
+              <Link
+                key={guide.href}
+                href={buildLocalePath(locale, guide.href)}
+                className="group flex h-full flex-col rounded-xl bg-white p-4 shadow-sm border border-gray-200 transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-700">
+                  {guide.title}
+                </h3>
+                <p className="mt-2 text-sm text-gray-600 flex-1">{guide.description}</p>
+                <span className="mt-3 inline-flex items-center text-sm font-semibold text-blue-600">
+                  {dictionary.home.readMoreLabel}
+                  <svg
+                    className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-8 rounded-2xl border border-yellow-200 bg-yellow-50 p-6">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+            {locale === 'en' ? "Optional gear for charades nights" : "Extras opcionales para tus noches de charadas"}
+          </h2>
+          <p className="text-gray-700 mb-4">
+            {locale === 'en'
+              ? "Some hosts like to add simple tools like timers, score sheets, and whiteboards around the table. If you explore product links from this site, some may be affiliate links which could support the project at no extra cost to you."
+              : "A muchxs anfitriones les gusta añadir temporizadores, hojas de puntuación o pizarras a la mesa. Algunos enlaces de productos desde este sitio pueden ser de afiliado y ayudar al proyecto sin coste extra para ti."}
+          </p>
         </section>
 
         <section className="mb-8 rounded-2xl border border-gray-200 bg-gray-50 p-6">

@@ -116,7 +116,12 @@ export default function Footer({ locale, footer }: FooterProps) {
         <div className="mt-8 border-t border-gray-200 pt-8">
           <div className="flex flex-col items-center justify-between gap-4 text-sm text-gray-600 md:flex-row md:gap-0">
             <div>{interpolate(footer.rights, { year: currentYear })}</div>
-            <div>{footer.slogan}</div>
+            <div className="text-center md:text-right space-y-1">
+              <div>{footer.slogan}</div>
+              <div className="text-xs text-gray-500">
+                As an Amazon Associate we may earn from qualifying purchases made through product links on this site.
+              </div>
+            </div>
           </div>
         </div>
       </div>

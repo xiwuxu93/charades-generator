@@ -7,6 +7,7 @@ import { pickWords } from "@/utils/charades";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { buildLocalePath } from "@/utils/localePaths";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -175,7 +176,34 @@ export default async function CharadesForKidsPage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-md p-6">
+        <section className="bg-yellow-50 rounded-lg shadow-md p-6 mb-8 border border-yellow-200">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">{copy.gearTitle}</h2>
+          <p className="text-gray-700 mb-4">{copy.gearDescription}</p>
+          <p className="text-xs font-semibold text-gray-500 mb-3">
+            {copy.gearDisclaimer}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {copy.gearItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col rounded-xl bg-white p-4 border border-yellow-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <span className="text-xs font-semibold text-yellow-700 uppercase tracking-wide mb-1">
+                  {item.tag}
+                </span>
+                <h3 className="text-sm font-semibold text-gray-900 mb-1 group-hover:text-yellow-700">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-gray-600 flex-1">{item.description}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">{copy.faqTitle}</h2>
           <div className="space-y-4">
             {copy.faq.map((item) => (
@@ -185,6 +213,21 @@ export default async function CharadesForKidsPage({ params }: PageProps) {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="bg-blue-50 rounded-lg border border-blue-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            {copy.rulesTitle}
+          </h2>
+          <p className="text-gray-700 mb-3">
+            {copy.rulesDescription}
+          </p>
+          <Link
+            href={buildLocalePath(locale, "/how-to-use/")}
+            className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            {copy.rulesCta}
+          </Link>
         </section>
       </div>
     </div>
@@ -285,6 +328,30 @@ const kidsContent = {
     marryTitle: "How do you act out “marry” in charades?",
     marryDescription:
       "Link both hands together like holding a bouquet, mime sliding a ring onto a finger, then clasp your hands over your heart. Kids immediately recognize the wedding gesture, so it’s a safe go-to when someone asks for the “marry” action.",
+    gearTitle: "Optional tools for kids charades nights",
+    gearDescription:
+      "These ideas are perfect if you’d like to add a few physical tools around the table. Links below are affiliate links—if you decide to buy, we may earn a small commission at no extra cost to you.",
+    gearDisclaimer: "Affiliate links below – always check age ratings and safety notes before buying.",
+    gearItems: [
+      {
+        title: "Dry-erase board and markers",
+        description: "Let kids keep score, doodle clues, or plan their own prompts between rounds.",
+        href: "https://amzn.to/49m1vD4",
+        tag: "Affiliate link",
+      },
+      {
+        title: "Simple sand timer set",
+        description: "Use colour-coded timers for 30, 60, and 90 seconds so every age group gets a fair challenge.",
+        href: "https://amzn.to/43zqJdt",
+        tag: "Affiliate link",
+      },
+      {
+        title: "Family-friendly party game bundle",
+        description: "Bundle charades with other light games so your kids game night has plenty of variety.",
+        href: "https://amzn.to/485FTbN",
+        tag: "Affiliate link",
+      },
+    ],
     faqTitle: "Kids Charades FAQ",
     faq: [
       {
@@ -323,6 +390,10 @@ const kidsContent = {
           "Kids love animals (especially pets and zoo animals), simple actions, Disney characters, everyday objects, and emotions. Our generator focuses on these child-friendly categories.",
       },
     ],
+    rulesTitle: "Need the full kids charades rules?",
+    rulesDescription:
+      "For mixed-age groups or first-time players, review the complete charades rules and age-specific tips before you start your kids rounds.",
+    rulesCta: "Open the full charades guide",
   },
   es: {
     introTitle: "Tu kit para charadas infantiles",
@@ -417,6 +488,32 @@ const kidsContent = {
     marryTitle: "¿Cómo representar “casarse” en charadas?",
     marryDescription:
       "Une las manos como si sostuvieras un ramo, imita que colocas un anillo y termina con un gran abrazo imaginario. Ese gesto de boda es fácil de entender incluso para los más pequeños.",
+    gearTitle: "Opcional: recursos para noches infantiles de charadas",
+    gearDescription:
+      "Si quieres sumar algo de material físico a la mesa, estas ideas pueden ayudar. Los enlaces son de afiliado: si compras, es posible que ganemos una pequeña comisión sin coste extra para ti.",
+    gearDisclaimer:
+      "Enlaces de afiliado a continuación: revisa siempre las edades recomendadas y notas de seguridad antes de comprar.",
+    gearItems: [
+      {
+        title: "Pizarra blanca con rotuladores",
+        description: "Para llevar el marcador, hacer dibujos o dejar que lxs peques inventen sus propios prompts.",
+        href: "https://amzn.to/4oeXzIc",
+        tag: "Enlace de afiliado",
+      },
+      {
+        title: "Juego de relojes de arena",
+        description: "Temporizadores de 30, 60 y 90 segundos para adaptar la dificultad a cada edad.",
+        href: "https://amzn.to/4nZz55z",
+        tag: "Enlace de afiliado",
+      },
+      {
+        title: "Pack de juegos familiares",
+        description:
+          "Combina charadas con otros juegos ligeros para que la noche de juegos tenga variedad y pausas naturales.",
+        href: "https://amzn.to/4i7tuZB",
+        tag: "Enlace de afiliado",
+      },
+    ],
     faqTitle: "Preguntas frecuentes sobre charadas infantiles",
     faq: [
       {
@@ -455,6 +552,10 @@ const kidsContent = {
           "Les encantan los animales, acciones simples, personajes Disney, objetos diarios y emociones básicas. Nuestro generador prioriza precisamente esas categorías.",
       },
     ],
+    rulesTitle: "¿Necesitas ver las reglas completas?",
+    rulesDescription:
+      "Si juegas con niños de distintas edades o es su primera vez con charadas, repasa antes la guía completa de reglas y consejos.",
+    rulesCta: "Abrir la guía completa de charadas",
   },
 } satisfies Record<Locale, {
   introTitle: string;
@@ -499,4 +600,16 @@ const kidsContent = {
     question: string;
     answer: string;
   }>;
+  gearTitle: string;
+  gearDescription: string;
+  gearDisclaimer: string;
+  gearItems: Array<{
+    title: string;
+    description: string;
+    href: string;
+    tag: string;
+  }>;
+  rulesTitle: string;
+  rulesDescription: string;
+  rulesCta: string;
 }>;

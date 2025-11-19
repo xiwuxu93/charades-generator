@@ -46,3 +46,4 @@ next-env.d.ts
 .wrangler/
 wrangler.toml.bak
 tmp_*.html
+gsc/*

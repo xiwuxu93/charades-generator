@@ -7,6 +7,7 @@ import { pickWords } from "@/utils/charades";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { buildLocalePath } from "@/utils/localePaths";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -168,6 +169,21 @@ export default async function DisneyCharadesPage({ params }: PageProps) {
             ))}
           </div>
         </section>
+
+        <section className="mt-8 bg-purple-50 rounded-lg border border-purple-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            {copy.rulesTitle}
+          </h2>
+          <p className="text-gray-700 mb-3">
+            {copy.rulesDescription}
+          </p>
+          <Link
+            href={buildLocalePath(locale, "/how-to-use/")}
+            className="inline-flex items-center rounded-md bg-purple-600 px-4 py-2 text-sm font-semibold text-white hover:bg-purple-700"
+          >
+            {copy.rulesCta}
+          </Link>
+        </section>
       </div>
     </div>
   );
@@ -281,6 +297,10 @@ const disneyContent = {
           "Our database includes characters and references from The Lion King, Frozen, Beauty and the Beast, The Little Mermaid, Toy Story, Finding Nemo, Moana, and many more Disney classics and recent releases.",
       },
     ],
+    rulesTitle: "Want a full overview of charades rules?",
+    rulesDescription:
+      "Before you start acting out Disney heroes and villains, review the core charades rules and variations so new players feel confident.",
+    rulesCta: "Read the complete charades guide",
   },
   es: {
     partyTitle: "Ideal para fiestas temáticas Disney",
@@ -389,6 +409,10 @@ const disneyContent = {
           "Disponemos de referencias de El Rey León, Frozen, La Bella y la Bestia, La Sirenita, Toy Story, Buscando a Nemo, Moana y muchas otras sagas queridas.",
       },
     ],
+    rulesTitle: "¿Quieres repasar las reglas de charadas?",
+    rulesDescription:
+      "Antes de representar héroes y villanos Disney, repasa las reglas básicas y variantes de charadas para que todos se sientan seguros.",
+    rulesCta: "Leer la guía completa de charadas",
   },
 } satisfies Record<Locale, {
   partyTitle: string;
@@ -427,4 +451,7 @@ const disneyContent = {
     question: string;
     answer: string;
   }>;
+  rulesTitle: string;
+  rulesDescription: string;
+  rulesCta: string;
 }>;

@@ -7,6 +7,7 @@ import { pickWords } from "@/utils/charades";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { buildLocalePath } from "@/utils/localePaths";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -151,7 +152,7 @@ export default async function RandomCharadesPage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-md p-6">
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">{copy.faqTitle}</h2>
           <div className="space-y-4">
             {copy.faq.map((item) => (
@@ -161,6 +162,21 @@ export default async function RandomCharadesPage({ params }: PageProps) {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="bg-blue-50 rounded-lg border border-blue-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            {copy.rulesTitle}
+          </h2>
+          <p className="text-gray-700 mb-3">
+            {copy.rulesDescription}
+          </p>
+          <Link
+            href={buildLocalePath(locale, "/how-to-use/")}
+            className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            {copy.rulesCta}
+          </Link>
         </section>
       </div>
     </div>
@@ -277,6 +293,10 @@ const randomContent = {
           "Yes. Generate any batch, tap “Copy word list,” and paste it into Notes, Docs, or chat. It’s the fastest way to hand someone a ready-to-play list when they literally search for “words for charades generator.”",
       },
     ],
+    rulesTitle: "Need a refresher on the base rules?",
+    rulesDescription:
+      "Random mode is wild, but the core charades rules stay the same—quickly review them so everyone understands the boundaries before the chaos begins.",
+    rulesCta: "See full charades rules",
   },
   es: {
     differenceTitle: "¿Qué hace único al modo aleatorio?",
@@ -387,6 +407,10 @@ const randomContent = {
           "Claro. Genera cualquier tanda, pulsa “Copy word list” y pégala en Notas, Docs o tu chat favorito. Es la forma más rápida de compartir palabras cuando alguien busca literalmente “palabras para charadas”.",
       },
     ],
+    rulesTitle: "¿Quieres repasar las reglas base?",
+    rulesDescription:
+      "El modo aleatorio es caótico, pero las reglas siguen siendo las mismas. Repásalas rápido para que todo el grupo tenga claro cómo se juega antes de empezar.",
+    rulesCta: "Ver guía completa de charadas",
   },
 } satisfies Record<Locale, {
   differenceTitle: string;
@@ -419,4 +443,7 @@ const randomContent = {
     question: string;
     answer: string;
   }>;
+  rulesTitle: string;
+  rulesDescription: string;
+  rulesCta: string;
 }>;
