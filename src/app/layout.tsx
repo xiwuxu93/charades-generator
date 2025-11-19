@@ -3,6 +3,7 @@ import { cookies, headers } from "next/headers";
 import { isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import ConsentManager from "@/components/ConsentManager";
+import RouteTracking from "@/components/RouteTracking";
 import { ensureUrlCanParse } from "@/utils/polyfills";
 import "./globals.css";
 
@@ -186,6 +187,7 @@ export default async function RootLayout({
           copy={dictionary.consent}
           isProduction={isProduction}
         />
+        <RouteTracking />
       </body>
     </html>
   );
