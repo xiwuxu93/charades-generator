@@ -35,15 +35,7 @@ export default function RouteTracking() {
     gtag("event", "page_view", {
       page_path: pagePath,
     });
-
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch {
-      // ignore ad refresh errors
-    }
   }, [pathname, searchParams]);
 
   return null;
 }
-
