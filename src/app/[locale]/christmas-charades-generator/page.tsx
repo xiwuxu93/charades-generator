@@ -7,6 +7,7 @@ import CharadesGeneratorOptimized from "@/components/CharadesGeneratorOptimized"
 import StructuredData from "@/components/StructuredData";
 import FAQStructuredData from "@/components/FAQStructuredData";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 import { buildLocalePath } from "@/utils/localePaths";
 
 interface PageProps {
@@ -24,6 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const canonicalPath = "/christmas-charades-generator";
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
+  const homeUrl = buildCanonicalUrl(locale, "/");
 
   return {
     title: dictionary.seo.christmas.title,
@@ -67,9 +69,16 @@ export default async function ChristmasCharadesPage({ params }: PageProps) {
 
   const canonicalPath = "/christmas-charades-generator";
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
+  const homeUrl = buildCanonicalUrl(locale, "/");
 
   return (
     <div className="bg-gradient-to-b from-red-50 to-green-50 min-h-screen">
+      <BreadcrumbStructuredData
+        items={[
+          { name: locale === 'en' ? 'Home' : 'Inicio', url: homeUrl },
+          { name: dictionary.pages.christmas.title, url: canonicalUrl },
+        ]}
+      />
       <CharadesGeneratorOptimized
         title={dictionary.pages.christmas.title}
         description={dictionary.pages.christmas.description}
@@ -106,6 +115,22 @@ export default async function ChristmasCharadesPage({ params }: PageProps) {
                 </h3>
                 <ul className="text-sm space-y-1" style={{ color: column.textColor }}>
                   {column.items.map((item) => (
+                    <li key={item}>• {item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">{copy.samplesTitle}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {copy.samples.map((group) => (
+              <div key={group.title} className="text-left p-4 rounded-lg border border-gray-200 bg-gray-50">
+                <h3 className="font-semibold mb-2 text-gray-800">{group.title}</h3>
+                <ul className="text-sm space-y-1 text-gray-700">
+                  {group.items.map((item) => (
                     <li key={item}>• {item}</li>
                   ))}
                 </ul>
@@ -299,6 +324,21 @@ const christmasContent = {
     rulesDescription:
       "If you’re mixing kids and adults at the same table, glance over the full charades rules so everyone knows how to play before the holiday rounds begin.",
     rulesCta: "View full charades guide",
+    samplesTitle: "Sample Christmas charades words",
+    samples: [
+      {
+        title: "Characters",
+        items: ["Santa", "Mrs. Claus", "Elf", "Rudolph", "Grinch", "Snowman"],
+      },
+      {
+        title: "Movies & Songs",
+        items: ["Home Alone", "Jingle Bells", "Elf (movie)", "The Polar Express", "Silent Night", "The Nutcracker"],
+      },
+      {
+        title: "Traditions",
+        items: ["Gift wrapping", "Caroling", "Stocking stuffers", "Snowball fight", "Mistletoe", "Baking cookies"],
+      },
+    ],
   },
   es: {
     calloutTitle: "Ideal para fiestas navideñas",
@@ -411,6 +451,21 @@ const christmasContent = {
     rulesDescription:
       "Si juegas con niños y adultos en la misma mesa, revisa antes la guía completa de charadas para que todos entiendan cómo funciona el juego.",
     rulesCta: "Ver guía completa de charadas",
+    samplesTitle: "Ejemplos de palabras navideñas",
+    samples: [
+      {
+        title: "Personajes",
+        items: ["Santa", "Señora Claus", "Elfo", "Rodolfo", "Grinch", "Muñeco de nieve"],
+      },
+      {
+        title: "Películas y canciones",
+        items: ["Mi Pobre Angelito", "Jingle Bells", "Elf (película)", "El Expreso Polar", "Noche de Paz", "El Cascanueces"],
+      },
+      {
+        title: "Tradiciones",
+        items: ["Envolver regalos", "Villancicos", "Calcetines de Navidad", "Guerra de bolas de nieve", "Muérdago", "Hornear galletas"],
+      },
+    ],
   },
 } satisfies Record<Locale, {
   calloutTitle: string;
@@ -452,4 +507,6 @@ const christmasContent = {
   rulesTitle: string;
   rulesDescription: string;
   rulesCta: string;
+  samplesTitle: string;
+  samples: Array<{ title: string; items: string[] }>;
 }>;

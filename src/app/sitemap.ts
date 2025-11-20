@@ -55,6 +55,11 @@ const routeConfig: Array<{
     priority: 0.8,
   },
   {
+    path: "/word-charades-generator",
+    changeFrequency: "weekly",
+    priority: 0.8,
+  },
+  {
     path: "/funny-charades-for-adults",
     changeFrequency: "weekly",
     priority: 0.8,

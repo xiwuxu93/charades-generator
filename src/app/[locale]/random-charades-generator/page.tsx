@@ -7,6 +7,7 @@ import { pickWords } from "@/utils/charades";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 import { buildLocalePath } from "@/utils/localePaths";
 
 interface PageProps {
@@ -24,6 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const canonicalPath = "/random-charades-generator";
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
+  const homeUrl = buildCanonicalUrl(locale, "/");
 
   return {
     title: dictionary.seo.random.title,
@@ -67,9 +69,16 @@ export default async function RandomCharadesPage({ params }: PageProps) {
 
   const canonicalPath = "/random-charades-generator";
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
+  const homeUrl = buildCanonicalUrl(locale, "/");
 
   return (
     <div className="bg-gray-50 min-h-screen">
+      <BreadcrumbStructuredData
+        items={[
+          { name: locale === 'en' ? 'Home' : 'Inicio', url: homeUrl },
+          { name: dictionary.pages.random.title, url: canonicalUrl },
+        ]}
+      />
       <CharadesGeneratorOptimized
         title={dictionary.pages.random.title}
         description={dictionary.pages.random.description}
@@ -177,6 +186,24 @@ export default async function RandomCharadesPage({ params }: PageProps) {
           >
             {copy.rulesCta}
           </Link>
+        </section>
+
+        <section className="mt-8 bg-gray-50 rounded-lg border border-gray-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">{locale === 'en' ? 'Keep exploring' : 'Sigue explorando'}</h2>
+          <div className="flex flex-wrap gap-2 text-sm">
+            <Link href={buildLocalePath(locale, "/word-charades-generator/")}
+              className="inline-flex items-center rounded-md border border-gray-300 px-2 py-1 text-gray-800 hover:bg-gray-100">
+              {locale === 'en' ? 'Word Generator' : 'Generador de palabras'}
+            </Link>
+            <Link href={buildLocalePath(locale, "/reverse-charades-game/")}
+              className="inline-flex items-center rounded-md border border-gray-300 px-2 py-1 text-gray-800 hover:bg-gray-100">
+              {locale === 'en' ? 'Reverse charades' : 'Reverse charades'}
+            </Link>
+            <Link href={buildLocalePath(locale, "/how-to-use/")}
+              className="inline-flex items-center rounded-md border border-gray-300 px-2 py-1 text-gray-800 hover:bg-gray-100">
+              {locale === 'en' ? 'How to play' : 'Cómo jugar'}
+            </Link>
+          </div>
         </section>
       </div>
     </div>

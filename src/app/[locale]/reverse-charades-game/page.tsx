@@ -7,6 +7,7 @@ import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import { pickWords } from "@/utils/charades";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 import { buildLocalePath } from "@/utils/localePaths";
 
 interface PageProps {
@@ -24,6 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const canonicalPath = "/reverse-charades-game";
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
+  const homeUrl = buildCanonicalUrl(locale, "/");
 
   return {
     title: dictionary.seo.reverse.title,
@@ -68,9 +70,16 @@ export default async function ReverseCharadesPage({ params }: PageProps) {
   const canonicalPath = "/reverse-charades-game";
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
   const quickPlayHref = locale === "en" ? "/quick-play-kit" : `/${locale}/quick-play-kit`;
+  const homeUrl = buildCanonicalUrl(locale, "/");
 
   return (
     <div className="bg-gray-50 min-h-screen">
+      <BreadcrumbStructuredData
+        items={[
+          { name: locale === 'en' ? 'Home' : 'Inicio', url: homeUrl },
+          { name: dictionary.pages.reverse.title, url: canonicalUrl },
+        ]}
+      />
       <CharadesGeneratorOptimized
         title={dictionary.pages.reverse.title}
         description={dictionary.pages.reverse.description}
@@ -120,6 +129,22 @@ export default async function ReverseCharadesPage({ params }: PageProps) {
                 ))}
               </ol>
             </div>
+          </div>
+        </section>
+
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">{copy.samplesTitle}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {copy.samples.map((group) => (
+              <div key={group.title} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                <h3 className="font-semibold text-gray-800 mb-3">{group.title}</h3>
+                <ul className="space-y-1 text-sm text-gray-600">
+                  {group.items.map((item) => (
+                    <li key={item}>• {item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -266,6 +291,21 @@ const reverseContent = {
     rulesCtaDescription:
       "If some players are brand new to charades, quickly walk through the standard rules before switching into the louder reverse mode.",
     rulesCtaLabel: "Open full charades guide",
+    samplesTitle: "Sample prompts for reverse charades",
+    samples: [
+      {
+        title: "Movies & TV",
+        items: ["Lightsaber duel", "Spy mission", "Zombie chase", "Time travel", "Courtroom drama", "Cooking show"],
+      },
+      {
+        title: "Animals & Actions",
+        items: ["Marching penguins", "Sneezing panda", "Kangaroo boxing", "Herd of turtles", "Cat stuck in a tree", "Fishing a big catch"],
+      },
+      {
+        title: "Professions & Daily Life",
+        items: ["Air traffic controller", "Busy barista", "News reporter on scene", "Stuck elevator repair", "Grocery bag disaster", "Traffic police dance"],
+      },
+    ],
   },
   es: {
     introTitle: "Por qué reverse charades sube el volumen de cualquier fiesta",
@@ -343,6 +383,21 @@ const reverseContent = {
     rulesCtaDescription:
       "Si hay personas nuevas en el juego, repasa rápido las reglas de charadas tradicionales antes de pasar al modo más ruidoso de reverse charades.",
     rulesCtaLabel: "Abrir guía completa de charadas",
+    samplesTitle: "Ejemplos de prompts para reverse charades",
+    samples: [
+      {
+        title: "Películas y TV",
+        items: ["Duelo de sables", "Misión de espías", "Persecución zombi", "Viaje en el tiempo", "Drama en el juzgado", "Programa de cocina"],
+      },
+      {
+        title: "Animales y acciones",
+        items: ["Pingüinos marchando", "Panda estornudando", "Canguro boxeador", "Manada de tortugas", "Gato en el árbol", "Pescar una gran captura"],
+      },
+      {
+        title: "Profesiones y cotidiano",
+        items: ["Controlador aéreo", "Barista ocupado", "Reportero en directo", "Reparar ascensor atascado", "Bolsa del súper rota", "Agente de tráfico bailando"],
+      },
+    ],
   },
 } satisfies Record<
   Locale,
@@ -366,5 +421,7 @@ const reverseContent = {
     rulesCtaTitle: string;
     rulesCtaDescription: string;
     rulesCtaLabel: string;
+    samplesTitle: string;
+    samples: Array<{ title: string; items: string[] }>;
   }
 >;

@@ -5,12 +5,22 @@ export const en = {
     home: {
       title: "Charades Generator - Free 1000+ Words & Ideas",
       description:
-        "Free charades generator with 1000+ words! Instant charades words for kids, adults, parties. Movies, Disney, animals, actions & more categories.",
+        "Free online charades word generator with 1000+ ideas. Instant words for kids and adults: movies, Disney, animals, actions, and more. Great for parties and family game night.",
       keywords:
-        "charades generator, free charades words, charades game, party games, family games, disney charades",
+        "charades generator, charades word generator, free charades words, charades ideas, party games, family games, disney charades, online charades",
       structuredDataName: "Charades Generator - Free Words & Ideas",
       structuredDataDescription:
         "Charades Generator with 1000+ words database! Free instant charades words for kids, adults, parties. Includes movies, Disney, animals, actions, funny words.",
+    },
+    wordGenerator: {
+      title: "Charades Word Generator - Free Printable Word Lists",
+      description:
+        "Online charades word generator for fast gameplay. Get easy, medium, and hard words by category, plus printable lists for parties and classrooms.",
+      keywords:
+        "charades word generator, printable charades words, charades list, charades ideas, charades prompts",
+      structuredDataName: "Charades Word Generator",
+      structuredDataDescription:
+        "Generate charades words by category and difficulty. Includes printable lists and gameplay tips for family nights and parties.",
     },
     kids: {
       title: "Kids Charades Generator - Free Children's Game Words",
@@ -163,6 +173,12 @@ export const en = {
         title: "Free Generator",
         description: "Main charades generator",
         href: "/",
+      },
+      {
+        key: "word",
+        title: "Word Generator",
+        description: "Printable word lists",
+        href: "/word-charades-generator",
       },
       {
         key: "kids",
@@ -337,6 +353,11 @@ export const en = {
     noFilters: "None (showing all words)",
   },
   home: {
+    seoIntro: {
+      title: "The fastest online charades word generator",
+      lead:
+        "Looking for an online charades generator that just works? Spin up instant words across movies, Disney, animals, actions, and more—filter by difficulty and age group, then copy or print your list in seconds.",
+    },
     exploreLabel: "Explore more",
     themedHeading: "Pick a themed charades generator",
     themedDescription:
@@ -695,6 +716,11 @@ export const en = {
     },
   },
   pages: {
+    wordGenerator: {
+      title: "Charades Word Generator",
+      description:
+        "Generate charades words by category and difficulty. Download or print lists for parties, classrooms, and family game night.",
+    },
     kids: {
       title: "Kids Charades Generator",
       description:
@@ -1123,6 +1149,7 @@ export const en = {
         title: "Charades Generators",
         links: [
           { title: "Free Charades Generator", href: "/" },
+          { title: "Charades Word Generator", href: "/word-charades-generator" },
           {
             title: "Random Charades Generator",
             href: "/random-charades-generator",
@@ -1143,6 +1170,7 @@ export const en = {
             title: "Christmas Charades Generator",
             href: "/christmas-charades-generator",
           },
+          { title: "Reverse Charades", href: "/reverse-charades-game" },
           { title: "Funny Adult Charades", href: "/funny-charades-for-adults" },
         ],
       },

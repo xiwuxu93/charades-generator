@@ -29,6 +29,41 @@ export default function HomeLanding({ initialWords, dictionary, locale }: HomeLa
     <>
       <CharadesGeneratorOptimized initialWords={initialWords} isShowScenarios />
 
+      {dictionary.home?.seoIntro && (
+        <div className="max-w-4xl mx-auto px-6 mt-6">
+          <section className="bg-white rounded-lg shadow-md p-6 mb-8 border border-gray-200">
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">{dictionary.home.seoIntro.title}</h2>
+            <p className="text-gray-700 leading-relaxed mb-4">{dictionary.home.seoIntro.lead}</p>
+            <div className="flex flex-wrap gap-2 text-sm">
+              <Link href={buildLocalePath(locale, "/word-charades-generator/")}
+                className="inline-flex items-center rounded-md border border-gray-200 px-2 py-1 text-gray-700 hover:bg-gray-50">
+                Word Generator
+              </Link>
+              <Link href={buildLocalePath(locale, "/random-charades-generator/")}
+                className="inline-flex items-center rounded-md border border-gray-200 px-2 py-1 text-gray-700 hover:bg-gray-50">
+                Random
+              </Link>
+              <Link href={buildLocalePath(locale, "/movie-charades-generator/")}
+                className="inline-flex items-center rounded-md border border-gray-200 px-2 py-1 text-gray-700 hover:bg-gray-50">
+                Movies
+              </Link>
+              <Link href={buildLocalePath(locale, "/disney-charades-generator/")}
+                className="inline-flex items-center rounded-md border border-gray-200 px-2 py-1 text-gray-700 hover:bg-gray-50">
+                Disney
+              </Link>
+              <Link href={buildLocalePath(locale, "/charades-generator-for-kids/")}
+                className="inline-flex items-center rounded-md border border-gray-200 px-2 py-1 text-gray-700 hover:bg-gray-50">
+                Kids
+              </Link>
+              <Link href={buildLocalePath(locale, "/reverse-charades-game/")}
+                className="inline-flex items-center rounded-md border border-gray-200 px-2 py-1 text-gray-700 hover:bg-gray-50">
+                Reverse
+              </Link>
+            </div>
+          </section>
+        </div>
+      )}
+
       <div className="max-w-4xl mx-auto px-6 pb-10">
         <section className="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-indigo-500">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{difference.title}</h2>

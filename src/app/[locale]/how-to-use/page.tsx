@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import HowToStructuredData from "@/components/HowToStructuredData";
 import { buildLocalePath } from "@/utils/localePaths";
 
 const howToExtras = {
@@ -165,12 +166,29 @@ export default async function HowToUsePage({ params }: PageProps) {
   const quickKitHref = locale === 'en' ? '/quick-play-kit' : `/${locale}/quick-play-kit`;
   const themedGenerators = dictionary.home?.themedGenerators;
   const guides = supportingGuides[locale] ?? supportingGuides.en;
+  const steps = [
+    dictionary.pages.howToUse.step1,
+    dictionary.pages.howToUse.step2,
+    dictionary.pages.howToUse.step3,
+    dictionary.pages.howToUse.step4,
+    dictionary.pages.howToUse.step5,
+    dictionary.pages.howToUse.step6,
+  ].filter(Boolean);
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">
         {dictionary.pages.howToUse.title}
       </h1>
+
+      <HowToStructuredData
+        name={dictionary.pages.howToUse.title}
+        description={dictionary.seo.howToUse.description}
+        steps={steps}
+        totalTime="PT10M"
+        supplies={["Timer", "Score sheet"]}
+        tools={["Charades Generator"]}
+      />
 
       <div className="prose prose-lg max-w-none">
         <section className="mb-8">
