@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl, getOpenGraphLocale } from "@/utils/seo";
+import { buildLocalePath } from "@/utils/localePaths";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
