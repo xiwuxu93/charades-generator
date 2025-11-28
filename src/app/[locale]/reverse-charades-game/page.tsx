@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const canonicalPath = "/reverse-charades-game";
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
   const homeUrl = buildCanonicalUrl(locale, "/");
+  const homeLabel = dictionary.navigation.items.find((item) => item.key === "home")?.title ?? "Home";
 
   return {
     title: dictionary.seo.reverse.title,
@@ -76,7 +77,7 @@ export default async function ReverseCharadesPage({ params }: PageProps) {
     <div className="bg-gray-50 min-h-screen">
       <BreadcrumbStructuredData
         items={[
-          { name: locale === 'en' ? 'Home' : 'Inicio', url: homeUrl },
+          { name: homeLabel, url: homeUrl },
           { name: dictionary.pages.reverse.title, url: canonicalUrl },
         ]}
       />

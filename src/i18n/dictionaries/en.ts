@@ -5,22 +5,12 @@ export const en = {
     home: {
       title: "Charades Generator - Free 1000+ Words & Ideas",
       description:
-        "Free online charades word generator with 1000+ ideas. Instant words for kids and adults: movies, Disney, animals, actions, and more. Great for parties and family game night.",
+        "Best free charades generator with 1000+ words and ideas. Generate instant charades words for kids and adults: movies, Disney, animals, actions, and more. Great for parties and family game night.",
       keywords:
-        "charades generator, charades word generator, free charades words, charades ideas, party games, family games, disney charades, online charades",
+        "charades generator, free charades generator, charades word generator, free charades words, charades ideas, party games, family games, disney charades, online charades",
       structuredDataName: "Charades Generator - Free Words & Ideas",
       structuredDataDescription:
         "Charades Generator with 1000+ words database! Free instant charades words for kids, adults, parties. Includes movies, Disney, animals, actions, funny words.",
-    },
-    wordGenerator: {
-      title: "Charades Word Generator - Free Printable Word Lists",
-      description:
-        "Online charades word generator for fast gameplay. Get easy, medium, and hard words by category, plus printable lists for parties and classrooms.",
-      keywords:
-        "charades word generator, printable charades words, charades list, charades ideas, charades prompts",
-      structuredDataName: "Charades Word Generator",
-      structuredDataDescription:
-        "Generate charades words by category and difficulty. Includes printable lists and gameplay tips for family nights and parties.",
     },
     kids: {
       title: "Kids Charades Generator - Free Children's Game Words",
@@ -173,12 +163,6 @@ export const en = {
         title: "Free Generator",
         description: "Main charades generator",
         href: "/",
-      },
-      {
-        key: "word",
-        title: "Word Generator",
-        description: "Printable word lists",
-        href: "/word-charades-generator",
       },
       {
         key: "kids",
@@ -355,8 +339,7 @@ export const en = {
   home: {
     seoIntro: {
       title: "The fastest online charades word generator",
-      lead:
-        "Looking for an online charades generator that just works? Spin up instant words across movies, Disney, animals, actions, and more—filter by difficulty and age group, then copy or print your list in seconds.",
+      lead: "Looking for an online charades generator that just works? Spin up instant words across movies, Disney, animals, actions, and more—filter by difficulty and age group, then copy or print your list in seconds.",
     },
     exploreLabel: "Explore more",
     themedHeading: "Pick a themed charades generator",
@@ -461,8 +444,7 @@ export const en = {
     generatorDeepDive: {
       difference: {
         title: "Why this charades generator stands out",
-        lead:
-          "Run every game night from one charades word generator hub. Filters, presets, and rules stay in a single interface so you can launch a round in seconds.",
+        lead: "Run every game night from one charades word generator hub. Filters, presets, and rules stay in a single interface so you can launch a round in seconds.",
         bullets: [
           "Mix categories, difficulties, and age ranges inside a single charades word generator without jumping between pages.",
           "Preview host-tested presets that instantly populate the generator for classroom breaks, team icebreakers, and family nights.",
@@ -716,11 +698,6 @@ export const en = {
     },
   },
   pages: {
-    wordGenerator: {
-      title: "Charades Word Generator",
-      description:
-        "Generate charades words by category and difficulty. Download or print lists for parties, classrooms, and family game night.",
-    },
     kids: {
       title: "Kids Charades Generator",
       description:
@@ -845,6 +822,12 @@ export const en = {
           ],
         },
       ],
+      playbooksHeading: "Charades playbooks for specific situations",
+      playbooksDescription:
+        "Once you know the core rules, dive into focused guides for classrooms, remote teams, and family nights.",
+      gearHeading: "Optional gear for charades nights",
+      gearDescription:
+        "Some hosts like to add simple tools like timers, score sheets, and whiteboards around the table. If you explore product links from this site, some may be affiliate links which could support the project at no extra cost to you.",
       readyToPlay: "Ready to Play?",
       readyToPlayDescription:
         "Now that you know the rules and tips, it's time to start your charades game!",
@@ -1002,11 +985,9 @@ export const en = {
       q9: "Can you talk in charades?",
       a9: "No talking, mouthing, or sound effects are allowed. Stick to gestures, facial expressions, and the category signals outlined in our How to Use guide.",
       q10: "How do you play charades with a large group or in teams?",
-      a10:
-        "Split big groups into squads of 3-6 players, rotate clue givers every round, and alternate 60-second turns so the pacing stays lively. Our Quick-Play Kit template makes score tracking painless.",
+      a10: "Split big groups into squads of 3-6 players, rotate clue givers every round, and alternate 60-second turns so the pacing stays lively. Our Quick-Play Kit template makes score tracking painless.",
       q11: "How do you act out “marry” in charades?",
-      a11:
-        "Use a wedding mini-story: mime holding a bouquet, pretend to slide a ring on someone’s finger, then clasp your hands over your heart. It communicates the idea instantly without needing props.",
+      a11: "Use a wedding mini-story: mime holding a bouquet, pretend to slide a ring on someone’s finger, then clasp your hands over your heart. It communicates the idea instantly without needing props.",
       stillHaveQuestions: "Still Have Questions?",
       contactDescription:
         "Need direct support? Drop us a note at support@charades-generator.com and we’ll reply within one business day.",
@@ -1149,7 +1130,10 @@ export const en = {
         title: "Charades Generators",
         links: [
           { title: "Free Charades Generator", href: "/" },
-          { title: "Charades Word Generator", href: "/word-charades-generator" },
+          {
+            title: "Charades Word List Generator",
+            href: "/word-charades-generator",
+          },
           {
             title: "Random Charades Generator",
             href: "/random-charades-generator",

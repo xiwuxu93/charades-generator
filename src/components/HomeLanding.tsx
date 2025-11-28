@@ -35,10 +35,6 @@ export default function HomeLanding({ initialWords, dictionary, locale }: HomeLa
             <h2 className="text-2xl font-bold text-gray-900 mb-3">{dictionary.home.seoIntro.title}</h2>
             <p className="text-gray-700 leading-relaxed mb-4">{dictionary.home.seoIntro.lead}</p>
             <div className="flex flex-wrap gap-2 text-sm">
-              <Link href={buildLocalePath(locale, "/word-charades-generator/")}
-                className="inline-flex items-center rounded-md border border-gray-200 px-2 py-1 text-gray-700 hover:bg-gray-50">
-                Word Generator
-              </Link>
               <Link href={buildLocalePath(locale, "/random-charades-generator/")}
                 className="inline-flex items-center rounded-md border border-gray-200 px-2 py-1 text-gray-700 hover:bg-gray-50">
                 Random

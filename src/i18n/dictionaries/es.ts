@@ -12,16 +12,6 @@ export const es = {
       structuredDataDescription:
         "Generador de Charadas con base de datos de más de 1000 palabras! Palabras instantáneas gratis para niños, adultos, fiestas. Incluye películas, Disney, animales, acciones, palabras divertidas.",
     },
-    wordGenerator: {
-      title: "Generador de Palabras para Charadas - Listas Imprimibles",
-      description:
-        "Generador online de palabras para charadas. Obtén palabras por categoría y dificultad (fácil, medio, difícil) y descarga listas imprimibles para fiestas y clases.",
-      keywords:
-        "generador palabras charadas, lista charadas imprimible, ideas charadas, prompts charadas",
-      structuredDataName: "Generador de Palabras para Charadas",
-      structuredDataDescription:
-        "Genera palabras para charadas por categoría y dificultad. Incluye listas imprimibles y consejos de juego para familia y fiestas.",
-    },
     kids: {
       title: "Charadas para Niños Gratis",
       description:
@@ -175,12 +165,6 @@ export const es = {
         title: "Generador Gratis",
         description: "Generador principal de charadas",
         href: "/",
-      },
-      {
-        key: "word",
-        title: "Palabras",
-        description: "Listas imprimibles",
-        href: "/word-charades-generator",
       },
       {
         key: "kids",
@@ -360,8 +344,7 @@ export const es = {
   home: {
     seoIntro: {
       title: "El generador de palabras para charadas más rápido",
-      lead:
-        "¿Buscas un generador de charadas online que funcione sin complicaciones? Genera palabras al instante por películas, Disney, animales, acciones y más; filtra por dificultad y edades, y copia o imprime tu lista en segundos.",
+      lead: "¿Buscas un generador de charadas online que funcione sin complicaciones? Genera palabras al instante por películas, Disney, animales, acciones y más; filtra por dificultad y edades, y copia o imprime tu lista en segundos.",
     },
     exploreLabel: "Explora más",
     themedHeading: "Elige un generador temático",
@@ -719,11 +702,6 @@ export const es = {
     },
   },
   pages: {
-    wordGenerator: {
-      title: "Generador de Palabras para Charadas",
-      description:
-        "Genera palabras por categoría y dificultad. Descarga o imprime listas para fiestas, aulas y noches de juegos en familia.",
-    },
     kids: {
       title: "Generador de Charadas para Niños",
       description:
@@ -854,6 +832,12 @@ export const es = {
           ],
         },
       ],
+      playbooksHeading: "Playbooks de charadas para situaciones concretas",
+      playbooksDescription:
+        "Una vez que tengas claras las reglas, profundiza en guías específicas para aulas, equipos remotos y noches de juegos en familia.",
+      gearHeading: "Extras opcionales para tus noches de charadas",
+      gearDescription:
+        "A muchxs anfitriones les gusta añadir temporizadores, hojas de puntuación o pizarras a la mesa. Algunos enlaces de productos desde este sitio pueden ser de afiliado y ayudar al proyecto sin coste extra para ti.",
       readyToPlay: "¿Listo para Jugar?",
       readyToPlayDescription:
         "Ahora que conoces las reglas y consejos, ¡es hora de comenzar tu juego de charadas!",

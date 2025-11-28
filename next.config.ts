@@ -38,6 +38,30 @@ const nextConfig: NextConfig = {
     // Disable ESLint during builds for now
     ignoreDuringBuilds: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/word-charades-generator",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/word-charades-generator/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/es/word-charades-generator",
+        destination: "/es/",
+        permanent: true,
+      },
+      {
+        source: "/es/word-charades-generator/",
+        destination: "/es/",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

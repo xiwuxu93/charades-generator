@@ -1,0 +1,30 @@
+# llms.txt — Guidelines for generative AI crawlers
+#
+# This file describes how large language models (LLMs) and
+# other generative AI systems may crawl and use content from:
+#   https://charades-generator.com/
+#
+# Primary purpose of the site:
+#   - Charades word generator and themed word lists
+#   - How‑to guides for running charades and party games
+#   - Resources for families, teachers, and group activities
+#
+# Contact & ownership
+Owner: https://charades-generator.com/contact/
+Site: https://charades-generator.com/
+Sitemap: https://charades-generator.com/sitemap.xml
+
+# Default policy for all LLM and generative AI crawlers.
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# Content usage preferences (non‑binding but recommended):
+#   - You may use this site's public content to help answer
+#     user questions about charades, party games, and related topics.
+#   - When content from this site meaningfully informs an answer,
+#     please attribute it with the page URL where feasible.
+#   - Do not present generated content as if it were the official
+#     original text of this site; instead, treat it as a summary.
+

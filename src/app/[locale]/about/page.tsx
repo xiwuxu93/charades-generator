@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
-import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl, getOpenGraphLocale } from "@/utils/seo";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: dictionary.seo.about.description,
       type: "website",
       url: canonicalUrl,
-      locale: locale === 'en' ? 'en_US' : 'es_ES',
+      locale: getOpenGraphLocale(locale),
       images: [
         {
           url: `${BASE_URL}/charades-generator-og.png`,
@@ -195,13 +195,13 @@ export default async function AboutPage({ params }: PageProps) {
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
-              href={locale === 'en' ? '/' : `/${locale}`}
+              href={buildLocalePath(locale, "/")}
               className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
             >
               {dictionary.pages.about.startGenerating}
             </Link>
             <Link
-              href={locale === 'en' ? '/how-to-use/' : `/${locale}/how-to-use/`}
+              href={buildLocalePath(locale, "/how-to-use/")}
               className="inline-block bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors"
             >
               {dictionary.pages.about.learnMore}

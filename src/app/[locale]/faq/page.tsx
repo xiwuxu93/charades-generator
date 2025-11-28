@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import FAQStructuredData from "@/components/FAQStructuredData";
-import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl, getOpenGraphLocale } from "@/utils/seo";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: dictionary.seo.faq.description,
       type: "website",
       url: canonicalUrl,
-      locale: locale === 'en' ? 'en_US' : 'es_ES',
+      locale: getOpenGraphLocale(locale),
       images: [
         {
           url: `${BASE_URL}/charades-generator-og.png`,

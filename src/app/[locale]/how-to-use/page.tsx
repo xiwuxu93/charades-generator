@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
-import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl, getOpenGraphLocale } from "@/utils/seo";
 import HowToStructuredData from "@/components/HowToStructuredData";
 import { buildLocalePath } from "@/utils/localePaths";
 
@@ -138,7 +138,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: dictionary.seo.howToUse.description,
       type: "article",
       url: canonicalUrl,
-      locale: locale === 'en' ? 'en_US' : 'es_ES',
+      locale: getOpenGraphLocale(locale),
       images: [
         {
           url: `${BASE_URL}/charades-generator-og.png`,
@@ -163,7 +163,7 @@ export default async function HowToUsePage({ params }: PageProps) {
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
   const extras = howToExtras[locale] ?? howToExtras.en;
-  const quickKitHref = locale === 'en' ? '/quick-play-kit' : `/${locale}/quick-play-kit`;
+  const quickKitHref = buildLocalePath(locale, "/quick-play-kit/");
   const themedGenerators = dictionary.home?.themedGenerators;
   const guides = supportingGuides[locale] ?? supportingGuides.en;
   const steps = [
@@ -313,12 +313,10 @@ export default async function HowToUsePage({ params }: PageProps) {
 
         <section className="mb-8 rounded-2xl border border-gray-200 bg-gray-50 p-6">
           <h2 className="text-2xl font-semibold text-gray-900 mb-3">
-            {locale === 'en' ? "Charades playbooks for specific situations" : "Playbooks de charadas para situaciones concretas"}
+            {dictionary.pages.howToUse.playbooksHeading}
           </h2>
           <p className="text-gray-700 mb-4">
-            {locale === 'en'
-              ? "Once you know the core rules, dive into focused guides for classrooms, remote teams, and family nights."
-              : "Una vez que tengas claras las reglas, profundiza en guías específicas para aulas, equipos remotos y noches de juegos en familia."}
+            {dictionary.pages.howToUse.playbooksDescription}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {guides.map((guide) => (
@@ -350,12 +348,10 @@ export default async function HowToUsePage({ params }: PageProps) {
 
         <section className="mb-8 rounded-2xl border border-yellow-200 bg-yellow-50 p-6">
           <h2 className="text-2xl font-semibold text-gray-900 mb-3">
-            {locale === 'en' ? "Optional gear for charades nights" : "Extras opcionales para tus noches de charadas"}
+            {dictionary.pages.howToUse.gearHeading}
           </h2>
           <p className="text-gray-700 mb-4">
-            {locale === 'en'
-              ? "Some hosts like to add simple tools like timers, score sheets, and whiteboards around the table. If you explore product links from this site, some may be affiliate links which could support the project at no extra cost to you."
-              : "A muchxs anfitriones les gusta añadir temporizadores, hojas de puntuación o pizarras a la mesa. Algunos enlaces de productos desde este sitio pueden ser de afiliado y ayudar al proyecto sin coste extra para ti."}
+            {dictionary.pages.howToUse.gearDescription}
           </p>
         </section>
 
@@ -420,7 +416,7 @@ export default async function HowToUsePage({ params }: PageProps) {
             {dictionary.pages.howToUse.readyToPlayDescription}
           </p>
           <Link
-            href={locale === 'en' ? '/' : `/${locale}`}
+            href={buildLocalePath(locale, "/")}
             className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
           >
             {dictionary.pages.howToUse.startGenerating}

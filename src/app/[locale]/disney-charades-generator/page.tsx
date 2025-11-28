@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import { pickWords } from "@/utils/charades";
 import { getDictionary } from "@/i18n/dictionary";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
-import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl, getOpenGraphLocale } from "@/utils/seo";
 import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 import { buildLocalePath } from "@/utils/localePaths";
 
@@ -25,7 +25,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const canonicalPath = "/disney-charades-generator";
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
-  const homeUrl = buildCanonicalUrl(locale, "/");
 
   return {
     title: dictionary.seo.disney.title,
@@ -40,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: dictionary.seo.disney.description,
       type: "website",
       url: canonicalUrl,
-      locale: locale === 'en' ? 'en_US' : 'es_ES',
+      locale: getOpenGraphLocale(locale),
       images: [
         {
           url: `${BASE_URL}/charades-generator-og.png`,
@@ -70,12 +69,16 @@ export default async function DisneyCharadesPage({ params }: PageProps) {
   const canonicalPath = "/disney-charades-generator";
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
   const homeUrl = buildCanonicalUrl(locale, "/");
+  const homeLabel = dictionary.navigation.items.find((item) => item.key === "home")?.title ?? "Home";
+  const exploreLabel = dictionary.home.exploreLabel;
+  const howToUseLabel =
+    dictionary.navigation.items.find((item) => item.key === "howToUse")?.title ?? "How to Use";
 
   return (
     <div className="bg-gray-50 min-h-screen">
       <BreadcrumbStructuredData
         items={[
-          { name: locale === 'en' ? 'Home' : 'Inicio', url: homeUrl },
+          { name: homeLabel, url: homeUrl },
           { name: dictionary.pages.disney.title, url: canonicalUrl },
         ]}
       />
@@ -195,19 +198,15 @@ export default async function DisneyCharadesPage({ params }: PageProps) {
         </section>
 
         <section className="mt-8 bg-purple-50 rounded-lg border border-purple-200 p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">{locale === 'en' ? 'Keep exploring' : 'Sigue explorando'}</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">{exploreLabel}</h2>
           <div className="flex flex-wrap gap-2 text-sm">
-            <Link href={buildLocalePath(locale, "/word-charades-generator/")}
-              className="inline-flex items-center rounded-md border border-purple-200 px-2 py-1 text-purple-800 hover:bg-purple-100">
-              {locale === 'en' ? 'Word Generator' : 'Generador de palabras'}
-            </Link>
             <Link href={buildLocalePath(locale, "/how-to-use/")}
               className="inline-flex items-center rounded-md border border-purple-200 px-2 py-1 text-purple-800 hover:bg-purple-100">
-              {locale === 'en' ? 'How to play' : 'Cómo jugar'}
+              {howToUseLabel}
             </Link>
             <Link href={buildLocalePath(locale, "/reverse-charades-game/")}
               className="inline-flex items-center rounded-md border border-purple-200 px-2 py-1 text-purple-800 hover:bg-purple-100">
-              {locale === 'en' ? 'Reverse charades' : 'Reverse charades'}
+              {dictionary.pages.reverse.title}
             </Link>
           </div>
         </section>

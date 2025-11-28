@@ -45,3 +45,11 @@ export function buildAlternateLanguages(path: string): Record<string, string> {
   };
 }
 
+export function getOpenGraphLocale(locale: Locale): string {
+  switch (locale) {
+    case "es":
+      return "es_ES";
+    default:
+      return "en_US";
+  }
+}
