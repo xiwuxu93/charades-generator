@@ -25,8 +25,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const canonicalPath = "/christmas-charades-generator";
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
-  const homeUrl = buildCanonicalUrl(locale, "/");
-  const homeLabel = dictionary.navigation.items.find((item) => item.key === "home")?.title ?? "Home";
 
   return {
     title: dictionary.seo.christmas.title,
@@ -71,6 +69,7 @@ export default async function ChristmasCharadesPage({ params }: PageProps) {
   const canonicalPath = "/christmas-charades-generator";
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
   const homeUrl = buildCanonicalUrl(locale, "/");
+  const homeLabel = dictionary.navigation.items.find((item) => item.key === "home")?.title ?? "Home";
 
   return (
     <div className="bg-gradient-to-b from-red-50 to-green-50 min-h-screen">

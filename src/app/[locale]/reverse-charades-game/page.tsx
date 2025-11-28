@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import { pickWords } from "@/utils/charades";
-import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl } from "@/utils/seo";
+import { BASE_URL, buildAlternateLanguages, buildCanonicalUrl, getOpenGraphLocale } from "@/utils/seo";
 import BreadcrumbStructuredData from "@/components/BreadcrumbStructuredData";
 import { buildLocalePath } from "@/utils/localePaths";
 
@@ -26,7 +26,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const canonicalPath = "/reverse-charades-game";
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
   const homeUrl = buildCanonicalUrl(locale, "/");
-  const homeLabel = dictionary.navigation.items.find((item) => item.key === "home")?.title ?? "Home";
 
   return {
     title: dictionary.seo.reverse.title,
@@ -41,7 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: dictionary.seo.reverse.description,
       type: "website",
       url: canonicalUrl,
-      locale: locale === "en" ? "en_US" : "es_ES",
+      locale: getOpenGraphLocale(locale),
       images: [
         {
           url: `${BASE_URL}/charades-generator-og.png`,
@@ -70,8 +69,9 @@ export default async function ReverseCharadesPage({ params }: PageProps) {
 
   const canonicalPath = "/reverse-charades-game";
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
-  const quickPlayHref = locale === "en" ? "/quick-play-kit" : `/${locale}/quick-play-kit`;
   const homeUrl = buildCanonicalUrl(locale, "/");
+  const homeLabel = dictionary.navigation.items.find((item) => item.key === "home")?.title ?? "Home";
+  const quickPlayHref = buildLocalePath(locale, "/quick-play-kit/");
 
   return (
     <div className="bg-gray-50 min-h-screen">
