@@ -112,6 +112,16 @@ export const es = {
       structuredDataDescription:
         "Generador avanzado con prompts exigentes y estrategias para anfitriones",
     },
+    imposter: {
+      title: "Juego del impostor - Reglas, roles e ideas",
+      description:
+        "Aprende a jugar al juego del impostor en la vida real con amigos, familia o alumnado. Reglas sencillas, ideas de roles y palabras para rondas de impostor en fiestas y aulas.",
+      keywords:
+        "juego del impostor, reglas impostor, quién es el impostor, juego de fiesta impostor, among us en la vida real",
+      structuredDataName: "Guía del juego del impostor",
+      structuredDataDescription:
+        "Reglas para el juego del impostor fuera de pantalla con ideas de roles, palabras y consejos para anfitriones en reuniones familiares, fiestas y clases.",
+    },
     howToUse: {
       title: "Cómo Usar el Generador",
       description:
@@ -702,6 +712,11 @@ export const es = {
     },
   },
   pages: {
+    imposter: {
+      title: "Cómo jugar al juego del impostor",
+      description:
+        "Guía paso a paso del juego del impostor con reglas, roles e ideas de palabras para usar en fiestas, aulas y actividades de equipo.",
+    },
     kids: {
       title: "Generador de Charadas para Niños",
       description:

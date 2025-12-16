@@ -1,0 +1,176 @@
+import type { Locale } from "@/i18n/config";
+import type { ImposterPackId } from "@/data/imposter-packs";
+
+export type Role = "imposter" | "crew";
+
+export interface Player {
+  id: string;
+  name: string;
+  role?: Role;
+  word?: string;
+}
+
+export interface Room {
+  id: string;
+  locale: Locale;
+  players: Player[];
+  mainWord: string;
+  imposterWord: string;
+  updatedAt: number;
+  packId: ImposterPackId;
+  imposters: number;
+  round: number;
+  hostId: string;
+}
+
+export interface ImposterRoomStore {
+  getRoom(id: string): Promise<Room | null>;
+  saveRoom(room: Room): Promise<void>;
+  deleteRoom(id: string): Promise<void>;
+}
+
+function normalizeRoomId(id: string): string {
+  return id.trim().toUpperCase();
+}
+
+function cloneRoom(room: Room): Room {
+  return {
+    ...room,
+    players: room.players.map((player) => ({ ...player })),
+  };
+}
+
+function createInMemoryImposterRoomStore(): ImposterRoomStore {
+  const rooms = new Map<string, Room>();
+
+  return {
+    async getRoom(id: string): Promise<Room | null> {
+      const room = rooms.get(normalizeRoomId(id));
+      return room ? cloneRoom(room) : null;
+    },
+    async saveRoom(room: Room): Promise<void> {
+      const normalizedId = normalizeRoomId(room.id);
+      rooms.set(normalizedId, { ...cloneRoom(room), id: normalizedId });
+    },
+    async deleteRoom(id: string): Promise<void> {
+      rooms.delete(normalizeRoomId(id));
+    },
+  };
+}
+
+function createCloudflareImposterRoomStore(baseUrl: string, apiKey: string): ImposterRoomStore {
+  const normalizedBaseUrl = baseUrl.replace(/\/+$/, "");
+
+  async function fetchJson(input: RequestInfo, init?: RequestInit) {
+    const response = await fetch(input, init);
+    return { response, data: await response.json().catch(() => null) };
+  }
+
+  return {
+    async getRoom(id: string): Promise<Room | null> {
+      const roomId = normalizeRoomId(id);
+      const url = `${normalizedBaseUrl}/rooms/${encodeURIComponent(roomId)}`;
+      const { response, data } = await fetchJson(url, {
+        method: "GET",
+        headers: {
+          "x-api-key": apiKey,
+        },
+      });
+
+      if (response.status === 404) {
+        return null;
+      }
+
+      if (!response.ok) {
+        throw new Error(`Cloudflare KV getRoom failed with status ${response.status}`);
+      }
+
+      if (!data || typeof data !== "object") {
+        return null;
+      }
+
+      const room = data as Room;
+      if (!room.id || !Array.isArray(room.players)) {
+        return null;
+      }
+
+      return {
+        ...room,
+        id: normalizeRoomId(room.id),
+        players: room.players.map((player) => ({ ...player })),
+      };
+    },
+
+    async saveRoom(room: Room): Promise<void> {
+      const normalizedId = normalizeRoomId(room.id);
+      const payload: Room = {
+        ...cloneRoom(room),
+        id: normalizedId,
+      };
+
+      const url = `${normalizedBaseUrl}/rooms/${encodeURIComponent(normalizedId)}`;
+      const { response } = await fetchJson(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": apiKey,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Cloudflare KV saveRoom failed with status ${response.status}`);
+      }
+    },
+
+    async deleteRoom(id: string): Promise<void> {
+      const roomId = normalizeRoomId(id);
+      const url = `${normalizedBaseUrl}/rooms/${encodeURIComponent(roomId)}`;
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "x-api-key": apiKey,
+        },
+      });
+
+      if (!response.ok && response.status !== 404) {
+        throw new Error(`Cloudflare KV deleteRoom failed with status ${response.status}`);
+      }
+    },
+  };
+}
+
+let store: ImposterRoomStore | null = null;
+
+export function getImposterRoomStore(): ImposterRoomStore {
+  if (!store) {
+    const baseUrl = process.env.CF_ROOMS_API_URL;
+    const apiKey = process.env.CF_ROOMS_API_KEY;
+    const isProduction = process.env.NODE_ENV === "production";
+
+    if (isProduction && baseUrl && apiKey) {
+      store = createCloudflareImposterRoomStore(baseUrl, apiKey);
+    } else {
+      store = createInMemoryImposterRoomStore();
+    }
+  }
+
+  return store;
+}
+
+export function createEmptyRoom(locale: Locale, packId: ImposterPackId, imposters: number): Room {
+  const id = Math.random().toString(36).slice(2, 8).toUpperCase();
+
+  return {
+    id,
+    locale,
+    players: [],
+    mainWord: "",
+    imposterWord: "",
+    updatedAt: Date.now(),
+    packId,
+    imposters,
+    round: 0,
+    hostId: "",
+  };
+}

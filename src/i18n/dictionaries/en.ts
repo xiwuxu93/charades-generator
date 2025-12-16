@@ -112,6 +112,16 @@ export const en = {
       structuredDataDescription:
         "Advanced charades generator with tough prompts, scoring twists, and host strategies",
     },
+    imposter: {
+      title: "Imposter Game - Rules, Roles & Word Ideas",
+      description:
+        "Learn how to play the imposter game in real life with friends, family, or classmates. Simple rules, roles, and word prompts for party and classroom impostor rounds.",
+      keywords:
+        "imposter game, impostor game rules, who is the imposter, imposter party game, among us in real life",
+      structuredDataName: "Imposter Party Game Guide",
+      structuredDataDescription:
+        "Offline imposter party game rules with role ideas, word prompts, and host tips for friends, families, and classrooms.",
+    },
     howToUse: {
       title: "How to Use Charades Generator - Complete Guide & Rules",
       description:
@@ -698,6 +708,11 @@ export const en = {
     },
   },
   pages: {
+    imposter: {
+      title: "How to Play the Imposter Game",
+      description:
+        "Step-by-step imposter game rules plus role ideas and word prompts you can use for parties, classrooms, and team icebreakers.",
+    },
     kids: {
       title: "Kids Charades Generator",
       description:

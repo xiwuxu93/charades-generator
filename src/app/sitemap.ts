@@ -89,6 +89,16 @@ const routeConfig: Array<{
     changeFrequency: "weekly",
     priority: 0.75,
   },
+  {
+    path: "/imposter-game",
+    changeFrequency: "weekly",
+    priority: 0.75,
+  },
+  {
+    path: "/imposter-game/play",
+    changeFrequency: "weekly",
+    priority: 0.7,
+  },
 
   {
     path: "/about",
