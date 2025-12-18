@@ -55,6 +55,12 @@ export default function HomeLanding({ initialWords, dictionary, locale }: HomeLa
                 className="inline-flex items-center rounded-md border border-gray-200 px-2 py-1 text-gray-700 hover:bg-gray-50">
                 Reverse
               </Link>
+              <Link
+                href={buildLocalePath(locale, "/imposter-game/")}
+                className="inline-flex items-center rounded-md border border-gray-200 px-2 py-1 text-gray-700 hover:bg-gray-50"
+              >
+                Imposter game
+              </Link>
             </div>
           </section>
         </div>
