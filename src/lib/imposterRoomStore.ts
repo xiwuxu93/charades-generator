@@ -29,6 +29,15 @@ export interface ImposterRoomStore {
   deleteRoom(id: string): Promise<void>;
 }
 
+// Room TTL: 24 hours of inactivity
+const ROOM_TTL_MS = 24 * 60 * 60 * 1000;
+// Cleanup interval: every 1 hour
+const CLEANUP_INTERVAL_MS = 60 * 60 * 1000;
+
+function isRoomExpired(room: Room): boolean {
+  return Date.now() - room.updatedAt > ROOM_TTL_MS;
+}
+
 function normalizeRoomId(id: string): string {
   return id.trim().toUpperCase();
 }
@@ -42,11 +51,49 @@ function cloneRoom(room: Room): Room {
 
 function createInMemoryImposterRoomStore(): ImposterRoomStore {
   const rooms = new Map<string, Room>();
+  let cleanupInterval: NodeJS.Timeout | null = null;
+
+  // Start periodic cleanup
+  const startCleanup = () => {
+    if (cleanupInterval) return;
+
+    cleanupInterval = setInterval(() => {
+      const expiredRooms: string[] = [];
+
+      for (const [id, room] of rooms.entries()) {
+        if (isRoomExpired(room)) {
+          expiredRooms.push(id);
+        }
+      }
+
+      expiredRooms.forEach(id => rooms.delete(id));
+
+      if (expiredRooms.length > 0) {
+        console.log(`[ImposterRoomStore] Cleaned up ${expiredRooms.length} expired rooms`);
+      }
+    }, CLEANUP_INTERVAL_MS);
+
+    // Ensure cleanup doesn't prevent process exit
+    if (cleanupInterval.unref) {
+      cleanupInterval.unref();
+    }
+  };
+
+  // Start cleanup on first use
+  startCleanup();
 
   return {
     async getRoom(id: string): Promise<Room | null> {
       const room = rooms.get(normalizeRoomId(id));
-      return room ? cloneRoom(room) : null;
+      if (!room) return null;
+
+      // Check if room has expired
+      if (isRoomExpired(room)) {
+        rooms.delete(normalizeRoomId(id));
+        return null;
+      }
+
+      return cloneRoom(room);
     },
     async saveRoom(room: Room): Promise<void> {
       const normalizedId = normalizeRoomId(room.id);
@@ -158,8 +205,15 @@ export function getImposterRoomStore(): ImposterRoomStore {
   return store;
 }
 
+function generateSecureRoomId(): string {
+  // Use crypto.randomUUID() and take first 6 chars after removing hyphens
+  // This provides ~2.8 trillion combinations (16^6) vs 2.2 billion from base36
+  const uuid = crypto.randomUUID().replace(/-/g, "");
+  return uuid.slice(0, 6).toUpperCase();
+}
+
 export function createEmptyRoom(locale: Locale, packId: ImposterPackId, imposters: number): Room {
-  const id = Math.random().toString(36).slice(2, 8).toUpperCase();
+  const id = generateSecureRoomId();
 
   return {
     id,

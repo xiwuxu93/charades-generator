@@ -13,8 +13,15 @@ import {
   type Role,
   type Room,
 } from "@/lib/imposterRoomStore";
+import { RateLimiter, getClientIdentifier } from "@/lib/rateLimit";
 
 export const dynamic = "force-dynamic";
+
+// Rate limiter: 30 requests per minute per IP
+const rateLimiter = new RateLimiter({
+  maxRequests: 30,
+  windowMs: 60 * 1000, // 1 minute
+});
 
 interface ClientRoomState {
   roomId: string;
@@ -30,6 +37,30 @@ interface ClientRoomState {
 }
 
 const store = getImposterRoomStore();
+
+// Maximum retries for room ID collision
+const MAX_ROOM_ID_RETRIES = 5;
+
+async function createUniqueRoom(
+  locale: string,
+  packId: ImposterPackId,
+  imposters: number
+): Promise<Room> {
+  for (let attempt = 0; attempt < MAX_ROOM_ID_RETRIES; attempt++) {
+    const room = createEmptyRoom(locale as any, packId, imposters);
+
+    // Check if room ID already exists
+    const existing = await store.getRoom(room.id);
+    if (!existing) {
+      return room;
+    }
+
+    // Collision detected, log and retry
+    console.warn(`[ImposterAPI] Room ID collision detected: ${room.id}, retrying...`);
+  }
+
+  throw new Error("Failed to generate unique room ID after maximum retries");
+}
 
 function assignRolesForRound(room: Room) {
   const players = room.players;
@@ -75,6 +106,28 @@ function serializePlayer(room: Room, playerId: string) {
 
 export async function POST(request: NextRequest) {
   try {
+    // Check rate limit
+    const clientId = getClientIdentifier(request.headers);
+    const rateLimit = rateLimiter.check(clientId);
+
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        {
+          error: "Too many requests. Please try again later.",
+          retryAfter: Math.ceil((rateLimit.reset - Date.now()) / 1000),
+        },
+        {
+          status: 429,
+          headers: {
+            "X-RateLimit-Limit": rateLimit.limit.toString(),
+            "X-RateLimit-Remaining": rateLimit.remaining.toString(),
+            "X-RateLimit-Reset": rateLimit.reset.toString(),
+            "Retry-After": Math.ceil((rateLimit.reset - Date.now()) / 1000).toString(),
+          },
+        }
+      );
+    }
+
     const body = await request.json();
     const action = typeof body?.action === "string" ? body.action : "";
     const rawLocale =
@@ -93,8 +146,11 @@ export async function POST(request: NextRequest) {
       let imposters = Number.parseInt(body?.imposters as string, 10);
       if (Number.isNaN(imposters)) imposters = 1;
       imposters = Math.min(Math.max(imposters, 1), 3);
-      const room = createEmptyRoom(locale, packId, imposters);
-      const playerId = Math.random().toString(36).slice(2, 10);
+
+      // Create room with collision detection
+      const room = await createUniqueRoom(locale, packId, imposters);
+
+      const playerId = crypto.randomUUID();
       const host: Player = { id: playerId, name };
       room.players.push(host);
       room.hostId = playerId;
@@ -119,7 +175,7 @@ export async function POST(request: NextRequest) {
           { status: 404 }
         );
       }
-      const playerId = Math.random().toString(36).slice(2, 10);
+      const playerId = crypto.randomUUID();
       const player: Player = { id: playerId, name };
       room.players.push(player);
       room.updatedAt = Date.now();
@@ -189,8 +245,8 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ error: "Unsupported action" }, { status: 400 });
-  } catch (error) {
-    console.error("Imposter room API error:", error);
+  } catch (err) {
+    console.error("Imposter room API error:", err);
     return NextResponse.json(
       { error: "Unable to update room" },
       { status: 500 }

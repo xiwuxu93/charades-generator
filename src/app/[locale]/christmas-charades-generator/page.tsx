@@ -181,6 +181,33 @@ export default async function ChristmasCharadesPage({ params }: PageProps) {
           </div>
         </section>
 
+        <section className="bg-red-50 rounded-lg shadow-md p-6 mb-8 border border-red-200">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">{copy.gearTitle}</h2>
+          <p className="text-gray-700 mb-4">{copy.gearDescription}</p>
+          <p className="text-xs font-semibold text-gray-500 mb-3">
+            {copy.gearDisclaimer}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {copy.gearItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col rounded-xl bg-white p-4 border border-red-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <span className="text-xs font-semibold text-red-700 uppercase tracking-wide mb-1">
+                  {item.tag}
+                </span>
+                <h3 className="text-sm font-semibold text-gray-900 mb-1 group-hover:text-red-700">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-gray-600 flex-1">{item.description}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
         <section className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">{copy.faqTitle}</h2>
           <div className="space-y-4">
@@ -320,6 +347,30 @@ const christmasContent = {
           "Yes! Our Christmas charades generator offers Easy (Santa, Tree), Medium (Caroling, Ornament), and Hard (Mistletoe, Christmas Tradition) difficulty levels to match your group's needs.",
       },
     ],
+    gearTitle: "Enhance Your Christmas Party",
+    gearDescription:
+      "Take your holiday charades game to the next level with these festive additions. Perfect for creating memorable Christmas moments!",
+    gearDisclaimer: "As an Amazon Associate, we earn from qualifying purchases at no extra cost to you.",
+    gearItems: [
+      {
+        title: "Christmas Charades Party Game Cards",
+        description: "Ready-made Christmas charades cards with 200+ holiday prompts. Perfect backup when you want physical cards alongside our generator.",
+        href: "https://amzn.to/48UKs9b",
+        tag: "Affiliate link",
+      },
+      {
+        title: "Christmas Party Props & Photo Booth Set",
+        description: "Santa hats, reindeer antlers, elf ears and festive props to make your charades acting hilarious and photo-worthy.",
+        href: "https://amzn.to/48XN3zd",
+        tag: "Affiliate link",
+      },
+      {
+        title: "Festive Sand Timer (3-pack)",
+        description: "Holiday-themed timers for 1, 3, and 5 minutes. Keep the game moving while adding to your Christmas décor.",
+        href: "https://amzn.to/4pK1WMV",
+        tag: "Affiliate link",
+      },
+    ],
     rulesTitle: "Need a reminder of the core rules?",
     rulesDescription:
       "If you’re mixing kids and adults at the same table, glance over the full charades rules so everyone knows how to play before the holiday rounds begin.",
@@ -445,6 +496,30 @@ const christmasContent = {
         question: "¿Ofrecen niveles de dificultad?",
         answer:
           "Sí. El generador navideño tiene niveles Fácil (Santa, Árbol), Medio (Villancico, Adorno) y Difícil (Muérdago, Tradición navideña) para adaptarse a cada grupo.",
+      },
+    ],
+    gearTitle: "Mejora tu fiesta navideña",
+    gearDescription:
+      "Lleva tu juego de charadas al siguiente nivel con estos complementos festivos. ¡Perfecto para crear momentos navideños memorables!",
+    gearDisclaimer: "Como Asociado de Amazon, ganamos con las compras que cumplan los requisitos sin coste adicional para ti.",
+    gearItems: [
+      {
+        title: "Tarjetas de juego navideño",
+        description: "Tarjetas preparadas con más de 200 prompts navideños. Complemento perfecto cuando quieres cartas físicas junto al generador.",
+        href: "https://amzn.to/48UKs9b",
+        tag: "Enlace de afiliado",
+      },
+      {
+        title: "Set de accesorios y photocall navideño",
+        description: "Gorros de Santa, cuernos de reno, orejas de duende y accesorios festivos para hacer las actuaciones divertidas y fotogénicas.",
+        href: "https://amzn.to/48XN3zd",
+        tag: "Enlace de afiliado",
+      },
+      {
+        title: "Temporizadores festivos (pack de 3)",
+        description: "Relojes de arena temáticos de 1, 3 y 5 minutos. Mantén el ritmo del juego mientras añades decoración navideña.",
+        href: "https://amzn.to/4pK1WMV",
+        tag: "Enlace de afiliado",
       },
     ],
     rulesTitle: "¿Quieres repasar las reglas básicas?",
