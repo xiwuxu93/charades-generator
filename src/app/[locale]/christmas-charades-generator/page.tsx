@@ -579,6 +579,15 @@ const christmasContent = {
     question: string;
     answer: string;
   }>;
+  gearTitle: string;
+  gearDescription: string;
+  gearDisclaimer: string;
+  gearItems: Array<{
+    title: string;
+    description: string;
+    href: string;
+    tag: string;
+  }>;
   rulesTitle: string;
   rulesDescription: string;
   rulesCta: string;
