@@ -69,7 +69,7 @@ export default async function ImposterGamePage({ params }: PageProps) {
   const homeLabel = dictionary.navigation.items.find((item) => item.key === "home")?.title ?? "Home";
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-slate-50 min-h-screen font-sans text-slate-900 selection:bg-indigo-100 selection:text-indigo-900">
       <BreadcrumbStructuredData
         items={[
           { name: homeLabel, url: homeUrl },
@@ -77,109 +77,175 @@ export default async function ImposterGamePage({ params }: PageProps) {
         ]}
       />
 
-      <main className="max-w-4xl mx-auto px-6 py-8 bg-white">
-        <section className="mb-8 rounded-2xl border border-gray-200 bg-gray-50 p-6">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-2">
-            {locale === "en" ? "Ready to play?" : "¿Listo para jugar?"}
-          </h2>
-          <p className="text-gray-700 mb-4 text-sm">
-            {locale === "en"
-              ? "Open this page on your phone and tap below to launch a clean, mobile-friendly room view for your next imposter round."
-              : "Abre esta página en tu móvil y pulsa abajo para abrir una vista limpia y lista para tu próxima ronda de impostor."}
-          </p>
-          <Link
-            href={buildLocalePath(locale, "/imposter-game/play/")}
-            className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-          >
-            {locale === "en" ? "Start imposter game" : "Empezar juego del impostor"}
-          </Link>
-        </section>
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {dictionary.pages.imposter.title}
-          </h1>
-          <p className="text-gray-700">
-            {dictionary.pages.imposter.description}
-          </p>
-        </header>
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
+        {/* Hero Section */}
+        <section className="mb-12 text-center relative overflow-hidden rounded-3xl bg-indigo-600 px-6 py-10 sm:py-16 text-white shadow-xl ring-1 ring-indigo-500/10">
+          <div className="relative z-10">
+            <span className="inline-block rounded-full bg-indigo-500/50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-indigo-100 mb-4 border border-indigo-400/30">
+              {locale === "en" ? "Mobile-Ready Party Game" : "Juego para Móvil"}
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4 text-white">
+              {dictionary.pages.imposter.title}
+            </h1>
+            <p className="text-indigo-100 text-lg sm:text-xl max-w-xl mx-auto mb-8 leading-relaxed">
+              {dictionary.pages.imposter.description}
+            </p>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">{content.whatIsTitle}</h2>
-          <p className="text-gray-700 mb-3">{content.whatIsIntro}</p>
-          <ul className="list-disc list-inside space-y-2 text-gray-700">
-            {content.whatIsBullets.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">{content.rulesTitle}</h2>
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">{content.setupTitle}</h3>
-          <ol className="list-decimal list-inside space-y-2 text-gray-700 mb-4">
-            {content.setupSteps.map((step) => (
-              <li key={step}>{step}</li>
-            ))}
-          </ol>
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">{content.playTitle}</h3>
-          <ol className="list-decimal list-inside space-y-2 text-gray-700">
-            {content.playSteps.map((step) => (
-              <li key={step}>{step}</li>
-            ))}
-          </ol>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">{content.rolesTitle}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {content.roles.map((role) => (
-              <article key={role.title} className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-                <h3 className="font-semibold text-gray-900 mb-1">{role.title}</h3>
-                <p className="text-sm text-gray-700 mb-2">{role.description}</p>
-                <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                  {role.tagline}
-                </p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">{content.wordsTitle}</h2>
-          <p className="text-gray-700 mb-4">{content.wordsIntro}</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {content.wordGroups.map((group) => (
-              <div key={group.title} className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-                <h3 className="font-semibold text-gray-900 mb-2">{group.title}</h3>
-                <ul className="text-sm text-gray-700 space-y-1">
-                  {group.items.map((item) => (
-                    <li key={item}>• {item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-          <p className="text-sm text-gray-700 mt-4">
-            {content.generatorHint.before}{" "}
             <Link
-              href={buildLocalePath(locale, "/")}
-              className="text-indigo-600 hover:text-indigo-800 underline"
+              href={buildLocalePath(locale, "/imposter-game/play/")}
+              className="group inline-flex items-center justify-center w-full sm:w-auto rounded-xl bg-white px-8 py-4 text-lg font-bold text-indigo-600 shadow-lg transition-all hover:bg-indigo-50 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
             >
-              {content.generatorHint.linkText}
-            </Link>{" "}
-            {content.generatorHint.after}
-          </p>
+              <svg className="w-6 h-6 mr-2 -ml-1 transition-transform group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {locale === "en" ? "Start Imposter Game" : "Empezar Juego del Impostor"}
+            </Link>
+            <p className="mt-4 text-xs font-medium text-indigo-200 uppercase tracking-wide opacity-80">
+              {locale === "en" ? "Instant Load · No App Needed" : "Carga Instantánea · Sin App"}
+            </p>
+          </div>
+          
+          {/* Decorative background effects */}
+          <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+          <div className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
         </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">{content.useCasesTitle}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* What is + Rules Grid */}
+        <div className="grid gap-8 md:grid-cols-2 mb-12">
+          {/* What Is */}
+          <section className="bg-white rounded-2xl p-6 shadow-sm ring-1 ring-slate-900/5">
+            <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center">
+              <span className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mr-3 text-xl shadow-sm">🧐</span>
+              {content.whatIsTitle}
+            </h2>
+            <p className="text-slate-600 mb-4 leading-relaxed">
+              {content.whatIsIntro}
+            </p>
+            <ul className="space-y-3">
+              {content.whatIsBullets.map((item) => (
+                <li key={item} className="flex items-start text-sm text-slate-600 bg-slate-50 rounded-lg p-2">
+                  <svg className="w-5 h-5 text-emerald-500 mr-2 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* Rules Summary */}
+          <section className="bg-white rounded-2xl p-6 shadow-sm ring-1 ring-slate-900/5">
+            <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center">
+               <span className="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mr-3 text-xl shadow-sm">📜</span>
+              {content.rulesTitle}
+            </h2>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wide mb-2">{content.setupTitle}</h3>
+                <ol className="space-y-2">
+                  {content.setupSteps.map((step, idx) => (
+                    <li key={step} className="flex items-start text-sm text-slate-600">
+                      <span className="flex items-center justify-center w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-xs font-bold mr-2 shrink-0">
+                        {idx + 1}
+                      </span>
+                      {step}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+              <div className="pt-4 border-t border-slate-100">
+                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wide mb-2">{content.playTitle}</h3>
+                <ol className="space-y-2">
+                  {content.playSteps.map((step, idx) => (
+                    <li key={step} className="flex items-start text-sm text-slate-600">
+                       <span className="flex items-center justify-center w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-xs font-bold mr-2 shrink-0">
+                        {idx + 1}
+                      </span>
+                      {step}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        {/* Roles Section */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">{content.rolesTitle}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {content.roles.map((role) => (
+              <article 
+                key={role.title} 
+                className={`relative overflow-hidden rounded-2xl p-6 shadow-sm ring-1 ring-slate-900/5 transition-transform hover:-translate-y-1 ${
+                  role.title.toLowerCase().includes('imposter') || role.title.toLowerCase().includes('impostor') 
+                  ? 'bg-slate-900 text-white' 
+                  : 'bg-white text-slate-900'
+                }`}
+              >
+                <div className="relative z-10">
+                   <h3 className={`font-bold text-lg mb-2 ${
+                      role.title.toLowerCase().includes('imposter') || role.title.toLowerCase().includes('impostor')  ? 'text-red-400' : 'text-indigo-600'
+                   }`}>{role.title}</h3>
+                   <p className={`text-sm mb-4 ${
+                      role.title.toLowerCase().includes('imposter') || role.title.toLowerCase().includes('impostor')  ? 'text-slate-300' : 'text-slate-600'
+                   }`}>{role.description}</p>
+                   <span className={`inline-block text-xs font-bold uppercase tracking-wider py-1 px-2 rounded-md ${
+                      role.title.toLowerCase().includes('imposter') || role.title.toLowerCase().includes('impostor') 
+                      ? 'bg-red-500/20 text-red-200' 
+                      : 'bg-indigo-50 text-indigo-700'
+                   }`}>
+                     {role.tagline}
+                   </span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* Words Ideas */}
+        <section className="mb-12">
+          <div className="flex flex-col md:flex-row items-center justify-between mb-6">
+             <h2 className="text-2xl font-bold text-slate-900">{content.wordsTitle}</h2>
+             <Link href={buildLocalePath(locale, "/")} className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 mt-2 md:mt-0 flex items-center">
+                {content.generatorHint.linkText} 
+                <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+             </Link>
+          </div>
+          <p className="text-slate-600 mb-6 max-w-2xl">{content.wordsIntro}</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {content.wordGroups.map((group) => (
+              <div key={group.title} className="bg-white rounded-2xl p-5 shadow-sm ring-1 ring-slate-900/5 border-t-4 border-indigo-500">
+                <h3 className="font-bold text-slate-900 mb-3">{group.title}</h3>
+                <ul className="space-y-2">
+                  {group.items.map((item) => (
+                    <li key={item} className="text-sm text-slate-600 flex items-center">
+                        <span className="w-1.5 h-1.5 rounded-full bg-slate-300 mr-2"></span>
+                        {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Use Cases */}
+        <section className="mb-12 bg-slate-100 rounded-3xl p-8">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">{content.useCasesTitle}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {content.useCases.map((useCase) => (
-              <article key={useCase.title} className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-                <h3 className="font-semibold text-gray-900 mb-2">{useCase.title}</h3>
-                <ul className="text-sm text-gray-700 space-y-1">
+              <article key={useCase.title} className="bg-white rounded-xl p-5 shadow-sm">
+                <h3 className="font-semibold text-slate-900 mb-3 flex items-center">
+                    <span className="w-2 h-6 bg-indigo-500 rounded-full mr-3"></span>
+                    {useCase.title}
+                </h3>
+                <ul className="text-sm text-slate-600 space-y-2">
                   {useCase.items.map((item) => (
-                    <li key={item}>• {item}</li>
+                    <li key={item} className="pl-5 relative before:absolute before:left-0 before:top-2 before:w-1 before:h-1 before:bg-slate-300 before:rounded-full">
+                        {item}
+                    </li>
                   ))}
                 </ul>
               </article>
@@ -187,36 +253,41 @@ export default async function ImposterGamePage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="mb-8">
+        {/* FAQ */}
+        <section className="mb-12 max-w-2xl mx-auto">
           <FAQStructuredData items={content.faq ?? []} />
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">{content.faqTitle}</h2>
-          <div className="space-y-4">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">{content.faqTitle}</h2>
+          <div className="space-y-6">
             {content.faq.map((item) => (
-              <div key={item.question}>
-                <h3 className="font-semibold text-gray-800 mb-1">{item.question}</h3>
-                <p className="text-gray-700 text-sm">{item.answer}</p>
+              <div key={item.question} className="bg-white rounded-xl p-6 shadow-sm ring-1 ring-slate-900/5">
+                <h3 className="font-bold text-slate-900 mb-2 flex items-start">
+                    <span className="text-indigo-500 mr-3 text-lg">Q.</span>
+                    {item.question}
+                </h3>
+                <p className="text-slate-600 text-sm pl-7 leading-relaxed">{item.answer}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="bg-blue-50 rounded-lg border border-blue-200 p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+        {/* Final CTA */}
+        <section className="bg-gradient-to-br from-slate-900 to-indigo-900 rounded-3xl p-8 text-center text-white shadow-lg">
+          <h2 className="text-2xl font-bold mb-3">
             {content.ctaTitle}
           </h2>
-          <p className="text-gray-700 mb-3">
+          <p className="text-indigo-200 mb-6 max-w-lg mx-auto">
             {content.ctaDescription}
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href={buildLocalePath(locale, "/")}
-              className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+              className="inline-flex items-center justify-center rounded-xl bg-white text-indigo-900 px-6 py-3 font-bold hover:bg-indigo-50 transition-colors"
             >
               {content.ctaPrimary}
             </Link>
             <Link
               href={buildLocalePath(locale, "/how-to-use/")}
-              className="inline-flex items-center rounded-md border border-blue-300 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50"
+              className="inline-flex items-center justify-center rounded-xl bg-transparent border-2 border-indigo-400 text-indigo-100 px-6 py-3 font-bold hover:bg-indigo-900/50 transition-colors"
             >
               {content.ctaSecondary}
             </Link>
