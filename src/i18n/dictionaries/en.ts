@@ -719,7 +719,7 @@ export const en = {
         "Each player joins on their phone to see a private role and word while you host the discussion and voting out loud.",
       hostButton: "I'm hosting · create a room",
       joinButton: "I have a code · join room",
-      back: "← Back",
+      back: "Back",
       yourName: "Your name",
       hostNamePlaceholder: "Host name",
       wordPack: "Word pack",
@@ -735,7 +735,8 @@ export const en = {
       playerNamePlaceholder: "Player name",
       joinRoom: "Join room",
       joining: "Joining…",
-      shareCodeHint: "Share this code or the link / QR below for others to join.",
+      shareCodeHint:
+        "Share this code or the link / QR below for others to join.",
       youAre: "You are",
       imposter: "Imposter",
       crew: "Crew",
@@ -751,9 +752,11 @@ export const en = {
       leaveRoom: "Leave room on this device",
       errorNameRequired: "Please enter your name first.",
       errorBothRequired: "Enter both room code and your name.",
-      inviteCopied: "Invite link copied to clipboard. Paste it into chat or messages.",
+      inviteCopied:
+        "Invite link copied to clipboard. Paste it into chat or messages.",
       shareFailed: "Unable to share right now. Copy the link shown below.",
-      shareNotSupported: "Sharing is not supported here. Copy the link shown below.",
+      shareNotSupported:
+        "Sharing is not supported here. Copy the link shown below.",
     },
     kids: {
       title: "Kids Charades Generator",

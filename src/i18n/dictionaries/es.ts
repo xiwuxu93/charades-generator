@@ -723,7 +723,7 @@ export const es = {
         "Cada jugador se une desde su móvil para ver su rol y palabra en privado mientras coordinas la discusión y votación en voz alta.",
       hostButton: "Soy anfitrión · crear sala",
       joinButton: "Tengo un código · unirme",
-      back: "← Atrás",
+      back: "Atrás",
       yourName: "Tu nombre",
       hostNamePlaceholder: "Nombre del anfitrión",
       wordPack: "Pack de palabras",
@@ -739,7 +739,8 @@ export const es = {
       playerNamePlaceholder: "Nombre de jugador",
       joinRoom: "Unirse a sala",
       joining: "Uniéndose…",
-      shareCodeHint: "Comparte este código o el enlace / QR de abajo para que otros se unan.",
+      shareCodeHint:
+        "Comparte este código o el enlace / QR de abajo para que otros se unan.",
       youAre: "Eres",
       imposter: "Impostor",
       crew: "Grupo",
@@ -755,9 +756,12 @@ export const es = {
       leaveRoom: "Salir de la sala en este dispositivo",
       errorNameRequired: "Por favor, introduce tu nombre primero.",
       errorBothRequired: "Introduce el código de sala y tu nombre.",
-      inviteCopied: "Enlace copiado al portapapeles. Pégalo en el chat o mensajes.",
-      shareFailed: "No se puede compartir ahora. Copia el enlace que aparece abajo.",
-      shareNotSupported: "Compartir no está disponible aquí. Copia el enlace de abajo.",
+      inviteCopied:
+        "Enlace copiado al portapapeles. Pégalo en el chat o mensajes.",
+      shareFailed:
+        "No se puede compartir ahora. Copia el enlace que aparece abajo.",
+      shareNotSupported:
+        "Compartir no está disponible aquí. Copia el enlace de abajo.",
     },
     kids: {
       title: "Generador de Charadas para Niños",

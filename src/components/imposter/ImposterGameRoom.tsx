@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getDictionary } from "@/i18n/dictionary";
 import { IMPOSTER_PACK_IDS, IMPOSTER_PACKS, type ImposterPackId } from "@/data/imposter-packs";
 import QRCodeCanvas from "@/components/QRCodeCanvas";
+import { buildLocalePath } from "@/utils/localePaths";
 
 type Role = "imposter" | "crew";
 
@@ -25,6 +27,7 @@ type Step = "mode" | "create" | "join" | "room";
 
 export default function ImposterGameRoom() {
   const { locale } = useLocale();
+  const router = useRouter();
   const dictionary = getDictionary(locale);
   const t = dictionary.pages.imposterGame;
 
@@ -38,6 +41,8 @@ export default function ImposterGameRoom() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [roomFromUrl, setRoomFromUrl] = useState(false);
+
+  const guideHref = useMemo(() => buildLocalePath(locale, "/imposter-game/"), [locale]);
 
   const packOptions = useMemo(
     () => IMPOSTER_PACK_IDS.map((id) => ({ id, label: IMPOSTER_PACKS[id].label[locale] || IMPOSTER_PACKS[id].label.en })),
@@ -225,28 +230,60 @@ export default function ImposterGameRoom() {
     }
   }, [room]);
 
-  return (
-    <section className="mb-10 rounded-2xl border border-gray-200 bg-gray-50 p-4 sm:p-6">
-      <h2 className="text-2xl font-semibold text-gray-900 mb-2 text-center sm:text-left">
+  // Hide global navigation bar and footer while on the play page
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const nav = document.querySelector<HTMLElement>(".critical-nav");
+    const footer = document.querySelector<HTMLElement>("footer");
+    const previousNavDisplay = nav?.style.display;
+    const previousFooterDisplay = footer?.style.display;
+
+    if (nav) nav.style.display = "none";
+    if (footer) footer.style.display = "none";
+
+    return () => {
+      if (nav) nav.style.display = previousNavDisplay ?? "";
+      if (footer) footer.style.display = previousFooterDisplay ?? "";
+    };
+  }, []);
+
+  const content = (
+    <>
+      <h2 className="text-2xl font-semibold text-slate-100 mb-2 text-center sm:text-left">
         {t.roomTitle}
       </h2>
-      <p className="text-gray-700 mb-4 text-sm text-center sm:text-left">
+      <p className="text-slate-400 text-sm text-center sm:text-left">
         {t.roomDescription}
       </p>
+
+      <button
+        type="button"
+        onClick={() => {
+          if (step === "mode") {
+            router.push(guideHref);
+          } else {
+            setStep("mode");
+          }
+        }}
+        className="mt-3 mb-4 inline-flex items-center text-sm font-medium text-slate-400 hover:text-slate-100 transition-colors"
+      >
+        <span className="mr-1.5 text-base leading-none">←</span>
+        {t.back}
+      </button>
 
       {step === "mode" && (
         <div className="flex flex-col gap-3 sm:flex-row">
           <button
             type="button"
             onClick={() => setStep("create")}
-            className="flex-1 rounded-lg border border-blue-500 bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-700"
+            className="flex-1 rounded-lg border border-indigo-500 bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-900/20 hover:bg-indigo-500 transition-all"
           >
             {t.hostButton}
           </button>
           <button
             type="button"
             onClick={() => setStep("join")}
-            className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-semibold text-gray-800 hover:bg-gray-50"
+            className="flex-1 rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-200 hover:bg-slate-700 transition-all"
           >
             {t.joinButton}
           </button>
@@ -255,17 +292,9 @@ export default function ImposterGameRoom() {
 
       {step === "create" && (
         <div className="mt-4 space-y-4">
-          <button
-            type="button"
-            onClick={() => setStep("mode")}
-            className="text-sm text-gray-600 hover:text-gray-800"
-          >
-            {t.back}
-          </button>
-
-          <div className="space-y-3">
+          <div className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wide text-gray-600 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5">
                 {t.yourName}
               </label>
               <input
@@ -273,18 +302,18 @@ export default function ImposterGameRoom() {
                 value={hostName}
                 onChange={(event) => setHostName(event.target.value)}
                 placeholder={t.hostNamePlaceholder}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wide text-gray-600 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5">
                 {t.wordPack}
               </label>
               <select
                 value={selectedPack}
                 onChange={(event) => setSelectedPack(event.target.value as ImposterPackId)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all"
               >
                 {packOptions.map((pack) => (
                   <option key={pack.id} value={pack.id}>
@@ -295,13 +324,13 @@ export default function ImposterGameRoom() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wide text-gray-600 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5">
                 {t.numberOfImposters}
               </label>
               <select
                 value={imposters}
                 onChange={(event) => setImposters(Number.parseInt(event.target.value, 10) || 1)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all"
               >
                 <option value={1}>{t.impostersOption1}</option>
                 <option value={2}>{t.impostersOption2}</option>
@@ -313,7 +342,7 @@ export default function ImposterGameRoom() {
               type="button"
               onClick={handleCreate}
               disabled={loading}
-              className="mt-2 inline-flex w-full items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60"
+              className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-900/30 hover:bg-indigo-500 disabled:opacity-60 disabled:hover:bg-indigo-600 transition-all"
             >
               {loading ? t.creating : t.createRoom}
             </button>
@@ -323,20 +352,13 @@ export default function ImposterGameRoom() {
 
       {step === "join" && (
         <div className="mt-4 space-y-4">
-          <button
-            type="button"
-            onClick={() => setStep("mode")}
-            className="text-sm text-gray-600 hover:text-gray-800"
-          >
-            {t.back}
-          </button>
-          <div className="space-y-3">
+          <div className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wide text-gray-600 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5">
                 {t.roomCode}
               </label>
               {roomFromUrl ? (
-                <div className="w-full rounded-md border border-gray-200 bg-gray-100 px-3 py-2 text-sm font-mono tracking-widest text-gray-800">
+                <div className="w-full rounded-lg border border-slate-700 bg-slate-800/50 px-3 py-2.5 text-sm font-mono tracking-widest text-slate-200">
                   {joinRoomId}
                 </div>
               ) : (
@@ -345,12 +367,12 @@ export default function ImposterGameRoom() {
                   value={joinRoomId}
                   onChange={(event) => setJoinRoomId(event.target.value.toUpperCase())}
                   placeholder={t.roomCodePlaceholder}
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm uppercase tracking-widest focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm uppercase tracking-widest text-slate-100 placeholder-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all"
                 />
               )}
             </div>
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wide text-gray-600 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5">
                 {t.yourName}
               </label>
               <input
@@ -358,14 +380,14 @@ export default function ImposterGameRoom() {
                 value={joinName}
                 onChange={(event) => setJoinName(event.target.value)}
                 placeholder={t.playerNamePlaceholder}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all"
               />
             </div>
             <button
               type="button"
               onClick={handleJoin}
               disabled={loading}
-              className="mt-2 inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-sm font-semibold text-white hover:bg-black disabled:opacity-60"
+              className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-900/30 hover:bg-indigo-500 disabled:opacity-60 disabled:hover:bg-indigo-600 transition-all"
             >
               {loading ? t.joining : t.joinRoom}
             </button>
@@ -375,51 +397,52 @@ export default function ImposterGameRoom() {
 
       {step === "room" && room && (
         <div className="mt-4 space-y-4">
-          <div className="flex flex-col gap-3 rounded-lg border border-gray-200 bg-white px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-3 rounded-xl border border-slate-700 bg-slate-800/50 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">{t.roomCode}</p>
-              <p className="text-2xl font-mono font-bold text-gray-900">{room.roomId}</p>
-              <p className="mt-1 text-xs text-gray-600">
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{t.roomCode}</p>
+              <p className="text-3xl font-mono font-bold text-slate-100 tracking-wider">{room.roomId}</p>
+              <p className="mt-1 text-xs text-slate-400">
                 {t.shareCodeHint}
               </p>
             </div>
             <div className="sm:text-right">
-              <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">{t.youAre}</p>
-              <p className="text-sm font-semibold text-gray-900">
-                {room.name} · {room.role === "imposter" ? t.imposter : t.crew}
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{t.youAre}</p>
+              <p className="text-lg font-semibold text-slate-100">
+                {room.name} · <span className={room.role === "imposter" ? "text-red-400" : "text-cyan-400"}>{room.role === "imposter" ? t.imposter : t.crew}</span>
               </p>
-              <p className="mt-1 text-xs text-gray-600">
+              <p className="mt-1 text-xs text-slate-400">
                 {t.round} {room.round} · {t.pack}: {IMPOSTER_PACKS[room.packId]?.label[locale] ?? IMPOSTER_PACKS[room.packId]?.label.en}
               </p>
             </div>
           </div>
 
           <div className="flex flex-col gap-4 sm:flex-row">
-            <div className="flex-1 rounded-lg border border-indigo-200 bg-indigo-50 px-4 py-3">
-              <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700 mb-1">
+            <div className="flex-1 rounded-xl border border-indigo-500/30 bg-indigo-900/20 px-4 py-4 backdrop-blur-sm">
+              <p className="text-xs font-semibold uppercase tracking-wide text-indigo-300 mb-1">
                 {t.yourSecretWord}
               </p>
-              <p className="text-2xl font-bold text-indigo-900 break-words">{room.word}</p>
-              <p className="mt-2 text-xs text-indigo-800">
+              <p className="text-3xl font-bold text-indigo-100 break-words">{room.word}</p>
+              <p className="mt-2 text-xs text-indigo-300/80">
                 {t.secretWordHint}
               </p>
             </div>
 
             {inviteUrl && (
-              <div className="w-full sm:w-64 rounded-lg border border-gray-200 bg-white px-4 py-3 flex flex-col items-center">
-                <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+              <div className="w-full sm:w-64 rounded-xl border border-slate-700 bg-slate-800/80 px-4 py-4 flex flex-col items-center backdrop-blur-sm">
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-3">
                   {t.inviteLinkQR}
                 </p>
-                <QRCodeCanvas
-                  value={inviteUrl}
-                  size={128}
-                  className="mb-2 rounded bg-gray-50"
-                />
-                <p className="mb-2 break-all text-[11px] text-gray-600">{inviteUrl}</p>
+                <div className="p-1.5 bg-white rounded-lg mb-3">
+                  <QRCodeCanvas
+                    value={inviteUrl}
+                    size={120}
+                  />
+                </div>
+                <p className="mb-3 break-all text-[10px] text-slate-500 text-center font-mono">{inviteUrl}</p>
                 <button
                   type="button"
                   onClick={handleShare}
-                  className="mt-1 inline-flex items-center rounded-md bg-gray-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-black"
+                  className="inline-flex items-center rounded-md bg-slate-700 px-3 py-1.5 text-xs font-semibold text-slate-200 hover:bg-slate-600 transition-colors"
                 >
                   {t.shareInvite}
                 </button>
@@ -427,13 +450,13 @@ export default function ImposterGameRoom() {
             )}
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-col sm:flex-row gap-3 pt-2">
             {room.isHost && (
               <button
                 type="button"
                 onClick={handleNextRound}
                 disabled={loading}
-                className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60"
+                className="w-full sm:flex-1 inline-flex items-center justify-center rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-900/30 hover:bg-emerald-400 disabled:opacity-60 disabled:hover:bg-emerald-500 transition-all"
               >
                 {loading ? t.starting : t.newRound}
               </button>
@@ -441,7 +464,7 @@ export default function ImposterGameRoom() {
             <button
               type="button"
               onClick={resetState}
-              className="inline-flex items-center rounded-md border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
+              className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg border border-slate-700 bg-slate-900/40 px-4 py-2.5 text-sm font-semibold text-slate-300 hover:bg-red-500/10 hover:text-red-100 hover:border-red-500/60 transition-all"
             >
               {t.leaveRoom}
             </button>
@@ -450,10 +473,20 @@ export default function ImposterGameRoom() {
       )}
 
       {error && (
-        <p className="mt-4 text-sm text-red-700">
+        <p className="mt-4 text-sm text-red-400 bg-red-900/20 p-3 rounded-lg border border-red-900/50">
           {error}
         </p>
       )}
+    </>
+  );
+
+  return (
+    <section className="fixed inset-0 z-[999] bg-slate-950 px-4 py-4 sm:px-6 sm:py-6 overflow-y-auto">
+      <div className="min-h-full flex items-center justify-center">
+        <div className="w-full max-w-md rounded-2xl border border-slate-800 bg-slate-900/90 p-4 sm:p-6 shadow-2xl shadow-black/40 backdrop-blur-md">
+          {content}
+        </div>
+      </div>
     </section>
   );
 }
