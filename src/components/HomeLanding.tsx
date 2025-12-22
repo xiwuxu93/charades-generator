@@ -27,7 +27,11 @@ export default function HomeLanding({ initialWords, dictionary, locale }: HomeLa
 
   return (
     <>
-      <CharadesGeneratorOptimized initialWords={initialWords} isShowScenarios />
+      <CharadesGeneratorOptimized
+        initialWords={initialWords}
+        isShowScenarios
+        showChristmasPromoLink
+      />
 
       {dictionary.home?.seoIntro && (
         <div className="max-w-4xl mx-auto px-6 mt-6">

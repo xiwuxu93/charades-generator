@@ -1,9 +1,11 @@
 'use client';
 
+import Link from 'next/link';
 import { useState, useEffect, useCallback, useRef, lazy, Suspense, useMemo } from 'react';
 import type { CharadesWord } from '@/data/charades-types';
 import { useLocale } from '@/contexts/LocaleContext';
 import { categoryIds, difficultyIds, ageGroupIds } from '@/data/charades-metadata';
+import { buildLocalePath } from '@/utils/localePaths';
 
 const DEFAULT_BATCH_SIZE = 3;
 
@@ -34,6 +36,7 @@ interface CharadesGeneratorProps {
   hideDifficultyFilter?: boolean;
   hideAgeGroupFilter?: boolean;
   isShowScenarios?: boolean;
+  showChristmasPromoLink?: boolean;
 }
 
 export default function CharadesGeneratorOptimized({
@@ -47,7 +50,8 @@ export default function CharadesGeneratorOptimized({
   hideCategoryFilter = false,
   hideDifficultyFilter = false,
   hideAgeGroupFilter = false,
-  isShowScenarios= false
+  isShowScenarios = false,
+  showChristmasPromoLink = false,
 }: CharadesGeneratorProps = {}) {
   const { locale, dictionary, t } = useLocale();
   const difficultiesLabel = dictionary.difficulties;
@@ -56,6 +60,14 @@ export default function CharadesGeneratorOptimized({
   const resolvedTitle = title ?? dictionary.generator.defaultTitle;
   const resolvedDescription = description ?? dictionary.generator.defaultDescription;
   const scenarios = (dictionary.generator.scenarios ?? []) as ScenarioPreset[];
+  const christmasHref = useMemo(
+    () => buildLocalePath(locale, '/christmas-charades-generator/'),
+    [locale],
+  );
+  const christmasLabel =
+    locale === 'es'
+      ? 'Especial de Navidad: charadas navideñas'
+      : 'Holiday special: Christmas charades generator';
 
   const [selectedCategory, setSelectedCategory] = useState<string>(defaultCategory);
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>(defaultDifficulty);
@@ -286,6 +298,19 @@ export default function CharadesGeneratorOptimized({
     <div className="max-w-4xl mx-auto px-4 py-6">
       {/* Header - Critical for LCP */}
       <header className="text-center mb-8">
+        {showChristmasPromoLink && (
+          <div className="mb-3">
+            <Link
+              href={christmasHref}
+              className="inline-flex items-center rounded-full bg-red-600 px-4 py-1.5 text-sm font-semibold text-white shadow-md shadow-red-300/70 hover:bg-red-500 transition-colors"
+            >
+              <span className="mr-2" aria-hidden="true">
+                🎄
+              </span>
+              {christmasLabel}
+            </Link>
+          </div>
+        )}
         <h1 className="text-4xl font-bold text-gray-800 mb-2">{resolvedTitle}</h1>
         <p className="text-gray-600 text-lg">{resolvedDescription}</p>
         <p className="text-gray-500 text-sm mt-2">{dictionary.generator.wordsCountSublabel}</p>
