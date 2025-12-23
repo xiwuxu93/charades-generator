@@ -24,7 +24,17 @@ interface RoomState {
   playersCount: number;
 }
 
-type Step = "mode" | "create" | "join" | "room";
+type Step = "mode" | "create" | "join" | "room" | "passSetup" | "passReveal" | "passSummary";
+
+interface PassPlayState {
+  totalPlayers: number;
+  currentIndex: number;
+  roles: Role[];
+  mainWord: string;
+  imposterWord: string;
+  packId: ImposterPackId;
+  imposters: number;
+}
 
 export default function ImposterGameRoom() {
   const { locale } = useLocale();
@@ -42,6 +52,9 @@ export default function ImposterGameRoom() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [roomFromUrl, setRoomFromUrl] = useState(false);
+  const [passPlayers, setPassPlayers] = useState(6);
+  const [passPlayState, setPassPlayState] = useState<PassPlayState | null>(null);
+  const [passRevealPhase, setPassRevealPhase] = useState<"prompt" | "word">("prompt");
 
   const guideHref = useMemo(() => buildLocalePath(locale, "/imposter-game/"), [locale]);
 
@@ -127,6 +140,36 @@ export default function ImposterGameRoom() {
       { silent: false },
     );
   }, [callApi, room]);
+
+  const startPassPlayRound = useCallback(() => {
+    const safePlayers = Math.max(3, Math.min(12, passPlayers));
+    let desiredImposters = Math.max(1, Math.min(imposters, safePlayers - 1));
+    if (Number.isNaN(desiredImposters)) desiredImposters = 1;
+
+    const pair = IMPOSTER_PACKS[selectedPack].pairs[Math.floor(Math.random() * IMPOSTER_PACKS[selectedPack].pairs.length)];
+
+    const roles: Role[] = [];
+    for (let i = 0; i < safePlayers; i += 1) {
+      roles.push(i < desiredImposters ? "imposter" : "crew");
+    }
+    // Shuffle roles so imposters are in random seats
+    for (let i = roles.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [roles[i], roles[j]] = [roles[j], roles[i]];
+    }
+
+    setPassPlayState({
+      totalPlayers: safePlayers,
+      currentIndex: 0,
+      roles,
+      mainWord: pair.main,
+      imposterWord: pair.imposter,
+      packId: selectedPack,
+      imposters: desiredImposters,
+    });
+    setPassRevealPhase("prompt");
+    setStep("passReveal");
+  }, [imposters, passPlayers, selectedPack]);
   const syncRoom = useCallback(() => {
     if (!room) return;
     void callApi(
@@ -224,21 +267,29 @@ export default function ImposterGameRoom() {
       <p className="text-slate-400 text-sm text-center sm:text-left">
         {t.roomDescription}
       </p>
-
-      <button
-        type="button"
-        onClick={() => {
-          if (step === "mode") {
-            router.push(guideHref);
-          } else {
-            setStep("mode");
-          }
-        }}
-        className="mt-3 mb-4 inline-flex items-center text-sm font-medium text-slate-400 hover:text-slate-100 transition-colors"
-      >
-        <span className="mr-1.5 text-base leading-none">←</span>
-        {t.back}
-      </button>
+      <div className="mt-3 mb-4 flex flex-wrap gap-3 items-center">
+        <button
+          type="button"
+          onClick={() => {
+            if (step === "mode") {
+              router.push(guideHref);
+            } else {
+              setStep("mode");
+              setPassPlayState(null);
+              setPassRevealPhase("prompt");
+            }
+          }}
+          className="inline-flex items-center text-sm font-medium text-slate-400 hover:text-slate-100 transition-colors"
+        >
+          <span className="mr-1.5 text-base leading-none">←</span>
+          {t.back}
+        </button>
+        {step === "passReveal" || step === "passSummary" ? (
+          <span className="inline-flex items-center rounded-full bg-slate-800/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-200">
+            {locale === "en" ? "Pass & play mode" : "Modo pasar y jugar"}
+          </span>
+        ) : null}
+      </div>
 
       {step === "mode" && (
         <div className="flex flex-col gap-3 sm:flex-row">
@@ -255,6 +306,93 @@ export default function ImposterGameRoom() {
             className="flex-1 rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-200 hover:bg-slate-700 transition-all"
           >
             {t.joinButton}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setRoom(null);
+              setStep("passSetup");
+              setError(null);
+            }}
+            className="flex-1 rounded-lg border border-emerald-500/70 bg-emerald-600/90 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/25 hover:bg-emerald-500 transition-all"
+          >
+            {locale === "en" ? "Pass & play on this device" : "Pasar y jugar en este móvil"}
+          </button>
+        </div>
+      )}
+
+      {step === "passSetup" && (
+        <div className="mt-4 space-y-4">
+          <p className="text-sm text-slate-300">
+            {locale === "en"
+              ? "Play with everyone using a single phone. Each player secretly checks their word, then you talk and vote out loud."
+              : "Jueguen todos usando un solo móvil. Cada persona mira su palabra en secreto y luego hablan y votan en voz alta."}
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5">
+                {locale === "en" ? "Number of players" : "Número de jugadores"}
+              </label>
+              <input
+                type="number"
+                min={3}
+                max={12}
+                value={passPlayers}
+                onChange={(event) => {
+                  const value = Number.parseInt(event.target.value, 10);
+                  if (Number.isNaN(value)) {
+                    setPassPlayers(3);
+                  } else {
+                    setPassPlayers(Math.max(3, Math.min(12, value)));
+                  }
+                }}
+                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all"
+              />
+              <p className="mt-1 text-xs text-slate-500">
+                {locale === "en" ? "Best between 4 and 10 players." : "Ideal entre 4 y 10 personas."}
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5">
+                {t.numberOfImposters}
+              </label>
+              <select
+                value={imposters}
+                onChange={(event) => setImposters(Number.parseInt(event.target.value, 10) || 1)}
+                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all"
+              >
+                <option value={1}>{t.impostersOption1}</option>
+                <option value={2}>{t.impostersOption2}</option>
+                <option value={3}>{t.impostersOption3}</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1.5">
+              {t.wordPack}
+            </label>
+            <select
+              value={selectedPack}
+              onChange={(event) => setSelectedPack(event.target.value as ImposterPackId)}
+              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all"
+            >
+              {packOptions.map((pack) => (
+                <option key={pack.id} value={pack.id}>
+                  {pack.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <button
+            type="button"
+            onClick={startPassPlayRound}
+            className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-900/30 hover:bg-emerald-500 transition-all"
+          >
+            {locale === "en" ? "Start pass & play round" : "Empezar ronda de pasar y jugar"}
           </button>
         </div>
       )}
@@ -359,6 +497,135 @@ export default function ImposterGameRoom() {
               className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-900/30 hover:bg-indigo-500 disabled:opacity-60 disabled:hover:bg-indigo-600 transition-all"
             >
               {loading ? t.joining : t.joinRoom}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {step === "passReveal" && passPlayState && (
+        <div className="mt-4 space-y-6">
+          <div className="rounded-xl border border-slate-700 bg-slate-800/60 px-4 py-4">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1">
+              {locale === "en" ? "Pass & play instructions" : "Instrucciones de pasar y jugar"}
+            </p>
+            <p className="text-sm text-slate-200">
+              {locale === "en"
+                ? "Only one player should look at the screen at a time. Everyone else looks away while you reveal your word."
+                : "Solo una persona debe mirar la pantalla cada vez. Las demás miran hacia otro lado mientras se revela la palabra."}
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-slate-700 bg-slate-900/80 px-4 py-6 text-center">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-2">
+              {locale === "en" ? "Current player" : "Jugador actual"}
+            </p>
+            <p className="text-2xl font-bold text-slate-50 mb-4">
+              {locale === "en" ? `Player ${passPlayState.currentIndex + 1}` : `Jugador ${passPlayState.currentIndex + 1}`}
+              <span className="text-sm font-normal text-slate-400">
+                {` / ${passPlayState.totalPlayers}`}
+              </span>
+            </p>
+
+            {passRevealPhase === "prompt" ? (
+              <>
+                <p className="text-sm text-slate-300 mb-6">
+                  {locale === "en"
+                    ? "Make sure only you can see the screen. When you're ready, tap the button below to reveal your word."
+                    : "Asegúrate de que solo tú veas la pantalla. Cuando estés listo, toca el botón para ver tu palabra."}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setPassRevealPhase("word")}
+                  className="inline-flex w-full items-center justify-center rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-900/30 hover:bg-indigo-500 transition-all"
+                >
+                  {locale === "en" ? "Show my word" : "Mostrar mi palabra"}
+                </button>
+              </>
+            ) : (
+              <>
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1">
+                  {locale === "en" ? "Your secret word" : "Tu palabra secreta"}
+                </p>
+                <p className="text-3xl font-bold text-indigo-100 mb-2 break-words">
+                  {passPlayState.roles[passPlayState.currentIndex] === "imposter"
+                    ? passPlayState.imposterWord
+                    : passPlayState.mainWord}
+                </p>
+                <p className="text-xs text-slate-300 mb-6">
+                  {passPlayState.roles[passPlayState.currentIndex] === "imposter"
+                    ? locale === "en"
+                      ? "You are the imposter. Use safe, vague clues to blend in without revealing your odd word."
+                      : "Eres el impostor. Usa pistas vagas pero creíbles para mezclarte sin revelar tu palabra diferente."
+                    : locale === "en"
+                      ? "You are crew. Give honest-sounding clues that clearly match this word."
+                      : "Eres parte del grupo. Da pistas claras y honestas que encajen con esta palabra."}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (!passPlayState) return;
+                    if (passPlayState.currentIndex + 1 < passPlayState.totalPlayers) {
+                      setPassPlayState({
+                        ...passPlayState,
+                        currentIndex: passPlayState.currentIndex + 1,
+                      });
+                      setPassRevealPhase("prompt");
+                    } else {
+                      setStep("passSummary");
+                    }
+                  }}
+                  className="inline-flex w-full items-center justify-center rounded-xl bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-100 hover:bg-slate-700 transition-all"
+                >
+                  {passPlayState.currentIndex + 1 < passPlayState.totalPlayers
+                    ? locale === "en"
+                      ? "Hide and pass to next player"
+                      : "Ocultar y pasar al siguiente"
+                    : locale === "en"
+                      ? "Hide and start discussion"
+                      : "Ocultar y empezar la discusión"}
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {step === "passSummary" && passPlayState && (
+        <div className="mt-4 space-y-4">
+          <div className="rounded-xl border border-slate-700 bg-slate-800/70 px-4 py-5">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1">
+              {locale === "en" ? "Everyone has their word" : "Todos tienen su palabra"}
+            </p>
+            <p className="text-sm text-slate-200 mb-3">
+              {locale === "en"
+                ? "Start the round: go around the circle and have each player give one short clue. Then open discussion and vote."
+                : "Empieza la ronda: que cada persona dé una pista corta. Luego hablen y hagan una votación."}
+            </p>
+            <p className="text-xs text-slate-400">
+              {locale === "en"
+                ? "Remember: most players share the same word, only the imposters saw a slightly different one."
+                : "Recuerda: la mayoría comparte la misma palabra, solo los impostores vieron una ligeramente distinta."}
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <button
+              type="button"
+              onClick={startPassPlayRound}
+              className="w-full sm:flex-1 inline-flex items-center justify-center rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-900/30 hover:bg-emerald-500 transition-all"
+            >
+              {locale === "en" ? "New round with same group" : "Nueva ronda con el mismo grupo"}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setPassPlayState(null);
+                setPassRevealPhase("prompt");
+                setStep("mode");
+              }}
+              className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg border border-slate-700 bg-slate-900/40 px-4 py-2.5 text-sm font-semibold text-slate-300 hover:bg-slate-800 hover:text-slate-100 transition-all"
+            >
+              {locale === "en" ? "Back to online mode" : "Volver al modo en línea"}
             </button>
           </div>
         </div>
