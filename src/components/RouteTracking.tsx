@@ -25,13 +25,12 @@ export default function RouteTracking() {
     window.__cgLastTrackedPath = pagePath;
 
     window.dataLayer = window.dataLayer || [];
-    function gtag(this: unknown, ...args: unknown[]) {
-      window.dataLayer!.push(args);
-    }
+    const gtag =
+      (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag ??
+      ((...args: unknown[]) => {
+        window.dataLayer!.push(args);
+      });
 
-    gtag("config", "G-YC6P6CMMW2", {
-      page_path: pagePath,
-    });
     gtag("event", "page_view", {
       page_path: pagePath,
     });

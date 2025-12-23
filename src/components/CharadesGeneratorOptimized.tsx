@@ -6,6 +6,7 @@ import type { CharadesWord } from '@/data/charades-types';
 import { useLocale } from '@/contexts/LocaleContext';
 import { categoryIds, difficultyIds, ageGroupIds } from '@/data/charades-metadata';
 import { buildLocalePath } from '@/utils/localePaths';
+import { trackEvent } from '@/lib/analytics';
 
 const DEFAULT_BATCH_SIZE = 3;
 
@@ -67,7 +68,10 @@ export default function CharadesGeneratorOptimized({
   const ageGroupLabels = dictionary.ageGroups;
   const resolvedTitle = title ?? dictionary.generator.defaultTitle;
   const resolvedDescription = description ?? dictionary.generator.defaultDescription;
-  const scenarios = (dictionary.generator.scenarios ?? []) as ScenarioPreset[];
+  const scenarios = useMemo(
+    () => (dictionary.generator.scenarios ?? []) as ScenarioPreset[],
+    [dictionary],
+  );
   const christmasHref = useMemo(
     () => buildLocalePath(locale, '/christmas-charades-generator/'),
     [locale],
@@ -99,15 +103,21 @@ export default function CharadesGeneratorOptimized({
     if (typeof window === 'undefined') {
       return;
     }
-    const stored = window.localStorage.getItem('cg-scenario-usage');
-    if (stored) {
+    const timeoutId = window.setTimeout(() => {
       try {
-        const parsed = JSON.parse(stored) as Record<string, boolean>;
-        setScenarioUsage(parsed);
+        const stored = window.localStorage.getItem('cg-scenario-usage');
+        if (stored) {
+          const parsed = JSON.parse(stored) as Record<string, boolean>;
+          setScenarioUsage(parsed);
+        }
       } catch {
         // ignore parsing errors
       }
-    }
+    }, 0);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
   }, []);
 
   useEffect(() => {
@@ -187,6 +197,7 @@ export default function CharadesGeneratorOptimized({
       setIsCustomMode(false);
       setCustomCount('');
       setScenariosExpanded(true);
+      trackEvent('charades_scenario_apply', { scenarioId: scenario.id });
     },
     [],
   );
@@ -222,6 +233,14 @@ export default function CharadesGeneratorOptimized({
     isCustomMode && !Number.isNaN(parsedCustomCount) && parsedCustomCount >= 1 && parsedCustomCount <= 50;
 
   const handleGenerateClick = useCallback(() => {
+    const effectiveCount = isCustomMode && isCustomValid ? parsedCustomCount : batchSize;
+    trackEvent('charades_generate_click', {
+      category: selectedCategory,
+      difficulty: selectedDifficulty,
+      ageGroup: selectedAgeGroup,
+      count: effectiveCount,
+    });
+
     if (isCustomMode) {
       if (!isCustomValid) {
         return;
@@ -232,7 +251,16 @@ export default function CharadesGeneratorOptimized({
     }
 
     void generateBatchWords(batchSize);
-  }, [batchSize, generateBatchWords, isCustomMode, isCustomValid, parsedCustomCount]);
+  }, [
+    batchSize,
+    generateBatchWords,
+    isCustomMode,
+    isCustomValid,
+    parsedCustomCount,
+    selectedAgeGroup,
+    selectedCategory,
+    selectedDifficulty,
+  ]);
 
   useEffect(() => {
     if (!hasHydrated) {
@@ -255,6 +283,7 @@ export default function CharadesGeneratorOptimized({
 
   const handleCopyWords = useCallback(async () => {
     if (!generatedWords.length) return;
+    trackEvent('charades_copy_words', { count: generatedWords.length });
     const list = generatedWords
       .map((word) => {
         const difficultyLabel =

@@ -8,6 +8,7 @@ import { IMPOSTER_PACK_IDS, IMPOSTER_PACKS, type ImposterPackId } from "@/data/i
 import QRCodeCanvas from "@/components/QRCodeCanvas";
 import { buildLocalePath } from "@/utils/localePaths";
 import { useImposterRealtime } from "@/lib/useImposterRealtime";
+import { trackEvent } from "@/lib/analytics";
 
 type Role = "imposter" | "crew";
 
@@ -109,28 +110,43 @@ export default function ImposterGameRoom() {
       setError(t.errorNameRequired);
       return;
     }
+    trackEvent("imposter_host_create", {
+      locale,
+      packId: selectedPack,
+      imposters,
+    });
     void callApi({
       action: "create",
       name: hostName.trim(),
       packId: selectedPack,
       imposters: String(imposters),
     });
-  }, [callApi, hostName, selectedPack, imposters, t.errorNameRequired]);
+  }, [callApi, hostName, selectedPack, imposters, t.errorNameRequired, locale]);
 
   const handleJoin = useCallback(() => {
     if (!joinName.trim() || !joinRoomId.trim()) {
       setError(t.errorBothRequired);
       return;
     }
+    trackEvent("imposter_join_attempt", {
+      locale,
+      fromUrl: roomFromUrl,
+    });
     void callApi({
       action: "join",
       roomId: joinRoomId.trim().toUpperCase(),
       name: joinName.trim(),
     });
-  }, [callApi, joinName, joinRoomId, t.errorBothRequired]);
+  }, [callApi, joinName, joinRoomId, roomFromUrl, t.errorBothRequired, locale]);
 
   const handleNextRound = useCallback(() => {
     if (!room) return;
+    trackEvent("imposter_new_round", {
+      locale,
+      roomId: room.roomId,
+      round: room.round + 1,
+      packId: room.packId,
+    });
     void callApi(
       {
         action: "nextRound",
@@ -139,14 +155,17 @@ export default function ImposterGameRoom() {
       },
       { silent: false },
     );
-  }, [callApi, room]);
+  }, [callApi, locale, room]);
 
   const startPassPlayRound = useCallback(() => {
     const safePlayers = Math.max(3, Math.min(12, passPlayers));
     let desiredImposters = Math.max(1, Math.min(imposters, safePlayers - 1));
     if (Number.isNaN(desiredImposters)) desiredImposters = 1;
 
-    const pair = IMPOSTER_PACKS[selectedPack].pairs[Math.floor(Math.random() * IMPOSTER_PACKS[selectedPack].pairs.length)];
+    const pair =
+      IMPOSTER_PACKS[selectedPack].pairs[
+        Math.floor(Math.random() * IMPOSTER_PACKS[selectedPack].pairs.length)
+      ];
 
     const roles: Role[] = [];
     for (let i = 0; i < safePlayers; i += 1) {
@@ -169,7 +188,13 @@ export default function ImposterGameRoom() {
     });
     setPassRevealPhase("prompt");
     setStep("passReveal");
-  }, [imposters, passPlayers, selectedPack]);
+    trackEvent("imposter_pass_play_round_start", {
+      locale,
+      players: safePlayers,
+      packId: selectedPack,
+      imposters: desiredImposters,
+    });
+  }, [imposters, locale, passPlayers, selectedPack]);
   const syncRoom = useCallback(() => {
     if (!room) return;
     void callApi(
@@ -313,6 +338,9 @@ export default function ImposterGameRoom() {
               setRoom(null);
               setStep("passSetup");
               setError(null);
+              trackEvent("imposter_pass_play_mode_open", {
+                locale,
+              });
             }}
             className="flex-1 rounded-lg border border-emerald-500/70 bg-emerald-600/90 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/25 hover:bg-emerald-500 transition-all"
           >

@@ -158,6 +158,8 @@ export default async function RootLayout({
     if (consentCookie === "granted" || consentCookie === "denied") {
       return consentCookie;
     }
+    // Only require explicit consent in regions/locales where it's legally needed;
+    // elsewhere (e.g. US) allow analytics/ads to load by default.
     return regionRequiresConsent(countryCode, locale) ? "pending" : "granted";
   })();
   const dictionary = getDictionary(locale);
