@@ -3,14 +3,14 @@ export const en = {
   localeName: "English",
   seo: {
     home: {
-      title: "Charades Generator - Free 1000+ Words & Ideas",
+      title: "Free Online Charades Word Generator – 1000+ Ideas",
       description:
-        "Best free charades generator with 1000+ words and ideas. Generate instant charades words for kids and adults: movies, Disney, animals, actions, and more. Great for parties and family game night.",
+        "Free online charades word generator with 1000+ words and ideas. Instantly generate printable charades lists for kids and adults: movies, Disney, animals, actions, and more. Perfect for parties, classrooms, and family game night.",
       keywords:
-        "charades generator, free charades generator, charades word generator, free charades words, charades ideas, party games, family games, disney charades, online charades",
-      structuredDataName: "Charades Generator - Free Words & Ideas",
+        "charades generator, free charades generator, online charades generator, charades word generator, free charades words, charades ideas, party games, family games, disney charades, online charades, charades game generator",
+      structuredDataName: "Free Online Charades Word Generator",
       structuredDataDescription:
-        "Charades Generator with 1000+ words database! Free instant charades words for kids, adults, parties. Includes movies, Disney, animals, actions, funny words.",
+        "Online charades generator with a 1000+ word database. Free instant charades words for kids, adults, parties, and classrooms—including movies, Disney, animals, actions, and funny prompts.",
     },
     kids: {
       title: "Kids Charades Generator - Free Children's Game Words",
@@ -43,9 +43,9 @@ export const en = {
         "Movie and cinema themed charades for film lovers and movie night entertainment",
     },
     funny: {
-      title: "Funny Charades for Adults - Hilarious Adult Party Games",
+      title: "Funny Adult Charades Generator – Hilarious Party Ideas",
       description:
-        "Funny adult charades generator with hilarious scenarios and mature humor! Perfect for adult parties, office games, and grown-up fun.",
+        "Funny adult charades word generator with hilarious scenarios and mature humor. Perfect for adult parties, office game nights, and grown-up fun.",
       keywords:
         "funny charades adults, adult party games, hilarious charades, office party games, mature humor games",
       structuredDataName: "Funny Adult Charades",
@@ -53,9 +53,9 @@ export const en = {
         "Hilarious adult charades generator for parties with mature humor and funny scenarios",
     },
     random: {
-      title: "Random Charades Generator - Surprise Word Mix",
+      title: "Random Charades Generator – Mixed Word Lists",
       description:
-        "Random charades generator mixing all categories! Surprise words from movies, animals, actions, and more for unpredictable fun.",
+        "Random charades word generator that mixes every category. Get surprise words from movies, animals, actions, and more for unpredictable, printable fun.",
       keywords:
         "random charades, charades word generator, mixed charades, surprise charades, variety charades",
       structuredDataName: "Random Charades Generator",
@@ -73,9 +73,9 @@ export const en = {
         "Festive Christmas charades generator with holiday-themed words for family celebrations",
     },
     reverse: {
-      title: "Reverse Charades Game - Team Rules & Word Generator",
+      title: "Reverse Charades Game – How to Play & Team Rules",
       description:
-        "Learn how to play reverse charades with teams, grab scorekeeping tips, and spin up instant prompts for loud party rounds.",
+        "Learn how to play reverse charades step by step. Get clear team rules, scorekeeping tips, and a built-in word generator for loud party rounds.",
       keywords:
         "reverse charades, reverse charades game, reverse charades rules, team charades, charades for large groups",
       structuredDataName: "Reverse Charades Game Generator",
@@ -123,11 +123,11 @@ export const en = {
         "Offline imposter party game rules with role ideas, word prompts, and host tips for friends, families, and classrooms.",
     },
     howToUse: {
-      title: "How to Use Charades Generator - Complete Guide & Rules",
+      title: "How to Play Charades – Rules & Charades Generator Guide",
       description:
-        "Complete guide on using our charades generator! Learn rules, tips, setup instructions, and gameplay strategies for the perfect charades night.",
+        "Step-by-step guide on how to play charades plus how to use our free charades generator. Learn rules, setup, timing tips, and strategies for the perfect game night.",
       keywords:
-        "how to play charades, charades rules, charades guide, charades instructions, party game setup",
+        "how to play charades, charades rules, charades guide, charades instructions, how to use charades generator, party game setup",
     },
     about: {
       title: "About Us - Charades Generator Team",
@@ -348,8 +348,9 @@ export const en = {
   },
   home: {
     seoIntro: {
-      title: "The fastest online charades word generator",
-      lead: "Looking for an online charades generator that just works? Spin up instant words across movies, Disney, animals, actions, and more—filter by difficulty and age group, then copy or print your list in seconds.",
+      title: "Start with the fastest online charades generator",
+      lead:
+        "Looking for an online charades generator that just works? Spin up instant words across movies, Disney, animals, actions, and more—filter by difficulty and age group, then copy or print a ready-to-play list in seconds, no sign-up required.",
     },
     exploreLabel: "Explore more",
     themedHeading: "Pick a themed charades generator",
@@ -774,14 +775,14 @@ export const en = {
         "Generate movie charades from classic films, blockbusters, and cinema favorites for your next movie night.",
     },
     funny: {
-      title: "Funny Charades for Adults",
+      title: "Funny Adult Charades Generator",
       description:
-        "Generate hilarious adult charades with mature humor and funny scenarios perfect for grown-up parties.",
+        "Generate hilarious adult charades with mature humor and funny scenarios perfect for grown-up parties and office game nights.",
     },
     random: {
       title: "Random Charades Generator",
       description:
-        "Random charades word generator that mixes every category—ideal when someone needs “words for charades generator” or a printable charades word list.",
+        "Random charades word generator that mixes every category—ideal when you need mixed charades ideas or a printable charades word list.",
     },
     christmas: {
       title: "Christmas Charades Generator",
@@ -791,7 +792,7 @@ export const en = {
     reverse: {
       title: "Reverse Charades Game",
       description:
-        "Generate team-friendly prompts and follow the reverse charades playbook for loud, high-energy rounds.",
+        "Generate team-friendly prompts and follow the reverse charades playbook for loud, high-energy rounds with simple team rules.",
     },
     emotions: {
       title: "Emotion Charades Generator",
@@ -809,7 +810,7 @@ export const en = {
         "Generate challenging charades ideas with multi-word prompts and advanced hosting tips for competitive players.",
     },
     howToUse: {
-      title: "How to Use Charades Generator",
+      title: "How to Play Charades (and Use the Generator)",
       whatIsCharades: "What is Charades?",
       whatIsCharadesDescription:
         "Charades is a classic party game where players act out words or phrases without speaking while others try to guess what they're performing. It's perfect for parties, family gatherings, and team-building activities.",
