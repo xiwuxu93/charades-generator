@@ -39,6 +39,14 @@ interface CharadesGeneratorProps {
   showChristmasPromoLink?: boolean;
 }
 
+type PickWordsFn = (
+  category: string,
+  difficulty: string,
+  ageGroup: string,
+  count: number,
+  locale: string,
+) => CharadesWord[];
+
 export default function CharadesGeneratorOptimized({
   defaultCategory = 'all',
   defaultAgeGroup = 'all',
@@ -80,18 +88,12 @@ export default function CharadesGeneratorOptimized({
   const [hasHydrated, setHasHydrated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const pendingRequest = useRef<AbortController | null>(null);
   const hasTriggeredInitialFetch = useRef(false);
+  const pickWordsRef = useRef<PickWordsFn | null>(null);
   const [activeScenarioId, setActiveScenarioId] = useState<string | null>(null);
   const [copyFeedback, setCopyFeedback] = useState<'idle' | 'success' | 'error'>('idle');
   const [scenarioUsage, setScenarioUsage] = useState<Record<string, boolean>>({});
   const [scenariosExpanded, setScenariosExpanded] = useState(false);
-
-  useEffect(() => () => {
-    if (pendingRequest.current) {
-      pendingRequest.current.abort();
-    }
-  }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -130,51 +132,44 @@ export default function CharadesGeneratorOptimized({
     }
   }, [scenarios, activeScenarioId]);
 
+  const loadPickWords = useCallback(async (): Promise<PickWordsFn> => {
+    if (pickWordsRef.current) {
+      return pickWordsRef.current;
+    }
+    const mod = await import('@/utils/charades');
+    pickWordsRef.current = mod.pickWords as PickWordsFn;
+    return pickWordsRef.current;
+  }, []);
+
   const generateBatchWords = useCallback(
     async (count: number) => {
-      if (pendingRequest.current) {
-        pendingRequest.current.abort();
-      }
-
-      const controller = new AbortController();
-      pendingRequest.current = controller;
       setIsLoading(true);
       setErrorMessage(null);
 
       try {
-        const response = await fetch('/api/charades', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            category: selectedCategory,
-            difficulty: selectedDifficulty,
-            ageGroup: selectedAgeGroup,
-            count,
-            locale,
-          }),
-          signal: controller.signal,
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch words');
-        }
-
-        const data = (await response.json()) as { words: CharadesWord[] };
-        setGeneratedWords(data.words);
-      } catch (error) {
-        if ((error as Error).name !== 'AbortError') {
-          setErrorMessage(dictionary.generator.errorFetchingWords);
-        }
+        const pickWords = await loadPickWords();
+        const words = pickWords(
+          selectedCategory,
+          selectedDifficulty,
+          selectedAgeGroup,
+          count,
+          locale,
+        );
+        setGeneratedWords(words);
+      } catch {
+        setErrorMessage(dictionary.generator.errorFetchingWords);
       } finally {
-        if (pendingRequest.current === controller) {
-          pendingRequest.current = null;
-        }
         setIsLoading(false);
       }
     },
-    [dictionary.generator.errorFetchingWords, locale, selectedAgeGroup, selectedCategory, selectedDifficulty],
+    [
+      dictionary.generator.errorFetchingWords,
+      loadPickWords,
+      locale,
+      selectedAgeGroup,
+      selectedCategory,
+      selectedDifficulty,
+    ],
   );
 
   const activeScenario = useMemo(() => {

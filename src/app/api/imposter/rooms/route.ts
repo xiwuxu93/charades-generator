@@ -14,6 +14,7 @@ import {
   type Room,
 } from "@/lib/imposterRoomStore";
 import { RateLimiter, getClientIdentifier } from "@/lib/rateLimit";
+import { notifyRoomUpdated } from "@/lib/realtime";
 
 export const dynamic = "force-dynamic";
 
@@ -156,6 +157,7 @@ export async function POST(request: NextRequest) {
       room.hostId = playerId;
       room.updatedAt = Date.now();
       await store.saveRoom(room);
+      await notifyRoomUpdated(room);
       const payload = serializePlayer(room, playerId);
       return NextResponse.json({ room: payload });
     }
@@ -180,6 +182,7 @@ export async function POST(request: NextRequest) {
       room.players.push(player);
       room.updatedAt = Date.now();
       await store.saveRoom(room);
+      await notifyRoomUpdated(room);
       const payload = serializePlayer(room, playerId);
       return NextResponse.json({ room: payload });
     }
@@ -217,6 +220,7 @@ export async function POST(request: NextRequest) {
           { status: 404 }
         );
       }
+      await notifyRoomUpdated(room);
       return NextResponse.json({ room: payload });
     }
 

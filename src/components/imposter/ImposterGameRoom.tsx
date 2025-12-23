@@ -7,6 +7,7 @@ import { getDictionary } from "@/i18n/dictionary";
 import { IMPOSTER_PACK_IDS, IMPOSTER_PACKS, type ImposterPackId } from "@/data/imposter-packs";
 import QRCodeCanvas from "@/components/QRCodeCanvas";
 import { buildLocalePath } from "@/utils/localePaths";
+import { useImposterRealtime } from "@/lib/useImposterRealtime";
 
 type Role = "imposter" | "crew";
 
@@ -126,51 +127,19 @@ export default function ImposterGameRoom() {
       { silent: false },
     );
   }, [callApi, room]);
-
-  // Adaptive polling: adjust interval based on tab visibility
-  useEffect(() => {
+  const syncRoom = useCallback(() => {
     if (!room) return;
-
-    const getPollInterval = () => {
-      // Use longer interval when tab is hidden to save battery
-      return document.hidden ? 15000 : 5000;
-    };
-
-    let timeoutId: NodeJS.Timeout;
-
-    const schedulePoll = () => {
-      const interval = getPollInterval();
-      timeoutId = setTimeout(() => {
-        void callApi(
-          {
-            action: "sync",
-            roomId: room.roomId,
-            playerId: room.playerId,
-          },
-          { silent: true },
-        ).finally(() => {
-          // Schedule next poll after current one completes
-          schedulePoll();
-        });
-      }, interval);
-    };
-
-    // Start polling
-    schedulePoll();
-
-    // Re-schedule on visibility change for immediate adjustment
-    const handleVisibilityChange = () => {
-      clearTimeout(timeoutId);
-      schedulePoll();
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    return () => {
-      clearTimeout(timeoutId);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    };
+    void callApi(
+      {
+        action: "sync",
+        roomId: room.roomId,
+        playerId: room.playerId,
+      },
+      { silent: true },
+    );
   }, [callApi, room]);
+
+  useImposterRealtime(room?.roomId ?? null, syncRoom);
 
   const handleShare = useCallback(async () => {
     if (!inviteUrl) return;
