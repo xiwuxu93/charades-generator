@@ -232,7 +232,7 @@ export default async function FunnyCharadesPage({ params }: PageProps) {
                 key={item.href}
                 href={item.href}
                 target="_blank"
-                rel="noopener noreferrer"
+               rel="noopener noreferrer nofollow" 
                 className="group flex flex-col rounded-xl bg-white p-4 border border-yellow-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <span className="text-xs font-semibold text-yellow-700 uppercase tracking-wide mb-1">

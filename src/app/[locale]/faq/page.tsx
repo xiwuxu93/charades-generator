@@ -135,7 +135,7 @@ export default async function FAQPage({ params }: PageProps) {
         <a
           href={`mailto:${dictionary.pages.contact?.email ?? 'support@charades-generator.com'}`}
           className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-          rel="noopener noreferrer"
+         rel="noopener noreferrer nofollow" 
         >
           {dictionary.pages.faq.contactUs}
         </a>

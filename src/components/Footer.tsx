@@ -71,12 +71,12 @@ export default function Footer({ locale, footer }: FooterProps) {
           <h3 className="font-semibold text-gray-800">{footer.sections.partnersTitle}</h3>
           <ul className="flex flex-wrap items-center gap-6 text-sm text-gray-600">
             <li>
-              <a href="https://magicbox.tools" target="_blank" rel="noopener noreferrer">
+              <a href="https://magicbox.tools" target="_blank"rel="noopener noreferrer nofollow" >
                 <Image src="https://magicbox.tools/badge-dark.svg" alt="Featured on MagicBox.tools" width={200} height={54} />
               </a>
             </li>
             <li>
-              <a href="https://imglab.dev/item/charades-generator-knot" target="_blank" rel="noopener noreferrer">
+              <a href="https://imglab.dev/item/charades-generator-knot" target="_blank"rel="noopener noreferrer nofollow" >
                 <Image
                   src="https://imglab.dev/svg/badge.svg"
                   alt="Listed on imglab"
@@ -86,7 +86,7 @@ export default function Footer({ locale, footer }: FooterProps) {
               </a>
             </li>
             <li>
-              <a href="https://fwfw.app/item/charades-generator" target="_blank" rel="noopener noreferrer">
+              <a href="https://fwfw.app/item/charades-generator" target="_blank"rel="noopener noreferrer nofollow" >
                 <Image
                   src="https://fwfw.app/badge-white.svg"
                   alt="Featured on FWFW"
@@ -96,7 +96,7 @@ export default function Footer({ locale, footer }: FooterProps) {
               </a>
             </li>
             <li>
-              <a href="https://acidtools.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://acidtools.com" target="_blank"rel="noopener noreferrer nofollow" >
                 <Image
                   src="https://acidtools.com/assets/images/badge.png"
                   alt="Acid Tools badge"
@@ -106,7 +106,7 @@ export default function Footer({ locale, footer }: FooterProps) {
               </a>
             </li>
             <li className="leading-none">
-              <a href="https://kontext-ai.com/" target="_blank" rel="noopener noreferrer">
+              <a href="https://kontext-ai.com/" target="_blank"rel="noopener noreferrer nofollow" >
                 Kontext AI
               </a>
             </li>
