@@ -3,19 +3,19 @@ export const en = {
   localeName: "English",
   seo: {
     home: {
-      title: "Free Online Charades Word Generator – 1000+ Ideas",
+      title: "Charades Generator – Free Online Words & Ideas",
       description:
-        "Free online charades word generator with 1000+ words and ideas. Instantly generate printable charades lists for kids and adults: movies, Disney, animals, actions, and more. Perfect for parties, classrooms, and family game night.",
+        "Generate random charades words for kids and adults in one click. Free online charades generator with 1000+ ideas, printable word lists, and themed packs for movies, Disney, kids, Christmas, and more.",
       keywords:
-        "charades generator, free charades generator, online charades generator, charades word generator, free charades words, charades ideas, party games, family games, disney charades, online charades, charades game generator",
-      structuredDataName: "Free Online Charades Word Generator",
+        "charades generator, free charades generator, online charades generator, random charades generator, charades word generator, charades words generator, free charades words, charades ideas, party games, family games, disney charades, online charades, charades game generator",
+      structuredDataName: "Charades Generator - Free Online Word Tool",
       structuredDataDescription:
-        "Online charades generator with a 1000+ word database. Free instant charades words for kids, adults, parties, and classrooms—including movies, Disney, animals, actions, and funny prompts.",
+        "Charades word generator with a 1000+ word database. Free instant charades words and ideas for kids, adults, parties, and classrooms—including movies, Disney, animals, actions, and funny prompts.",
     },
     kids: {
-      title: "Kids Charades Generator - Free Children's Game Words",
+      title: "Kids Charades Generator - Free Children's Ideas & Words",
       description:
-        "Free kids charades with 500+ child-friendly words! Children's charades generator for parties, Disney characters, animals, and classroom activities.",
+        "Free kids charades with 500+ child-friendly words and ideas! Children's charades generator for parties, Disney characters, animals, classroom activities, and printable word lists.",
       keywords:
         "kids charades, children charades, kids party games, educational charades, animal charades kids",
       structuredDataName: "Kids Charades Generator",
@@ -53,9 +53,9 @@ export const en = {
         "Hilarious adult charades generator for parties with mature humor and funny scenarios",
     },
     random: {
-      title: "Random Charades Generator – Mixed Word Lists",
+      title: "Random Charades Generator – One-Click Mixed Word Lists",
       description:
-        "Random charades word generator that mixes every category. Get surprise words from movies, animals, actions, and more for unpredictable, printable fun.",
+        "Random charades word generator that mixes every category. Click once to get a fresh random mix of charades words from movies, animals, actions, and more when you just need new ideas fast.",
       keywords:
         "random charades, charades word generator, mixed charades, surprise charades, variety charades",
       structuredDataName: "Random Charades Generator",
