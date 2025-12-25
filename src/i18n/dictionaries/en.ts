@@ -62,6 +62,16 @@ export const en = {
       structuredDataDescription:
         "Random charades generator mixing all categories for surprising and varied gameplay",
     },
+    ideas: {
+      title: "Charades Ideas & Word Lists – Kids, Adults & Family",
+      description:
+        "Browse ready-made charades ideas and word lists for kids, adults, families, and classrooms. Copy or print free charades words, then use our online charades generator to build your own lists.",
+      keywords:
+        "charades ideas, charades words, charades word list, charades game ideas, charades ideas for kids, charades ideas for adults, family charades ideas, charades ideas printable",
+      structuredDataName: "Charades Ideas & Word Lists",
+      structuredDataDescription:
+        "Curated charades ideas and word lists grouped by audience and theme, plus tips on using the free online charades generator to build custom printable lists.",
+    },
     christmas: {
       title: "Christmas Charades Generator - Holiday Party Games",
       description:
@@ -352,6 +362,10 @@ export const en = {
       lead:
         "Looking for an online charades generator that just works? Spin up instant words across movies, Disney, animals, actions, and more—filter by difficulty and age group, then copy or print a ready-to-play list in seconds, no sign-up required.",
     },
+    heroShortcuts: {
+      ideasLabel: "Browse ideas & word lists",
+      howToLabel: "Learn rules & how to play",
+    },
     exploreLabel: "Explore more",
     themedHeading: "Pick a themed charades generator",
     themedDescription:
@@ -451,16 +465,23 @@ export const en = {
         description:
           "See what we're building next and how the generator continues to grow each month.",
       },
+      {
+        key: "ideas",
+        title: "Charades Ideas & Word Lists",
+        href: "/charades-ideas/",
+        description:
+          "Browse ready-made word lists for kids, adults, families, and classrooms before you open the generator.",
+      },
     ],
     generatorDeepDive: {
       difference: {
-        title: "Why this charades generator stands out",
-        lead: "Run every game night from one charades word generator hub. Filters, presets, and rules stay in a single interface so you can launch a round in seconds.",
+        title: "Run every game night from one place",
+        lead: "Instead of juggling apps, notes, and rule sheets, you can plan, generate, and share charades rounds from a single hub.",
         bullets: [
-          "Mix categories, difficulties, and age ranges inside a single charades word generator without jumping between pages.",
-          "Preview host-tested presets that instantly populate the generator for classroom breaks, team icebreakers, and family nights.",
-          "Copy, print, or share a charades word list in one click so even last-minute hosts look prepared.",
-          "Built-in How to Play reminders keep new players confident while the generator serves fresh prompts on demand.",
+          "Mix categories, difficulty, and age ranges without switching tools mid-game.",
+          "Use host-tested presets to set up classroom breaks, team icebreakers, or family nights in under a minute.",
+          "Copy or print a word list in one click so last-minute hosts still look prepared.",
+          "Keep new players confident with built-in How to Play reminders while fresh prompts stay ready to go.",
         ],
         footer: {
           before: "Craving total unpredictability? Hop over to the",
@@ -470,74 +491,74 @@ export const en = {
         },
       },
       presets: {
-        title: "Ready-to-go charades generator presets",
+        title: "Quick presets for common groups",
         items: [
           {
             title: "Family Night Mix",
             description:
-              "Balanced easy prompts and wildcards so the charades generator keeps grandparents and kids engaged together.",
+              "Balanced easy prompts and wildcards so grandparents and kids stay engaged in the same game.",
             note: "Start with 10 words, difficulty easy",
           },
           {
             title: "Hybrid Stand-up Sprint",
             description:
-              "Switch to medium difficulty and adults-only in the charades generator for fast-moving team energizers.",
+              "Medium difficulty and adults-only prompts that wake up hybrid meetings without derailing the agenda.",
             note: "9 words • 60-second rounds",
           },
           {
             title: "Classroom Brain Break",
             description:
-              "Filter for kids-friendly verbs in the charades generator to reinforce vocab during five-minute pauses.",
+              "Kids-friendly verbs and emotions that double as quick SEL or language-vocab refreshers between lessons.",
             note: "8 words • actions + emotions",
           },
         ],
       },
       useCases: {
-        title: "Charades generator ideas for every group",
+        title: "Ways different hosts use this generator",
         columns: [
           {
             title: "Family & friends",
             items: [
-              "Share a printable charades generator list before gatherings.",
-              "Rotate presets so each age group picks a feature round.",
-              "Save favorite word batches to reuse at future parties.",
+              "Share printable lists before gatherings so late arrivals can catch up.",
+              "Rotate presets so each age group picks one signature round.",
+              "Save or screenshot favourite batches to reuse at future parties.",
             ],
           },
           {
             title: "Classrooms",
             items: [
-              "Use the charades generator to refresh SEL or language vocab.",
-              "Assign helpers to copy the latest batch for absent students.",
-              "Track progress by logging which generator filters boosted engagement.",
+              "Refresh SEL or language vocabulary with short acting breaks.",
+              "Ask helpers to copy the latest batch so absent students can replay at home.",
+              "Note which filter combinations keep different classes most engaged.",
             ],
           },
           {
             title: "Teams & events",
             items: [
-              "Kick off retros with a charades generator speed round.",
-              "Switch to hard clues to challenge trivia pros at offsites.",
-              "Drop generator links in chat so remote teammates play along.",
+              "Kick off retros or offsites with a 5-minute speed round.",
+              "Switch to hard clues as a friendly challenge for trivia fans.",
+              "Drop generator links in chat so remote teammates can join in live.",
             ],
           },
         ],
       },
       tips: {
-        title: "Tips for getting more from the charades generator",
+        title: "Simple hosting tricks that keep rounds smooth",
         cards: [
           {
             title: "Mix filters each round",
             items: [
-              'Start on "all" to showcase the full charades generator range, then narrow to themes for finals.',
-              "Alternate word counts so no team knows what is coming next.",
-              "Duplicate the tab and prep the next batch while players act.",
+              'Start on "all" to see what your group enjoys, then narrow to themes for finals or tie-breakers.',
+              "Alternate word counts so no team can predict how long a round will feel.",
+              "Open a second tab and prep the next batch while players act.",
             ],
           },
           {
             title: "Keep the momentum",
             items: [
-              "Use the copy button to paste generator results into Notes or Slack.",
-              "Mark used presets so the charades generator recommends fresh combos.",
-              "Pair the quick-play kit timers with the generator’s suggested round lengths.",
+              "Use the copy button to paste results into Notes, Docs, or Slack before you start.",
+              "Mark used presets so you avoid repeating the same combinations every game night.",
+              "Pair the quick-play kit timers with your usual round length and stick to it.",
             ],
           },
         ],
@@ -596,9 +617,9 @@ export const en = {
       printLabel: "Print instantly",
     },
     expertInsights: {
-      title: "Expert insights from real game leaders",
+      title: "Real hosting examples you can copy",
       description:
-        "Every prompt in our database has been field-tested by families, teachers, and facilitators. These playbooks show how different hosts keep energy high and players engaged.",
+        "These short case studies show how families, teachers, and team leads actually structure charades sessions—from round order to timing and house rules.",
       personas: [
         {
           title: "Family host · Seattle, WA",
@@ -893,6 +914,9 @@ export const en = {
       readyToPlayDescription:
         "Now that you know the rules and tips, it's time to start your charades game!",
       startGenerating: "Start Generating Words",
+    },
+    ideas: {
+      title: "Charades Ideas & Word Lists",
     },
     quickKit: {
       title: "Quick-Play Kit",

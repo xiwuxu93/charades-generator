@@ -421,6 +421,17 @@ export default async function HowToUsePage({ params }: PageProps) {
           >
             {dictionary.pages.howToUse.startGenerating}
           </Link>
+          <p className="mt-3 text-sm text-blue-900">
+            <Link
+              href={buildLocalePath(locale, "/charades-ideas/")}
+              className="font-semibold underline underline-offset-2"
+            >
+              {locale === "es" ? "Ver ideas y listas de palabras para charadas" : "Browse charades ideas & word lists"}
+            </Link>{" "}
+            {locale === "es"
+              ? "si prefieres empezar con ejemplos listos antes de usar el generador."
+              : "if you want ready-made examples before you start generating your own lists."}
+          </p>
         </div>
       </div>
     </div>

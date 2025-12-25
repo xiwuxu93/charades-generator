@@ -33,6 +33,23 @@ export default function HomeLanding({ initialWords, dictionary, locale }: HomeLa
         showChristmasPromoLink
       />
 
+      <div className="max-w-4xl mx-auto px-6 mt-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+          <Link
+            href={buildLocalePath(locale, "/charades-ideas/")}
+            className="inline-flex items-center justify-center rounded-md border border-blue-600 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50"
+          >
+            {dictionary.home.heroShortcuts?.ideasLabel ?? "Browse ideas & word lists"}
+          </Link>
+          <Link
+            href={buildLocalePath(locale, "/how-to-use/")}
+            className="inline-flex items-center justify-center rounded-md border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-800 hover:bg-gray-50"
+          >
+            {dictionary.home.heroShortcuts?.howToLabel ?? "Learn rules & how to play"}
+          </Link>
+        </div>
+      </div>
+
       {dictionary.home?.seoIntro && (
         <div className="max-w-4xl mx-auto px-6 mt-6">
           <section className="bg-white rounded-lg shadow-md p-6 mb-8 border border-gray-200">

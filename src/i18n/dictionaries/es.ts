@@ -62,6 +62,16 @@ export const es = {
       structuredDataDescription:
         "Generador de charadas aleatorias mezclando todas las categorías para juego sorprendente y variado",
     },
+    ideas: {
+      title: "Ideas y listas de palabras para charadas",
+      description:
+        "Explora ideas y listas de palabras para charadas clasificadas por niños, adultos, familias y aulas. Copia o imprime palabras gratis y combínalas con nuestro generador de charadas en línea.",
+      keywords:
+        "ideas charadas, palabras charadas, lista palabras charadas, ideas juego charadas, ideas charadas niños, ideas charadas adultos, charadas en familia",
+      structuredDataName: "Ideas y listas para charadas",
+      structuredDataDescription:
+        "Selección de ideas y listas de palabras para charadas según público y temática, junto con consejos para usar el generador de charadas en línea y crear listas imprimibles.",
+    },
     christmas: {
       title: "Charadas de Navidad Gratis",
       description:
@@ -356,6 +366,10 @@ export const es = {
       title: "El generador de palabras para charadas más rápido",
       lead: "¿Buscas un generador de charadas online que funcione sin complicaciones? Genera palabras al instante por películas, Disney, animales, acciones y más; filtra por dificultad y edades, y copia o imprime tu lista en segundos.",
     },
+    heroShortcuts: {
+      ideasLabel: "Ver ideas y listas de palabras",
+      howToLabel: "Ver reglas y cómo jugar",
+    },
     exploreLabel: "Explora más",
     themedHeading: "Elige un generador temático",
     themedDescription:
@@ -453,6 +467,13 @@ export const es = {
         href: "/about/",
         description:
           "Conoce en qué estamos trabajando y cómo evoluciona el generador cada mes.",
+      },
+      {
+        key: "ideas",
+        title: "Ideas y listas de palabras",
+        href: "/charades-ideas/",
+        description:
+          "Consulta listas de palabras para niños, adultos, familias y aulas antes de abrir el generador.",
       },
     ],
     generatorDeepDive: {
@@ -903,6 +924,9 @@ export const es = {
       readyToPlayDescription:
         "Ahora que conoces las reglas y consejos, ¡es hora de comenzar tu juego de charadas!",
       startGenerating: "Comenzar a Generar Palabras",
+    },
+    ideas: {
+      title: "Ideas y listas de palabras para charadas",
     },
     quickKit: {
       title: "Kit rápido para jugar",
