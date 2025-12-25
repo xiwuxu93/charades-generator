@@ -47,3 +47,5 @@ next-env.d.ts
 wrangler.toml.bak
 tmp_*.html
 gsc/*
+lighthouse*.json
+charades-generator.com-Performance-*/*
