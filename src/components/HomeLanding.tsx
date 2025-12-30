@@ -30,7 +30,6 @@ export default function HomeLanding({ initialWords, dictionary, locale }: HomeLa
       <CharadesGeneratorOptimized
         initialWords={initialWords}
         isShowScenarios
-        showChristmasPromoLink
       />
 
       <div className="max-w-4xl mx-auto px-6 mt-4">
